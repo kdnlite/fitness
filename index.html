@@ -738,6 +738,278 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
 .sbody>*{flex-shrink:0}
 .sbody .cbs.scrollx{min-height:44px}
 
+/* ===== v12: plans, family, gym manager ===== */
+.herobtns{display:flex;flex-wrap:wrap;gap:12px}
+.plans{display:grid;gap:16px}
+.pcd{position:relative;background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:22px 18px 18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 8px 28px rgba(20,32,43,.06)}
+.pcd h3{font-family:var(--font-display);font-size:1.5rem;margin:0}
+.pcd.fam{border-color:var(--accent);box-shadow:0 10px 32px rgba(29,78,216,.14)}
+.pcd.gym{background:linear-gradient(160deg,#14110A,#2A2110);border-color:#8C6B1F;color:#F6EBCB}
+.pcd.gym h3,.pcd.gym .pr b{color:#E9C05A}
+.pcd.gym .pr span,.pcd.gym .pst{color:#CDBB8A}
+.pcd.gym .btn{background:linear-gradient(135deg,#E9C05A,#B98A1E);border-color:#B98A1E;color:#1A1405}
+.pcd.gym .ticks li::before{background-color:#3A2D10}
+.ptag{align-self:flex-start;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;background:var(--accent-soft);color:var(--accent);padding:5px 10px;border-radius:99px}
+.pcd.gym .ptag{background:#3A2D10;color:#E9C05A}
+.pst{font-size:.9rem;color:var(--ok);font-weight:600;min-height:0;margin:0}
+.pst:empty{display:none}
+.pr span{color:var(--muted);font-size:.95rem}
+@media (min-width:760px){.plans{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* family */
+.famhero{background:linear-gradient(150deg,#1D4ED8,#0F2A7A);color:#fff;border-radius:24px;padding:22px 18px;display:flex;flex-direction:column;gap:10px}
+.famhero small{font-family:var(--font-mono);letter-spacing:.08em;text-transform:uppercase;opacity:.8;font-size:11px}
+.famhero h2{margin:0;color:#fff}
+.famhero p{margin:0;opacity:.9}
+.famslots{display:flex;flex-wrap:wrap;gap:8px}
+.slot{padding:8px 14px;border-radius:99px;border:1.5px dashed rgba(255,255,255,.5);font-size:.9rem}
+.slot.on{background:#fff;color:#0F2A7A;border:1.5px solid #fff;font-weight:700}
+.fmleft{opacity:.85}
+#family{display:flex;flex-direction:column;gap:16px}
+.fmc{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:14px;box-shadow:0 6px 22px rgba(20,32,43,.05)}
+.fmc.me{background:var(--accent-soft);border-color:#C7D4F7}
+.fmh{display:flex;align-items:center;gap:12px}
+.fmh small{display:block;color:var(--muted)}
+.fav{width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;flex:none}
+.fav.me{font-size:.8rem;background:#0F2A7A}
+.fmsec{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:10px}
+.fmt{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.fmt span{color:var(--muted);font-size:.9rem}
+.fmchart{background:var(--surface);border-radius:14px;padding:10px}
+.fmchart svg{width:100%;height:84px;display:block}
+.fmx{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:4px}
+.famform .two,.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.famform .fl{display:block;margin:6px 0 4px;font-weight:600;font-size:.92rem}
+.btn.danger{background:#B3261E;border-color:#B3261E}
+.hb.two>*{flex:1}
+.crow{display:flex;gap:8px}.crow .sel{flex:1;min-width:0}
+
+/* gym manager: dark and gold */
+body.gymmode{background:#0B0A07}
+body.gymmode .hd,body.gymmode .ft,body.gymmode #bnav{display:none!important}
+body.gymmode .wrap{padding:0!important;max-width:none!important;margin:0!important;gap:0}
+body.gymmode #s-gym{padding:0;gap:0}
+#gymroot{--gold:#E9C05A;--gold2:#B98A1E;--ink:#0B0A07;--card:#17140D;--card2:#1F1A0F;--gline:#3A3118;--gtext:#F6EBCB;--gmute:#A89868;color:var(--gtext);font-family:var(--font-body);min-height:100vh;min-height:100dvh;background:var(--ink)}
+#gymroot h1,#gymroot h2,#gymroot h3,#gymroot h4{font-family:var(--font-display);color:var(--gtext);margin:0}
+#gymroot p{margin:0}
+.gcenter{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-height:60vh;text-align:center}
+.gcenter.in{min-height:70vh}
+.gcenter p{color:var(--gmute)}
+.gspin{width:38px;height:38px;border-radius:50%;border:3px solid #3A3118;border-top-color:var(--gold);animation:gsp .9s linear infinite}
+.gspin.big{width:60px;height:60px;border-width:4px}
+@keyframes gsp{to{transform:rotate(360deg)}}
+.glogin{position:relative;min-height:100vh;min-height:100dvh;background:#0B0A07 var(--bg,linear-gradient(160deg,#2A2110,#0B0A07)) center/cover no-repeat;display:flex}
+.glogin[style*="--bg"]{background-image:var(--bg)}
+.gshade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,7,.55),rgba(11,10,7,.92))}
+.gl-in{position:relative;z-index:1;width:100%;max-width:420px;margin:0 auto;padding:36px 20px 28px;display:flex;flex-direction:column;gap:24px;justify-content:center}
+.gl-brand{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.gl-brand h1{font-size:1.9rem;color:#fff}
+.gl-brand p{color:#D9CBA0;font-size:.92rem}
+.gl-logo{width:92px;height:92px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.gl-logo.sm{width:48px;height:48px;border-width:2px}
+.gl-logo.ph{display:flex;align-items:center;justify-content:center;background:#2A2110;color:var(--gold);font-family:var(--font-display);font-weight:800;font-size:2.2rem}
+.gl-logo.sm.ph{font-size:1.2rem}
+.gpinbox{background:rgba(23,20,13,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--gline);border-radius:26px;padding:22px 18px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.gpinbox>p:first-child{color:var(--gmute)}
+.gdots{display:flex;gap:16px}
+.gdots i{width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);transition:background .15s}
+.gdots i.on{background:var(--gold)}
+.gdots.shake{animation:gshake .4s}
+@keyframes gshake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.gkeys{display:grid;grid-template-columns:repeat(3,76px);gap:12px;justify-content:center}
+.gkey{height:62px;border-radius:50%;width:76px;border:1px solid var(--gline);background:var(--card2);color:var(--gtext);font:700 1.5rem var(--font-display);cursor:pointer;touch-action:manipulation}
+.gkey:active{background:var(--gold);color:#1A1405}
+.gkey.fn{font-size:1.1rem;color:var(--gmute)}
+.glink{background:none;border:0;color:var(--gold);font:inherit;text-decoration:underline;cursor:pointer;padding:8px;min-height:44px}
+.gerr{color:#FF8A80;font-weight:600;font-size:.92rem;text-align:center}
+.gerr[hidden]{display:none}
+.gsetup{display:flex;flex-direction:column;gap:0;max-width:560px;margin:0 auto}
+.gbanner{position:relative;min-height:190px;background:#2A2110 var(--bg,none) center/cover no-repeat;display:flex;align-items:flex-end}
+.gbanner[style*="--bg"]{background-image:var(--bg)}
+.gbn{position:relative;z-index:1;padding:24px 18px;display:flex;flex-direction:column;gap:6px}
+.gbn small{font-family:var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-size:11px}
+.gbn h2{font-size:1.7rem;color:#fff}.gbn p{color:#D9CBA0}
+.gcard{background:var(--card);border:1px solid var(--gline);border-radius:22px;padding:18px;margin:16px;display:flex;flex-direction:column;gap:12px}
+.gcard.dark{background:var(--card)}
+.gsetup .gcard{margin-top:-20px;position:relative;z-index:2}
+.gl{font-weight:600;font-size:.92rem;color:var(--gtext);margin-top:4px}
+.gin{width:100%;font:inherit;font-size:16px;color:var(--gtext);background:#0F0D08;border:1.5px solid var(--gline);border-radius:12px;padding:12px 14px;min-height:48px;box-sizing:border-box;color-scheme:dark}
+.gin:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.gin.pin{letter-spacing:.5em;text-align:center;font-size:1.4rem}
+select.gin{appearance:auto}
+.gin::placeholder{color:#6F6444}
+.gphrow{display:flex;gap:14px;flex-wrap:wrap}
+.gph{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:120px}
+.gphv{width:100%;height:86px;border-radius:14px;border:1.5px dashed var(--gline);display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--gmute);background:#0F0D08}
+.gphv.round{width:86px;border-radius:50%}
+.gphv img{width:100%;height:100%;object-fit:cover}
+.gwarn{background:#2B2208;border:1px solid #6F5514;color:#F3DB9A;border-radius:14px;padding:12px 14px;font-size:.92rem;line-height:1.45}
+.gchk{display:flex;gap:10px;align-items:center;font-size:.95rem;min-height:44px}
+.gchk input{width:22px;height:22px;accent-color:var(--gold)}
+.grow{display:flex;gap:10px;flex-wrap:wrap}
+.grow>*{flex:1}
+.gbtn{font:700 1rem var(--font-display);border-radius:12px;padding:12px 18px;min-height:46px;border:1.5px solid var(--gline);background:transparent;color:var(--gtext);cursor:pointer;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
+.gbtn.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:var(--gold2);color:#1A1405}
+.gbtn.ghost{background:transparent;border-color:#5A4A1E;color:var(--gold)}
+.gbtn.danger{background:#B3261E;border-color:#B3261E;color:#fff}
+.gbtn.sm{min-height:38px;padding:8px 14px;font-size:.9rem}
+.gbtn.wide{width:100%}
+.gbtn:disabled{opacity:.5}
+.gdash{max-width:720px;margin:0 auto;padding-bottom:96px}
+.gtop{position:relative;background:#2A2110 var(--bg,none) center/cover no-repeat;min-height:130px;display:flex;align-items:flex-end}
+.gtop[style*="--bg"]{background-image:var(--bg)}
+.gtin{position:relative;z-index:1;width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:22px 16px 16px;box-sizing:border-box}
+.gbrand{display:flex;align-items:center;gap:12px;min-width:0}
+.gbrand h1{font-size:1.2rem;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gbrand p{color:#D9CBA0;font-size:.82rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gbrand>div{min-width:0}
+.gtb{display:flex;gap:8px}
+.giconb{width:44px;height:44px;border-radius:50%;border:1px solid var(--gline);background:rgba(23,20,13,.8);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.giconb svg,.gnav svg,.gsearch svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.gstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:14px 12px}
+.gst{background:var(--card);border:1px solid var(--gline);border-radius:16px;padding:12px 4px;text-align:center}
+.gst b{display:block;font:800 1.4rem var(--font-display);color:var(--gold)}
+.gst b small{font-size:.65rem;color:var(--gmute)}
+.gst span{font:10px var(--font-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--gmute)}
+.gst.warn{border-color:#8C6B1F;background:#2B2208}
+.gbanner2{margin:0 12px 6px;width:calc(100% - 24px);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#3A2D10,#241B09);border:1px solid #8C6B1F;border-radius:16px;padding:12px 14px;color:var(--gtext);font:inherit;text-align:left;cursor:pointer;box-sizing:border-box}
+.gbanner2 b{color:var(--gold)}
+.gbanner2 span{flex:1;font-size:.88rem;color:#D9CBA0}
+.gbanner2 i{font-style:normal;font-size:1.6rem;color:var(--gold)}
+.gbody{padding:8px 12px;display:flex;flex-direction:column;gap:12px}
+.gbar{display:flex;gap:8px;align-items:center}
+.gsearch{flex:1;min-width:0;display:flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--gline);border-radius:12px;padding:0 12px;min-height:46px;color:var(--gmute)}
+.gsearch input{flex:1;min-width:0;background:transparent;border:0;color:var(--gtext);font:inherit;font-size:16px;outline:none;min-height:44px}
+.gbar .gbtn{white-space:nowrap}
+.gsheet{background:var(--card);border:1px solid var(--gline);border-radius:18px;overflow:hidden}
+.gsh{display:flex;gap:10px;padding:10px 14px;font:11px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--gmute);border-bottom:1px solid var(--gline)}
+.gsh .gn,.grow2 .gn{flex:1;min-width:0}
+.grow2{width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:transparent;border:0;border-bottom:1px solid #261F10;color:var(--gtext);font:inherit;text-align:left;cursor:pointer;min-height:60px;box-sizing:border-box}
+.grow2:last-child{border-bottom:0}
+.grow2:active,.grow2:hover{background:var(--card2)}
+.gno{width:30px;font:700 .95rem var(--font-mono);color:var(--gold);flex:none}
+.gsh>span:first-child:not(.gn){width:30px}
+.gn b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gn small{display:block;color:var(--gmute);font-size:.8rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gr{text-align:right;flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.gr b{font-size:.88rem}
+.gav{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#2A2110;color:var(--gold);display:flex;align-items:center;justify-content:center;font:800 1.05rem var(--font-display);flex:none;border:1.5px solid #5A4A1E}
+.gav.xl{width:96px;height:96px;font-size:2.4rem;border-width:3px}
+.gchip{font-style:normal;font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.gchip.ok{background:#16301F;color:#7BE0A3}
+.gchip.soon{background:#3A2D10;color:#F3C94E}
+.gchip.over{background:#4A1713;color:#FF9A90}
+.gchip.none{background:#26220F;color:var(--gmute)}
+.gempty{text-align:center;padding:36px 16px;display:flex;flex-direction:column;gap:6px;color:var(--gmute)}
+.gempty b{color:var(--gtext);font-size:1.1rem}
+.gnav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(15,13,8,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--gline);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.gnav button{position:relative;background:none;border:0;color:var(--gmute);display:flex;flex-direction:column;align-items:center;gap:2px;font:600 .72rem var(--font-body);min-height:52px;cursor:pointer}
+.gnav button.on{color:var(--gold)}
+.gnav em{position:absolute;top:2px;left:calc(50% + 6px);background:#D9473E;color:#fff;font:700 .65rem var(--font-body);font-style:normal;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;box-sizing:border-box}
+.ghead2 h3{font-size:1.3rem}.ghead2 p{color:var(--gmute);font-size:.9rem}
+.grem{background:var(--card);border:1px solid var(--gline);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.grem.over{border-color:#7A2A24}.grem.soon{border-color:#8C6B1F}
+.grh{display:flex;gap:10px;align-items:center}
+.grh .gn{flex:1;min-width:0}
+.gdt{color:var(--gmute);font-size:.9rem}.gdt b{color:var(--gtext)}
+.gra{display:flex;gap:8px;flex-wrap:wrap}
+.gra .gbtn{flex:1}
+.gov{position:fixed;inset:0;z-index:50;background:var(--ink);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.govh{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:8px;padding:10px 12px;background:rgba(11,10,7,.96);border-bottom:1px solid var(--gline);font:700 1rem var(--font-display);text-align:center}
+.govb{max-width:560px;margin:0 auto;padding-bottom:40px}
+.gprof{display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px 16px 4px;text-align:center}
+.gprof p{color:var(--gmute)}
+.gdr{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid #261F10}
+.gdr:last-child{border-bottom:0}
+.gdr span{color:var(--gmute);flex:none}
+.gdr b{text-align:right;min-width:0;overflow-wrap:anywhere;font-weight:600}
+.gdr a{color:var(--gold)}
+.gdays{color:var(--gold);font-weight:800}
+.gnext small{font:11px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gmute)}
+.gnext h3{font-size:1.8rem}
+.gnext.over h3{color:#FF9A90}.gnext.soon h3{color:#F3C94E}
+.gnext .gchip{align-self:flex-start}
+.gsum{color:var(--gold);font-weight:700}
+.ghint{color:var(--gmute);font-size:.88rem}
+@media (max-width:380px){.gkeys{grid-template-columns:repeat(3,68px);gap:10px}.gkey{width:68px;height:56px}.gstats{gap:6px;padding:12px 8px}.gst b{font-size:1.15rem}}
+@media (prefers-reduced-motion:reduce){.gspin,.gdots.shake{animation:none}}
+body.gymmode{margin:0;padding:0!important}
+.gnav{max-width:720px;margin:0 auto}
+
+/* ===== v13: bills + premium polish ===== */
+.gmake{display:flex;align-items:center;gap:14px;width:calc(100% - 24px);margin:0 12px 8px;padding:14px 16px;border:1px solid #8C6B1F;border-radius:20px;background:linear-gradient(135deg,#3A2D10 0%,#1F1A0F 60%,#2A2110 100%);color:var(--gtext);font:inherit;text-align:left;cursor:pointer;box-sizing:border-box;box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06)}
+.gbody>.gmake{width:100%;margin:0}
+.gmake b{display:block;font:800 1.05rem var(--font-display);color:var(--gold)}
+.gmake small{color:#CDBB8A;font-size:.82rem}
+.gmake>span:nth-child(2){flex:1;min-width:0}
+.gmake i{font-style:normal;font-size:1.8rem;color:var(--gold)}
+.gmk{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#F3D77F,#B98A1E);display:flex;align-items:center;justify-content:center;flex:none}
+.gmk svg{width:24px;height:24px;fill:none;stroke:#1A1405;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.gseg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#0F0D08;border:1px solid var(--gline);border-radius:14px;padding:4px}
+.gseg button{border:0;background:transparent;color:var(--gmute);font:700 .95rem var(--font-display);border-radius:10px;min-height:42px;cursor:pointer}
+.gseg button.on{background:linear-gradient(135deg,#F3D77F,#C99A2B);color:#1A1405}
+.gsearch.big{min-height:52px}
+.gpick{display:flex;align-items:center;gap:10px;background:#0F0D08;border:1px solid var(--gline);border-radius:14px;padding:10px 12px}
+.gpick .gn{flex:1;min-width:0}
+.gauto{background:#0F0D08;border:1px dashed #5A4A1E;border-radius:14px;padding:10px 14px}
+.gauto small{font:10.5px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.gtwo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gtwo>div{min-width:0}
+.ginv{position:relative;margin:14px 12px;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.55);aspect-ratio:794/1123}
+.ginv img{display:block;width:100%;height:auto}
+.ginv-sp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#17140D}
+.ginv-sp[hidden],.ginv img[hidden]{display:none}
+.gbills{display:flex;flex-direction:column;gap:10px;padding:0 12px}
+.gbi{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;margin-right:8px}
+.ghint.cen{text-align:center;padding:10px 12px}
+.gnav{grid-template-columns:repeat(5,1fr)}
+.gnav button{font-size:.68rem}
+.gnav button.on::before{content:"";position:absolute;top:-7px;left:30%;right:30%;height:3px;border-radius:0 0 4px 4px;background:var(--gold)}
+
+/* gym polish */
+#gymroot{background:radial-gradient(120% 60% at 50% -10%,#241B09 0%,#0B0A07 60%) fixed}
+.gdash{animation:rise .35s ease both}
+.gst{background:linear-gradient(160deg,#1F1A0F,#13100A);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.gst b{background:linear-gradient(135deg,#F3D77F,#C99A2B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gst.warn{background:linear-gradient(160deg,#3A2D10,#1F1808)}
+.gcard{background:linear-gradient(170deg,#1B170E,#131009);box-shadow:0 14px 34px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.04)}
+.gsheet{background:linear-gradient(170deg,#1B170E,#131009);box-shadow:0 10px 28px rgba(0,0,0,.3)}
+.gtop::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,#E9C05A,transparent)}
+.gl-logo{box-shadow:0 0 0 6px rgba(233,192,90,.12),0 10px 34px rgba(0,0,0,.6)}
+.gpinbox{box-shadow:0 20px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.05)}
+.gkey{background:linear-gradient(160deg,#2A2110,#17130A);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+.gbtn.gold{box-shadow:0 8px 22px rgba(185,138,30,.35),inset 0 1px 0 rgba(255,255,255,.35)}
+.gbtn.gold:active{transform:translateY(1px)}
+.gbanner2{box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.gdots i.on{box-shadow:0 0 10px rgba(233,192,90,.7)}
+.gov{animation:rise .25s ease both}
+
+/* plans + family polish */
+.pcd{transition:transform .2s ease,box-shadow .2s ease}
+.pcd:hover{transform:translateY(-3px)}
+.pcd.gym{box-shadow:0 18px 50px rgba(185,138,30,.28)}
+.pcd.gym::after{content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;background:linear-gradient(135deg,rgba(243,215,127,.14),transparent 40%)}
+.famhero{background:radial-gradient(90% 120% at 100% 0%,#3B6CF0 0%,transparent 55%),linear-gradient(150deg,#1D4ED8,#0B1F66);box-shadow:0 16px 40px rgba(29,78,216,.3)}
+.fmc{transition:box-shadow .2s ease}
+.fav{background:linear-gradient(135deg,#3B6CF0,#1D4ED8)}
+@media (max-width:380px){.gnav button span{font-size:.62rem}}
+#gymroot input.gin,#gymroot select.gin,#gymroot textarea.gin{background:#0F0D08!important;color:var(--gtext)!important;border-color:var(--gline)}
+#gymroot input.gin:focus{border-color:var(--gold)}
+#gymroot input.gin,#gymroot select.gin{max-width:none;width:100%;border-radius:12px;font-size:16px;padding:12px 14px;font-family:var(--font-body)}
+
+/* whatsapp sheet */
+.gbtn.wa{background:linear-gradient(135deg,#2BD366,#128C4A);border-color:#128C4A;color:#04210F;box-shadow:0 8px 22px rgba(18,140,74,.35)}
+.gwa{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.65);display:flex;align-items:flex-end;justify-content:center;animation:rise .2s ease both}
+.gwa-in{width:100%;max-width:560px;max-height:92vh;overflow-y:auto;background:linear-gradient(170deg,#1B170E,#100D08);border:1px solid var(--gline);border-radius:24px 24px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px;box-sizing:border-box}
+.gwa-h{display:flex;justify-content:space-between;align-items:center}
+.gwa-h b{font:800 1.15rem var(--font-display)}
+.gsteps{display:flex;flex-direction:column;gap:8px;margin:4px 0}
+.gstep{display:flex;gap:10px;align-items:center;background:#0F0D08;border:1px solid var(--gline);border-radius:14px;padding:10px 12px}
+.gstep>span{width:26px;height:26px;border-radius:50%;background:#2A2110;color:var(--gold);display:flex;align-items:center;justify-content:center;font:800 .85rem var(--font-display);flex:none}
+.gstep.done>span{background:#16301F;color:#7BE0A3}
+.gstep>div{flex:1;min-width:0}
+.gstep small{display:block;color:var(--gmute);font-size:.8rem;line-height:1.35}
+
 </style>
 </head>
 <body>
@@ -757,6 +1029,9 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
         <button type="button" data-go="steps"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="14" cy="4.5" r="1.8"/><path d="M8 21l3-6-2-2 2-4 4 2 2 3M11 9l-3 1"/></svg><span><b>Step tracker</b><small>Steps, km, calories, 30 days</small></span></button>
         <button type="button" data-go="library"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12"/></svg><span><b>Exercise library</b><small>300+ exercises sorted by muscle</small></span></button>
         <button type="button" data-go="foods"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7c-2-3-7-2-7 3 0 5 3 10 7 10s7-5 7-10c0-5-5-6-7-3z"/><path d="M12 7c0-2 1-3 3-4"/></svg><span><b>Food guide</b><small>Nutrients in every food</small></span></button>
+        <button type="button" data-go="plans"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><span><b>Plans</b><small>Individual, Family, Gym</small></span></button>
+        <button type="button" data-go="family" id="m-fam" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 15c3 0 6 1.5 6 4"/></svg><span><b>Family</b><small>Track your family members</small></span></button>
+        <button type="button" data-go="gym" id="m-gym"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12"/></svg><span><b>Gym manager</b><small>Members, trainers, fees</small></span></button>
         <button type="button" data-go="sub" id="m-sub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Subscription</b><small id="m-lic">Not active</small></span></button>
         <button type="button" data-go="about"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span><b>About KDN</b><small>How the numbers work</small></span></button>
         <button type="button" data-go="edit" id="m-edit" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/></svg><span><b>Edit plan</b><small>Change weight, time, diet</small></span></button>
@@ -775,7 +1050,7 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
       <div class="hero-t">
         <h1>Eat and train for the <mark>body you want</mark>.</h1>
         <p class="lead">Answer thirteen short questions. You get a calorie and protein target worked out for your body and workouts, a plan for every day with real dishes, recipes and a week of exercises for where you train, a step tracker, and weekly weigh-ins that correct the plan.</p>
-        <button class="btn" type="button" id="b-start1">Get Started</button>
+        <div class="herobtns"><button class="btn" type="button" id="b-start1">Get Started</button><button class="btn ghost" type="button" id="b-plans">View plans</button></div>
       </div>
       <figure class="scene"><div id="heroscene" class="heroscene"></div><figcaption><span id="herocap">Walking into the gym</span> · animated illustration of a male and a female athlete in KDN tees</figcaption></figure>
       <div class="tees" id="tees" aria-hidden="true"></div>
@@ -797,16 +1072,16 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
 
   <!-- 1c. Subscription -->
   <section class="screen" id="s-pay" hidden>
-    <div class="payhero"><div class="payart" id="payart" aria-hidden="true"></div><div class="payt"><small>KDN Fitness Tracker</small><h2>Unlock your plan</h2><p>One purchase for lifetime access to the plan builder, 300+ exercises, 129 dishes with recipes, the step tracker and weekly check-ins.</p></div></div>
+    <div class="payhero"><div class="payart" id="payart" aria-hidden="true"></div><div class="payt"><small>KDN Fitness Tracker</small><h2 id="pay-ptitle">Unlock your plan</h2><p id="pay-pdesc"></p></div></div>
     <p class="note" id="pay-note" hidden></p>
     <div id="pay-active" hidden>
-      <div class="actcard"><div class="acth"><span class="dot"></span><b id="act-title">Coupon active</b></div><p id="act-sub"></p><div class="cd" id="act-cd" aria-live="off"></div><button class="btn wide" type="button" id="act-go">Open my plan</button></div>
+      <div class="actcard"><div class="acth"><span class="dot"></span><b id="act-title">Active</b></div><p id="act-sub"></p><div class="cd" id="act-cd" aria-live="off"></div><button class="btn wide" type="button" id="act-go">Open my plan</button></div>
     </div>
     <div id="pay-buy">
       <div class="pricecard">
-        <div class="pr"><b>₹999</b><span>one-time purchase<br>lifetime access</span></div>
-        <ul class="ticks"><li>Calorie and protein targets worked out for your body</li><li>Daily meals from 129 dishes with recipes</li><li>300+ exercises with male and female demos</li><li>Step tracker, weigh-ins and plan corrections</li></ul>
-        <button class="btn wide" type="button" id="pay-btn"><span class="spin" id="pay-spin" hidden></span><span id="pay-lbl">Pay ₹999</span></button>
+        <div class="pr" id="pay-pr"></div>
+        <ul class="ticks" id="pay-feat"></ul>
+        <button class="btn wide" type="button" id="pay-btn"><span class="spin" id="pay-spin" hidden></span><span id="pay-lbl">Pay</span></button>
         <p class="payerr" id="pay-err" role="alert" hidden></p>
       </div>
       <div class="or"><span>or use a coupon</span></div>
@@ -817,16 +1092,30 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
         <p class="foot">A valid coupon gives 30 days of full access, counted from the day you apply it.</p>
       </form>
     </div>
+    <button class="btn ghost wide" type="button" id="pay-plans">View all plans</button>
     <div id="pay-done" class="donecard" hidden>
       <div class="confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
       <h2>Congratulations!</h2>
-      <p>Your coupon is applied. You have full access for 30 days, starting today.</p>
+      <p id="done-msg">Your coupon is applied.</p>
       <div class="cd" id="done-cd" aria-live="off"></div>
       <p class="foot" id="done-until"></p>
       <button class="btn wide" type="button" id="done-go">Start my questions</button>
     </div>
   </section>
+
+  <!-- 1d. Plans -->
+  <section class="screen" id="s-plans" hidden>
+    <h2>Choose your plan</h2>
+    <p class="lead">One plan for you, one for your family, one to run a gym. A coupon gives any plan 30 days free.</p>
+    <div id="plans" class="plans"></div>
+  </section>
+
+  <!-- 1e. Family -->
+  <section class="screen" id="s-family" hidden><div id="family"></div></section>
+
+  <!-- 1f. Gym manager -->
+  <section class="screen" id="s-gym" hidden><div id="gymroot"></div></section>
 
   <!-- 2. Intro -->
   <section class="screen" id="s-intro" hidden>
@@ -1049,13 +1338,15 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
 <script>
 (function(){
   var $ = function(id){return document.getElementById(id)};
-  var screens = ['s-landing','s-pay','s-home','s-intro','s-form','s-review','s-result','s-library','s-foods','s-about'];
+  var screens = ['s-landing','s-pay','s-plans','s-family','s-gym','s-home','s-intro','s-form','s-review','s-result','s-library','s-foods','s-about'];
   var curScreen = 's-landing';
   var planDone = false;
-  var OPENSCR = ['s-landing','s-pay','s-about'];
+  var OPENSCR = ['s-landing','s-pay','s-plans','s-about'];
   function show(id){
-    if(OPENSCR.indexOf(id)<0 && typeof licensed==='function' && !licensed()){ id = 's-pay'; payGateNote(); }
+    var need = (typeof gateOf==='function') ? gateOf(id) : ''; if(need){ payGateNote(need); id = 's-pay'; }
     curScreen = id;
+    document.body.classList.toggle('gymmode',id==='s-gym');
+    if(id!=='s-gym' && typeof gymLeave==='function') gymLeave();
     screens.forEach(function(s){$(s).hidden = (s !== id)});
     window.scrollTo(0,0);
     var h = $(id).querySelector('h1,h2');
@@ -1063,6 +1354,9 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
     syncNav();
     if(id==='s-landing') heroKick();
     if(id==='s-pay') payShow();
+    if(id==='s-plans') renderPlans();
+    if(id==='s-family') renderFamily();
+    if(id==='s-gym') gymEnter();
   }
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   function fmt(n){return n.toLocaleString('en-IN')}
@@ -4468,15 +4762,44 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
   });
 
 
-  /* ---------- Subscription screen: lifetime price, coupon, 30-day access with a running timer ----------
-     This is a front-end demo. No payment is ever taken: the Pay button only shows a loading state and then an error.
-     The coupon and its expiry are checked in this browser only. */
-  var LICKEY = 'kdn.lic.v1', COUPON = 'maingaribhu', LIC_DAYS = 30;
-  function licGet(){ try{ var t = localStorage.getItem(LICKEY); var o = t ? JSON.parse(t) : null; return (o && o.end>0 && o.start>0) ? o : null; }catch(e){ return null; } }
-  function licSet(o){ try{ localStorage.setItem(LICKEY,JSON.stringify(o)); }catch(e){} }
-  var licMem = null; /* fallback when storage is blocked */
-  function lic(){ return licGet() || licMem; }
-  function licensed(){ var l = lic(); return !!l && Date.now() < l.end; }
+  /* ---------- Plans, subscription screen, coupon, access timers ----------
+     Front-end demo. No payment is ever taken: the Pay button only shows a loading state and then an error.
+     Access comes from the coupon, which is checked in this browser only. */
+  var LICKEY = 'kdn.lic.v2', LICKEY1 = 'kdn.lic.v1', COUPON = 'maingaribhu', LIC_DAYS = 30;
+  var PLANS = {
+    ind:{n:'Individual',short:'Individual',price:'₹999',unit:'one-time purchase<br>lifetime access',tag:'For one person',
+      feat:['Calorie and protein targets worked out for your body','Daily meals from 129 dishes with recipes','300+ exercises with male and female demos','Step tracker, weigh-ins and plan corrections']},
+    fam:{n:'Family pack',short:'Family',price:'₹15,000',unit:'for 3 months<br>3 members',tag:'Most popular',
+      feat:['Everything in Individual','3 members: you and 2 family members','Track each member’s steps, weight and daily plan','A separate calorie, meal and workout plan for each person']},
+    gym:{n:'Gym manager',short:'Gym',price:'₹9,999',unit:'per month<br>for your whole gym',tag:'For gym owners',
+      feat:['Your gym’s name, logo, cover photo and address','Private 4-digit PIN login','Up to 500 members with photo, plan, fee date and days as member','Trainers and employees with salary tracking','Reminders 3 days before every fee or salary is due']}
+  };
+  var payPlan = 'ind';
+  var licMem = null;
+  function licAll(){
+    var o = null;
+    try{ var t = localStorage.getItem(LICKEY); o = t ? JSON.parse(t) : null; }catch(e){}
+    if(!o || typeof o!=='object'){
+      o = {};
+      try{ var t1 = localStorage.getItem(LICKEY1), v1 = t1 ? JSON.parse(t1) : null; if(v1 && v1.end>0 && v1.start>0) o.ind = {start:v1.start,end:v1.end,code:v1.code}; }catch(e){}
+    }
+    if(licMem) Object.keys(licMem).forEach(function(k){ if(!o[k] || licMem[k].end>o[k].end) o[k] = licMem[k]; });
+    return o;
+  }
+  function licSetPlan(plan,l){
+    var o = licAll(); o[plan] = l; licMem = o;
+    try{ localStorage.setItem(LICKEY,JSON.stringify(o)); }catch(e){}
+  }
+  function licOf(plan){ var l = licAll()[plan]; return (l && l.end>0 && l.start>0) ? l : null; }
+  function planOn(p){ var l = licOf(p); return !!l && Date.now()<l.end; }
+  function licensed(plan){ plan = plan||'app'; return plan==='app' ? (planOn('ind') || planOn('fam')) : planOn(plan); }
+  /* which plan does a screen need? '' = none */
+  function gateOf(id){
+    if(id==='s-gym') return licensed('gym') ? '' : 'gym';
+    if(id==='s-family') return licensed('fam') ? '' : 'fam';
+    if(OPENSCR.indexOf(id)>=0) return '';
+    return licensed('app') ? '' : (payPlan==='fam' ? 'fam' : 'ind');
+  }
   function two(n){ return n<10 ? '0'+n : ''+n; }
   function cdParts(ms){
     var s = Math.max(0,Math.floor(ms/1000));
@@ -4490,40 +4813,66 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
     var d = new Date(l.end);
     return d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})+' at '+d.toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit'});
   }
-  var payTimer = null, payBusy = false, doneTimer = null, payNoteTxt = '';
-  function payGateNote(){
-    var l = lic();
-    payNoteTxt = l ? 'Your 30-day coupon access ended on '+untilTxt(l)+'. Apply a coupon again or buy lifetime access to continue.' : 'Please unlock KDN Fitness Tracker to continue.';
+  var payBusy = false, doneTimer = null, payNoteTxt = '';
+  function payGateNote(plan){
+    if(plan) payPlan = plan;
+    var l = licOf(payPlan);
+    payNoteTxt = l ? 'Your 30-day coupon access for '+PLANS[payPlan].n+' ended on '+untilTxt(l)+'. Apply a coupon again or buy a plan to continue.' : 'Please unlock '+PLANS[payPlan].n+' to continue.';
   }
-  function paySetMode(m){ /* 'buy' | 'active' | 'done' */
-    $('pay-buy').hidden = (m!=='buy'); $('pay-active').hidden = (m!=='active'); $('pay-done').hidden = (m!=='done');
-  }
+  function paySetMode(m){ $('pay-buy').hidden = (m!=='buy'); $('pay-active').hidden = (m!=='active'); $('pay-done').hidden = (m!=='done'); }
+  function payGoLabel(plan){ return plan==='gym' ? 'Set up my gym' : plan==='fam' ? (S ? 'Open family tracker' : 'Start my questions') : (S ? 'Open my home' : 'Start my questions'); }
   function payShow(){
-    var l = lic(), on = licensed();
-    var note = $('pay-note');
+    var P = PLANS[payPlan], l = licOf(payPlan), on = planOn(payPlan), note = $('pay-note');
     if(payNoteTxt){ note.textContent = payNoteTxt; note.hidden = false; payNoteTxt = ''; } else note.hidden = true;
-    if(on){
-      paySetMode('active');
-      $('act-title').textContent = 'Coupon active';
-      $('act-sub').textContent = 'Full access until '+untilTxt(l)+'.';
-    } else paySetMode('buy');
-    $('payart').innerHTML = '<div class="pa m">'+frame(PL.ohpress[1],'m')+'</div><div class="pa f">'+frame(PL.ohpress[1],'f')+'</div>';
+    $('pay-ptitle').textContent = payPlan==='ind' ? 'Unlock your plan' : P.n;
+    $('pay-pdesc').textContent = payPlan==='ind' ? 'One purchase for lifetime access to the plan builder, 300+ exercises, 129 dishes with recipes, the step tracker and weekly check-ins.' : payPlan==='fam' ? 'One pack for 3 people. Each gets a personal plan and you can follow everyone’s steps and progress in one place.' : 'Run your whole gym from your phone: members, trainers, employees, fees, salaries and reminders, behind your own PIN.';
+    $('pay-pr').innerHTML = '<b>'+P.price+'</b><span>'+P.unit+'</span>';
+    $('pay-feat').innerHTML = P.feat.map(function(x){return '<li>'+esc(x)+'</li>'}).join('');
+    $('pay-lbl').textContent = 'Pay '+P.price;
+    if(on){ paySetMode('active'); $('act-title').textContent = P.n+' active'; $('act-sub').textContent = 'Full access until '+untilTxt(l)+'.'; $('act-go').textContent = payGoLabel(payPlan).replace('Start my questions','Open my plan'); }
+    else paySetMode('buy');
+    $('payart').innerHTML = payPlan==='gym' ? '<div class="pa m gymart">'+frame(PL.deadlift[1],'m')+'</div><div class="pa f">'+frame(PL.kbswing[1],'f')+'</div>' : '<div class="pa m">'+frame(PL.ohpress[1],'m')+'</div><div class="pa f">'+frame(PL.ohpress[1],'f')+'</div>';
     tickLic();
   }
+  function licSummary(){
+    var act = ['ind','fam','gym'].filter(planOn);
+    if(!act.length) return Object.keys(licAll()).length ? 'Expired' : 'Not active';
+    var l = licOf(act[0]), p = cdParts(l.end-Date.now());
+    return PLANS[act[0]].short+' · '+p.d+'d '+two(p.h)+':'+two(p.m)+':'+two(p.s)+' left'+(act.length>1 ? ' (+'+(act.length-1)+' more)' : '');
+  }
   function tickLic(){
-    var l = lic(), on = licensed();
-    var el = $('m-lic');
-    if(el) el.textContent = on ? 'Active · '+(function(){var p = cdParts(l.end-Date.now()); return p.d+'d '+two(p.h)+':'+two(p.m)+':'+two(p.s)+' left'})() : (l ? 'Expired' : 'Not active');
+    var el = $('m-lic'); if(el) el.textContent = licSummary();
+    var mf = $('m-fam'); if(mf) mf.hidden = !planOn('fam');
     if(curScreen==='s-pay'){
+      var l = licOf(payPlan), on = planOn(payPlan);
       if(on){
         if(!$('pay-active').hidden) $('act-cd').innerHTML = cdHtml(l.end-Date.now());
         if(!$('pay-done').hidden) $('done-cd').innerHTML = cdHtml(l.end-Date.now());
       } else if(!$('pay-active').hidden || !$('pay-done').hidden){ payShow(); }
-    } else if(!on && OPENSCR.indexOf(curScreen)<0){
-      payGateNote(); show('s-pay');
+    } else if(curScreen==='s-plans'){
+      var pc = document.querySelectorAll('#plans .pcd'); Array.prototype.forEach.call(pc,function(e){ var k = e.getAttribute('data-plan'), s = e.querySelector('.pst'); if(s) s.textContent = planOn(k) ? 'Active · '+(function(){var q = cdParts(licOf(k).end-Date.now()); return q.d+'d '+two(q.h)+':'+two(q.m)+':'+two(q.s)+' left'})() : ''; });
+    } else {
+      var need = gateOf(curScreen);
+      if(need){ payGateNote(need); if(curScreen==='s-gym' && typeof gymLeave==='function') gymLeave(); show(curScreen); }
     }
   }
   setInterval(tickLic,1000);
+
+  /* plans page */
+  function renderPlans(){
+    $('plans').innerHTML = ['ind','fam','gym'].map(function(k){
+      var P = PLANS[k];
+      return '<div class="pcd '+k+'" data-plan="'+k+'">'+(P.tag?'<span class="ptag">'+esc(P.tag)+'</span>':'')+'<h3>'+esc(P.n)+'</h3><div class="pr"><b>'+P.price+'</b><span>'+P.unit+'</span></div><ul class="ticks">'+P.feat.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><p class="pst" aria-live="off"></p><button type="button" class="btn wide" data-choose="'+k+'">'+(planOn(k)?'Open':'Choose')+' '+esc(P.short.toLowerCase())+'</button></div>';
+    }).join('');
+    tickLic();
+  }
+  $('plans').addEventListener('click',function(ev){
+    var b = ev.target.closest('button[data-choose]'); if(!b) return;
+    var k = b.getAttribute('data-choose'); payPlan = k; show('s-pay');
+  });
+  function openPlans(){ show('s-plans'); renderPlans(); }
+  $('pay-plans').addEventListener('click',openPlans);
+  $('b-plans').addEventListener('click',openPlans);
 
   /* Pay button: loading for 5 seconds, then an error. Nothing is charged. */
   $('pay-btn').addEventListener('click',function(){
@@ -4532,24 +4881,27 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
     var btn = $('pay-btn'); btn.disabled = true; btn.classList.add('busy');
     $('pay-spin').hidden = false; $('pay-lbl').textContent = 'Processing…';
     $('pay-err').hidden = true;
+    var pp = payPlan;
     setTimeout(function(){
       payBusy = false; btn.disabled = false; btn.classList.remove('busy');
-      $('pay-spin').hidden = true; $('pay-lbl').textContent = 'Pay ₹999';
+      $('pay-spin').hidden = true; $('pay-lbl').textContent = 'Pay '+PLANS[payPlan].price;
       var e = $('pay-err'); e.textContent = 'Payment could not be completed. Online payments are not available in this version. Please use a coupon code to continue.'; e.hidden = false;
     },5000);
   });
 
-  /* Coupon: letters can be any case. */
+  /* Coupon: letters can be any case. One coupon works for every plan and gives 30 days. */
   $('coupon-form').addEventListener('submit',function(ev){
     ev.preventDefault();
     var v = $('cp-in').value.trim().toLowerCase(), m = $('cp-msg');
     m.hidden = false; m.className = 'cpmsg';
     if(!v){ m.textContent = 'Enter a coupon code first.'; m.classList.add('bad'); return; }
     if(v!==COUPON){ m.textContent = 'That coupon is not valid. Check the spelling and try again.'; m.classList.add('bad'); return; }
-    if(licensed()){ m.textContent = 'Your coupon is already active. Time left is shown in the menu.'; m.classList.add('ok'); return; }
+    if(planOn(payPlan)){ m.textContent = 'Your coupon is already active for this plan. Time left is shown in the menu.'; m.classList.add('ok'); return; }
     var now = Date.now(), l = {start:now,end:now+LIC_DAYS*86400000,code:COUPON};
-    licSet(l); licMem = l;
+    licSetPlan(payPlan,l);
     m.hidden = true; $('cp-in').value = '';
+    $('done-msg').textContent = 'Your coupon is applied. '+PLANS[payPlan].n+' is active for 30 days, starting today.';
+    $('done-go').textContent = payGoLabel(payPlan);
     $('done-until').textContent = 'Valid until '+untilTxt(l)+'. You can see the time left in the menu.';
     paySetMode('done'); tickLic();
     window.scrollTo(0,0);
@@ -4560,10 +4912,862 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
   });
   function afterPay(){
     clearTimeout(doneTimer);
-    if(S) openHome(); else { show('s-form'); goStep(0); }
+    if(payPlan==='gym') show('s-gym');
+    else if(payPlan==='fam' && S) show('s-family');
+    else if(S) openHome();
+    else { show('s-form'); goStep(0); }
   }
   $('done-go').addEventListener('click',afterPay);
-  $('act-go').addEventListener('click',function(){ if(S) openHome(); else show('s-intro'); });
+  $('act-go').addEventListener('click',function(){
+    if(payPlan==='gym') show('s-gym'); else if(payPlan==='fam' && S) show('s-family'); else if(S) openHome(); else show('s-intro');
+  });
+
+  /* ---------- Family pack: you and 2 family members ---------- */
+  var FKEY = 'kdn.family.v1', FAM = null, famForm = null, famDel = null;
+  function famLoad(){
+    if(FAM) return FAM;
+    var o = null;
+    try{ var t = localStorage.getItem(FKEY); o = t ? JSON.parse(t) : null; }catch(e){}
+    FAM = (o && Array.isArray(o.members)) ? o : {members:[]};
+    FAM.members = FAM.members.filter(function(m){ return m && m.p && m.id; }).slice(0,2);
+    FAM.members.forEach(function(m){ try{ m.p = normalize(m.p); }catch(e){} if(!m.log) m.log = {}; if(!m.wl) m.wl = {}; });
+    return FAM;
+  }
+  function famSave(){ try{ localStorage.setItem(FKEY,JSON.stringify(FAM)); }catch(e){} }
+  function fmGoal(p){ return p.stepGoal>0 ? p.stepGoal : (p.goal==='lose' ? 10000 : p.goal==='gain' ? 7000 : 8000); }
+  function fmSteps(p,n){
+    var stride = p.height*(p.gender==='female' ? 0.413 : 0.415)/100, km = n*stride/1000;
+    return {km:km,kcal:0.6*p.weight*km};
+  }
+  function fmStepsOn(m,k){ return (m.log[k] && m.log[k].st) || 0; }
+  function fmWeights(m){
+    return Object.keys(m.wl).sort().map(function(k){return {k:k,kg:m.wl[k]}});
+  }
+  function fmBars(m,goal){
+    var days = [], i, mx = goal;
+    for(i=6;i>=0;i--){ var dt = new Date(); dt.setDate(dt.getDate()-i); var k = dkey(dt); days.push({k:k,dt:dt,st:fmStepsOn(m,k)}); }
+    days.forEach(function(x){ if(x.st>mx) mx = x.st; });
+    var gy = 60-Math.round(goal/mx*54);
+    var bars = days.map(function(x,ix){
+      var bh = Math.round(x.st/mx*54);
+      return '<rect x="'+(ix*26+4)+'" y="'+(60-bh)+'" width="18" height="'+Math.max(bh,x.st>0?2:0)+'" rx="4" fill="'+(ix===6?'#1D4ED8':x.st>=goal?'#2E9E6E':'#9DB5EE')+'"><title>'+x.dt.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'})+': '+fmt(x.st)+' steps</title></rect>';
+    }).join('');
+    var tot = 0, met = 0; days.forEach(function(x){ tot += x.st; if(x.st>=goal) met++; });
+    return {svg:'<svg viewBox="0 0 182 66" preserveAspectRatio="none" role="img" aria-label="Steps for the last 7 days"><line x1="0" x2="182" y1="'+gy+'" y2="'+gy+'" stroke="#2E9E6E" stroke-width="1" stroke-dasharray="4 3"/>'+bars+'</svg><div class="fmx">'+days.map(function(x){return '<span>'+x.dt.toLocaleDateString('en-IN',{weekday:'narrow'})+'</span>'}).join('')+'</div>',tot:tot,met:met};
+  }
+  function fmCard(m){
+    var p = m.p, r = calc(p), dow = todayDow(), wp = weekPlan(p), day = wp.days[dow], mp = mealPlan(p,r,dow), tk = todayKey();
+    var st = fmStepsOn(m,tk), goal = fmGoal(p), ss = fmSteps(p,st), bars = fmBars(m,goal), wl = fmWeights(m), last = wl.length ? wl[wl.length-1].kg : p.weight;
+    var tw = targetOf(p), pct = Math.min(100,Math.round(st/goal*100));
+    var h = '<div class="fmc" data-id="'+m.id+'"><div class="fmh"><span class="fav">'+esc(p.name.charAt(0).toUpperCase())+'</span><div><b>'+esc(p.name)+'</b><small>'+p.age+' yrs · '+esc(goalLine(p))+'</small></div></div>';
+    h += '<div class="hchips"><div><b>'+fmt(r.target)+'</b><span>kcal a day</span></div><div><b>'+r.protein+' g</b><span>protein</span></div><div><b>'+r.water.toFixed(1)+' L</b><span>water</span></div></div>';
+    h += '<div class="fmsec"><div class="fmt"><b>Steps today</b><span>'+fmt(st)+' of '+fmt(goal)+'</span></div><div class="bar"><i style="width:'+pct+'%"></i></div><p class="hint">'+fmtKm(ss.km)+' km · about '+Math.round(ss.kcal)+' kcal walked</p>';
+    h += '<div class="cbs">'+[['500','+500'],['1000','+1,000'],['2000','+2,000'],['-500','−500']].map(function(x){return '<button type="button" class="cb" data-fa="add" data-id="'+m.id+'" data-n="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>';
+    h += '<div class="crow"><input class="sel" type="number" min="0" max="100000" inputmode="numeric" placeholder="Enter total steps today" id="fs-'+m.id+'" aria-label="Total steps today for '+esc(p.name)+'"><button type="button" class="btn sm" data-fa="setst" data-id="'+m.id+'">Save</button></div>';
+    h += '<div class="fmchart">'+bars.svg+'</div><p class="hint">Last 7 days: '+fmt(bars.tot)+' steps · goal met on '+bars.met+' of 7 days</p></div>';
+    h += '<div class="fmsec"><div class="fmt"><b>Weight</b><span>'+r1(last)+' kg now · target '+r1(tw)+' kg</span></div><div class="crow"><input class="sel" type="number" min="20" max="400" step="0.1" inputmode="decimal" placeholder="Today’s weight in kg" id="fw-'+m.id+'" aria-label="Weight for '+esc(p.name)+'"><button type="button" class="btn sm" data-fa="wsave" data-id="'+m.id+'">Log</button></div>';
+    h += '<p class="hint">Started at '+r1(p.weight)+' kg'+(wl.length ? ' · '+wl.length+' weigh-in'+(wl.length===1?'':'s')+' logged' : '')+'.</p></div>';
+    h += '<div class="fmsec"><div class="fmt"><b>Today’s plan</b><span>'+esc(day.t)+'</span></div><ul class="hl">'+day.items.map(function(it){return '<li><b>'+esc(EXS[it.id].n)+'</b><span>'+esc(rxTxt(it.id,it))+'</span></li>'}).join('')+'</ul>';
+    h += '<ul class="hl">'+mp.slots.map(function(s){return '<li><span class="mpic sm">'+dishPic(s.x)+'</span><b>'+esc(s.x.n)+'</b><span>'+s.sl[0].replace(' snack','')+' · '+Math.round(s.k)+' kcal</span></li>'}).join('')+mp.tops.map(function(q){return '<li><b>'+q.u+' × '+esc(q.t.n)+'</b><span>Protein top-up</span></li>'}).join('')+'</ul></div>';
+    h += '<div class="hb two"><button type="button" class="btn sm ghost" data-fa="edit" data-id="'+m.id+'">Edit profile</button>'+(famDel===m.id ? '<button type="button" class="btn sm danger" data-fa="rmyes" data-id="'+m.id+'">Tap again to remove</button>' : '<button type="button" class="btn sm ghost" data-fa="rm" data-id="'+m.id+'">Remove member</button>')+'</div></div>';
+    return h;
+  }
+  function famFormHtml(f){
+    var d = f.p || {}, ft = '', inch = '';
+    if(d.height>0){ var t = Math.round(d.height/2.54*10)/10, a = Math.floor(t/12); ft = a; inch = r1(t-a*12); }
+    function sel(id,label,list,cur){ return '<label class="fl" for="'+id+'">'+label+'</label><select class="sel" id="'+id+'">'+list.map(function(x){return '<option value="'+x[0]+'"'+(String(cur)===String(x[0])?' selected':'')+'>'+esc(x[1])+'</option>'}).join('')+'</select>'; }
+    var h = '<div class="sect famform"><div class="sh"><div><small>'+(f.id?'Edit member':'New family member')+'</small><h3>'+(f.id?esc(d.name):'Add a family member')+'</h3></div></div>';
+    h += '<label class="fl" for="ff-name">Name</label><input class="sinp" id="ff-name" maxlength="30" value="'+esc(d.name||'')+'" placeholder="Name">';
+    h += sel('ff-gender','Gender',[['female','Female'],['male','Male'],['other','Other']],d.gender||'female');
+    h += '<div class="two"><div><label class="fl" for="ff-age">Age</label><input class="sinp" id="ff-age" type="number" inputmode="numeric" value="'+(d.age||'')+'" placeholder="Years"></div><div><label class="fl" for="ff-weight">Weight (kg)</label><input class="sinp" id="ff-weight" type="number" step="0.1" inputmode="decimal" value="'+(d.weight||'')+'" placeholder="kg"></div></div>';
+    h += '<div class="two"><div><label class="fl" for="ff-ft">Height (feet)</label><input class="sinp" id="ff-ft" type="number" inputmode="numeric" value="'+ft+'" placeholder="ft"></div><div><label class="fl" for="ff-in">Height (inches)</label><input class="sinp" id="ff-in" type="number" step="0.1" inputmode="decimal" value="'+inch+'" placeholder="in"></div></div>';
+    h += sel('ff-diet','Diet',[['veg','Vegetarian'],['vegan','Vegan'],['nonveg','Non-vegetarian']],d.diet||'veg');
+    h += sel('ff-goal','Goal',[['lose','Lose weight'],['gain','Gain weight'],['maintain','Stay stable']],d.goal||'lose');
+    h += '<label class="fl" for="ff-amt">Kilograms to lose or gain (or the weight to hold)</label><input class="sinp" id="ff-amt" type="number" step="0.1" inputmode="decimal" value="'+(d.amt||'')+'" placeholder="kg">';
+    h += sel('ff-loc','Where they train',[['h0','Home, no equipment'],['h1','Home with dumbbells'],['gym','Gym']],d.loc||'h0');
+    h += sel('ff-level','Level',[['beginner','Beginner'],['mid','Intermediate'],['adv','Advanced']],d.level||'beginner');
+    h += sel('ff-days','Training days a week',[[3,'3 days'],[4,'4 days'],[5,'5 days'],[6,'6 days']],d.days||4);
+    h += sel('ff-budget','Food budget',[['low','Low'],['mid','Medium'],['high','High']],d.budget||'mid');
+    h += '<p class="payerr" id="ff-err" role="alert" hidden></p><div class="hb two"><button type="button" class="btn" data-fa="save">Save member</button><button type="button" class="btn ghost" data-fa="cancel">Cancel</button></div></div>';
+    return h;
+  }
+  function renderFamily(){
+    var F = famLoad(), h = '';
+    h += '<div class="famhero"><small>Family pack</small><h2>Family tracker</h2><p>You and up to 2 family members. Everyone gets a personal plan, and you can follow each person’s steps, weight and daily plan here.</p>';
+    var left = planOn('fam') ? (function(){var q = cdParts(licOf('fam').end-Date.now()); return q.d+' days left'})() : '';
+    h += '<div class="famslots">'+[0,1,2].map(function(i){ var nm = i===0 ? (S?S.name:'You') : (F.members[i-1] ? F.members[i-1].p.name : ''); return '<span class="slot'+(nm?' on':'')+'">'+(nm?esc(nm):'Open slot')+'</span>'; }).join('')+'</div>'+(left?'<small class="fmleft">'+left+'</small>':'')+'</div>';
+    if(famForm){ h += famFormHtml(famForm); $('family').innerHTML = h; return; }
+    /* you */
+    if(S){
+      var st = ((S.log||{})[todayKey()]||{}).st||0, g = stepGoal(), r0 = curR || calc(S);
+      h += '<div class="fmc me"><div class="fmh"><span class="fav me">You</span><div><b>'+esc(S.name)+'</b><small>'+esc(goalLine(S))+'</small></div></div><div class="hchips"><div><b>'+fmt(r0.target)+'</b><span>kcal a day</span></div><div><b>'+fmt(st)+'</b><span>steps today</span></div><div><b>'+Math.round(st/g*100)+'%</b><span>of step goal</span></div></div><div class="hb"><button type="button" class="btn sm" data-fa="me">Open my plan</button></div></div>';
+    } else {
+      h += '<div class="fmc me"><p class="hint">Make your own plan first so your card shows here too.</p><div class="hb"><button type="button" class="btn sm" data-fa="mk">Make my plan</button></div></div>';
+    }
+    F.members.forEach(function(m){ h += fmCard(m); });
+    if(F.members.length<2) h += '<button type="button" class="btn addbtn" data-fa="new">+ Add family member ('+(2-F.members.length)+' left)</button>';
+    else h += '<p class="hint">All 3 places in your family pack are used.</p>';
+    h += '<p class="foot">Family details are saved on this device only. Steps are entered by hand here, using each person’s phone or watch.</p>';
+    $('family').innerHTML = h;
+  }
+  function famVal(){
+    var ft = parseFloat($('ff-ft').value), inch = parseFloat($('ff-in').value);
+    var d = {name:$('ff-name').value.trim(),gender:$('ff-gender').value,age:parseInt($('ff-age').value,10),weight:parseFloat($('ff-weight').value),
+      height:(ft>=0 ? ft : 0)*30.48+((inch>=0 ? inch : 0)*2.54),diet:$('ff-diet').value,goal:$('ff-goal').value,amt:parseFloat($('ff-amt').value),
+      loc:$('ff-loc').value,level:$('ff-level').value,days:parseInt($('ff-days').value,10),budget:$('ff-budget').value,tmode:'safe'};
+    if(!(ft>0)) d.height = NaN;
+    d = normalize(d);
+    var err = '';
+    KEYS.forEach(function(k){ if(!err){ var e = FV[k](d); if(e) err = e; } });
+    return {d:d,err:err};
+  }
+  $('family').addEventListener('click',function(ev){
+    var b = ev.target.closest('button[data-fa]'); if(!b) return;
+    var a = b.getAttribute('data-fa'), F = famLoad(), id = b.getAttribute('data-id');
+    var m = F.members.filter(function(x){return x.id===id})[0];
+    if(a==='new'){ famForm = {p:null,id:null}; renderFamily(); window.scrollTo(0,0); return; }
+    if(a==='cancel'){ famForm = null; renderFamily(); return; }
+    if(a==='me'){ openHome(); return; }
+    if(a==='mk'){ show('s-form'); goStep(0); return; }
+    if(a==='edit' && m){ famForm = {p:m.p,id:m.id}; renderFamily(); window.scrollTo(0,0); return; }
+    if(a==='save'){
+      var v = famVal(), e = $('ff-err');
+      if(v.err){ e.textContent = v.err; e.hidden = false; return; }
+      if(famForm.id){ var mm = F.members.filter(function(x){return x.id===famForm.id})[0]; if(mm){ var keep = mm.p; v.d.stepGoal = keep.stepGoal; mm.p = v.d; } }
+      else F.members.push({id:'m'+Date.now().toString(36),p:v.d,log:{},wl:{}});
+      famForm = null; famSave(); renderFamily(); toast('Saved.'); return;
+    }
+    if(!m) return;
+    if(a==='add'){ var tk = todayKey(); if(!m.log[tk]) m.log[tk] = {}; m.log[tk].st = Math.max(0,(m.log[tk].st||0)+parseInt(b.getAttribute('data-n'),10)); famSave(); var y = window.scrollY; renderFamily(); window.scrollTo(0,y); return; }
+    if(a==='setst'){
+      var n = parseFloat($('fs-'+id).value);
+      if(!(n>=0) || n>100000){ toast('Enter steps between 0 and 100,000.'); return; }
+      var tk2 = todayKey(); if(!m.log[tk2]) m.log[tk2] = {}; m.log[tk2].st = Math.round(n); famSave(); var y2 = window.scrollY; renderFamily(); window.scrollTo(0,y2); toast('Steps saved.'); return;
+    }
+    if(a==='wsave'){
+      var w = parseFloat($('fw-'+id).value);
+      if(!(w>=20 && w<=400)){ toast('Enter a weight between 20 and 400 kg.'); return; }
+      m.wl[todayKey()] = Math.round(w*10)/10; famSave(); var y3 = window.scrollY; renderFamily(); window.scrollTo(0,y3); toast('Weight logged.'); return;
+    }
+    if(a==='rm'){ famDel = id; renderFamily(); return; }
+    if(a==='rmyes'){ F.members = F.members.filter(function(x){return x.id!==id}); famDel = null; famSave(); renderFamily(); toast('Member removed.'); return; }
+  });
+
+  /* ---------- Gym manager ----------
+     Everything is stored in this browser (IndexedDB). The PIN is stored as a salted hash, but this is a convenience lock,
+     not bank-grade security: anyone with access to the browser profile and developer tools can read the stored data. */
+  var GMAX = 500, GREM = 3;
+  var GDB = {db:null,tried:false,mem:null}, G = null, gT = null, gTO = null, gLock = {n:0,until:0};
+  var gS = {wa:null,bill:null,view:'loading',tab:'members',q:'',n:50,ov:null,tmp:{},pin:'',err:'',nextTouched:false,del:false,reset:false};
+  var GPLANS = [['m1','Monthly',1],['m3','Quarterly (3 months)',3],['m6','Half-yearly (6 months)',6],['m12','Yearly',12]];
+  var GKIND = {
+    members:{one:'member',many:'Members',list:'members'},
+    trainers:{one:'trainer',many:'Trainers',list:'trainers'},
+    employees:{one:'employee',many:'Employees',list:'employees'}
+  };
+
+  /* --- storage --- */
+  function gOpen(cb){
+    if(GDB.tried){ cb(); return; }
+    GDB.tried = true;
+    try{
+      var rq = indexedDB.open('kdn-gym',1);
+      rq.onupgradeneeded = function(){ rq.result.createObjectStore('kv'); };
+      rq.onsuccess = function(){ GDB.db = rq.result; cb(); };
+      rq.onerror = function(){ cb(); }; rq.onblocked = function(){ cb(); };
+    }catch(e){ cb(); }
+  }
+  function gLoad(cb){
+    gOpen(function(){
+      if(!GDB.db){ cb(GDB.mem||null); return; }
+      try{ var r = GDB.db.transaction('kv').objectStore('kv').get('data'); r.onsuccess = function(){ cb(r.result||GDB.mem||null); }; r.onerror = function(){ cb(GDB.mem||null); }; }
+      catch(e){ cb(GDB.mem||null); }
+    });
+  }
+  function gSave(){ GDB.mem = G; clearTimeout(gT); gT = setTimeout(gFlush,200); }
+  function gFlush(){
+    clearTimeout(gT);
+    if(!G) return;
+    GDB.mem = G;
+    if(!GDB.db) return;
+    try{ GDB.db.transaction('kv','readwrite').objectStore('kv').put(G,'data'); }catch(e){}
+  }
+  function gWipe(){ G = null; GDB.mem = null; if(GDB.db){ try{ GDB.db.transaction('kv','readwrite').objectStore('kv').delete('data'); }catch(e){} } }
+  function gFH(s){ var h = 2166136261; for(var i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h,16777619)>>>0; } return 'f'+h.toString(16); }
+  function gHash(pin,salt,useFallback,cb){
+    var s = salt+':'+pin;
+    if(!useFallback){
+      try{
+        if(window.crypto && crypto.subtle && window.TextEncoder){
+          crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(b){ cb(Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2)}).join('')); }).catch(function(){ cb(gFH(s)); });
+          return;
+        }
+      }catch(e){}
+    }
+    cb(gFH(s));
+  }
+  function gImg(file,max,q,cb){
+    var fr = new FileReader();
+    fr.onload = function(){
+      var im = new Image();
+      im.onload = function(){
+        var k = Math.min(1,max/Math.max(im.width,im.height)), c = document.createElement('canvas');
+        c.width = Math.max(1,Math.round(im.width*k)); c.height = Math.max(1,Math.round(im.height*k));
+        c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+        cb(c.toDataURL('image/jpeg',q));
+      };
+      im.onerror = function(){ cb(null); };
+      im.src = fr.result;
+    };
+    fr.onerror = function(){ cb(null); };
+    fr.readAsDataURL(file);
+  }
+
+  /* --- dates and money --- */
+  function gD(s){ var a = s.split('-'); return new Date(+a[0],+a[1]-1,+a[2],12,0,0); }
+  function gK(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function gToday(){ var d = new Date(); return new Date(d.getFullYear(),d.getMonth(),d.getDate(),12,0,0); }
+  function gDiff(a,b){ return Math.round((a-b)/86400000); }
+  function gAddM(s,n){
+    var d = gD(s), day = d.getDate(); d.setDate(1); d.setMonth(d.getMonth()+n);
+    d.setDate(Math.min(day,new Date(d.getFullYear(),d.getMonth()+1,0).getDate())); return gK(d);
+  }
+  function gFmt(s){ return gD(s).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}); }
+  function gOk(s){ return /^\d{4}-\d{2}-\d{2}$/.test(s||'') && !isNaN(gD(s).getTime()); }
+  function gMoney(n){ return '₹'+fmt(Math.round(n)); }
+  function gSince(s){
+    var a = gD(s), b = gToday(), days = gDiff(b,a);
+    if(days<0) return 'Starts in '+(-days)+' day'+(days===-1?'':'s');
+    if(days===0) return 'Joined today';
+    var y = b.getFullYear()-a.getFullYear(), m = b.getMonth()-a.getMonth(), d = b.getDate()-a.getDate();
+    if(d<0){ m--; d += new Date(b.getFullYear(),b.getMonth(),0).getDate(); }
+    if(m<0){ y--; m += 12; }
+    var parts = []; if(y) parts.push(y+' yr'+(y>1?'s':'')); if(m) parts.push(m+' mo'); if(d) parts.push(d+' day'+(d>1?'s':''));
+    return fmt(days)+' day'+(days===1?'':'s')+(parts.length>1||y||m ? ' · '+parts.join(' ') : '');
+  }
+  function gDue(s){
+    var dd = gDiff(gD(s),gToday());
+    if(dd<0) return {cls:'over',txt:'Overdue by '+(-dd)+' day'+(dd===-1?'':'s'),dd:dd};
+    if(dd===0) return {cls:'soon',txt:'Due today',dd:dd};
+    if(dd<=GREM) return {cls:'soon',txt:'Due in '+dd+' day'+(dd===1?'':'s'),dd:dd};
+    return {cls:'ok',txt:'In '+dd+' days',dd:dd};
+  }
+  function gDur(id){ var p = GPLANS.filter(function(x){return x[0]===id})[0]; return p ? p[2] : 1; }
+  function gPlanName(id){ var p = GPLANS.filter(function(x){return x[0]===id})[0]; return p ? p[1] : 'Monthly'; }
+  function gId(){ return 'g'+Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+  function gAvatar(e,cls){
+    return e.photo ? '<img class="gav '+(cls||'')+'" src="'+e.photo+'" alt="">' : '<span class="gav '+(cls||'')+'">'+esc((e.name||'?').charAt(0).toUpperCase())+'</span>';
+  }
+  function gBg(u){ return u ? ' style="--bg:url(\''+u+'\')"' : ''; }
+  function gList(k){ return G[GKIND[k].list]; }
+  function gFind(k,id){ return gList(k).filter(function(x){return x.id===id})[0]; }
+  function gPayable(k,e){ return k==='members' ? e.fee>0 : (e.pay==='sal' && e.salary>0); }
+  function gReminders(){
+    var out = [];
+    ['members','trainers','employees'].forEach(function(k){
+      gList(k).forEach(function(e){
+        if(!gPayable(k,e) || !gOk(e.next)) return;
+        var d = gDue(e.next); if(d.dd<=GREM) out.push({k:k,e:e,d:d,amt:k==='members'?e.fee:e.salary});
+      });
+    });
+    out.sort(function(a,b){ return a.d.dd-b.d.dd; });
+    return out;
+  }
+
+  /* --- entry and exit --- */
+  function gymEnter(){
+    gS.ov = null; gS.pin = ''; gS.err = ''; gS.tab = 'members'; gS.q = ''; gS.n = 50; gS.del = false; gS.reset = false;
+    gS.view = 'loading'; gRender();
+    gLoad(function(d){
+      G = d;
+      if(!G || !G.gym){ G = null; gS.view = 'setup'; gS.tmp = {logo:'',bg:'',mode:'new'}; }
+      else { if(!G.members) G.members = []; if(!G.trainers) G.trainers = []; if(!G.employees) G.employees = []; if(!G.invoices) G.invoices = []; if(!G.billSeq) G.billSeq = G.invoices.length; gS.view = 'login'; }
+      if(curScreen==='s-gym') gRender();
+    });
+  }
+  function gymLeave(){ gFlush(); gS.view = 'loading'; document.body.classList.remove('noscroll'); clearTimeout(gTO); }
+  function gLockNow(){ gFlush(); gS.view = 'login'; gS.pin = ''; gS.err = ''; gS.ov = null; document.body.classList.remove('noscroll'); gRender(); window.scrollTo(0,0); }
+
+  /* --- rendering --- */
+  function gRender(){
+    var root = $('gymroot'), v = gS.view;
+    if(v==='loading') root.innerHTML = '<div class="gcenter"><div class="gspin"></div></div>';
+    else if(v==='setup') root.innerHTML = gSetupHtml();
+    else if(v==='login') root.innerHTML = gLoginHtml();
+    else if(v==='opening') root.innerHTML = '<div class="glogin"'+gBg(G.gym.bg)+'><div class="gshade"></div><div class="gl-in"><div class="gcenter in"><div class="gspin big"></div><h2>Opening your dashboard…</h2><p>'+esc(G.gym.name)+'</p></div></div></div>';
+    else if(v==='dash') root.innerHTML = gDashHtml();
+    if(v==='dash' && typeof gBillAfter==='function') gBillAfter();
+    document.body.classList.toggle('noscroll',v==='dash' && !!gS.ov);
+  }
+  function gPhotoPick(id,label,val,round){
+    return '<div class="gph"><div class="gphv'+(round?' round':'')+'" id="gp-'+id+'">'+(val?'<img src="'+val+'" alt="">':'<span>'+(round?'Logo':'Photo')+'</span>')+'</div><label class="gbtn ghost sm" for="gf-'+id+'">'+label+'</label><input type="file" id="gf-'+id+'" data-gph="'+id+'" accept="image/*" hidden></div>';
+  }
+  function gSetupHtml(){
+    var edit = gS.tmp.mode==='edit', g = edit ? G.gym : {};
+    var h = '<div class="gsetup"><div class="gbanner"'+gBg(gS.tmp.bg)+' id="gp-bgbox"><div class="gshade"></div><div class="gbn"><small>KDN Gym manager</small><h2>'+(edit?'Gym profile':'Set up your gym')+'</h2><p>'+(edit?'Update your gym’s details.':'Add your gym’s details once. Your members, trainers and employees will be saved under this gym.')+'</p></div></div>';
+    h += '<div class="gcard"><div class="gphrow">'+gPhotoPick('logo','Profile photo',gS.tmp.logo,true)+gPhotoPick('bg','Background photo',gS.tmp.bg,false)+'</div>';
+    h += '<label class="gl" for="gs-name">Gym name</label><input class="gin" id="gs-name" maxlength="50" placeholder="For example, Iron House Fitness" value="'+esc(g.name||'')+'" autocomplete="off">';
+    h += '<label class="gl" for="gs-addr">Address</label><textarea class="gin" id="gs-addr" rows="3" maxlength="200" placeholder="Street, area, city">'+esc(g.address||'')+'</textarea>';
+    h += '<label class="gl" for="gs-phone">Gym phone number</label><input class="gin" id="gs-phone" type="tel" inputmode="numeric" maxlength="18" placeholder="10-digit number" value="'+esc(g.phone||'')+'" autocomplete="off">';
+    h += '<label class="gl" for="gs-pin">'+(edit?'New 4-digit PIN (leave empty to keep your current PIN)':'Choose a 4-digit PIN')+'</label><input class="gin pin" id="gs-pin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="new-password">';
+    h += '<label class="gl" for="gs-pin2">Enter the PIN again</label><input class="gin pin" id="gs-pin2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="new-password">';
+    h += '<div class="gwarn"><b>Save your PIN somewhere safe.</b> Without the PIN you cannot open your gym’s data, and it cannot be recovered. Choose it carefully and write it down.</div>';
+    h += '<label class="gchk"><input type="checkbox" id="gs-ok"><span>I have noted my PIN</span></label>';
+    h += '<p class="gerr" id="gs-err" role="alert" hidden></p><div class="grow"><button type="button" class="gbtn gold wide" data-g="setup-save">'+(edit?'Save changes':'Save and continue')+'</button>'+(edit?'<button type="button" class="gbtn ghost" data-g="setup-cancel">Cancel</button>':'')+'</div></div></div>';
+    return h;
+  }
+  function gLoginHtml(){
+    var g = G.gym, dots = '';
+    for(var i=0;i<4;i++) dots += '<i class="'+(i<gS.pin.length?'on':'')+'"></i>';
+    var keys = ['1','2','3','4','5','6','7','8','9','C','0','⌫'];
+    var h = '<div class="glogin"'+gBg(g.bg)+'><div class="gshade"></div><div class="gl-in">';
+    h += '<div class="gl-brand">'+(g.logo?'<img class="gl-logo" src="'+g.logo+'" alt="">':'<span class="gl-logo ph">'+esc(g.name.charAt(0).toUpperCase())+'</span>')+'<h1>'+esc(g.name)+'</h1>'+(g.address?'<p>'+esc(g.address)+'</p>':'')+'</div>';
+    if(gS.reset){
+      h += '<div class="gcard dark"><h3>Forgot your PIN?</h3><p>A forgotten PIN cannot be recovered. You can erase this gym’s saved data on this device and set up again. This cannot be undone.</p><label class="gl" for="gr-in">Type DELETE to confirm</label><input class="gin" id="gr-in" autocomplete="off" autocapitalize="characters"><div class="grow"><button type="button" class="gbtn danger" data-g="reset-yes">Erase everything</button><button type="button" class="gbtn ghost" data-g="reset-no">Back</button></div></div>';
+    } else {
+      h += '<div class="gpinbox"><p>Enter your 4-digit PIN</p><div class="gdots'+(gS.err==='bad'?' shake':'')+'" id="gdots">'+dots+'</div><p class="gerr" id="gl-err" role="alert"'+(gS.err?'':' hidden')+'>'+(gS.err==='bad' ? 'Wrong PIN. Please try again.' : esc(gS.err))+'</p>';
+      h += '<div class="gkeys">'+keys.map(function(k){ return '<button type="button" class="gkey'+(k==='C'||k==='⌫'?' fn':'')+'" data-gk="'+k+'" aria-label="'+(k==='C'?'Clear':k==='⌫'?'Delete':k)+'">'+k+'</button>'; }).join('')+'</div><button type="button" class="glink" data-g="forgot">Forgot PIN?</button></div>';
+    }
+    return h+'</div></div>';
+  }
+  function gStat(n,l,cls){ return '<div class="gst '+(cls||'')+'"><b>'+n+'</b><span>'+l+'</span></div>'; }
+  function gDashHtml(){
+    var g = G.gym, rem = gReminders(), feeDue = rem.filter(function(x){return x.k==='members'}).length;
+    var h = '<div class="gdash"><div class="gtop"'+gBg(g.bg)+'><div class="gshade"></div><div class="gtin"><div class="gbrand">'+(g.logo?'<img class="gl-logo sm" src="'+g.logo+'" alt="">':'<span class="gl-logo sm ph">'+esc(g.name.charAt(0).toUpperCase())+'</span>')+'<div><h1>'+esc(g.name)+'</h1>'+(g.address?'<p>'+esc(g.address)+'</p>':'')+'</div></div><div class="gtb"><button type="button" class="giconb" data-g="edit-gym" aria-label="Gym profile"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg></button><button type="button" class="giconb" data-g="lock" aria-label="Lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button></div></div></div>';
+    h += '<div class="gstats">'+gStat(G.members.length+'<small>/'+GMAX+'</small>','Members')+gStat(feeDue,'Fees due soon',feeDue?'warn':'')+gStat(G.trainers.length,'Trainers')+gStat(G.employees.length,'Employees')+'</div>';
+    h += '<button type="button" class="gmake" data-g="b-new"><span class="gmk"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg></span><span><b>Make a bill</b><small>Invoice for a member, trainer or employee</small></span><i>›</i></button>';
+    if(!GDB.db) h += '<p class="gwarn">Saving is not available in this browser, so data will be lost when you close the page.</p>';
+    if(rem.length && gS.tab!=='rem') h += '<button type="button" class="gbanner2" data-g="tab" data-t="rem"><b>'+rem.length+' reminder'+(rem.length===1?'':'s')+'</b><span>Fees and salaries due within '+GREM+' days</span><i>›</i></button>';
+    h += '<div class="gbody" id="gbody">'+gTabHtml()+'</div></div>';
+    var tabs = [['members','Members','M5 20c0-3 3-5 7-5s7 2 7 5M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8'],['trainers','Trainers','M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12'],['employees','Employees','M4 8h16v11H4zM9 8V5h6v3M4 13h16'],['bills','Bills','M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6'],['rem','Reminders','M12 4a6 6 0 0 0-6 6v4l-2 3h16l-2-3v-4a6 6 0 0 0-6-6zM10 20a2 2 0 0 0 4 0']];
+    h += '<nav class="gnav" aria-label="Gym sections">'+tabs.map(function(t){ return '<button type="button" class="'+(gS.tab===t[0]?'on':'')+'" data-g="tab" data-t="'+t[0]+'"><svg viewBox="0 0 24 24"><path d="'+t[2]+'"/></svg><span>'+t[1]+'</span>'+(t[0]==='rem' && rem.length ? '<em>'+rem.length+'</em>' : '')+'</button>'; }).join('')+'</nav>';
+    if(gS.ov) h += gOvHtml();
+    return h;
+  }
+  function gTabHtml(){
+    if(gS.tab==='rem') return gRemHtml();
+    if(gS.tab==='bills') return gBillsListHtml();
+    var k = gS.tab, K = GKIND[k];
+    var h = '<div class="gbar"><label class="gsearch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg><input id="g-q" type="search" placeholder="Search '+K.many.toLowerCase()+'…" value="'+esc(gS.q)+'" autocomplete="off" aria-label="Search '+K.many.toLowerCase()+'"></label><button type="button" class="gbtn gold" data-g="add" data-k="'+k+'">+ Add '+K.one+'</button></div>';
+    h += '<div id="g-list">'+gListHtml(k)+'</div>';
+    return h;
+  }
+  function gListHtml(k){
+    var q = gS.q.trim().toLowerCase(), all = gList(k).slice();
+    if(k==='members') all.sort(function(a,b){return a.no-b.no});
+    var list = all.filter(function(e){ return !q || (e.name+' '+e.mobile+' '+(e.no||'')+' '+(e.role||'')).toLowerCase().indexOf(q)>=0; });
+    var shown = list.slice(0,gS.n), h = '';
+    if(!all.length) return '<div class="gempty"><b>No '+GKIND[k].many.toLowerCase()+' yet</b><span>Tap “Add '+GKIND[k].one+'” to create the first one.</span></div>';
+    if(!list.length) return '<div class="gempty"><b>No match</b><span>Try another name or number.</span></div>';
+    h += '<div class="gsheet"><div class="gsh">'+(k==='members'?'<span>No.</span>':'')+'<span class="gn">'+GKIND[k].one.charAt(0).toUpperCase()+GKIND[k].one.slice(1)+'</span><span class="gr">'+(k==='members'?'Next fee':'Salary due')+'</span></div>';
+    h += shown.map(function(e){
+      var due = gPayable(k,e) && gOk(e.next) ? gDue(e.next) : null;
+      var sub = k==='members' ? gPlanName(e.plan)+' · '+gMoney(e.fee) : (e.role||GKIND[k].one)+(e.mobile?' · '+e.mobile:'');
+      return '<button type="button" class="grow2" data-g="open" data-k="'+k+'" data-id="'+e.id+'">'+(k==='members'?'<span class="gno">'+e.no+'</span>':'')+gAvatar(e,'sm')+'<span class="gn"><b>'+esc(e.name)+'</b><small>'+esc(sub)+'</small></span><span class="gr">'+(due ? '<b>'+gFmt(e.next)+'</b><i class="gchip '+due.cls+'">'+due.txt+'</i>' : '<i class="gchip none">No salary</i>')+'</span></button>';
+    }).join('')+'</div>';
+    if(list.length>shown.length) h += '<button type="button" class="gbtn ghost wide" data-g="more">Show more ('+(list.length-shown.length)+' left)</button>';
+    return h;
+  }
+  function gTel(m){ return String(m||'').replace(/\D/g,''); }
+  function gWa(m,txt){ var n = gTel(m); if(n.length===10) n = '91'+n; return 'https://wa.me/'+n+'?text='+encodeURIComponent(txt); }
+  function gRemHtml(){
+    var rem = gReminders(), h = '<div class="ghead2"><h3>Reminders</h3><p>Fees and salaries that are due in the next '+GREM+' days, or already overdue.</p></div>';
+    if(!rem.length) return h+'<div class="gempty"><b>Nothing due</b><span>You will see a member’s fee here '+GREM+' days before the date it is due.</span></div>';
+    h += rem.map(function(x){
+      var e = x.e, isM = x.k==='members', what = isM ? 'Fee' : 'Salary';
+      var msg = 'Hello '+e.name+', your '+G.gym.name+' membership fee of '+gMoney(x.amt)+' is due on '+gFmt(e.next)+'. Please pay at the earliest. Thank you.';
+      return '<div class="grem '+x.d.cls+'"><div class="grh">'+gAvatar(e,'sm')+'<div class="gn"><b>'+esc(e.name)+'</b><small>'+(isM?'Member no. '+e.no+' · '+gPlanName(e.plan):esc(e.role||GKIND[x.k].one)+' · '+GKIND[x.k].one)+'</small></div><div class="gr"><b>'+gMoney(x.amt)+'</b><i class="gchip '+x.d.cls+'">'+x.d.txt+'</i></div></div><p class="gdt">'+what+' date: <b>'+gFmt(e.next)+'</b></p><div class="gra">'+(e.mobile?'<a class="gbtn ghost sm" href="tel:'+gTel(e.mobile)+'">Call</a>':'')+(isM && e.mobile?'<a class="gbtn ghost sm" href="'+gWa(e.mobile,msg)+'" target="_blank" rel="noopener">WhatsApp</a>':'')+'<button type="button" class="gbtn gold sm" data-g="paid" data-k="'+x.k+'" data-id="'+e.id+'">Mark '+(isM?'fee received':'salary paid')+'</button></div></div>';
+    }).join('');
+    return h;
+  }
+
+  /* --- detail and form overlays --- */
+  function gOvHtml(){
+    var o = gS.ov;
+    return '<div class="gov" role="dialog" aria-modal="true">'+(o.type==='form' ? gFormHtml(o.k,o.id) : o.type==='bill' ? gBillHtml() : o.type==='inv' ? gInvHtml(o.id) : gDetailHtml(o.k,o.id))+'</div>';
+  }
+  function gRow(l,v){ return '<div class="gdr"><span>'+l+'</span><b>'+v+'</b></div>'; }
+  function gDetailHtml(k,id){
+    var e = gFind(k,id), K = GKIND[k]; if(!e) return '';
+    var due = gPayable(k,e) && gOk(e.next) ? gDue(e.next) : null, isM = k==='members';
+    var h = '<div class="govh"><button type="button" class="giconb" data-g="close" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><span>'+(isM?'Member no. '+e.no:K.one.charAt(0).toUpperCase()+K.one.slice(1))+'</span><span></span></div>';
+    h += '<div class="govb"><div class="gprof">'+gAvatar(e,'xl')+'<h2>'+esc(e.name)+'</h2>'+(e.role?'<p>'+esc(e.role)+'</p>':'')+'</div>';
+    h += '<div class="gcard dark">'+gRow('Mobile',e.mobile?'<a href="tel:'+gTel(e.mobile)+'">'+esc(e.mobile)+'</a>':'—')+gRow('Address',esc(e.address||'—'))+gRow('Joining date',gFmt(e.join))+gRow('Time with the gym','<span class="gdays">'+gSince(e.join)+'</span>');
+    if(isM) h += gRow('Membership plan',esc(gPlanName(e.plan)))+gRow('Fee',gMoney(e.fee));
+    if(!isM) h += gRow('Pay type',e.pay==='sal'?'Monthly salary':'Not on salary')+(e.pay==='sal'?gRow('Salary',gMoney(e.salary)):'');
+    h += '</div>';
+    if(due){
+      var paid = e.paid||[], tot = 0; paid.forEach(function(p){tot += p.amt});
+      h += '<div class="gcard dark gnext '+due.cls+'"><small>'+(isM?'Next fee':'Next salary')+'</small><h3>'+gFmt(e.next)+'</h3><i class="gchip '+due.cls+'">'+due.txt+'</i><p>'+(isM?'Fee':'Salary')+' amount: <b>'+gMoney(isM?e.fee:e.salary)+'</b></p><button type="button" class="gbtn gold wide" data-g="paid" data-k="'+k+'" data-id="'+e.id+'">'+(isM?'Mark fee received':'Mark salary paid')+'</button></div>';
+      h += '<div class="gcard dark"><h4>'+(isM?'Fees received':'Salary paid')+'</h4><p class="gsum">'+gMoney(tot)+' in '+paid.length+' payment'+(paid.length===1?'':'s')+'</p>'+(paid.length?paid.slice().reverse().slice(0,12).map(function(p){return '<div class="gdr"><span>'+gFmt(p.d)+'</span><b>'+gMoney(p.amt)+'</b></div>'}).join(''):'<p class="ghint">No payments recorded yet.</p>')+'</div>';
+    }
+    h += '<div class="grow"><button type="button" class="gbtn ghost wide" data-g="edit" data-k="'+k+'" data-id="'+e.id+'">Edit details</button>'+(gS.del ? '<button type="button" class="gbtn danger wide" data-g="del-yes" data-k="'+k+'" data-id="'+e.id+'">Tap again to delete</button>' : '<button type="button" class="gbtn ghost wide" data-g="del" data-k="'+k+'" data-id="'+e.id+'">Delete '+K.one+'</button>')+'</div></div>';
+    return h;
+  }
+  function gFormHtml(k,id){
+    var K = GKIND[k], e = id ? gFind(k,id) : null, isM = k==='members', tmp = gS.tmp;
+    var d = e || {name:'',mobile:'',address:'',join:gK(gToday()),plan:'m1',fee:'',next:'',role:'',pay:'sal',salary:'',photo:''};
+    if(!id){ d.next = isM ? gAddM(d.join,1) : gAddM(d.join,1); }
+    var h = '<div class="govh"><button type="button" class="giconb" data-g="close" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><span>'+(id?'Edit ':'Add ')+K.one+'</span><span></span></div><div class="govb"><div class="gcard dark">';
+    h += '<div class="gphrow">'+gPhotoPick('p','Photo',tmp.photo,true)+'</div>';
+    h += '<label class="gl" for="gf-name">Full name</label><input class="gin" id="gf-name" maxlength="40" value="'+esc(d.name)+'" autocomplete="off">';
+    h += '<label class="gl" for="gf-mob">Mobile number</label><input class="gin" id="gf-mob" type="tel" inputmode="numeric" maxlength="18" value="'+esc(d.mobile)+'" placeholder="10-digit number" autocomplete="off">';
+    h += '<label class="gl" for="gf-addr">Address</label><textarea class="gin" id="gf-addr" rows="2" maxlength="200">'+esc(d.address)+'</textarea>';
+    h += '<label class="gl" for="gf-join">Joining date</label><input class="gin" id="gf-join" type="date" value="'+esc(d.join)+'">';
+    if(isM){
+      h += '<label class="gl" for="gf-plan">Membership plan</label><select class="gin" id="gf-plan">'+GPLANS.map(function(p){return '<option value="'+p[0]+'"'+(d.plan===p[0]?' selected':'')+'>'+p[1]+'</option>'}).join('')+'</select>';
+      h += '<label class="gl" for="gf-fee">Fee for this plan (₹)</label><input class="gin" id="gf-fee" type="number" inputmode="numeric" min="1" value="'+(d.fee||'')+'" placeholder="For example, 1500">';
+      h += '<label class="gl" for="gf-next">Next fee date</label><input class="gin" id="gf-next" type="date" value="'+esc(d.next)+'">';
+    } else {
+      h += '<label class="gl" for="gf-role">'+(k==='trainers'?'Specialty (for example, Strength, Yoga)':'Job role (for example, Receptionist)')+'</label><input class="gin" id="gf-role" maxlength="40" value="'+esc(d.role||'')+'">';
+      h += '<label class="gl" for="gf-pay">Pay type</label><select class="gin" id="gf-pay"><option value="sal"'+(d.pay==='sal'?' selected':'')+'>Monthly salary</option><option value="none"'+(d.pay==='none'?' selected':'')+'>Not on salary</option></select>';
+      h += '<div id="gf-salbox"'+(d.pay==='none'?' hidden':'')+'><label class="gl" for="gf-sal">Monthly salary (₹)</label><input class="gin" id="gf-sal" type="number" inputmode="numeric" min="1" value="'+(d.salary||'')+'"><label class="gl" for="gf-next">Next salary date</label><input class="gin" id="gf-next" type="date" value="'+esc(d.next)+'"></div>';
+    }
+    h += '<p class="gerr" id="gf-err" role="alert" hidden></p><button type="button" class="gbtn gold wide" data-g="save" data-k="'+k+'" data-id="'+(id||'')+'">Save '+K.one+'</button></div></div>';
+    return h;
+  }
+
+  /* --- actions --- */
+  function gNextNo(){
+    var used = {}; G.members.forEach(function(m){ used[m.no] = 1; });
+    for(var i=1;i<=GMAX;i++) if(!used[i]) return i;
+    return 0;
+  }
+  function gSaveForm(k,id){
+    var isM = k==='members', err = '', e = id ? gFind(k,id) : null;
+    var name = $('gf-name').value.trim(), mob = $('gf-mob').value.replace(/[\s-]/g,'').replace(/^\+?91(?=\d{10}$)/,''), addr = $('gf-addr').value.trim(), join = $('gf-join').value;
+    if(!name) err = 'Enter the name.';
+    else if(!/^\d{10}$/.test(mob)) err = 'Enter a 10-digit mobile number.';
+    else if(!gOk(join)) err = 'Choose the joining date.';
+    var o = {name:name,mobile:mob,address:addr,join:join,photo:gS.tmp.photo||''};
+    if(!err){
+      if(isM){
+        var fee = parseFloat($('gf-fee').value), next = $('gf-next').value;
+        if(!(fee>0)) err = 'Enter the fee amount.'; else if(!gOk(next)) err = 'Choose the next fee date.';
+        o.plan = $('gf-plan').value; o.fee = Math.round(fee); o.next = next;
+      } else {
+        o.role = $('gf-role').value.trim(); o.pay = $('gf-pay').value;
+        if(o.pay==='sal'){
+          var sal = parseFloat($('gf-sal').value), nx = $('gf-next').value;
+          if(!(sal>0)) err = 'Enter the monthly salary.'; else if(!gOk(nx)) err = 'Choose the next salary date.';
+          o.salary = Math.round(sal); o.next = nx;
+        } else { o.salary = 0; o.next = ''; }
+      }
+    }
+    if(err){ var el = $('gf-err'); el.textContent = err; el.hidden = false; return; }
+    if(e){ Object.keys(o).forEach(function(key){ e[key] = o[key]; }); }
+    else {
+      if(isM){ var no = gNextNo(); if(!no){ var el2 = $('gf-err'); el2.textContent = 'The limit of '+GMAX+' members is reached.'; el2.hidden = false; return; } o.no = no; }
+      o.id = gId(); o.paid = []; gList(k).push(o);
+    }
+    gSave(); gS.tmp = {}; gS.ov = {type:'detail',k:k,id:e?e.id:o.id}; gS.del = false; gRender();
+    toast(e ? 'Saved.' : name+' added.');
+  }
+  function gMarkPaid(k,id){
+    var e = gFind(k,id); if(!e) return;
+    var amt = k==='members' ? e.fee : e.salary, dur = k==='members' ? gDur(e.plan) : 1;
+    if(!e.paid) e.paid = [];
+    e.paid.push({d:gK(gToday()),amt:amt,f:e.next});
+    e.next = gAddM(e.next,dur);
+    gSave(); gRender();
+    toast((k==='members'?'Fee':'Salary')+' recorded. Next date: '+gFmt(e.next)+'.');
+  }
+  function gTryPin(){
+    if(Date.now()<gLock.until){ gS.err = 'Too many tries. Wait '+Math.ceil((gLock.until-Date.now())/1000)+' seconds.'; gS.pin = ''; gRender(); return; }
+    var pin = gS.pin, g = G.gym;
+    gHash(pin,g.salt,g.hash.length<20,function(h){
+      if(gS.view!=='login') return;
+      if(h===g.hash){
+        gLock.n = 0; gS.err = ''; gS.view = 'opening'; gRender();
+        clearTimeout(gTO); gTO = setTimeout(function(){ if(gS.view==='opening' && curScreen==='s-gym'){ gS.view = 'dash'; gS.tab = 'members'; gRender(); window.scrollTo(0,0); } },2000);
+      } else {
+        gLock.n++; gS.pin = ''; gS.err = 'bad';
+        if(gLock.n>=5){ gLock.until = Date.now()+30000; gLock.n = 0; gS.err = 'Too many wrong tries. Wait 30 seconds.'; }
+        gRender();
+      }
+    });
+  }
+  function gKey(k){
+    if(gS.view!=='login' || gS.reset) return;
+    if(Date.now()<gLock.until){ gS.err = 'Too many tries. Wait '+Math.ceil((gLock.until-Date.now())/1000)+' seconds.'; gRender(); return; }
+    gS.err = '';
+    if(k==='C') gS.pin = '';
+    else if(k==='⌫') gS.pin = gS.pin.slice(0,-1);
+    else if(/^\d$/.test(k) && gS.pin.length<4) gS.pin += k;
+    gRender();
+    if(gS.pin.length===4) setTimeout(gTryPin,120);
+  }
+  document.addEventListener('keydown',function(ev){
+    if(curScreen!=='s-gym' || gS.view!=='login' || gS.reset) return;
+    if(/^\d$/.test(ev.key)) gKey(ev.key); else if(ev.key==='Backspace') gKey('⌫');
+  });
+
+  function gSetupSave(){
+    var edit = gS.tmp.mode==='edit', name = $('gs-name').value.trim(), addr = $('gs-addr').value.trim(), phone = $('gs-phone').value.replace(/[\s-]/g,'').replace(/^\+?91(?=\d{10}$)/,''), p1 = $('gs-pin').value, p2 = $('gs-pin2').value, err = '';
+    if(!name) err = 'Enter your gym’s name.';
+    else if(!addr) err = 'Enter your gym’s address.';
+    else if(!/^\d{10}$/.test(phone)) err = 'Enter your gym’s 10-digit phone number.';
+    else if((!edit || p1 || p2) && !/^\d{4}$/.test(p1)) err = 'The PIN must be exactly 4 digits.';
+    else if((!edit || p1 || p2) && p1!==p2) err = 'The two PINs do not match.';
+    else if((!edit || p1) && !$('gs-ok').checked) err = 'Please tick the box to confirm that you have noted your PIN.';
+    if(err){ var el = $('gs-err'); el.textContent = err; el.hidden = false; return; }
+    if(edit){
+      G.gym.name = name; G.gym.address = addr; G.gym.phone = phone; G.gym.logo = gS.tmp.logo||''; G.gym.bg = gS.tmp.bg||'';
+      if(p1){ gHash(p1,G.gym.salt,false,function(h){ G.gym.hash = h; gSave(); gS.view = 'dash'; gRender(); toast('Saved. Your PIN was changed.'); }); return; }
+      gSave(); gS.view = 'dash'; gRender(); toast('Saved.'); return;
+    }
+    var salt = Math.random().toString(36).slice(2)+Date.now().toString(36);
+    gHash(p1,salt,false,function(h){
+      G = {invoices:[],billSeq:0,gym:{name:name,phone:phone,address:addr,logo:gS.tmp.logo||'',bg:gS.tmp.bg||'',salt:salt,hash:h,created:Date.now()},members:[],trainers:[],employees:[]};
+      gSave(); gFlush(); gS.view = 'login'; gS.pin = ''; gS.err = ''; gS.tmp = {}; gRender(); window.scrollTo(0,0); toast('Gym saved. Enter your PIN to log in.');
+    });
+  }
+
+  $('gymroot').addEventListener('click',function(ev){
+    var key = ev.target.closest('button[data-gk]');
+    if(key){ gKey(key.getAttribute('data-gk')); return; }
+    var b = ev.target.closest('[data-g]'); if(!b || b.tagName==='A') return;
+    var a = b.getAttribute('data-g'), k = b.getAttribute('data-k'), id = b.getAttribute('data-id');
+    if(a==='setup-save'){ gSetupSave(); return; }
+    if(a==='setup-cancel'){ gS.view = 'dash'; gS.tmp = {}; gRender(); return; }
+    if(a==='forgot'){ gS.reset = true; gRender(); return; }
+    if(a==='reset-no'){ gS.reset = false; gRender(); return; }
+    if(a==='reset-yes'){
+      if($('gr-in').value.trim().toUpperCase()!=='DELETE'){ toast('Type DELETE to confirm.'); return; }
+      gWipe(); gS.view = 'setup'; gS.tmp = {logo:'',bg:'',mode:'new'}; gS.reset = false; gRender(); toast('Gym data erased.'); return;
+    }
+    if(gS.view!=='dash') return;
+    if(a.indexOf('b-')===0 && gBillAct(a,b)) return;
+    if(a==='lock'){ gLockNow(); return; }
+    if(a==='edit-gym'){ gS.view = 'setup'; gS.tmp = {logo:G.gym.logo||'',bg:G.gym.bg||'',mode:'edit'}; gRender(); window.scrollTo(0,0); return; }
+    if(a==='tab'){ gS.tab = b.getAttribute('data-t'); gS.q = ''; gS.n = 50; gS.ov = null; gRender(); window.scrollTo(0,0); return; }
+    if(a==='more'){ gS.n += 50; var l = $('g-list'); if(l) l.innerHTML = gListHtml(gS.tab); return; }
+    if(a==='add'){
+      if(k==='members' && G.members.length>=GMAX){ toast('The limit of '+GMAX+' members is reached.'); return; }
+      gS.tmp = {photo:''}; gS.ov = {type:'form',k:k,id:''}; gRender(); var ov = document.querySelector('.gov'); if(ov) ov.scrollTop = 0; return;
+    }
+    if(a==='open'){ gS.ov = {type:'detail',k:k,id:id}; gS.del = false; gRender(); return; }
+    if(a==='close'){ gS.wa = null; gS.ov = null; gS.tmp = {}; gS.del = false; gRender(); return; }
+    if(a==='edit'){ var e = gFind(k,id); gS.tmp = {photo:e.photo||''}; gS.ov = {type:'form',k:k,id:id}; gRender(); return; }
+    if(a==='save'){ gSaveForm(k,id); return; }
+    if(a==='paid'){ gMarkPaid(k,id); return; }
+    if(a==='del'){ gS.del = true; gRender(); return; }
+    if(a==='del-yes'){
+      var arr = gList(k), i = arr.map(function(x){return x.id}).indexOf(id);
+      if(i>=0) arr.splice(i,1);
+      gSave(); gS.ov = null; gS.del = false; gRender(); toast('Deleted.'); return;
+    }
+  });
+  $('gymroot').addEventListener('input',function(ev){
+    if(ev.target.id==='g-q'){ gS.q = ev.target.value; gS.n = 50; var l = $('g-list'); if(l) l.innerHTML = gListHtml(gS.tab); }
+  });
+  $('gymroot').addEventListener('change',function(ev){
+    var t = ev.target;
+    if(t.getAttribute && t.getAttribute('data-gph')){
+      var which = t.getAttribute('data-gph'), f = t.files && t.files[0]; if(!f) return;
+      if(f.size>25*1024*1024){ toast('That photo is too large. Choose one under 25 MB.'); return; }
+      gImg(f,which==='bg'?1000:which==='logo'?320:260,which==='bg'?0.7:0.75,function(u){
+        if(!u){ toast('That file could not be read as a photo.'); return; }
+        var box = $('gp-'+which);
+        if(which==='bg'){ gS.tmp.bg = u; var bb = $('gp-bgbox'); if(bb) bb.style.setProperty('--bg',"url('"+u+"')"); }
+        else if(which==='logo') gS.tmp.logo = u; else gS.tmp.photo = u;
+        if(box) box.innerHTML = '<img src="'+u+'" alt="">';
+      });
+      return;
+    }
+    if(t.id==='gf-pay'){ $('gf-salbox').hidden = (t.value==='none'); return; }
+    if(t.id==='gf-plan' || t.id==='gf-join'){
+      var nx = $('gf-next');
+      if(nx && !gS.nextTouched && gOk($('gf-join').value) && !(gS.ov && gS.ov.id)) nx.value = gAddM($('gf-join').value,gDur($('gf-plan')?$('gf-plan').value:'m1'));
+      return;
+    }
+    if(t.id==='gf-next') gS.nextTouched = true;
+  });
+
+  /* ---------- Gym bills: invoice maker + real PDF download ----------
+     The invoice is drawn once on a canvas. The same picture is shown on screen and placed inside an A4 PDF,
+     so what you see is exactly what you download. */
+  var BONES = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+  var BTENS = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+  function bW99(n){ return n<20 ? BONES[n] : BTENS[Math.floor(n/10)]+(n%10?' '+BONES[n%10]:''); }
+  function bW999(n){ var h = Math.floor(n/100), r = n%100; return (h?BONES[h]+' Hundred'+(r?' ':''):'')+(r?bW99(r):''); }
+  function bWords(n){
+    n = Math.round(n); if(n<=0) return 'Zero';
+    var parts = [], cr = Math.floor(n/10000000); n %= 10000000;
+    var lk = Math.floor(n/100000); n %= 100000;
+    var th = Math.floor(n/1000); n %= 1000;
+    if(cr) parts.push(bW999(cr)+' Crore'); if(lk) parts.push(bW99(lk)+' Lakh'); if(th) parts.push(bW99(th)+' Thousand'); if(n) parts.push(bW999(n));
+    return parts.join(' ');
+  }
+  var BKIND = {members:'Member',trainers:'Trainer',employees:'Employee'};
+  var bImgs = {}, bBusy = {};
+  function bNo(n){ return 'INV-'+('0000'+n).slice(-4); }
+  function bSnap(k,e){ return {name:e.name,mobile:e.mobile||'',address:e.address||'',tag:k==='members'?'Member no. '+e.no:(e.role?e.role+' · ':'')+BKIND[k]}; }
+
+  /* --- canvas drawing --- */
+  function bWrap(ctx,text,maxW,maxLines){
+    var words = String(text).split(/\s+/), lines = [], cur = '';
+    words.forEach(function(w){
+      var t = cur ? cur+' '+w : w;
+      if(ctx.measureText(t).width<=maxW){ cur = t; return; }
+      if(cur) lines.push(cur);
+      while(ctx.measureText(w).width>maxW && w.length>1){ var i = w.length-1; while(i>1 && ctx.measureText(w.slice(0,i)).width>maxW) i--; lines.push(w.slice(0,i)); w = w.slice(i); }
+      cur = w;
+    });
+    if(cur) lines.push(cur);
+    if(maxLines && lines.length>maxLines){ lines = lines.slice(0,maxLines); var l = lines[maxLines-1]; while(l.length>1 && ctx.measureText(l+'…').width>maxW) l = l.slice(0,-1); lines[maxLines-1] = l+'…'; }
+    return lines;
+  }
+  function bDraw(inv,cb){
+    var W = 794, H = 1123, S = 2, cv = document.createElement('canvas'); cv.width = W*S; cv.height = H*S;
+    var ctx = cv.getContext('2d'); ctx.scale(S,S);
+    var F = '"DM Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif', D = '"Bricolage Grotesque","DM Sans","Segoe UI",Roboto,Helvetica,Arial,sans-serif';
+    var GOLD = '#E9C05A', DARK = '#14110A', INK = '#1B1710', MUTE = '#6B6247', LINE = '#E8E0C8';
+    function txt(t,x,y,font,color,align){ ctx.font = font; ctx.fillStyle = color; ctx.textAlign = align||'left'; ctx.textBaseline = 'alphabetic'; ctx.fillText(t,x,y); }
+    function rr(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+    var logo = null;
+    function go(){
+      ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0,0,W,H);
+      /* header */
+      var hg = ctx.createLinearGradient(0,0,W,190); hg.addColorStop(0,'#1E1810'); hg.addColorStop(1,'#0B0A07');
+      ctx.fillStyle = hg; ctx.fillRect(0,0,W,184);
+      var sg = ctx.createLinearGradient(0,0,W,0); sg.addColorStop(0,'#B98A1E'); sg.addColorStop(.5,'#F3D77F'); sg.addColorStop(1,'#B98A1E');
+      ctx.fillStyle = sg; ctx.fillRect(0,184,W,6);
+      ctx.save(); ctx.beginPath(); ctx.arc(88,92,44,0,Math.PI*2); ctx.closePath(); ctx.fillStyle = '#2A2110'; ctx.fill(); ctx.clip();
+      if(logo){ var k = Math.max(88/logo.width,88/logo.height); ctx.drawImage(logo,88-logo.width*k/2,92-logo.height*k/2,logo.width*k,logo.height*k); }
+      else txt((inv.g.name||'G').charAt(0).toUpperCase(),88,108,'800 44px '+D,GOLD,'center');
+      ctx.restore(); ctx.beginPath(); ctx.arc(88,92,44,0,Math.PI*2); ctx.strokeStyle = GOLD; ctx.lineWidth = 3; ctx.stroke();
+      ctx.font = '800 26px '+D; var nl = bWrap(ctx,inv.g.name,360,2), y = nl.length>1 ? 62 : 78;
+      nl.forEach(function(l,i){ txt(l,150,y+i*30,'800 26px '+D,'#FFFFFF'); }); y += nl.length*30-6;
+      ctx.font = '400 12.5px '+F; bWrap(ctx,inv.g.address||'',360,2).forEach(function(l,i){ txt(l,150,y+i*17,'400 12.5px '+F,'#D9CBA0'); y += 0; });
+      var al = bWrap(ctx,inv.g.address||'',360,2).length; y += al*17;
+      if(inv.g.phone) txt('Phone: '+inv.g.phone,150,y+2,'600 12.5px '+F,GOLD);
+      txt('INVOICE',W-48,86,'800 38px '+D,GOLD,'right');
+      txt(inv.no,W-48,114,'600 15px '+F,'#FFFFFF','right');
+      txt(gFmt(inv.date),W-48,136,'400 13px '+F,'#D9CBA0','right');
+      /* billed to */
+      txt('BILLED TO',48,236,'700 11px '+F,'#9A7A24');
+      ctx.fillStyle = GOLD; ctx.fillRect(48,244,28,2);
+      txt(inv.c.name,48,274,'800 22px '+D,INK);
+      var by = 296; txt(inv.c.tag,48,by,'600 13px '+F,MUTE); by += 20;
+      if(inv.c.mobile){ txt('Mobile: '+inv.c.mobile,48,by,'400 13px '+F,INK); by += 19; }
+      ctx.font = '400 13px '+F; bWrap(ctx,inv.c.address||'',330,3).forEach(function(l){ if(inv.c.address){ txt(l,48,by,'400 13px '+F,INK); by += 18; } });
+      /* details box */
+      rr(446,222,300,128,14); ctx.fillStyle = '#FBF7EA'; ctx.fill(); ctx.strokeStyle = LINE; ctx.lineWidth = 1; ctx.stroke();
+      var rows = [['Invoice no.',inv.no],['Invoice date',gFmt(inv.date)],['Bill type',BKIND[inv.k]],['Status',inv.status==='paid'?'Paid':'Unpaid']];
+      rows.forEach(function(r,i){ var yy = 252+i*26; txt(r[0],466,yy,'400 13px '+F,MUTE); txt(r[1],726,yy,'700 13.5px '+F,r[0]==='Status'?(inv.status==='paid'?'#1F7A55':'#B3261E'):INK,'right'); });
+      /* table */
+      var ty = 400; ctx.fillStyle = DARK; rr(48,ty,698,38,8); ctx.fill();
+      txt('DESCRIPTION',66,ty+24,'700 11.5px '+F,GOLD); txt('AMOUNT',728,ty+24,'700 11.5px '+F,GOLD,'right');
+      ctx.font = '600 15px '+F; var dl = bWrap(ctx,inv.desc,520,3), rh = Math.max(58,dl.length*22+28);
+      dl.forEach(function(l,i){ txt(l,66,ty+38+30+i*22-8,'600 15px '+F,INK); });
+      txt(gMoney(inv.amt),728,ty+38+30-8,'800 16px '+F,INK,'right');
+      ctx.fillStyle = LINE; ctx.fillRect(48,ty+38+rh,698,1);
+      var yy = ty+38+rh+34;
+      txt('Subtotal',500,yy,'400 14px '+F,MUTE); txt(gMoney(inv.amt),728,yy,'600 14px '+F,INK,'right'); yy += 16;
+      var tg = ctx.createLinearGradient(470,0,746,0); tg.addColorStop(0,'#F3D77F'); tg.addColorStop(1,'#C99A2B');
+      rr(470,yy,276,56,12); ctx.fillStyle = tg; ctx.fill();
+      txt('TOTAL',490,yy+34,'800 13px '+F,'#3A2D10'); txt(gMoney(inv.amt),728,yy+37,'800 26px '+D,'#14110A','right');
+      /* amount in words */
+      txt('AMOUNT IN WORDS',48,yy+8,'700 11px '+F,'#9A7A24');
+      ctx.font = 'italic 600 14px '+F; bWrap(ctx,'Rupees '+bWords(inv.amt)+' only',380,3).forEach(function(l,i){ txt(l,48,yy+30+i*20,'italic 600 14px '+F,INK); });
+      /* stamp */
+      var sy = yy+130; ctx.save(); ctx.translate(150,sy+30); ctx.rotate(-0.2);
+      var sc = inv.status==='paid' ? '#1F7A55' : '#B3261E'; ctx.strokeStyle = sc; ctx.lineWidth = 4; rr(-70,-28,140,56,10); ctx.stroke();
+      ctx.lineWidth = 1.5; rr(-65,-23,130,46,7); ctx.stroke();
+      txt(inv.status==='paid'?'PAID':'UNPAID',0,11,'800 30px '+D,sc,'center'); ctx.restore();
+      /* signature + footer */
+      ctx.fillStyle = INK; ctx.fillRect(540,960,206,1);
+      txt('Authorised signatory',643,980,'400 12px '+F,MUTE,'center');
+      txt('For '+inv.g.name,643,950,'700 13px '+F,INK,'center');
+      ctx.fillStyle = LINE; ctx.fillRect(48,1016,698,1);
+      txt('Thank you for being a part of '+inv.g.name+'.',W/2,1044,'600 13.5px '+F,INK,'center');
+      txt('This is a computer-generated invoice.',W/2,1064,'400 11.5px '+F,MUTE,'center');
+      ctx.fillStyle = DARK; ctx.fillRect(0,H-20,W,20); ctx.fillStyle = sg; ctx.fillRect(0,H-20,W,3);
+      cb(cv.toDataURL('image/jpeg',0.92));
+    }
+    function start(){
+      if(G && G.gym && G.gym.logo){ var im = new Image(); im.onload = function(){ logo = im; go(); }; im.onerror = function(){ go(); }; im.src = G.gym.logo; }
+      else go();
+    }
+    try{ if(document.fonts && document.fonts.ready){ var done = false, fin = function(){ if(!done){ done = true; start(); } }; setTimeout(fin,900); Promise.all([document.fonts.load('800 26px "Bricolage Grotesque"'),document.fonts.load('400 13px "DM Sans"'),document.fonts.load('700 13px "DM Sans"')]).then(fin,fin); } else start(); }catch(e){ start(); }
+  }
+  function bPaint(inv,cb){
+    if(bImgs[inv.id]){ cb(bImgs[inv.id]); return; }
+    if(bBusy[inv.id]){ bBusy[inv.id].push(cb); return; }
+    bBusy[inv.id] = [cb];
+    bDraw(inv,function(u){ bImgs[inv.id] = u; var q = bBusy[inv.id]; delete bBusy[inv.id]; q.forEach(function(f){ f(u); }); });
+  }
+
+  /* --- PDF (one A4 page holding the invoice picture) --- */
+  function bPdf(dataUrl){
+    var b64 = dataUrl.split(',')[1], bin = atob(b64), jpg = new Uint8Array(bin.length), i;
+    for(i=0;i<bin.length;i++) jpg[i] = bin.charCodeAt(i);
+    var W = 1588, H = 2246, chunks = [], offs = [], len = 0;
+    function put(x){ if(typeof x==='string'){ var u = new Uint8Array(x.length); for(var j=0;j<x.length;j++) u[j] = x.charCodeAt(j)&255; x = u; } chunks.push(x); len += x.length; }
+    function obj(n,body){ offs[n] = len; put(n+' 0 obj\n'+body+'\nendobj\n'); }
+    put('%PDF-1.4\n');
+    obj(1,'<< /Type /Catalog /Pages 2 0 R >>');
+    obj(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+    obj(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /XObject << /Im0 5 0 R >> >> /Contents 4 0 R >>');
+    var cs = 'q 595.28 0 0 841.89 0 0 cm /Im0 Do Q';
+    obj(4,'<< /Length '+cs.length+' >>\nstream\n'+cs+'\nendstream');
+    offs[5] = len; put('5 0 obj\n<< /Type /XObject /Subtype /Image /Width '+W+' /Height '+H+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpg.length+' >>\nstream\n'); put(jpg); put('\nendstream\nendobj\n');
+    obj(6,'<< /Title (Invoice) /Producer (KDN Fitness Tracker) >>');
+    var xr = len; put('xref\n0 7\n0000000000 65535 f \n');
+    for(i=1;i<=6;i++) put(('0000000000'+offs[i]).slice(-10)+' 00000 n \n');
+    put('trailer\n<< /Size 7 /Root 1 0 R /Info 6 0 R >>\nstartxref\n'+xr+'\n%%EOF');
+    return new Blob(chunks,{type:'application/pdf'});
+  }
+  function bDownload(inv,done){
+    toast('Preparing the PDF…');
+    bPaint(inv,function(u){
+      var blob = bPdf(u), fn = 'Invoice-'+inv.no+'-'+inv.c.name.replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30)+'.pdf';
+      function fallback(){
+        try{
+          var url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = fn; document.body.appendChild(a); a.click();
+          setTimeout(function(){ a.remove(); URL.revokeObjectURL(url); },4000);
+          toast('PDF downloaded: '+fn); if(done) done();
+        }catch(e){ toast('Could not create the PDF in this browser.'); }
+      }
+      try{
+        if(window.claude && typeof window.claude.use==='function'){
+          window.claude.use('downloads').then(function(d){
+            if(!d){ fallback(); return; }
+            d.save({filename:fn,data:blob}).then(function(){ toast('PDF saved.'); if(done) done(); },function(er){ if(er && er.code==='declined') return; fallback(); });
+          },function(){ fallback(); });
+          return;
+        }
+      }catch(e){}
+      fallback();
+    });
+  }
+
+  /* --- screens --- */
+  function bFields(){ if(!G.invoices) G.invoices = []; if(!G.billSeq) G.billSeq = G.invoices.length; }
+  function bResults(){
+    var B = gS.bill, q = B.q.trim().toLowerCase(), all = gList(B.k).slice();
+    if(B.k==='members') all.sort(function(a,b){ return a.no-b.no; });
+    var list = all.filter(function(e){ return !q || (e.name+' '+(e.mobile||'')+' '+(e.no||'')+' '+(e.role||'')).toLowerCase().indexOf(q)>=0; });
+    if(!all.length) return '<div class="gempty"><b>No '+GKIND[B.k].many.toLowerCase()+' yet</b><span>Add a '+GKIND[B.k].one+' first, then come back to make a bill.</span></div>';
+    if(!list.length) return '<div class="gempty"><b>No match</b><span>Try another name or number.</span></div>';
+    return '<div class="gsheet">'+list.slice(0,8).map(function(e){
+      return '<button type="button" class="grow2" data-g="b-pick" data-id="'+e.id+'">'+(B.k==='members'?'<span class="gno">'+e.no+'</span>':'')+gAvatar(e,'sm')+'<span class="gn"><b>'+esc(e.name)+'</b><small>'+esc((e.role||BKIND[B.k])+(e.mobile?' · '+e.mobile:''))+'</small></span><span class="gr"><i class="gchip ok">Select</i></span></button>';
+    }).join('')+'</div>'+(list.length>8?'<p class="ghint">Showing 8 of '+list.length+'. Type more of the name to narrow it down.</p>':'');
+  }
+  function bDefaults(k,e){
+    var d = gK(gToday());
+    if(k==='members') return {amt:e.fee||'',desc:'Membership fee · '+gPlanName(e.plan)+' plan',date:d};
+    var m = gD(d).toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+    return {amt:e.salary||'',desc:'Salary for '+m,date:d};
+  }
+  function gBillHtml(){
+    var B = gS.bill, g = G.gym, e = B.pid ? gFind(B.k,B.pid) : null;
+    var h = '<div class="govh"><button type="button" class="giconb" data-g="close" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><span>Make a bill</span><span></span></div><div class="govb"><div class="gcard dark">';
+    h += '<h3>Who is this bill for?</h3><div class="gseg" role="tablist">'+['members','trainers','employees'].map(function(k){ return '<button type="button" role="tab" aria-selected="'+(B.k===k)+'" class="'+(B.k===k?'on':'')+'" data-g="b-kind" data-k="'+k+'">'+BKIND[k]+'</button>'; }).join('')+'</div>';
+    if(!e){
+      h += '<label class="gsearch big"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg><input id="gb-q" type="search" placeholder="Search by name, number or mobile" value="'+esc(B.q)+'" autocomplete="off" aria-label="Search"></label><div id="gb-res">'+bResults()+'</div></div></div>';
+      return h;
+    }
+    h += '<div class="gpick">'+gAvatar(e,'sm')+'<div class="gn"><b>'+esc(e.name)+'</b><small>'+esc(B.k==='members'?'Member no. '+e.no:(e.role||BKIND[B.k]))+'</small></div><button type="button" class="gbtn ghost sm" data-g="b-clear">Change</button></div>';
+    h += '<div class="gauto"><small>Filled in automatically</small>'+gRow('Name',esc(e.name))+gRow('Mobile',esc(e.mobile||'—'))+gRow('Address',esc(e.address||'—'))+gRow('Gym',esc(g.name))+gRow('Gym address',esc(g.address||'—'))+gRow('Gym phone',esc(g.phone||'—'))+'</div>';
+    if(!g.phone) h += '<p class="gwarn">Your gym phone number is not saved yet, so it will not appear on the bill. <button type="button" class="glink" data-g="edit-gym">Add it in Gym profile</button></p>';
+    h += '<label class="gl" for="gb-desc">Bill for</label><input class="gin" id="gb-desc" maxlength="80" value="'+esc(B.desc)+'">';
+    h += '<div class="gtwo"><div><label class="gl" for="gb-amt">Amount (₹)</label><input class="gin" id="gb-amt" type="number" inputmode="numeric" min="1" value="'+esc(B.amt)+'" placeholder="For example, 1500"></div><div><label class="gl" for="gb-date">Date</label><input class="gin" id="gb-date" type="date" value="'+esc(B.date)+'"></div></div>';
+    h += '<label class="gl" for="gb-status">Payment status</label><select class="gin" id="gb-status"><option value="paid"'+(B.status==='paid'?' selected':'')+'>Paid</option><option value="unpaid"'+(B.status==='unpaid'?' selected':'')+'>Unpaid</option></select>';
+    h += '<p class="gerr" id="gb-err" role="alert" hidden></p><button type="button" class="gbtn gold wide" data-g="b-gen">Generate invoice</button></div></div>';
+    return h;
+  }
+  function gInvHtml(id){
+    var inv = (G.invoices||[]).filter(function(x){ return x.id===id; })[0]; if(!inv) return '';
+    var h = '<div class="govh"><button type="button" class="giconb" data-g="close" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><span>'+esc(inv.no)+'</span><span></span></div><div class="govb"><div class="ginv"><div class="ginv-sp" id="gv-sp"><div class="gspin"></div></div><img id="gv-img" alt="Invoice '+esc(inv.no)+' for '+esc(inv.c.name)+'" '+(bImgs[inv.id]?'src="'+bImgs[inv.id]+'"':'hidden')+'></div>';
+    h += '<div class="gbills"><div class="gtwo"><button type="button" class="gbtn gold" data-g="b-pdf" data-id="'+inv.id+'"><svg viewBox="0 0 24 24" class="gbi"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Download</button><button type="button" class="gbtn wa" data-g="b-wa" data-id="'+inv.id+'"><svg viewBox="0 0 24 24" class="gbi"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.4 18.7z"/></svg>Send</button></div><button type="button" class="gbtn ghost wide" data-g="b-new">Make another bill</button>'+(gS.del ? '<button type="button" class="gbtn danger wide" data-g="b-del-yes" data-id="'+inv.id+'">Tap again to delete this bill</button>' : '<button type="button" class="gbtn ghost wide" data-g="b-del" data-id="'+inv.id+'">Delete this bill</button>')+'</div></div>'+(gS.wa && gS.wa.id===inv.id ? bWaHtml(inv) : '');
+    return h;
+  }
+  /* --- WhatsApp: opens the chat with the message ready. A web page cannot attach a file or press send inside WhatsApp. --- */
+  function bWaNum(v){
+    var d = String(v||'').replace(/\D/g,''); if(d.length===11 && d.charAt(0)==='0') d = d.slice(1);
+    if(d.length===10) d = '91'+d;
+    return (d.length>=11 && d.length<=15) ? d : '';
+  }
+  function bWaMsg(inv){ return 'Hello '+inv.c.name+', your invoice '+inv.no+' from '+inv.g.name+' for '+gMoney(inv.amt)+' ('+inv.desc+') dated '+gFmt(inv.date)+' is ready. Please find the PDF attached. Thank you!'; }
+  function bWaLink(){ var w = gS.wa, n = bWaNum(w.num); return n ? 'https://wa.me/'+n+'?text='+encodeURIComponent(w.msg) : '#'; }
+  function bWaHtml(inv){
+    var w = gS.wa, canShare = false;
+    try{ canShare = !!(navigator.canShare && window.File && navigator.canShare({files:[new File(['x'],'a.pdf',{type:'application/pdf'})]})); }catch(e){}
+    return '<div class="gwa" role="dialog" aria-modal="true" aria-label="Send on WhatsApp"><div class="gwa-in"><div class="gwa-h"><b>Send on WhatsApp</b><button type="button" class="giconb" data-g="b-wa-x" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'+
+      '<label class="gl" for="gwa-num">WhatsApp number (you can change it)</label><input class="gin" id="gwa-num" type="tel" inputmode="numeric" maxlength="18" value="'+esc(w.num)+'" placeholder="10-digit number" autocomplete="off">'+
+      '<label class="gl" for="gwa-msg">Message</label><textarea class="gin" id="gwa-msg" rows="4" maxlength="600">'+esc(w.msg)+'</textarea>'+
+      '<div class="gsteps"><div class="gstep'+(w.dl?' done':'')+'"><span>1</span><div><b>Save the invoice PDF</b><small>You will attach this file in WhatsApp.</small></div><button type="button" class="gbtn ghost sm" data-g="b-wa-dl" data-id="'+inv.id+'">'+(w.dl?'Saved ✓':'Download')+'</button></div>'+
+      (canShare?'<div class="gstep"><span>·</span><div><b>Or share the PDF directly</b><small>Pick WhatsApp and the contact from your phone’s share sheet.</small></div><button type="button" class="gbtn ghost sm" data-g="b-wa-share" data-id="'+inv.id+'">Share</button></div>':'')+
+      '<div class="gstep"><span>2</span><div><b>Open the WhatsApp chat</b><small>The chat opens with the message ready. Tap the paperclip, choose Document, pick the PDF, then press send.</small></div></div></div>'+
+      '<p class="gerr" id="gwa-err" role="alert" hidden></p><a class="gbtn wa wide" id="gwa-go" data-g="b-wa-go" target="_blank" rel="noopener" href="'+esc(bWaLink())+'">Open WhatsApp chat</a></div></div>';
+  }
+  function gBillsListHtml(){
+    var all = (G.invoices||[]).slice().reverse(), tot = 0; all.forEach(function(x){ if(x.status==='paid') tot += x.amt; });
+    var h = '<div class="ghead2"><h3>Bills</h3><p>Every invoice you have made. Tap one to open it or download the PDF.</p></div><button type="button" class="gmake" data-g="b-new"><span class="gmk"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg></span><span><b>Make a bill</b><small>For a member, trainer or employee</small></span><i>›</i></button>';
+    if(!all.length) return h+'<div class="gempty"><b>No bills yet</b><span>Your invoices will be listed here.</span></div>';
+    h += '<p class="gsum">'+all.length+' bill'+(all.length===1?'':'s')+' · '+gMoney(tot)+' marked paid</p><div class="gsheet">'+all.slice(0,gS.n).map(function(x){
+      return '<button type="button" class="grow2" data-g="b-view" data-id="'+x.id+'"><span class="gn"><b>'+esc(x.c.name)+'</b><small>'+esc(x.no+' · '+BKIND[x.k]+' · '+gFmt(x.date))+'</small></span><span class="gr"><b>'+gMoney(x.amt)+'</b><i class="gchip '+(x.status==='paid'?'ok':'soon')+'">'+(x.status==='paid'?'Paid':'Unpaid')+'</i></span></button>';
+    }).join('')+'</div>'+(all.length>gS.n?'<button type="button" class="gbtn ghost wide" data-g="more">Show more</button>':'');
+    return h;
+  }
+  function gBillAfter(){
+    var o = gS.ov; if(!o || o.type!=='inv') return;
+    var inv = (G.invoices||[]).filter(function(x){ return x.id===o.id; })[0]; if(!inv) return;
+    bPaint(inv,function(u){ var im = $('gv-img'), sp = $('gv-sp'); if(im && gS.ov && gS.ov.id===inv.id){ im.src = u; im.hidden = false; if(sp) sp.hidden = true; } });
+  }
+  function bGen(){
+    var B = gS.bill, e = gFind(B.k,B.pid), err = '';
+    var desc = $('gb-desc').value.trim(), amt = parseFloat($('gb-amt').value), date = $('gb-date').value, st = $('gb-status').value;
+    if(!e) err = 'Choose who the bill is for.'; else if(!desc) err = 'Write what the bill is for.'; else if(!(amt>0)) err = 'Enter the amount.'; else if(amt>99999999) err = 'That amount is too large.'; else if(!gOk(date)) err = 'Choose the date.';
+    if(err){ var el = $('gb-err'); el.textContent = err; el.hidden = false; return; }
+    bFields(); G.billSeq++;
+    var inv = {id:gId(),no:bNo(G.billSeq),k:B.k,pid:e.id,c:bSnap(B.k,e),g:{name:G.gym.name,address:G.gym.address||'',phone:G.gym.phone||''},desc:desc,amt:Math.round(amt),date:date,status:st,created:Date.now()};
+    G.invoices.push(inv); gSave(); gS.del = false; gS.ov = {type:'inv',id:inv.id}; gRender(); var ov = document.querySelector('.gov'); if(ov) ov.scrollTop = 0;
+    toast('Invoice '+inv.no+' created.');
+  }
+  /* returns true when the action belongs to bills */
+  function gBillAct(a,b){
+    var k = b.getAttribute('data-k'), id = b.getAttribute('data-id');
+    if(a==='b-new'){ bFields(); gS.bill = {k:'members',q:'',pid:'',amt:'',desc:'',date:gK(gToday()),status:'paid'}; gS.ov = {type:'bill'}; gRender(); var ov = document.querySelector('.gov'); if(ov) ov.scrollTop = 0; return true; }
+    if(a==='b-kind'){ gS.bill.k = k; gS.bill.q = ''; gS.bill.pid = ''; gRender(); return true; }
+    if(a==='b-clear'){ gS.bill.pid = ''; gRender(); return true; }
+    if(a==='b-pick'){ var e = gFind(gS.bill.k,id); if(!e) return true; var d = bDefaults(gS.bill.k,e); gS.bill.pid = id; gS.bill.amt = d.amt; gS.bill.desc = d.desc; gS.bill.date = d.date; gRender(); return true; }
+    if(a==='b-gen'){ bGen(); return true; }
+    if(a==='b-view'){ gS.del = false; gS.ov = {type:'inv',id:id}; gRender(); return true; }
+    if(a==='b-pdf'){ var inv = (G.invoices||[]).filter(function(x){ return x.id===id; })[0]; if(inv) bDownload(inv); return true; }
+    if(a==='b-wa'){ var iv = (G.invoices||[]).filter(function(x){ return x.id===id; })[0]; if(!iv) return true; gS.wa = {id:id,num:iv.c.mobile||'',msg:bWaMsg(iv),dl:false}; gRender(); return true; }
+    if(a==='b-wa-x'){ gS.wa = null; gRender(); return true; }
+    if(a==='b-wa-dl'){ var i2 = (G.invoices||[]).filter(function(x){ return x.id===id; })[0]; if(i2) bDownload(i2,function(){ if(gS.wa){ gS.wa.dl = true; var bt = document.querySelector('[data-g=b-wa-dl]'); if(bt){ bt.textContent = 'Saved ✓'; bt.closest('.gstep').classList.add('done'); } } }); return true; }
+    if(a==='b-wa-share'){
+      var i3 = (G.invoices||[]).filter(function(x){ return x.id===id; })[0]; if(!i3) return true;
+      bPaint(i3,function(u){
+        try{
+          var fn = 'Invoice-'+i3.no+'.pdf', f = new File([bPdf(u)],fn,{type:'application/pdf'});
+          navigator.share({files:[f],text:gS.wa?gS.wa.msg:''}).then(function(){ gS.wa = null; gS.ov = null; gRender(); toast('Shared.'); },function(){});
+        }catch(e){ toast('Sharing is not available here. Use Download instead.'); }
+      });
+      return true;
+    }
+    if(a==='b-del'){ gS.del = true; gRender(); return true; }
+    if(a==='b-del-yes'){ G.invoices = (G.invoices||[]).filter(function(x){ return x.id!==id; }); delete bImgs[id]; gSave(); gS.ov = null; gS.del = false; gRender(); toast('Bill deleted.'); return true; }
+    return false;
+  }
+  $('gymroot').addEventListener('click',function(ev){
+    var go = ev.target.closest('#gwa-go'); if(!go || !gS.wa) return;
+    var n = bWaNum($('gwa-num').value), er = $('gwa-err');
+    if(!n){ ev.preventDefault(); er.textContent = 'Enter a valid WhatsApp number with 10 digits.'; er.hidden = false; return; }
+    go.setAttribute('href',bWaLink());
+    setTimeout(function(){ gS.wa = null; gS.ov = null; gS.tab = 'members'; gRender(); window.scrollTo(0,0); toast('Attach the PDF in WhatsApp and press send.'); },700);
+  });
+  $('gymroot').addEventListener('input',function(ev){
+    if(gS.wa && (ev.target.id==='gwa-num' || ev.target.id==='gwa-msg')){
+      if(ev.target.id==='gwa-num') gS.wa.num = ev.target.value; else gS.wa.msg = ev.target.value;
+      var g2 = $('gwa-go'); if(g2) g2.setAttribute('href',bWaLink()); var e2 = $('gwa-err'); if(e2) e2.hidden = true; return;
+    }
+    if(ev.target.id==='gb-q' && gS.bill){ gS.bill.q = ev.target.value; var r = $('gb-res'); if(r) r.innerHTML = bResults(); }
+  });
 
   /* ---------- Home-page scene: a male and a female athlete in KDN tees walk into a gym and train (animated drawing) ---------- */
   var HERO_BG = (function(){
@@ -4651,7 +5855,10 @@ select.sel{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 5
     else if(where==='library') show('s-library');
     else if(where==='foods') show('s-foods');
     else if(where==='about') show('s-about');
-    else if(where==='sub') show('s-pay');
+    else if(where==='sub'){ payPlan = planOn('gym')&&!planOn('ind')&&!planOn('fam') ? 'gym' : planOn('fam')&&!planOn('ind') ? 'fam' : 'ind'; show('s-pay'); }
+    else if(where==='plans') openPlans();
+    else if(where==='family') show('s-family');
+    else if(where==='gym') show('s-gym');
     else if(where==='edit'){ if(S) editSaved(); else { show('s-form'); goStep(cur) } }
     else if(where==='logout'){ askLogout(); return; }
     else if(where==='steps'){ if(S) openPlan('steps'); else show('s-intro'); }
