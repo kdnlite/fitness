@@ -2369,6 +2369,38 @@ body.onland .hd{border-bottom-color:rgba(255,255,255,.08)}
 @media (max-width:699px){.lp-walk{width:118%;margin:0 -9% 4px}}
 body.onland .lgimg{mix-blend-mode:lighten}
 @media (prefers-reduced-motion:reduce){.lp-art img{animation:none}}
+
+/* ===== preview mode + mobile hero order ===== */
+#mlist .lockhide{display:none!important}
+.mprev{font-style:normal;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;margin-left:8px;padding:2px 7px;border-radius:99px;background:#F3EAD3;color:#7A5C1E;vertical-align:middle}
+.mprev[hidden]{display:none}
+.kprev{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px;padding:18px;border-radius:18px;border:1.5px solid #E9CF9C;background:linear-gradient(160deg,#FFFBF1,#F7EEDA);color:#14202B}
+.kprev b{font-family:var(--font-display);font-size:1.1rem}
+.kprev p{margin:0;color:#586774}
+.kprev-l{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9A7A36}
+.kprev-l svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.foods .kprev{grid-column:1/-1}
+.kgp{max-width:760px;margin:0 auto;padding:28px 16px 40px;display:flex;flex-direction:column;gap:16px;color:#F6EBCB}
+.kgp h2{color:#fff;font-size:clamp(1.8rem,6vw,2.6rem)}
+.kgp .lead{color:#CDBB8A}
+.kgp .kprev-l{color:#E9C05A}
+.kgp-shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.kgp-shots figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.kgp-shots img{width:100%;height:auto;max-width:100%;border-radius:18px;border:1px solid rgba(233,192,90,.35);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.kgp-shots figcaption{font-family:var(--font-mono);font-size:11px;color:#A89868;text-align:center}
+.kgp-list{margin:0;padding-left:20px;display:grid;gap:6px;color:#F6EBCB}
+.kgp .btn{align-self:flex-start;background:linear-gradient(180deg,#F3D77F,#E9C05A 45%,#B98A1E);border-color:#B98A1E;color:#1A1405}
+.kgp .foot{color:#A89868}
+@media (max-width:520px){.kgp-shots{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.kgp-shots img{border-radius:12px}}
+@media (max-width:699px){
+  .lp-hero{display:flex;flex-direction:column;gap:18px}
+  .lp-copy{display:contents}
+  .lp-copy>h1{order:1}
+  .lp-walk{order:2;margin:-4px -9% 0}
+  .lp-lead{order:3}
+  .lp-cta{order:4}
+  .lp-trust{order:5}
+}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -2414,8 +2446,7 @@ body.onland .lgimg{mix-blend-mode:lighten}
 
     <div class="lp-hero">
       <div class="lp-copy">
-        <span class="lp-eyebrow"><span class="lp-dot" aria-hidden="true"></span>Made for India · Hindi &amp; English</span>
-        <h1>Your fitness coach, <span class="lp-hl">right in your pocket.</span></h1>
+                <h1>Your fitness coach, <span class="lp-hl">right in your pocket.</span></h1>
         <p class="lp-lead">A diet built from the Indian food you already eat, workouts for home or the gym, and an assistant you can talk to in Hindi or English. Answer 13 quick questions and your plan will be ready in about two minutes.</p>
         <div class="lp-cta"><button class="btn" type="button" id="b-start1">Get Started</button><button class="btn ghost" type="button" id="b-plans">See plans</button></div>
         <ul class="lp-trust">
@@ -2425,7 +2456,7 @@ body.onland .lgimg{mix-blend-mode:lighten}
         </ul>
       </div>
 
-      <figure class="lp-stage lp-walk"><video id="lpwalk" class="lp-walk-v" muted playsinline preload="auto" poster="assets/kdn-hero-start.webp" width="928" height="754" aria-label="The KDN male and female athletes walk in from both sides and pose in front of the KDN app on a phone"><source src="assets/kdn-hero.mp4" type="video/mp4"></video><img class="lp-walk-end" src="assets/kdn-hero-end.webp" width="928" height="754" alt="The KDN male and female athletes posing in front of the KDN app on a phone" hidden><button type="button" class="lp-replay" id="lpreplay" hidden aria-label="Play the walk-in again"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v5h5"/></svg></button></figure>
+      <figure class="lp-stage lp-walk"><video id="lpwalk" class="lp-walk-v" muted playsinline preload="auto" poster="assets/kdn-hero-start.webp" width="928" height="754" aria-label="The KDN male and female athletes walk in from both sides and pose in front of the KDN app on a phone"><source src="assets/kdn-hero.mp4" type="video/mp4"></video><img class="lp-walk-end" src="assets/kdn-hero-end.webp" width="928" height="754" alt="The KDN male and female athletes posing in front of the KDN app on a phone" hidden></figure>
     </div>
 
     <section class="lp-sec" aria-labelledby="lp-f-h">
@@ -2838,12 +2869,14 @@ body.onland .lgimg{mix-blend-mode:lighten}
   var curScreen = 's-landing';
   var planDone = false;
   var OPENSCR = ['s-landing','s-pay','s-about','s-trainer','s-share'];
+  var KPREV = ['s-library','s-foods','s-gym'];
   function show(id){
-    if(OPENSCR.indexOf(id)<0 && typeof licensed==='function' && !licensed()){ id = 's-pay'; payGateNote(); }
+    if(OPENSCR.indexOf(id)<0 && KPREV.indexOf(id)<0 && typeof licensed==='function' && !licensed()){ id = 's-pay'; payGateNote(); }
     curScreen = id;
     document.body.classList.toggle('onland', id==='s-landing');
-    document.body.classList.toggle('gymmode',id==='s-gym'||id==='s-trainer');
-    if(id!=='s-gym' && typeof gymLeave==='function') gymLeave();
+    var gymOn = id==='s-gym' && typeof licensed==='function' && licensed();
+    document.body.classList.toggle('gymmode',gymOn||id==='s-trainer');
+    if(!gymOn && typeof gymLeave==='function') gymLeave();
     screens.forEach(function(s){$(s).hidden = (s !== id)});
     window.scrollTo(0,0);
     var h = $(id).querySelector('h1,h2');
@@ -2852,7 +2885,7 @@ body.onland .lgimg{mix-blend-mode:lighten}
     if(id==='s-landing'){ heroKick(); if(window.kdnWalkReplay) setTimeout(window.kdnWalkReplay,50); }
     if(id==='s-pay'){ payShow(); if(typeof kPayNote==='function') kPayNote(); }
     if(id==='s-family') renderFamily();
-    if(id==='s-gym') gymEnter();
+    if(id==='s-gym'){ if(licensed()) gymEnter(); else kGymPreview(); }
     if(id==='s-trainer') trOpen();
   }
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
@@ -4568,14 +4601,15 @@ body.onland .lgimg{mix-blend-mode:lighten}
     paintLib();
   }
   function paintLib(){
-    var ids = libIds(LB), shown = ids.slice(0,LB.n), h = '', last = '';
+    var kp = !licensed(), ids = libIds(LB), shown = ids.slice(0,kp?6:LB.n), h = '', last = '';
     shown.forEach(function(id){
       var mu = EXS[id].mu;
       if(mu!==last){ h += '<h3 class="lgh">'+esc(mu)+'</h3>'; last = mu; }
       h += libRow(id);
     });
     if(!ids.length) h = '<p class="hint">No exercise matches. Try a shorter word or clear the filters.</p>';
-    if(ids.length>shown.length) h += '<button type="button" class="btn ghost more" data-lib="more">Show '+Math.min(30,ids.length-shown.length)+' more ('+(ids.length-shown.length)+' left)</button>';
+    if(kp && ids.length>shown.length) h += kPrevCard('You are seeing '+shown.length+' of '+fmt(EXCOUNT)+' exercises.','Get a plan to open every exercise, with pictures, form tips, calories burned and alternatives.');
+    else if(ids.length>shown.length) h += '<button type="button" class="btn ghost more" data-lib="more">Show '+Math.min(30,ids.length-shown.length)+' more ('+(ids.length-shown.length)+' left)</button>';
     $('lib-res').innerHTML = h;
     $('libcount').textContent = ids.length+' of '+EXCOUNT+' exercises'+(ids.length>shown.length?' · showing '+shown.length:'');
   }
@@ -5075,7 +5109,7 @@ body.onland .lgimg{mix-blend-mode:lighten}
     var list = DISHES.filter(function(x){return x.cat===foodCat && dietOk(x,foodDiet)});
     list = list.filter(function(x){return DPH[x.id]}).concat(list.filter(function(x){return !DPH[x.id]}));
     $('foodcount').textContent = list.length+' '+CATN[foodCat].toLowerCase()+' dishes for '+({vegan:'vegan',veg:'vegetarian',nonveg:'non-vegetarian'}[foodDiet])+' eaters'+(foodDiet==='nonveg' ? ' (every dish, including egg, chicken and fish)' : foodDiet==='veg' ? ' (including vegan dishes)' : '');
-    var shownN = foodN; $('foodgrid').innerHTML = list.slice(0,shownN).map(dishCard).join('') + (list.length>shownN ? '<button type="button" class="btn ghost more" id="food-more">Show '+Math.min(60,list.length-shownN)+' more ('+(list.length-shownN)+' left)</button>' : '');
+    var kp = !licensed(), shownN = kp ? 6 : foodN; $('foodgrid').innerHTML = list.slice(0,shownN).map(dishCard).join('') + (kp && list.length>shownN ? kPrevCard('You are seeing '+shownN+' of '+DISHES.length+' dishes.','Get a plan to open every dish with its recipe, nutrition and a daily meal plan set for your body.') : list.length>shownN ? '<button type="button" class="btn ghost more" id="food-more">Show '+Math.min(60,list.length-shownN)+' more ('+(list.length-shownN)+' left)</button>' : '');
   }
   var foodN = 60;
   $('foodgrid').addEventListener('click',function(ev){ if(ev.target.closest('#food-more')){ foodN += 60; renderFoods(); } });
@@ -6758,8 +6792,10 @@ body.onland .lgimg{mix-blend-mode:lighten}
     $('payart').innerHTML = '<div class="pa m">'+frame(PL.ohpress[1],'m')+'</div><div class="pa f">'+frame(PL.ohpress[1],'f')+'</div>';
     tickLic();
   }
+  var kWasOn = null;
   function tickLic(){
     var l = lic(), on = licensed();
+    if(on!==kWasOn){ var first = kWasOn===null; kWasOn = on; kMenuSync(); if(!first){ renderLibrary(); renderFoods(); if(curScreen==='s-gym') show('s-gym'); } }
     var el = $('m-lic');
     if(el) el.textContent = on ? 'Active · '+(function(){var p = cdParts(l.end-Date.now()); return p.d+'d '+two(p.h)+':'+two(p.m)+':'+two(p.s)+' left'})() : (l ? 'Expired' : 'Not active');
     if(curScreen==='s-pay'){
@@ -6767,7 +6803,7 @@ body.onland .lgimg{mix-blend-mode:lighten}
         if(!$('pay-active').hidden) $('act-cd').innerHTML = cdHtml(l.end-Date.now());
         if(!$('pay-done').hidden) $('done-cd').innerHTML = cdHtml(l.end-Date.now());
       } else if(!$('pay-active').hidden || !$('pay-done').hidden){ payShow(); }
-    } else if(!on && OPENSCR.indexOf(curScreen)<0){
+    } else if(!on && OPENSCR.indexOf(curScreen)<0 && KPREV.indexOf(curScreen)<0){
       payGateNote(); show('s-pay');
     }
   }
@@ -9947,15 +9983,34 @@ body.onland .lgimg{mix-blend-mode:lighten}
   document.addEventListener('touchmove',function(e){ if(e.touches && e.touches.length>1) e.preventDefault(); },{passive:false});
 
 
+  /* ---------- Preview mode (no active plan): menu, library, dishes and gym manager ---------- */
+  var KLOCK = ['plan','ai','steps','sub','sound','about','edit','family','trainer'];
+  function kMenuSync(){
+    var on = licensed();
+    Array.prototype.forEach.call(document.querySelectorAll('#mlist button[data-go]'),function(b){
+      var g = b.getAttribute('data-go');
+      if(KLOCK.indexOf(g)>=0) b.classList.toggle('lockhide',!on);
+      if(g==='library'||g==='foods'||g==='gym'){
+        var t = b.querySelector('.mprev'); if(!t){ t = document.createElement('i'); t.className = 'mprev'; t.textContent = 'Preview'; var bb = b.querySelector('b'); if(bb) bb.appendChild(t); }
+        t.hidden = on;
+      }
+    });
+  }
+  function kPrevCard(t1,t2){ return '<div class="kprev"><span class="kprev-l"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Preview</span><b>'+t1+'</b><p>'+t2+'</p><button type="button" class="btn" data-unlock>See plans</button></div>'; }
+  function kGymPreview(){
+    $('gymroot').innerHTML = '<div class="kgp"><span class="kprev-l"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Preview</span><h2>KDN Gym Manager</h2><p class="lead">Run your whole gym from one app: members and fees, attendance, trainers and salaries, bills, classes, personal training, a store, lockers and reports.</p>'+
+      '<div class="kgp-shots">'+[['home','Home'],['members','Members and fees'],['reports','Reports']].map(function(x){ return '<figure><img src="assets/gym-preview-'+x[0]+'.webp" width="400" height="860" alt="Gym Manager '+x[1]+' screen with sample data" loading="lazy"><figcaption>'+x[1]+'</figcaption></figure>'; }).join('')+'</div>'+
+      '<ul class="kgp-list"><li>Members, fee reminders and part payments</li><li>Check-in and a self check-in kiosk</li><li>Trainers, staff attendance and salaries</li><li>Bills as PDF and WhatsApp messages</li><li>Class schedule, PT packages, store and lockers</li><li>Reports: income, renewals and busy hours</li></ul>'+
+      '<button type="button" class="btn" data-unlock>See plans</button><p class="foot">Sample data shown. The Gym plan unlocks the manager for your own gym.</p></div>';
+  }
+  document.addEventListener('click',function(ev){ var b = ev.target.closest('[data-unlock]'); if(b){ ev.preventDefault(); if(typeof setPlan==='function' && curScreen==='s-gym') setPlan('gym'); show('s-pay'); } });
   /* ---------- Landing hero: the athletes walk in once, then hold their pose ---------- */
   (function(){
-    var v = $('lpwalk'); if(!v) return; var end = v.parentNode.querySelector('.lp-walk-end'), rb = $('lpreplay');
+    var v = $('lpwalk'); if(!v) return; var end = v.parentNode.querySelector('.lp-walk-end');
     var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function showEnd(){ end.hidden = false; v.hidden = true; rb.hidden = false; }
-    function play(){ if(still) { showEnd(); return; } end.hidden = true; v.hidden = false; rb.hidden = true; try{ v.currentTime = 0; }catch(e){} var p = v.play(); if(p && p.catch) p.catch(showEnd); }
-    v.addEventListener('ended',function(){ rb.hidden = false; });
+    function showEnd(){ end.hidden = false; v.hidden = true; }
+    function play(){ if(still){ showEnd(); return; } end.hidden = true; v.hidden = false; try{ v.currentTime = 0; }catch(e){} var p = v.play(); if(p && p.catch) p.catch(showEnd); }
     v.addEventListener('error',showEnd,true);
-    rb.addEventListener('click',play);
     if(still) showEnd(); else play();
     window.kdnWalkReplay = function(){ if(!$('s-landing').hidden && v.ended) play(); };
   })();
