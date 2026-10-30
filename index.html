@@ -1324,11 +1324,11 @@ body.onland .hd .burger i,.hd .burger[aria-expanded=true] i{background:#E9CF9C}
 .trprice s{color:var(--muted);font-family:var(--font-display);font-size:1.1rem}
 .trprice b{font-family:var(--font-display);font-size:1.9rem;color:#0B2545;line-height:1}
 .trprice span{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#3B6A8C;line-height:1.35}
-.soon{display:flex;gap:10px;align-items:flex-start;border:1.5px dashed #93C5FD;border-radius:12px;padding:12px 14px;background:#F8FCFF}
-.soon .pulse{width:10px;height:10px;margin-top:7px;flex:none;border-radius:50%;background:#38BDF8;box-shadow:0 0 0 0 rgba(56,189,248,.6);animation:pulse 1.6s ease-out infinite}
+.kcsoon{display:flex;gap:10px;align-items:flex-start;border:1.5px dashed #93C5FD;border-radius:12px;padding:12px 14px;background:#F8FCFF}
+.kcsoon .pulse{width:10px;height:10px;margin-top:7px;flex:none;border-radius:50%;background:#38BDF8;box-shadow:0 0 0 0 rgba(56,189,248,.6);animation:pulse 1.6s ease-out infinite}
 @keyframes pulse{to{box-shadow:0 0 0 10px rgba(56,189,248,0)}}
-.soon b{display:block;color:#0B2545}
-.soon span{color:var(--muted);font-size:.92rem}
+.kcsoon b{display:block;color:#0B2545}
+.kcsoon span{color:var(--muted);font-size:.92rem}
 .trrev .btn[disabled]{background:#D5EAF7;border-color:#D5EAF7;color:#3B6A8C;cursor:not-allowed;transform:none}
 
 .payhero{display:flex;gap:18px;align-items:center;background:linear-gradient(135deg,#0F2E8F,#1D4ED8 55%,#4C7DF5);color:#fff;border-radius:24px;padding:22px 20px;box-shadow:0 18px 40px rgba(29,78,216,.3);overflow:hidden;flex-wrap:wrap}
@@ -2269,6 +2269,89 @@ details.zmore[open]{padding-bottom:12px}
 .zline span{min-width:0;flex:1}
 .zline b{white-space:nowrap;text-align:right}
 .gstats.zst2{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* ===== v23: premium finish for the gym manager (both themes, every accent) ===== */
+body.gymmode{--zgl:color-mix(in srgb,var(--gold) 34%,var(--gline));--zhi:color-mix(in srgb,#fff 5%,transparent);--zsh:0 1px 0 var(--zhi) inset,0 14px 34px -18px rgba(0,0,0,.55)}
+body.gymmode[data-gt="light"]{--zhi:rgba(255,255,255,.9);--zsh:0 1px 0 #fff inset,0 14px 30px -18px color-mix(in srgb,var(--gold2) 30%,transparent)}
+/* surfaces: hairline gold edge that fades, soft lift */
+:is(#gymroot,#trainerroot) :is(.gcard,.gsheet,.grem,.gst,.gmk2){border:1px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(165deg,var(--zgl),var(--gline) 38%,var(--gline)) border-box;box-shadow:var(--zsh)}
+:is(#gymroot,#trainerroot) .gmk2{background:linear-gradient(160deg,var(--c3),var(--c4)) padding-box,linear-gradient(165deg,var(--zgl),var(--gline) 45%) border-box}
+:is(#gymroot,#trainerroot) .gcard{border-radius:24px;padding:20px}
+:is(#gymroot,#trainerroot) .gcard h4{font:700 1.06rem var(--font-display);letter-spacing:-.01em;color:var(--gtext);margin:0}
+:is(#gymroot,#trainerroot) .ghead2 h3,:is(#gymroot,#trainerroot) .gsubh h3{font:800 1.45rem var(--font-display);letter-spacing:-.02em;line-height:1.15}
+:is(#gymroot,#trainerroot) .ghead2 p{line-height:1.5;max-width:58ch}
+:is(#gymroot,#trainerroot) .gsubh{margin:6px 16px 2px;gap:12px}
+/* stat tiles: big tabular numerals, quiet labels */
+:is(#gymroot,#trainerroot) .gst{border-radius:18px;padding:14px 6px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0}
+:is(#gymroot,#trainerroot) .gst b{font-size:clamp(1.15rem,4.6vw,1.55rem);letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1;max-width:100%;overflow-wrap:anywhere}
+:is(#gymroot,#trainerroot) .gst span{font-size:9.5px;letter-spacing:.1em;line-height:1.35}
+:is(#gymroot,#trainerroot) .gst.warn{background:linear-gradient(color-mix(in srgb,var(--gbad) 10%,var(--card)),var(--card)) padding-box,linear-gradient(165deg,color-mix(in srgb,var(--gbad) 55%,transparent),var(--gline) 50%) border-box}
+:is(#gymroot,#trainerroot) .gst.warn b{color:var(--gbad);-webkit-text-fill-color:var(--gbad)}
+/* banners: title over text, chevron on the right */
+:is(#gymroot,#trainerroot) .gbanner2{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:12px;row-gap:2px;text-align:left;padding:14px 16px;border-radius:18px;box-shadow:var(--zsh)}
+:is(#gymroot,#trainerroot) .gbanner2>b{grid-column:1;font:700 1rem var(--font-display);display:flex;align-items:center;gap:8px}
+:is(#gymroot,#trainerroot) .gbanner2>span{grid-column:1;text-align:left;font-size:.85rem;color:var(--gmute);line-height:1.4}
+:is(#gymroot,#trainerroot) .gbanner2>i{grid-column:2;grid-row:1/3;align-self:center;font-style:normal;font-size:1.4rem;color:var(--gold)}
+:is(#gymroot,#trainerroot) .gbanner2 .zic{width:18px;height:18px;flex:none;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* buttons */
+:is(#gymroot,#trainerroot) .gbtn{border-radius:14px;letter-spacing:.005em;transition:transform .12s ease,box-shadow .2s ease,background-color .2s ease}
+:is(#gymroot,#trainerroot) .gbtn.gold{background:linear-gradient(180deg,color-mix(in srgb,var(--g1) 55%,var(--gold)),var(--gold) 45%,var(--gold2));border-color:color-mix(in srgb,var(--gold2) 80%,#000);color:var(--gon);text-shadow:0 1px 0 color-mix(in srgb,#fff 25%,transparent)}
+:is(#gymroot,#trainerroot) .gbtn.ghost{background:color-mix(in srgb,var(--gold) 5%,transparent);border-color:color-mix(in srgb,var(--gold) 45%,var(--gline))}
+:is(#gymroot,#trainerroot) .gbtn:hover{transform:translateY(-1px)}
+:is(#gymroot,#trainerroot) .gbtn:active{transform:translateY(1px) scale(.99)}
+:is(#gymroot,#trainerroot) .gbtn[disabled]{opacity:.45;transform:none;cursor:not-allowed}
+:is(#gymroot,#trainerroot) .gra{gap:8px}
+:is(#gymroot,#trainerroot) .gra>.gbtn{flex:1 1 auto;white-space:nowrap;min-width:max-content}
+/* rows */
+:is(#gymroot,#trainerroot) .grow2{border-bottom-color:color-mix(in srgb,var(--gline) 70%,transparent);transition:background-color .15s ease}
+:is(#gymroot,#trainerroot) .grow2:hover{background:color-mix(in srgb,var(--gold) 5%,transparent)}
+:is(#gymroot,#trainerroot) .gsheet>.grow2:last-child{border-bottom:0}
+:is(#gymroot,#trainerroot) .gav{box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 10%,transparent)}
+/* chips readable in both themes */
+:is(#gymroot,#trainerroot) .gchip{font-weight:700;letter-spacing:.02em}
+:is(#gymroot,#trainerroot) .gchip.over{background:color-mix(in srgb,var(--gbad) 18%,var(--card));color:var(--gbad)}
+body.gymmode[data-gt="light"] :is(#gymroot,#trainerroot) .gchip.over{background:#FCE4E0;color:#A3271A}
+body.gymmode[data-gt="light"] :is(#gymroot,#trainerroot) .gchip.ok{background:#E2F5EA;color:#17663F}
+body.gymmode[data-gt="light"] :is(#gymroot,#trainerroot) .gchip.soon{background:color-mix(in srgb,var(--gold) 12%,#fff);color:var(--gold2)}
+/* reminder cards */
+:is(#gymroot,#trainerroot) .grem{border-radius:20px;padding:16px;margin:0 12px 10px}
+:is(#gymroot,#trainerroot) .grem.over{background:linear-gradient(color-mix(in srgb,var(--gbad) 7%,var(--card)),var(--card)) padding-box,linear-gradient(165deg,color-mix(in srgb,var(--gbad) 55%,transparent),var(--gline) 50%) border-box}
+:is(#gymroot,#trainerroot) .grem .gn b{color:var(--gtext)}
+:is(#gymroot,#trainerroot) .grem .gr b{color:var(--gtext);font-variant-numeric:tabular-nums}
+/* More page groups */
+.zgrp{display:flex;flex-direction:column;gap:8px;margin:0 12px 6px}
+.zgrp>h4{font:600 11px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:14px 4px 2px}
+.zgrp .gmk2{width:100%}
+@media (min-width:760px){.zgrp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.zgrp>h4{grid-column:1/-1}}
+/* fixes for the part-4 pages */
+.zdays button.on,.zdaypick input:checked+span{color:var(--gon)}
+.zdays button.on small{color:var(--gon)}
+.zlk.used{background:color-mix(in srgb,var(--gold) 16%,var(--card));border-color:color-mix(in srgb,var(--gold) 60%,var(--gline))}
+.zlk.used b{color:var(--gtext)}
+.zlk.used small{color:var(--gold)}
+.zlk.exp{background:color-mix(in srgb,var(--gbad) 14%,var(--card))}
+.zlk{transition:transform .12s ease}
+.zlk:hover{transform:translateY(-1px)}
+.zbk{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.zbk>.gn{flex:1 1 140px;min-width:0}
+.zbk>.zbka{flex:0 1 auto}
+@media (max-width:440px){.zbk>.zbka{flex:1 1 100%;justify-content:flex-start;padding-left:50px}}
+.zrank{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;margin-right:8px;font:700 12px var(--font-display);background:color-mix(in srgb,var(--gold) 14%,transparent);color:var(--gold);border:1px solid color-mix(in srgb,var(--gold) 40%,transparent);vertical-align:middle}
+.zrank.r1{background:var(--gold);color:var(--gon)}
+/* 12-month income bars (HTML, so it scales at any width) */
+.ztr{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;align-items:end;height:150px;padding-top:6px;border-bottom:1px solid var(--gline)}
+.ztr>div{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
+.ztr i{display:block;border-radius:5px 5px 0 0;background:var(--gold);min-height:1px}
+.ztr i.o{background:#7FB3E8;border-radius:5px 5px 0 0}
+.ztr i.o+i{border-radius:0}
+.ztrx{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;text-align:center;font:10px var(--font-mono);color:var(--gmute);margin-top:6px}
+.ztrx span.on{color:var(--gold);font-weight:700}
+/* bottom bar and header glass */
+body.gymmode .gnav{box-shadow:0 -12px 30px -18px rgba(0,0,0,.6)}
+body.gymmode .gnav button.on{color:var(--gold)}
+/* member form extras */
+details.zmore{background:color-mix(in srgb,var(--gold) 3%,transparent)}
+details.zmore .gtwo{align-items:end}
+@media (prefers-reduced-motion:reduce){:is(#gymroot,#trainerroot) .gbtn,.zlk{transition:none}:is(#gymroot,#trainerroot) .gbtn:hover,.zlk:hover{transform:none}}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -2496,7 +2579,7 @@ details.zmore[open]{padding-bottom:12px}
           <div class="big90"><b>90% OFF</b><span>Trainer's Offer</span></div>
           <div class="trprice"><s>₹999</s><b>₹99.90</b><span>for 3 months<br>full access</span></div>
           <div class="trp"><div class="av" aria-hidden="true">VK</div><div><small>Your trainer</small><strong>Vikas Kumar</strong><div class="stars" role="img" aria-label="Rated 9.5 out of 10"><i></i><i></i><i></i><i></i><i style="--f:50%"></i><em>9.5 / 10</em></div></div></div>
-          <div class="soon"><span class="pulse" aria-hidden="true"></span><div><b>The Trainer's Offer is coming soon</b><span>This offer is not live yet. It will be available very soon, so please keep your code safe.</span></div></div>
+          <div class="kcsoon"><span class="pulse" aria-hidden="true"></span><div><b>The Trainer's Offer is coming soon</b><span>This offer is not live yet. It will be available very soon, so please keep your code safe.</span></div></div>
           <button class="btn wide" type="button" disabled>Coming soon</button>
         </div>
       </form>
@@ -7311,7 +7394,7 @@ details.zmore[open]{padding-bottom:12px}
     if(typeof stAfter==='function') stAfter();
   }
   function gPhotoPick(id,label,val,round){
-    return '<div class="gph"><div class="gphv'+(round?' round':'')+'" id="gp-'+id+'">'+(val?'<img src="'+val+'" alt="">':'<span>'+(round?'Logo':'Photo')+'</span>')+'</div><label class="gbtn ghost sm" for="gf-'+id+'">'+label+'</label><input type="file" id="gf-'+id+'" data-gph="'+id+'" accept="image/*" hidden></div>';
+    return '<div class="gph"><div class="gphv'+(round?' round':'')+'" id="gp-'+id+'">'+(val?'<img src="'+val+'" alt="">':'<span>'+(id==='logo'?'Logo':'Photo')+'</span>')+'</div><label class="gbtn ghost sm" for="gf-'+id+'">'+label+'</label><input type="file" id="gf-'+id+'" data-gph="'+id+'" accept="image/*" hidden></div>';
   }
   function gSetupHtml(){
     var edit = gS.tmp.mode==='edit', g = edit ? G.gym : {};
@@ -7390,7 +7473,7 @@ details.zmore[open]{padding-bottom:12px}
     h += shown.map(function(e){
       var due = gPayable(k,e) && gOk(e.next) ? gDue(e.next) : null;
       var sub = k==='members' ? gPlanName(e.plan)+' · '+gMoney(e.fee) : (e.role||GKIND[k].one)+(e.mobile?' · '+e.mobile:'');
-      return '<button type="button" class="grow2" data-g="open" data-k="'+k+'" data-id="'+e.id+'">'+(k==='members'?'<span class="gno">'+e.no+'</span>':'')+gAvatar(e,'sm')+'<span class="gn"><b>'+esc(e.name)+'</b><small>'+esc(sub)+'</small></span><span class="gr">'+(due ? '<b>'+gFmt(e.next)+'</b><i class="gchip '+due.cls+'">'+due.txt+'</i>' : '<i class="gchip none">No salary</i>')+'</span></button>';
+      return '<button type="button" class="grow2" data-g="open" data-k="'+k+'" data-id="'+e.id+'">'+(k==='members'?'<span class="gno">'+e.no+'</span>':'')+gAvatar(e,'sm')+'<span class="gn"><b>'+esc(e.name)+'</b><small>'+esc(sub)+'</small></span><span class="gr">'+(due ? '<b>'+gFmt(e.next)+'</b><i class="gchip '+due.cls+'">'+due.txt+'</i>' : (k==='members' ? (e.freeze ? '<i class="gchip soon">Frozen</i>' : '<i class="gchip none">No fee date</i>') : '<i class="gchip none">No salary</i>'))+'</span></button>';
     }).join('')+'</div>';
     if(list.length>shown.length) h += '<button type="button" class="gbtn ghost wide" data-g="more">Show more ('+(list.length-shown.length)+' left)</button>';
     return h;
@@ -8140,7 +8223,7 @@ details.zmore[open]{padding-bottom:12px}
       ['equip','Equipment','Service reminders','M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12'],
       ['leads','Enquiries','Visitors to follow up','M4 6h16v10H8l-4 4z'],
       ['backup','Backup and export','Save or restore your data','M12 4v11M7 11l5 5 5-5M5 20h14']]);
-    return '<div class="ghead2"><h3>More</h3><p>Everything else for running your gym.</p></div><div class="gmore">'+items.map(function(x){ return '<button type="button" class="gmk2" data-g="tab" data-t="'+x[0]+'"><span class="gmk"><svg viewBox="0 0 24 24"><path d="'+x[3]+'"/></svg></span><span><b>'+x[1]+'</b><small>'+x[2]+'</small></span><i>›</i></button>'; }).join('')+'</div>';
+    return zMoreHtml(items);
   }
 
   /* --- detail page additions --- */
@@ -9189,10 +9272,19 @@ details.zmore[open]{padding-bottom:12px}
       ['kiosk','Self check-in kiosk','Members check in on a tablet','M7 3h10v18H7zM11 18h2']
     ];
   }
+  var ZGRP = [['Front desk',['att','kiosk','pass','cls','pt','store','lock']],['Members and growth',['rep','ren','leads','bc','eng','plans','studio']],['Team and money',['rem','satt']],['Gym setup',['equip','settings','backup']]];
+  function zMoreHtml(items){
+    var by = {}, used = {}; items.forEach(function(x){ by[x[0]] = x; });
+    var btn = function(x){ used[x[0]] = 1; return '<button type="button" class="gmk2" data-g="tab" data-t="'+x[0]+'"><span class="gmk"><svg viewBox="0 0 24 24"><path d="'+x[3]+'"/></svg></span><span><b>'+x[1]+'</b><small>'+x[2]+'</small></span><i>›</i></button>'; };
+    var h = '<div class="ghead2"><h3>More</h3><p>Everything else for running your gym.</p></div>';
+    ZGRP.forEach(function(g){ var list = g[1].filter(function(id){ return by[id]; }); if(list.length) h += '<div class="zgrp"><h4>'+g[0]+'</h4>'+list.map(function(id){ return btn(by[id]); }).join('')+'</div>'; });
+    var rest = items.filter(function(x){ return !used[x[0]]; }); if(rest.length) h += '<div class="zgrp"><h4>Other</h4>'+rest.map(btn).join('')+'</div>';
+    return h;
+  }
   function zHomeHtml(){
     var today = gK(gToday()), dow = gToday().getDay(), h = '';
     var bd = G.members.filter(function(m){ return gOk(m.dob) && m.dob.slice(5)===today.slice(5); });
-    if(bd.length) h += '<button type="button" class="gbanner2 zbday" data-g="tab" data-t="eng"><b>🎂 '+(bd.length===1?esc(bd[0].name)+'’s birthday today':bd.length+' birthdays today')+'</b><span>Send a wish on WhatsApp</span><i>›</i></button>';
+    if(bd.length) h += '<button type="button" class="gbanner2 zbday" data-g="tab" data-t="eng"><b><svg class="zic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21h16v-8H4zM4 16c2 1.5 4 1.5 5.3 0 1.4 1.5 3.6 1.5 5 0 1.4 1.5 3.4 1.5 5.7 0M12 13V9M12 9c-1.4 0-2.2-1-2.2-2.2C9.8 5.6 12 3 12 3s2.2 2.6 2.2 3.8C14.2 8 13.4 9 12 9z"/></svg>'+(bd.length===1?esc(bd[0].name)+'’s birthday today':bd.length+' birthdays today')+'</b><span>Send a wish on WhatsApp</span><i>›</i></button>';
     var risk = zRisk().length;
     if(risk) h += '<button type="button" class="gbanner2" data-g="tab" data-t="rep"><b>'+risk+' member'+(risk===1?'':'s')+' may stop coming</b><span>Active members who have not visited in 10 or more days</span><i>›</i></button>';
     h += '<div class="gquick zq">'+[['cls','Classes','M4 5h16v15H4zM4 9h16M8 3v4M16 3v4'],['pt','PT','M6 8v8M18 8v8M3 10v4M21 10v4M6 12h12'],['store','Store','M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2'],['rep','Reports','M4 20V10M10 20V4M16 20v-7M22 20H2']].map(function(x){ return '<button type="button" data-g="tab" data-t="'+x[0]+'"><svg viewBox="0 0 24 24"><path d="'+x[2]+'"/></svg><span>'+x[1]+'</span></button>'; }).join('')+'</div>';
@@ -9235,8 +9327,8 @@ details.zmore[open]{padding-bottom:12px}
     return '<details class="zmore"'+(d.dob||d.gender||d.emg?' open':'')+'><summary>More details: birthday, health, emergency contact</summary>'+
       '<div class="gtwo">'+'<div>'+gSel('Gender','zf-gen',[['','Not set'],['m','Male'],['f','Female'],['o','Other']],d.gender||'')+'</div><div>'+gFld('Date of birth','zf-dob',d.dob||'','date')+'</div></div>'+
       '<div class="gtwo"><div>'+gSel('Blood group','zf-bg',[['','Not set'],['A+','A+'],['A-','A−'],['B+','B+'],['B-','B−'],['AB+','AB+'],['AB-','AB−'],['O+','O+'],['O-','O−']],d.blood||'')+'</div><div>'+gSel('Goal','zf-goal',ZGOAL,d.goal||'')+'</div></div>'+
-      '<div class="gtwo"><div>'+gFld('Height (cm)','zf-ht',d.ht||'','number','min="80" max="250" inputmode="numeric"')+'</div><div>'+gFld('Emergency contact name','zf-emn',d.emn||'','text','maxlength="40"')+'</div></div>'+
-      gFld('Emergency contact mobile','zf-emg',d.emg||'','tel','inputmode="numeric" maxlength="18"')+
+      '<div class="gtwo"><div>'+gFld('Height (cm)','zf-ht',d.ht||'','number','min="80" max="250" inputmode="numeric"')+'</div><div>'+gFld('Emergency contact','zf-emn',d.emn||'','text','maxlength="40"')+'</div></div>'+
+      gFld('Emergency mobile','zf-emg',d.emg||'','tel','inputmode="numeric" maxlength="18"')+
       '<label class="gl" for="zf-med">Health notes (injuries, conditions, medicines)</label><textarea class="gin" id="zf-med" rows="2" maxlength="200">'+esc(d.med||'')+'</textarea>'+
       gSel('Referred by','zf-ref',zMOpts(d.ref,'No one').filter(function(o){ return !d.id || o[0]!==d.id; }),d.ref||'')+
       '<label class="gchk"><input type="checkbox" id="zf-dec"'+(d.dec?' checked':'')+'><span>Health declaration and gym rules signed</span></label>'+
@@ -9388,7 +9480,7 @@ details.zmore[open]{padding-bottom:12px}
     if(low) h += '<p class="ghint zwarn">'+low+' product'+(low===1?' is':'s are')+' low or out of stock.</p>';
     if(!G.z.prod.length) h += '<div class="gempty"><b>No products yet</b><span>Add protein, water bottles, shakes, T-shirts, gloves or anything you sell at the desk.</span></div>';
     else h += '<div class="gsheet">'+G.z.prod.slice().sort(function(a,b){ return a.name<b.name?-1:1; }).map(function(p){ var cls = p.stock<=0?'over':p.stock<=(p.low||0)?'soon':'ok'; return '<button type="button" class="grow2" data-g="x-open" data-p="z-prod" data-id="'+p.id+'"><span class="gn"><b>'+esc(p.name)+'</b><small>'+gMoney(p.price)+(p.cost?' · cost '+gMoney(p.cost):'')+'</small></span><span class="gr"><i class="gchip '+cls+'">'+(p.stock<=0?'Out of stock':p.stock+' in stock')+'</i></span></button>'; }).join('')+'</div>';
-    var rec = G.z.sales.slice(-12).reverse();
+    var rec = G.z.sales.slice(-8).reverse();
     if(rec.length) h += '<div class="gcard dark"><h4>Recent sales</h4>'+rec.map(function(s){ return '<div class="gdr zline"><span>'+gFmt(s.d)+' · '+esc(s.mid?zName(s.mid):'Walk-in')+' · '+s.items.map(function(it){ var p = G.z.prod.filter(function(x){ return x.id===it[0]; })[0]; return (p?p.name:'Item')+' ×'+it[1]; }).join(', ')+'</span><b>'+gMoney(s.amt)+'</b></div>'; }).join('')+'</div>';
     return h;
   }
@@ -9548,7 +9640,7 @@ details.zmore[open]{padding-bottom:12px}
     var risk = zRisk();
     h += '<div class="gcard dark"><div class="grh"><h4>May stop coming ('+risk.length+')</h4><button type="button" class="glink" data-g="x-zaudgo" data-v="away">Message all</button></div>'+(risk.length?risk.slice(0,8).map(function(x){ var m = x.m; return '<div class="grh zbk">'+gAvatar(m,'sm')+'<div class="gn"><b>'+esc(m.name)+'</b><small>'+(x.days==null?'No visit since joining':'Last visit '+x.days+' days ago')+'</small></div><div class="zbka">'+(m.mobile?'<a class="gbtn ghost sm" href="'+gWa(m.mobile,zFill(ZMSG.miss,m))+'" target="_blank" rel="noopener">WhatsApp</a>':'')+'</div></div>'; }).join(''):'<p class="ghint">Every active member visited in the last 10 days.</p>')+'</div>';
     var top = G.members.map(function(m){ var n = 0; Object.keys(G.att).forEach(function(d){ if(d.slice(0,7)===mk && G.att[d].some(function(r){ return r[0]===m.id; })) n++; }); return [n,m]; }).filter(function(x){ return x[0]>0; }).sort(function(a,b){ return b[0]-a[0]; }).slice(0,10);
-    if(top.length) h += '<div class="gcard dark"><h4>Most regular this month</h4>'+top.map(function(x,i){ return '<div class="gdr zline"><span>'+(i<3?['🥇','🥈','🥉'][i]:(i+1)+'.')+' '+esc(x[1].name)+'</span><b>'+x[0]+' visit'+(x[0]===1?'':'s')+'</b></div>'; }).join('')+'</div>';
+    if(top.length) h += '<div class="gcard dark"><h4>Most regular this month</h4>'+top.map(function(x,i){ return '<div class="gdr zline"><span><i class="zrank'+(i===0?' r1':'')+'">'+(i+1)+'</i>'+esc(x[1].name)+'</span><b>'+x[0]+' visit'+(x[0]===1?'':'s')+'</b></div>'; }).join('')+'</div>';
     if(G.trainers.length){ var pe = zPtEarn(mk); h += '<div class="gcard dark"><h4>Trainers</h4>'+G.trainers.map(function(t){ var ms = G.members.filter(function(m){ return m.trainer===t.id && zActive(m); }).length, x = pe.by[t.id]||{s:0,c:0}; return '<div class="gdr zline"><span>'+esc(t.name)+'</span><b>'+ms+' members · '+x.s+' PT · '+gMoney(x.c)+' share</b></div>'; }).join('')+'</div>'; }
     var lm = G.leads.filter(function(l){ return (l.created||'').slice(0,7)===mk; }), lj = lm.filter(function(l){ return l.status==='joined'; }).length, ll = lm.filter(function(l){ return l.status==='lost'; }).length;
     var pm = G.z.pass.filter(function(p){ return p.d.slice(0,7)===mk; }).length;
@@ -9566,10 +9658,8 @@ details.zmore[open]{padding-bottom:12px}
   function zTrend(mk){
     var ms = [], i, mx = 1; for(i=11;i>=0;i--) ms.push(gMonthAdd(mk,-i));
     var data = ms.map(function(m){ var f = zFeeSum(m), o = zIncSum(m); mx = Math.max(mx,f+o); return {m:m,f:f,o:o}; });
-    var bw = 20, gap = 5, W = ms.length*(bw+gap);
-    var bars = data.map(function(d,ix){ var x = ix*(bw+gap)+2, h1 = Math.round(d.f/mx*84), h2 = Math.round(d.o/mx*84), lbl = new Date(+d.m.slice(0,4),+d.m.slice(5,7)-1,1).toLocaleDateString('en-IN',{month:'short'}).slice(0,3);
-      return '<rect x="'+x+'" y="'+(92-h1)+'" width="'+bw+'" height="'+h1+'" rx="2" fill="#E9C05A"><title>'+lbl+' fees '+gMoney(d.f)+'</title></rect><rect x="'+x+'" y="'+(92-h1-h2)+'" width="'+bw+'" height="'+h2+'" rx="2" fill="#7FB3E8"><title>'+lbl+' other '+gMoney(d.o)+'</title></rect><text x="'+(x+bw/2)+'" y="106" text-anchor="middle" font-size="8" fill="#A89868">'+lbl+'</text>'; }).join('');
-    return '<svg viewBox="0 0 '+(W+4)+' 110" class="gchart" role="img" aria-label="Income for the last 12 months"><line x1="0" x2="'+(W+4)+'" y1="92" y2="92" stroke="#3A3118"/>'+bars+'</svg><div class="glegend"><span><i style="background:#E9C05A"></i>Membership fees</span><span><i style="background:#7FB3E8"></i>PT, store, lockers, passes</span></div>';
+    var lbl = function(m){ return new Date(+m.slice(0,4),+m.slice(5,7)-1,1).toLocaleDateString('en-IN',{month:'short'}).slice(0,3); };
+    return '<div class="ztr" role="img" aria-label="Income for the last 12 months">'+data.map(function(d){ return '<div title="'+lbl(d.m)+': fees '+gMoney(d.f)+', other '+gMoney(d.o)+'">'+(d.o?'<i class="o" style="height:'+(d.o/mx*100).toFixed(1)+'%"></i>':'')+'<i style="height:'+(d.f/mx*100).toFixed(1)+'%'+(d.o?';border-radius:0':'')+'"></i></div>'; }).join('')+'</div><div class="ztrx">'+data.map(function(d){ return '<span class="'+(d.m===mk?'on':'')+'">'+lbl(d.m)+'</span>'; }).join('')+'</div><div class="glegend"><span><i style="background:var(--gold)"></i>Membership fees</span><span><i style="background:#7FB3E8"></i>PT, store, lockers, passes</span></div>';
   }
   function zHeat(){
     var grid = [], i, j, mx = 0, cut = gK(new Date(gToday().getTime()-30*86400000)), H0 = 5, H1 = 23;
