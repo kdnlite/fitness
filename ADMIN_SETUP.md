@@ -12,15 +12,18 @@ Do the steps in order. Everything is in the Cloudflare dashboard unless it says 
 4. **Workers & Pages → your kdnfitness Pages project → Settings → Bindings → Add → D1 database**
    Variable name `DB`, database `kdn-admin`. Add it for **Production**.
 
-## 2. Lock /admin with Cloudflare Access (login)
-1. Cloudflare → **Zero Trust** (pick the Free plan if asked; choose a team name, e.g. `kdnfitness`).
-2. **Access → Applications → Add → Self-hosted**.
-   - Name: `KDN Admin`
-   - Domain: `kdnfitness.com`, path: `admin`
-   - Policy: **Allow**, Include → **Emails** → your email (e.g. kabirdiwaan7@gmail.com)
-   - Login method: One-time PIN (email code).
-3. After saving, open the application → copy the **Application Audience (AUD) Tag**.
-4. Your team domain is `<team-name>.cloudflareaccess.com` (Zero Trust → Settings → Custom pages / Team domain).
+## 2. Admin login (username + password)
+The login page at /admin checks the username and password you save in Cloudflare.
+They are **not** written in this repo (the repo is public).
+
+Pages project → **Settings → Variables and Secrets** (Production) → add:
+- `ADMIN_USERNAME` = your username (Text)
+- `ADMIN_PASSWORD` = your password (**Secret** — click Encrypt)
+
+5 wrong tries from one device lock login for 15 minutes. You stay logged in for 7 days unless you tap **Log out**.
+To change the password, edit `ADMIN_PASSWORD` and redeploy; this also logs out every device.
+
+(Optional, extra lock: Cloudflare Zero Trust → Access → self-hosted app on `kdnfitness.com/admin`, then set `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD`, `ADMIN_EMAILS`. Not needed for normal use.)
 
 ## 3. Sending mail (Resend)
 1. Sign up at resend.com → **Domains → Add** `kdnfitness.com` → it shows DNS records.
@@ -32,9 +35,8 @@ Pages project → **Settings → Variables and Secrets** (Production). Add:
 
 | Name | Value | Type |
 |---|---|---|
-| `ACCESS_TEAM_DOMAIN` | `kdnfitness.cloudflareaccess.com` (your team) | Text |
-| `ACCESS_AUD` | AUD tag from step 2 | Secret |
-| `ADMIN_EMAILS` | your email (comma-separate for more) | Text |
+| `ADMIN_USERNAME` | your admin username | Text |
+| `ADMIN_PASSWORD` | your admin password | Secret |
 | `RESEND_API_KEY` | key from step 3 | Secret |
 | `MAIL_FROM` | `KDN Fitness <support@kdnfitness.com>` | Text |
 | `RAZORPAY_WEBHOOK_SECRET` | any long random text (same as step 6) | Secret |

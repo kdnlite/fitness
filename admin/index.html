@@ -140,13 +140,19 @@ main{max-width:880px;margin:0 auto;padding:16px 16px calc(var(--tabh) + 32px + e
 .toast.bad{background:var(--bad);color:#fff}
 
 /* gate */
-.gate{max-width:520px;margin:12vh auto 0;padding:0 20px;display:grid;gap:12px}
-.gate h1{font-size:1.8rem}
+.gate{max-width:400px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 12vh) 20px 40px;display:grid;gap:14px}
+.gate h1{font-size:2rem;font-weight:800}
+.gate .mark{font-size:1.6rem}
+.gate .f{margin-top:6px}
+.gate .btn{width:100%;padding:12px 16px;font-size:1.05rem}
+.pw{position:relative}
+.pw input{padding-right:64px}
+.pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--accent);font-weight:700;font-size:.88rem;padding:6px 8px;cursor:pointer}
 @media (prefers-reduced-motion:no-preference){.sheet-in{animation:up .18s ease-out}@keyframes up{from{transform:translateY(14px);opacity:.6}}}
 </style>
 </head>
 <body>
-<header class="top"><div class="top-in"><span class="mark" aria-label="KDN">KDN</span><h1 id="title">Inbox</h1><span class="who" id="who"></span></div></header>
+<header class="top"><div class="top-in"><span class="mark" aria-label="KDN">KDN</span><h1 id="title">Inbox</h1><span class="who" id="who"></span><button class="btn quiet sm" id="logout" hidden>Log out</button></div></header>
 
 <main id="main" aria-live="polite">
   <div class="stats" id="stats" hidden></div>
@@ -198,7 +204,7 @@ function api(path, opts){
   if(opts.body !== undefined){ init.headers['content-type'] = 'application/json'; init.body = JSON.stringify(opts.body); }
   return fetch('/admin/api/' + path, init).then(function(r){
     return r.json().catch(function(){ return {error:'Unexpected reply from the server ('+r.status+').'}; }).then(function(j){
-      if(r.status === 401){ gate(j.error); throw new Error(j.error); }
+      if(r.status === 401 && path !== 'login'){ gate(j); throw new Error(j.error); }
       if(!r.ok) throw new Error(j.error || ('Error ' + r.status));
       return j;
     });
@@ -206,10 +212,34 @@ function api(path, opts){
 }
 function fail(e){ toast(e.message || String(e), true); }
 
-function gate(msg){
-  $('main').hidden = true; document.querySelector('.tabs').hidden = true;
+function gate(j){
+  j = j || {};
+  closeSheet();
+  $('main').hidden = true; document.querySelector('.tabs').hidden = true; document.querySelector('.top').hidden = true;
   var g = $('gate'); g.hidden = false;
-  g.innerHTML = '<span class="mark">KDN</span><h1>Admin is locked</h1><p>' + esc(msg || 'Sign in to continue.') + '</p><p class="note">Open this page again at kdnfitness.com/admin and sign in with your admin email.</p><div><button class="btn" onclick="location.reload()">Reload</button></div>';
+  if(j.login && j.configured === false){
+    g.innerHTML = '<span class="mark">KDN</span><h1>Admin login is not set up</h1><p>Add ADMIN_USERNAME and ADMIN_PASSWORD in Cloudflare (Pages project → Settings → Variables and Secrets), then redeploy.</p>';
+    return;
+  }
+  if(!j.login){
+    g.innerHTML = '<span class="mark">KDN</span><h1>Admin is unavailable</h1><p>' + esc(j.error || 'Try again in a moment.') + '</p><div><button class="btn" onclick="location.reload()">Reload</button></div>';
+    return;
+  }
+  g.innerHTML = '<span class="mark">KDN</span><h1>Admin login</h1>' +
+    '<form class="f" id="lf" novalidate><label>Username<input name="username" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" required></label>' +
+    '<label>Password<span class="pw"><input name="password" type="password" autocomplete="current-password" required><button type="button" id="pwt" aria-label="Show password">Show</button></span></label>' +
+    '<p class="err" id="lerr" role="alert" hidden></p><button class="btn" type="submit">Log in</button></form>';
+  var f = $('lf'); f.username.focus();
+  $('pwt').onclick = function(){ var show = f.password.type === 'password'; f.password.type = show ? 'text' : 'password'; this.textContent = show ? 'Hide' : 'Show'; this.setAttribute('aria-label', show ? 'Hide password' : 'Show password'); };
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var err = $('lerr'), btn = f.querySelector('[type=submit]');
+    if(!f.username.value.trim() || !f.password.value){ err.hidden = false; err.textContent = 'Enter your username and password.'; return; }
+    busy(btn, true, 'Logging in…'); err.hidden = true;
+    api('login', {method:'POST', body:{username:f.username.value, password:f.password.value}})
+      .then(function(){ location.reload(); })
+      .catch(function(x){ busy(btn, false); err.hidden = false; err.textContent = x.message; f.password.value = ''; f.password.focus(); });
+  });
 }
 
 /* ---------- sheet ---------- */
@@ -523,7 +553,8 @@ function siteView(){
 
 /* ---------- start ---------- */
 api('me').then(function(me){
-  state.me = me; $('who').textContent = me.email;
+  state.me = me; $('who').textContent = me.email; var lo = $('logout'); lo.hidden = false;
+  lo.onclick = function(){ api('logout',{method:'POST'}).then(function(){ location.reload(); }).catch(function(){ location.reload(); }); };
   loadStats();
   var h = (location.hash || '').slice(1);
   go(TITLES[h] ? h : 'mail');
