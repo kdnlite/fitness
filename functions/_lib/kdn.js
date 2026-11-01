@@ -70,7 +70,7 @@ export function mailHtml(text) {
 
 // Send through Resend and log it in the messages table.
 export function mailReady(env) {
-  return !!(env.SMTP_PASSWORD || env.RESEND_API_KEY);
+  return !!(String(env.RESEND_API_KEY || '').trim() || env.SMTP_PASSWORD);
 }
 
 // Send from support@kdnfitness.com and log it in the messages table.
@@ -81,12 +81,14 @@ export async function sendMail(env, { to, subject, text, inReplyTo, references }
   const user = env.SMTP_USER || 'support@kdnfitness.com';
   let status = 'sent', error = null, messageId = null;
   try {
-    if (env.RESEND_API_KEY) {
+    const resendKey = String(env.RESEND_API_KEY || '').replace(/\s+/g, '');
+    if (resendKey) {
+      if (!/^re_[A-Za-z0-9_]+$/.test(resendKey)) throw new Error('RESEND_API_KEY in Cloudflare does not look like a Resend key (it should start with re_). Paste the key again.');
       const headers = {};
       if (inReplyTo) { headers['In-Reply-To'] = inReplyTo; headers['References'] = references || inReplyTo; }
       const r = await fetch('https://api.resend.com/emails', {
         method: 'POST',
-        headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
+        headers: { authorization: `Bearer ${resendKey}`, 'content-type': 'application/json' },
         body: JSON.stringify({ from, to: [to], subject, text, html: mailHtml(text), reply_to: replyTo, headers }),
       });
       const out = await r.json().catch(() => ({}));
