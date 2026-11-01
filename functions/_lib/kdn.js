@@ -69,8 +69,30 @@ export function mailHtml(text) {
 }
 
 // Send through Resend and log it in the messages table.
-export function mailReady(env) {
-  return !!(String(env.RESEND_API_KEY || '').trim() || env.SMTP_PASSWORD);
+const RESEND_RE = /^re_[A-Za-z0-9_]{8,}$/;
+
+// The Resend key can come from Cloudflare (RESEND_API_KEY) or be pasted in the admin panel (stored in D1).
+export async function resendKey(env) {
+  const fromEnv = String(env.RESEND_API_KEY || '').replace(/\s+/g, '');
+  if (RESEND_RE.test(fromEnv)) return fromEnv;
+  if (env.DB) {
+    const row = await env.DB.prepare("SELECT value FROM settings WHERE key='resend_key'").first();
+    const k = row ? String(JSON.parse(row.value) || '') : '';
+    if (RESEND_RE.test(k)) return k;
+  }
+  return fromEnv ? 'invalid' : '';
+}
+
+export async function setResendKey(env, key) {
+  const k = String(key || '').replace(/\s+/g, '');
+  if (!RESEND_RE.test(k)) throw new Error('That is not a Resend key. It should start with re_ — copy it again from resend.com.');
+  await env.DB.prepare("INSERT INTO settings (key,value) VALUES ('resend_key',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").bind(JSON.stringify(k)).run();
+  return k;
+}
+
+export async function mailReady(env) {
+  const k = await resendKey(env);
+  return (k && k !== 'invalid') || !!env.SMTP_PASSWORD;
 }
 
 // Send from support@kdnfitness.com and log it in the messages table.
@@ -81,14 +103,14 @@ export async function sendMail(env, { to, subject, text, inReplyTo, references }
   const user = env.SMTP_USER || 'support@kdnfitness.com';
   let status = 'sent', error = null, messageId = null;
   try {
-    const resendKey = String(env.RESEND_API_KEY || '').replace(/\s+/g, '');
-    if (resendKey) {
-      if (!/^re_[A-Za-z0-9_]+$/.test(resendKey)) throw new Error('RESEND_API_KEY in Cloudflare does not look like a Resend key (it should start with re_). Paste the key again.');
+    const rkey = await resendKey(env);
+    if (rkey === 'invalid') throw new Error('The mail key is not valid. Open the Website tab and paste your Resend key (it starts with re_).');
+    if (rkey) {
       const headers = {};
       if (inReplyTo) { headers['In-Reply-To'] = inReplyTo; headers['References'] = references || inReplyTo; }
       const r = await fetch('https://api.resend.com/emails', {
         method: 'POST',
-        headers: { authorization: `Bearer ${resendKey}`, 'content-type': 'application/json' },
+        headers: { authorization: `Bearer ${rkey}`, 'content-type': 'application/json' },
         body: JSON.stringify({ from, to: [to], subject, text, html: mailHtml(text), reply_to: replyTo, headers }),
       });
       const out = await r.json().catch(() => ({}));
@@ -103,7 +125,7 @@ export async function sendMail(env, { to, subject, text, inReplyTo, references }
         connectFn: opts.connectFn || cloudflareConnect,
       });
     } else {
-      throw new Error('Sending is not set up yet: add RESEND_API_KEY in Cloudflare.');
+      throw new Error('Sending is not set up yet. Open the Website tab and paste your Resend key.');
     }
   } catch (e) {
     status = 'failed'; error = e && e.message ? e.message : String(e); messageId = null;

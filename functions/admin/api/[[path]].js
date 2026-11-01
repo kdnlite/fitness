@@ -1,5 +1,5 @@
 import {
-  json, bad, now, cleanEmail, PLANS, getContent, sendMail, activate, welcomeText, addMonths, mailReady,
+  json, bad, now, cleanEmail, PLANS, getContent, sendMail, activate, welcomeText, addMonths, mailReady, resendKey, setResendKey,
 } from '../../_lib/kdn.js';
 
 const DAY = 86400000;
@@ -22,7 +22,7 @@ export async function onRequest(ctx) {
   try {
     // ---------- who am I + dashboard ----------
     if (res === 'me' && m === 'GET') {
-      return json({ email: ctx.data.admin, mailReady: mailReady(env), razorpayReady: !!env.RAZORPAY_WEBHOOK_SECRET });
+      return json({ email: ctx.data.admin, mailReady: await mailReady(env), razorpayReady: !!env.RAZORPAY_WEBHOOK_SECRET });
     }
     if (res === 'stats' && m === 'GET') {
       const t = now();
@@ -217,6 +217,18 @@ export async function onRequest(ctx) {
     }
 
     // ---------- website content ----------
+    if (res === 'mailkey') {
+      if (m === 'GET') {
+        const k = await resendKey(env);
+        return json({ set: !!k && k !== 'invalid', hint: k && k !== 'invalid' ? k.slice(0, 6) + '…' + k.slice(-4) : null });
+      }
+      if (m === 'PUT') {
+        const b = await body(request);
+        try { const k = await setResendKey(env, b.key); return json({ set: true, hint: k.slice(0, 6) + '…' + k.slice(-4) }); }
+        catch (e) { return bad(e.message); }
+      }
+    }
+
     if (res === 'content') {
       if (m === 'GET') return json(await getContent(db));
       if (m === 'PUT') {
