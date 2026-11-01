@@ -74,22 +74,14 @@ export function mailReady(env) {
 }
 
 // Send from support@kdnfitness.com and log it in the messages table.
-// Preferred: the Hostinger mailbox over SMTP (SMTP_PASSWORD). Fallback: Resend (RESEND_API_KEY).
+// Preferred: Resend (RESEND_API_KEY). Fallback: an SMTP mailbox (SMTP_PASSWORD) that is not on Cloudflare's network.
 export async function sendMail(env, { to, subject, text, inReplyTo, references }, opts = {}) {
   const from = env.MAIL_FROM || 'KDN Fitness <support@kdnfitness.com>';
   const replyTo = env.MAIL_REPLY_TO || 'support@kdnfitness.com';
   const user = env.SMTP_USER || 'support@kdnfitness.com';
   let status = 'sent', error = null, messageId = null;
   try {
-    if (env.SMTP_PASSWORD) {
-      messageId = `<${crypto.randomUUID()}@kdnfitness.com>`;
-      const raw = buildMessage({ from, to, subject, text, html: mailHtml(text), replyTo, inReplyTo, references, messageId });
-      await smtpSend({
-        host: env.SMTP_HOST || 'smtp.hostinger.com', port: Number(env.SMTP_PORT || 465),
-        user, pass: env.SMTP_PASSWORD, from: user, to, raw,
-        connectFn: opts.connectFn || cloudflareConnect,
-      });
-    } else if (env.RESEND_API_KEY) {
+    if (env.RESEND_API_KEY) {
       const headers = {};
       if (inReplyTo) { headers['In-Reply-To'] = inReplyTo; headers['References'] = references || inReplyTo; }
       const r = await fetch('https://api.resend.com/emails', {
@@ -100,8 +92,16 @@ export async function sendMail(env, { to, subject, text, inReplyTo, references }
       const out = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(out.message || out.error || `Resend error ${r.status}`);
       messageId = out.id ? `resend-${out.id}` : null;
+    } else if (env.SMTP_PASSWORD) {
+      messageId = `<${crypto.randomUUID()}@kdnfitness.com>`;
+      const raw = buildMessage({ from, to, subject, text, html: mailHtml(text), replyTo, inReplyTo, references, messageId });
+      await smtpSend({
+        host: env.SMTP_HOST || 'smtp.hostinger.com', port: Number(env.SMTP_PORT || 465),
+        user, pass: env.SMTP_PASSWORD, from: user, to, raw,
+        connectFn: opts.connectFn || cloudflareConnect,
+      });
     } else {
-      throw new Error('Sending is not set up yet: add SMTP_PASSWORD (the support@kdnfitness.com mailbox password) in Cloudflare.');
+      throw new Error('Sending is not set up yet: add RESEND_API_KEY in Cloudflare.');
     }
   } catch (e) {
     status = 'failed'; error = e && e.message ? e.message : String(e); messageId = null;

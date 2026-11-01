@@ -560,7 +560,7 @@ api('me').then(function(me){
   loadStats();
   var h = (location.hash || '').slice(1);
   go(TITLES[h] ? h : 'mail');
-  if(!me.mailReady) toast('Sending is off until SMTP_PASSWORD (the support@ mailbox password) is added in Cloudflare.', true);
+  if(!me.mailReady) toast('Sending is off until RESEND_API_KEY is added in Cloudflare.', true);
   setInterval(function(){ if(document.visibilityState === 'visible'){ loadStats(); if(state.tab==='mail' && !document.querySelector('.sheet')) loadMail(); } }, 60000);
 }).catch(function(e){ gate({error:e.message}); });
 })();
