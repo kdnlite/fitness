@@ -1,4 +1,4 @@
-import { accessUser, bad, json } from '../../_lib/kdn.js';
+import { accessUser, bad, json, ensureSchema } from '../../_lib/kdn.js';
 import { loginConfigured, sessionUser, checkLogin, makeSessionCookie, clearSessionCookie, adminUsername } from '../../_lib/session.js';
 
 // Every /admin/api/* call needs a signed-in admin: username/password session cookie,
@@ -6,6 +6,7 @@ import { loginConfigured, sessionUser, checkLogin, makeSessionCookie, clearSessi
 export async function onRequest(ctx) {
   const { request, env } = ctx;
   if (!env.DB) return bad('Database is not connected: add a D1 binding named DB to this Pages project.', 500);
+  await ensureSchema(env.DB);
   const url = new URL(request.url);
   const route = url.pathname.replace(/^\/admin\/api\/?/, '').replace(/\/$/, '');
 

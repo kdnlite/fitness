@@ -165,3 +165,21 @@ export async function accessUser(request, env) {
   if (!allowed.includes(email)) return { error: `${email || 'This account'} is not an admin.` };
   return { email };
 }
+
+// Tables are created automatically on first use (same as db/schema.sql).
+const SCHEMA = [
+  "CREATE TABLE IF NOT EXISTS messages ( id INTEGER PRIMARY KEY AUTOINCREMENT, direction TEXT NOT NULL, message_id TEXT, in_reply_to TEXT, peer_email TEXT NOT NULL, peer_name TEXT, subject TEXT, text_body TEXT, html_body TEXT, attachments TEXT, is_read INTEGER NOT NULL DEFAULT 0, status TEXT, error TEXT, created_at INTEGER NOT NULL )",
+  "CREATE INDEX IF NOT EXISTS idx_messages_peer ON messages(peer_email, created_at)",
+  "CREATE INDEX IF NOT EXISTS idx_messages_dir ON messages(direction, created_at)",
+  "CREATE UNIQUE INDEX IF NOT EXISTS idx_messages_mid ON messages(message_id) WHERE message_id IS NOT NULL",
+  "CREATE TABLE IF NOT EXISTS users ( id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL UNIQUE, name TEXT, kdn_id TEXT NOT NULL UNIQUE, plan TEXT NOT NULL DEFAULT 'ind', status TEXT NOT NULL DEFAULT 'active', valid_until INTEGER, notes TEXT, created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL )",
+  "CREATE TABLE IF NOT EXISTS payments ( id INTEGER PRIMARY KEY AUTOINCREMENT, ref TEXT UNIQUE, source TEXT NOT NULL, email TEXT, plan TEXT, amount INTEGER NOT NULL, currency TEXT NOT NULL DEFAULT 'INR', status TEXT NOT NULL, method TEXT, coupon TEXT, note TEXT, created_at INTEGER NOT NULL )",
+  "CREATE INDEX IF NOT EXISTS idx_payments_time ON payments(created_at)",
+  "CREATE TABLE IF NOT EXISTS coupons ( code TEXT PRIMARY KEY, kind TEXT NOT NULL, value INTEGER NOT NULL, plan TEXT, max_uses INTEGER, used INTEGER NOT NULL DEFAULT 0, expires_at INTEGER, active INTEGER NOT NULL DEFAULT 1, note TEXT, created_at INTEGER NOT NULL )",
+  "CREATE TABLE IF NOT EXISTS settings ( key TEXT PRIMARY KEY, value TEXT NOT NULL )"
+];
+let schemaReady = null;
+export function ensureSchema(db) {
+  if (!schemaReady) schemaReady = db.batch(SCHEMA.map((s) => db.prepare(s))).catch((e) => { schemaReady = null; throw e; });
+  return schemaReady;
+}

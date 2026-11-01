@@ -1,4 +1,4 @@
-import { json, bad, now, cleanEmail, PLANS, getContent, sendMail, activate, welcomeText } from '../../_lib/kdn.js';
+import { json, bad, now, cleanEmail, PLANS, getContent, sendMail, activate, welcomeText, ensureSchema } from '../../_lib/kdn.js';
 
 // Razorpay -> Settings -> Webhooks: URL https://kdnfitness.com/api/razorpay/webhook,
 // events payment.captured, payment.failed, refund.processed; same secret as RAZORPAY_WEBHOOK_SECRET.
@@ -19,6 +19,7 @@ function safeEqual(a, b) {
 
 export async function onRequestPost({ request, env }) {
   if (!env.RAZORPAY_WEBHOOK_SECRET || !env.DB) return bad('Not configured', 503);
+  await ensureSchema(env.DB);
   const raw = await request.text();
   const sig = request.headers.get('x-razorpay-signature') || '';
   if (!safeEqual(await hmacHex(env.RAZORPAY_WEBHOOK_SECRET, raw), sig)) return bad('Bad signature', 401);

@@ -1,9 +1,10 @@
-import { json, bad } from '../../_lib/kdn.js';
+import { json, bad, ensureSchema } from '../../_lib/kdn.js';
 
 // Public: check a coupon code. POST {code, plan}. Does not use up the coupon;
 // a use is counted when the Razorpay payment (with notes.coupon) is captured.
 export async function onRequestPost({ request, env }) {
   if (!env.DB) return bad('Unavailable', 503);
+  await ensureSchema(env.DB);
   let b = {};
   try { b = await request.json(); } catch {}
   const code = String(b.code || '').trim().toLowerCase();

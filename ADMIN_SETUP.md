@@ -7,7 +7,7 @@ Do the steps in order. Everything is in the Cloudflare dashboard unless it says 
 
 ## 1. Database (D1)
 1. Cloudflare → **Storage & Databases → D1** → **Create** → name `kdn-admin`.
-2. Open it → **Console** → paste the whole of `db/schema.sql` → **Execute**.
+2. Tables are created automatically on the first visit to /admin (no Console step needed).
 3. Copy the **Database ID** (needed in step 5).
 4. **Workers & Pages → your kdnfitness Pages project → Settings → Bindings → Add → D1 database**
    Variable name `DB`, database `kdn-admin`. Add it for **Production**.
