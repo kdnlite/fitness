@@ -203,7 +203,7 @@ function api(path, opts){
   var init = {method: opts.method || 'GET', headers:{}, credentials:'same-origin'};
   if(opts.body !== undefined){ init.headers['content-type'] = 'application/json'; init.body = JSON.stringify(opts.body); }
   return fetch('/admin/api/' + path, init).then(function(r){
-    return r.json().catch(function(){ return {error:'The admin server is not running on this site yet (reply ' + r.status + '). The site must be served by Cloudflare Pages with the functions folder deployed.', noServer:true}; }).then(function(j){
+    return r.json().catch(function(){ return {error: r.status === 404 ? 'The admin server is not running on this site yet (reply 404).' : 'The server had a problem (reply ' + r.status + '). Try again in a minute.', noServer:true}; }).then(function(j){
       if(r.status === 401 && path !== 'login'){ gate(j); throw new Error(j.error); }
       if(!r.ok) throw new Error(j.error || ('Error ' + r.status));
       return j;
@@ -560,7 +560,7 @@ api('me').then(function(me){
   loadStats();
   var h = (location.hash || '').slice(1);
   go(TITLES[h] ? h : 'mail');
-  if(!me.mailReady) toast('Sending is off until RESEND_API_KEY is added in Cloudflare.', true);
+  if(!me.mailReady) toast('Sending is off until SMTP_PASSWORD (the support@ mailbox password) is added in Cloudflare.', true);
   setInterval(function(){ if(document.visibilityState === 'visible'){ loadStats(); if(state.tab==='mail' && !document.querySelector('.sheet')) loadMail(); } }, 60000);
 }).catch(function(e){ gate({error:e.message}); });
 })();

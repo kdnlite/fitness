@@ -25,10 +25,10 @@ To change the password, edit `ADMIN_PASSWORD` and redeploy; this also logs out e
 
 (Optional, extra lock: Cloudflare Zero Trust → Access → self-hosted app on `kdnfitness.com/admin`, then set `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD`, `ADMIN_EMAILS`. Not needed for normal use.)
 
-## 3. Sending mail (Resend)
-1. Sign up at resend.com → **Domains → Add** `kdnfitness.com` → it shows DNS records.
-2. Add those records in Cloudflare DNS (they are on `send.` and `resend._domainkey`, so Hostinger mail keeps working). Wait until Resend says **Verified**.
-3. Resend → **API Keys → Create** (Sending access) → copy the key.
+## 3. Sending mail
+Mail is sent straight from the Hostinger mailbox support@kdnfitness.com (SMTP, smtp.hostinger.com:465).
+Add one **Secret** in the Pages project: `SMTP_PASSWORD` = the support@kdnfitness.com mailbox password, then redeploy.
+(Optional alternative: Resend with `RESEND_API_KEY`; SMTP is used when both are set.)
 
 ## 4. Pages project variables
 Pages project → **Settings → Variables and Secrets** (Production). Add:
@@ -37,7 +37,7 @@ Pages project → **Settings → Variables and Secrets** (Production). Add:
 |---|---|---|
 | `ADMIN_USERNAME` | your admin username | Text |
 | `ADMIN_PASSWORD` | your admin password | Secret |
-| `RESEND_API_KEY` | key from step 3 | Secret |
+| `SMTP_PASSWORD` | support@kdnfitness.com mailbox password | Secret |
 | `MAIL_FROM` | `KDN Fitness <support@kdnfitness.com>` | Text |
 | `RAZORPAY_WEBHOOK_SECRET` | any long random text (same as step 6) | Secret |
 

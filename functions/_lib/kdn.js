@@ -1,3 +1,4 @@
+import { buildMessage, smtpSend, cloudflareConnect } from './smtp.js';
 // Shared helpers for KDN Fitness Pages Functions.
 
 export const PLANS = { ind: 'Individual', fam: 'Family', gym: 'Gym' };
@@ -68,23 +69,42 @@ export function mailHtml(text) {
 }
 
 // Send through Resend and log it in the messages table.
-export async function sendMail(env, { to, subject, text, inReplyTo, references }) {
+export function mailReady(env) {
+  return !!(env.SMTP_PASSWORD || env.RESEND_API_KEY);
+}
+
+// Send from support@kdnfitness.com and log it in the messages table.
+// Preferred: the Hostinger mailbox over SMTP (SMTP_PASSWORD). Fallback: Resend (RESEND_API_KEY).
+export async function sendMail(env, { to, subject, text, inReplyTo, references }, opts = {}) {
   const from = env.MAIL_FROM || 'KDN Fitness <support@kdnfitness.com>';
   const replyTo = env.MAIL_REPLY_TO || 'support@kdnfitness.com';
-  const headers = {};
-  if (inReplyTo) { headers['In-Reply-To'] = inReplyTo; headers['References'] = references || inReplyTo; }
+  const user = env.SMTP_USER || 'support@kdnfitness.com';
   let status = 'sent', error = null, messageId = null;
-  if (!env.RESEND_API_KEY) {
-    status = 'failed'; error = 'RESEND_API_KEY is not set';
-  } else {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ from, to: [to], subject, text, html: mailHtml(text), reply_to: replyTo, headers }),
-    });
-    const out = await r.json().catch(() => ({}));
-    if (!r.ok) { status = 'failed'; error = out.message || out.error || `Resend error ${r.status}`; }
-    else messageId = out.id ? `resend-${out.id}` : null;
+  try {
+    if (env.SMTP_PASSWORD) {
+      messageId = `<${crypto.randomUUID()}@kdnfitness.com>`;
+      const raw = buildMessage({ from, to, subject, text, html: mailHtml(text), replyTo, inReplyTo, references, messageId });
+      await smtpSend({
+        host: env.SMTP_HOST || 'smtp.hostinger.com', port: Number(env.SMTP_PORT || 465),
+        user, pass: env.SMTP_PASSWORD, from: user, to, raw,
+        connectFn: opts.connectFn || cloudflareConnect,
+      });
+    } else if (env.RESEND_API_KEY) {
+      const headers = {};
+      if (inReplyTo) { headers['In-Reply-To'] = inReplyTo; headers['References'] = references || inReplyTo; }
+      const r = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
+        body: JSON.stringify({ from, to: [to], subject, text, html: mailHtml(text), reply_to: replyTo, headers }),
+      });
+      const out = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(out.message || out.error || `Resend error ${r.status}`);
+      messageId = out.id ? `resend-${out.id}` : null;
+    } else {
+      throw new Error('Sending is not set up yet: add SMTP_PASSWORD (the support@kdnfitness.com mailbox password) in Cloudflare.');
+    }
+  } catch (e) {
+    status = 'failed'; error = e && e.message ? e.message : String(e); messageId = null;
   }
   const res = await env.DB.prepare(
     `INSERT INTO messages (direction,message_id,in_reply_to,peer_email,subject,text_body,html_body,is_read,status,error,created_at)

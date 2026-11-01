@@ -1,5 +1,5 @@
 import {
-  json, bad, now, cleanEmail, PLANS, getContent, sendMail, activate, welcomeText, addMonths,
+  json, bad, now, cleanEmail, PLANS, getContent, sendMail, activate, welcomeText, addMonths, mailReady,
 } from '../../_lib/kdn.js';
 
 const DAY = 86400000;
@@ -22,7 +22,7 @@ export async function onRequest(ctx) {
   try {
     // ---------- who am I + dashboard ----------
     if (res === 'me' && m === 'GET') {
-      return json({ email: ctx.data.admin, mailReady: !!env.RESEND_API_KEY, razorpayReady: !!env.RAZORPAY_WEBHOOK_SECRET });
+      return json({ email: ctx.data.admin, mailReady: mailReady(env), razorpayReady: !!env.RAZORPAY_WEBHOOK_SECRET });
     }
     if (res === 'stats' && m === 'GET') {
       const t = now();
@@ -88,7 +88,7 @@ export async function onRequest(ctx) {
         if (orig?.message_id && !orig.message_id.startsWith('resend-')) inReplyTo = orig.message_id;
       }
       const r = await sendMail(env, { to, subject, text, inReplyTo });
-      return r.ok ? json({ ok: true, id: r.id }) : bad(`Not sent: ${r.error}`, 502);
+      return r.ok ? json({ ok: true, id: r.id }) : bad(`Not sent: ${r.error}`, 422);
     }
 
     // ---------- users ----------
