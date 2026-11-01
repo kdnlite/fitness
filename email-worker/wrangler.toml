@@ -1,0 +1,9 @@
+name = "kdn-inbox"
+main = "src/index.js"
+compatibility_date = "2026-06-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "kdn-admin"
+# Paste the Database ID from Cloudflare -> D1 -> kdn-admin here:
+database_id = "PASTE-D1-DATABASE-ID-HERE"

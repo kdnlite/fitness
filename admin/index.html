@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121418" media="(prefers-color-scheme: dark)">
+<title>KDN Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#F3F5F8; --line:#E1E6ED; --fg:#14202B; --muted:#5D6B78;
+  --accent:#1D4ED8; --accent-soft:#E8EEFC; --gold:#A87A1E; --gold-soft:#F7EFDD;
+  --ok:#1F7A55; --ok-soft:#E3F3EA; --bad:#B42318; --bad-soft:#FCE9E7; --warn:#8A5200; --warn-soft:#FDF1DC;
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:12px; --tabh:64px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#121418;--surface:#1B1E24;--line:#2B3039;--fg:#ECEFF3;--muted:#9AA5B1;--accent:#7EA2FF;--accent-soft:#1E2A47;
+    --gold:#E0B85A;--gold-soft:#2E2718;--ok:#5BC694;--ok-soft:#163026;--bad:#FF8A80;--bad-soft:#3A1D1B;--warn:#F0B35A;--warn-soft:#33281A;color-scheme:dark}
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.15;letter-spacing:-.01em}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 10px) 16px 10px}
+.top-in{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.mark{font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:.06em;color:var(--gold)}
+.top h1{font-size:1.25rem;font-weight:800;flex:1;min-width:0}
+.who{font-size:.8rem;color:var(--muted);max-width:40vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+main{max-width:880px;margin:0 auto;padding:16px 16px calc(var(--tabh) + 32px + env(safe-area-inset-bottom))}
+
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:18px}
+.stats div{background:var(--bg);padding:10px 12px}
+.stats b{display:block;font-family:var(--display);font-size:1.35rem;font-weight:800}
+.stats span{font-size:.78rem;color:var(--muted)}
+@media (max-width:520px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* bottom tabs */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.tabs-in{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);height:var(--tabh)}
+.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:.74rem;color:var(--muted);cursor:pointer;position:relative}
+.tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabs button[aria-current="page"]{color:var(--accent);font-weight:700}
+.badge{position:absolute;top:8px;left:calc(50% + 6px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--bad);color:#fff;font-size:.68rem;font-weight:700;display:grid;place-items:center}
+
+/* toolbar */
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.seg{display:inline-flex;background:var(--surface);border-radius:10px;padding:3px}
+.seg button{border:0;background:none;padding:7px 12px;border-radius:8px;font-size:.88rem;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--bg);color:var(--fg);font-weight:700;box-shadow:0 0 0 1px var(--line)}
+.search{flex:1;min-width:160px;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 12px;font-size:16px}
+.btn{border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;white-space:nowrap}
+@media (prefers-color-scheme: dark){.btn{color:#0E1630}}
+.btn.quiet{background:var(--bg);color:var(--accent);border-color:var(--line)}
+.btn.danger{background:var(--bg);color:var(--bad);border-color:var(--line)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.sm{padding:6px 11px;font-size:.85rem}
+
+/* lists */
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:start;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.row:hover{background:var(--surface)}
+.row .dot{width:9px;height:9px;border-radius:50%;margin-top:7px;background:transparent}
+.row.unread .dot{background:var(--accent)}
+.row.unread .t1{font-weight:700}
+.t1{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t2{grid-column:2/4;font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.t3{grid-column:2/4;font-size:.85rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.when{font-size:.8rem;color:var(--muted);white-space:nowrap}
+.pill{display:inline-block;font-size:.75rem;font-weight:700;border-radius:999px;padding:2px 9px;vertical-align:1px}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.gold{background:var(--gold-soft);color:var(--gold)}
+.pill.mute{background:var(--surface);color:var(--muted)}
+.empty{padding:40px 12px;text-align:center;color:var(--muted)}
+.empty h3{color:var(--fg);margin-bottom:6px;font-size:1.1rem}
+.more{display:block;margin:14px auto 0}
+
+/* sheet */
+.sheet{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column}
+@media (min-width:760px){.sheet{background:rgba(10,14,20,.45)}.sheet-in{margin:4vh auto;width:720px;max-height:92vh;border-radius:16px}}
+.sheet-in{background:var(--bg);display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+@media (min-width:760px){.sheet-in{flex:0 1 auto}}
+.sh-hd{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top) + 10px) 12px 10px;border-bottom:1px solid var(--line)}
+@media (min-width:760px){.sh-hd{padding-top:10px}}
+.sh-hd h2{flex:1;font-size:1.1rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.x{border:0;background:var(--surface);width:38px;height:38px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
+.x svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none}
+.sh-bd{flex:1;overflow:auto;padding:16px;-webkit-overflow-scrolling:touch}
+.sh-ft{border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+
+/* forms */
+.f{display:grid;gap:14px}
+.f label{display:grid;gap:5px;font-size:.88rem;font-weight:700}
+.f label small{font-weight:400;color:var(--muted)}
+.f input,.f select,.f textarea{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:10px 12px;font-size:16px;font-weight:400;width:100%}
+.f textarea{min-height:140px;resize:vertical;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.check{display:flex!important;grid-template-columns:none;align-items:center;gap:10px;font-weight:500!important}
+.check input{width:20px;height:20px}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.err{color:var(--bad);font-size:.9rem}
+
+/* thread */
+.msg{border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.msg.out{border-color:var(--accent-soft);background:color-mix(in srgb,var(--accent-soft) 45%,var(--bg))}
+.msg-hd{display:flex;justify-content:space-between;gap:8px;padding:9px 12px;font-size:.85rem;color:var(--muted);border-bottom:1px solid var(--line)}
+.msg-hd b{color:var(--fg)}
+.msg-bd{padding:12px;white-space:pre-wrap;word-break:break-word}
+.msg iframe{width:100%;border:0;display:block;background:#fff;min-height:120px}
+.att{padding:0 12px 10px;font-size:.85rem;color:var(--muted)}
+.cust{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--gold-soft);border-radius:var(--r);padding:10px 12px;margin-bottom:14px;font-size:.9rem}
+.reply textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:90px;font-size:16px;background:var(--bg);resize:vertical}
+.reply .acts{margin-top:8px;justify-content:flex-end}
+
+/* key/value */
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0 0 16px;font-size:.92rem}
+.kv dt{color:var(--muted)} .kv dd{margin:0;font-weight:500;word-break:break-word}
+.sec{margin-top:22px}
+.sec h3{font-size:1rem;margin-bottom:8px}
+
+/* plan editor */
+.plan{border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:10px}
+.plan h3{font-size:1.05rem}
+.note{font-size:.88rem;color:var(--muted)}
+.warnbox{background:var(--warn-soft);color:var(--warn);border-radius:var(--r);padding:10px 12px;font-size:.9rem;margin-bottom:14px}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(var(--tabh) + 16px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:.92rem;z-index:80;max-width:calc(100vw - 32px)}
+.toast.bad{background:var(--bad);color:#fff}
+
+/* gate */
+.gate{max-width:520px;margin:12vh auto 0;padding:0 20px;display:grid;gap:12px}
+.gate h1{font-size:1.8rem}
+@media (prefers-reduced-motion:no-preference){.sheet-in{animation:up .18s ease-out}@keyframes up{from{transform:translateY(14px);opacity:.6}}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in"><span class="mark" aria-label="KDN">KDN</span><h1 id="title">Inbox</h1><span class="who" id="who"></span></div></header>
+
+<main id="main" aria-live="polite">
+  <div class="stats" id="stats" hidden></div>
+  <div id="view"></div>
+</main>
+
+<div class="gate" id="gate" hidden></div>
+
+<nav class="tabs" aria-label="Sections"><div class="tabs-in" id="tabs">
+  <button data-tab="mail" aria-current="page"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Inbox<span class="badge" id="unread" hidden></span></button>
+  <button data-tab="users"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2.2.6 3.5 2.6 3.5 6"/></svg>Users</button>
+  <button data-tab="pay"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 10h19M6.5 15h4"/></svg>Payments</button>
+  <button data-tab="coupons"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 2"/></svg>Coupons</button>
+  <button data-tab="site"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h10"/></svg>Website</button>
+</div></nav>
+
+<script>
+(function(){
+'use strict';
+var $ = function(id){ return document.getElementById(id); };
+var PLANS = {ind:'Individual', fam:'Family', gym:'Gym'};
+var state = {tab:'mail', box:'in', q:'', page:0, ufilter:'all', me:null};
+var TITLES = {mail:'Inbox', users:'Users', pay:'Payments', coupons:'Coupons', site:'Website'};
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+var TZ = 'Asia/Kolkata';
+function dShort(ms){
+  if(!ms) return '';
+  var d = new Date(ms), n = new Date();
+  var same = d.toLocaleDateString('en-IN',{timeZone:TZ}) === n.toLocaleDateString('en-IN',{timeZone:TZ});
+  return same ? d.toLocaleTimeString('en-IN',{timeZone:TZ,hour:'numeric',minute:'2-digit'})
+              : d.toLocaleDateString('en-IN',{timeZone:TZ,day:'numeric',month:'short'});
+}
+function dLong(ms){ return ms ? new Date(ms).toLocaleString('en-IN',{timeZone:TZ,day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit'}) : '—'; }
+function dDate(ms){ return ms ? new Date(ms).toLocaleDateString('en-IN',{timeZone:TZ,day:'numeric',month:'short',year:'numeric'}) : '—'; }
+function isoDay(ms){ return ms ? new Date(ms + 5.5*3600000).toISOString().slice(0,10) : ''; }
+function rupees(paise){ return '₹' + (Math.round(paise)/100).toLocaleString('en-IN',{maximumFractionDigits:2}); }
+
+var toastT;
+function toast(msg, bad){
+  var t = document.querySelector('.toast'); if(t) t.remove();
+  t = document.createElement('div'); t.className = 'toast' + (bad?' bad':''); t.setAttribute('role','status'); t.textContent = msg;
+  document.body.appendChild(t); clearTimeout(toastT); toastT = setTimeout(function(){ t.remove(); }, bad?5000:2600);
+}
+
+function api(path, opts){
+  opts = opts || {};
+  var init = {method: opts.method || 'GET', headers:{}, credentials:'same-origin'};
+  if(opts.body !== undefined){ init.headers['content-type'] = 'application/json'; init.body = JSON.stringify(opts.body); }
+  return fetch('/admin/api/' + path, init).then(function(r){
+    return r.json().catch(function(){ return {error:'Unexpected reply from the server ('+r.status+').'}; }).then(function(j){
+      if(r.status === 401){ gate(j.error); throw new Error(j.error); }
+      if(!r.ok) throw new Error(j.error || ('Error ' + r.status));
+      return j;
+    });
+  });
+}
+function fail(e){ toast(e.message || String(e), true); }
+
+function gate(msg){
+  $('main').hidden = true; document.querySelector('.tabs').hidden = true;
+  var g = $('gate'); g.hidden = false;
+  g.innerHTML = '<span class="mark">KDN</span><h1>Admin is locked</h1><p>' + esc(msg || 'Sign in to continue.') + '</p><p class="note">Open this page again at kdnfitness.com/admin and sign in with your admin email.</p><div><button class="btn" onclick="location.reload()">Reload</button></div>';
+}
+
+/* ---------- sheet ---------- */
+function sheet(title, bodyHtml, footHtml){
+  closeSheet();
+  var s = document.createElement('div'); s.className = 'sheet'; s.setAttribute('role','dialog'); s.setAttribute('aria-modal','true'); s.setAttribute('aria-label', title);
+  s.innerHTML = '<div class="sheet-in"><div class="sh-hd"><button class="x" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button><h2>' + esc(title) + '</h2></div><div class="sh-bd">' + bodyHtml + '</div>' + (footHtml?'<div class="sh-ft">'+footHtml+'</div>':'') + '</div>';
+  s.addEventListener('click', function(e){ if(e.target === s || e.target.closest('[data-close]')) closeSheet(); });
+  document.body.appendChild(s); document.body.style.overflow = 'hidden';
+  var f = s.querySelector('input,textarea,select');
+  (f && window.innerWidth > 760 ? f : s.querySelector('.x')).focus();
+  return s;
+}
+function closeSheet(){ var s = document.querySelector('.sheet'); if(s){ s.remove(); document.body.style.overflow = ''; } }
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeSheet(); });
+
+function formData(form){
+  var o = {};
+  Array.prototype.forEach.call(form.elements, function(el){
+    if(!el.name) return;
+    o[el.name] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+  return o;
+}
+function busy(btn, on, label){ if(!btn) return; btn.disabled = on; if(on){ btn.dataset.l = btn.textContent; btn.textContent = label || 'Working…'; } else if(btn.dataset.l){ btn.textContent = btn.dataset.l; } }
+
+/* ---------- stats ---------- */
+function loadStats(){
+  return api('stats').then(function(s){
+    var st = $('stats'); st.hidden = false;
+    st.innerHTML = '<div><b>'+s.unread+'</b><span>Unread mails</span></div><div><b>'+s.active+'</b><span>Active members</span></div>' +
+      '<div><b>'+s.expiringSoon+'</b><span>Ending in 7 days</span></div><div><b>'+rupees(s.monthRevenue)+'</b><span>This month, '+s.monthPayments+' paid</span></div>';
+    var b = $('unread'); b.hidden = !s.unread; b.textContent = s.unread > 99 ? '99+' : s.unread;
+  }).catch(function(){});
+}
+
+/* ---------- tabs ---------- */
+$('tabs').addEventListener('click', function(e){
+  var b = e.target.closest('button[data-tab]'); if(!b) return;
+  go(b.dataset.tab);
+});
+function go(tab){
+  state.tab = tab; state.q = ''; state.page = 0;
+  Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function(b){ if(b.dataset.tab === tab) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
+  $('title').textContent = TITLES[tab];
+  try{ history.replaceState(null,'','#'+tab); }catch(e){}
+  ({mail:mailView, users:usersView, pay:payView, coupons:couponsView, site:siteView})[tab]();
+}
+
+function searchBox(ph){ return '<input class="search" type="search" id="q" placeholder="'+esc(ph)+'" value="'+esc(state.q)+'" aria-label="'+esc(ph)+'">'; }
+function bindSearch(fn){
+  var t; var q = $('q'); if(!q) return;
+  q.addEventListener('input', function(){ clearTimeout(t); t = setTimeout(function(){ state.q = q.value; state.page = 0; fn(); }, 300); });
+}
+
+/* ================= MAIL ================= */
+function mailView(){
+  $('view').innerHTML = '<div class="bar"><div class="seg" id="box">' +
+    [['in','Inbox'],['unread','Unread'],['out','Sent']].map(function(x){ return '<button data-box="'+x[0]+'" aria-pressed="'+(state.box===x[0])+'">'+x[1]+'</button>'; }).join('') +
+    '</div>' + searchBox('Search mail') + '<button class="btn" id="compose">New mail</button></div><ul class="list" id="ml"></ul><div id="mlmore"></div>';
+  $('box').addEventListener('click', function(e){ var b = e.target.closest('button'); if(!b) return; state.box = b.dataset.box; state.page = 0; mailView(); });
+  $('compose').addEventListener('click', function(){ compose({}); });
+  bindSearch(loadMail);
+  loadMail();
+}
+function loadMail(append){
+  var p = 'messages?box=' + state.box + '&page=' + state.page + (state.q ? '&q=' + encodeURIComponent(state.q) : '');
+  return api(p).then(function(j){
+    var ul = $('ml'); if(!ul) return;
+    var html = j.items.map(function(m){
+      var who = m.direction === 'out' ? 'To: ' + m.peer_email : (m.peer_name || m.peer_email);
+      var tag = m.direction === 'out' && m.status === 'failed' ? ' <span class="pill bad">Not sent</span>' : '';
+      return '<li class="row'+(m.direction==='in' && !m.is_read?' unread':'')+'" data-id="'+m.id+'" tabindex="0"><span class="dot"></span><span class="t1">'+esc(who)+tag+'</span><span class="when">'+dShort(m.created_at)+'</span>' +
+        '<span class="t2">'+esc(m.subject || '(no subject)')+'</span><span class="t3">'+esc(m.snippet)+'</span></li>';
+    }).join('');
+    if(append) ul.insertAdjacentHTML('beforeend', html); else ul.innerHTML = html;
+    if(!ul.children.length){
+      ul.outerHTML = '<div class="empty" id="ml"><h3>'+(state.q?'No mail matches that search':state.box==='out'?'Nothing sent yet':state.box==='unread'?'All caught up':'No mail yet')+'</h3><p>'+
+        (state.box==='in' && !state.q ? 'Mail sent to support@kdnfitness.com appears here once forwarding is set up.' : state.box==='out' && !state.q ? 'Use New mail to write to a customer.' : '')+'</p></div>';
+    }
+    $('mlmore').innerHTML = j.more ? '<button class="btn quiet more" id="mmore">Show older mail</button>' : '';
+    if(j.more) $('mmore').onclick = function(){ state.page++; loadMail(true); };
+  }).catch(fail);
+}
+document.addEventListener('click', function(e){
+  var r = e.target.closest('#ml .row'); if(r) openMail(r.dataset.id);
+});
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Enter') return;
+  var r = e.target.closest && e.target.closest('.row[data-id]'); if(r) r.click();
+});
+
+function openMail(id){
+  api('messages/' + id).then(function(j){
+    var m = j.message;
+    var cust = j.user ? '<div class="cust"><span class="pill gold">Member</span><b>'+esc(j.user.kdn_id)+'</b><span>'+esc(PLANS[j.user.plan]||j.user.plan)+' · valid till '+dDate(j.user.valid_until)+'</span><button class="btn sm quiet" data-user="'+j.user.id+'">Open member</button></div>'
+                       : '<div class="cust"><span>Not a member yet.</span><button class="btn sm quiet" id="mkuser">Add as member</button></div>';
+    var thread = j.thread.map(function(t){
+      var atts = []; try{ atts = JSON.parse(t.attachments || '[]'); }catch(_){}
+      var body = t.html_body ? '<iframe sandbox="allow-same-origin allow-popups" referrerpolicy="no-referrer" data-html="'+t.id+'" title="Email content"></iframe>' : '<div class="msg-bd">'+esc(t.text_body || '')+'</div>';
+      return '<article class="msg '+t.direction+'"><div class="msg-hd"><span><b>'+(t.direction==='out'?'You':esc(t.peer_name || m.peer_email))+'</b>'+(t.direction==='out' && t.status==='failed'?' <span class="pill bad">Not sent</span>':'')+'</span><span>'+dLong(t.created_at)+'</span></div>' +
+        (t.subject && t.subject !== m.subject ? '<div class="msg-bd" style="padding-bottom:0;font-weight:700">'+esc(t.subject)+'</div>' : '') + body +
+        (atts.length ? '<div class="att">Attachments (open them in the Hostinger mailbox): '+atts.map(function(a){return esc(a.name);}).join(', ')+'</div>' : '') +
+        (t.status==='failed' && t.error ? '<div class="att err">'+esc(t.error)+'</div>' : '') + '</article>';
+    }).join('');
+    var subj = m.subject || '(no subject)';
+    var s = sheet(subj, '<p class="note" style="margin:0 0 12px">'+esc(m.peer_name ? m.peer_name + ' <' + m.peer_email + '>' : m.peer_email)+'</p>' + cust + thread,
+      '<form class="reply" id="rf"><textarea name="text" placeholder="Write a reply to '+esc(m.peer_email)+'" aria-label="Reply" required></textarea><div class="acts"><button type="button" class="btn danger sm" id="del">Delete</button><button type="button" class="btn quiet sm" id="unr">Mark unread</button><button class="btn" type="submit">Send reply</button></div></form>');
+    // fill sandboxed HTML bodies
+    j.thread.forEach(function(t){
+      if(!t.html_body) return;
+      var f = s.querySelector('iframe[data-html="'+t.id+'"]'); if(!f) return;
+      f.srcdoc = '<base target="_blank"><meta name="viewport" content="width=device-width"><style>body{margin:12px;font-family:Arial,sans-serif;font-size:15px;color:#111;word-break:break-word}img{max-width:100%;height:auto}</style>' + t.html_body;
+      f.onload = function(){ try{ f.style.height = (f.contentDocument.documentElement.scrollHeight + 4) + 'px'; }catch(_){} };
+    });
+    var bd = s.querySelector('.sh-bd'); setTimeout(function(){ bd.scrollTop = bd.scrollHeight; }, 60);
+    var ub = s.querySelector('[data-user]'); if(ub) ub.onclick = function(){ openUser(ub.dataset.user); };
+    var mk = $('mkuser'); if(mk) mk.onclick = function(){ addUser({email:m.peer_email, name:m.peer_name}); };
+    $('del').onclick = function(){
+      if(!confirm('Delete this mail from the admin? It stays in the Hostinger mailbox.')) return;
+      api('messages/'+m.id,{method:'DELETE'}).then(function(){ closeSheet(); toast('Mail deleted'); loadMail(); loadStats(); }).catch(fail);
+    };
+    $('unr').onclick = function(){ api('messages/'+m.id,{method:'PATCH',body:{read:false}}).then(function(){ closeSheet(); loadMail(); loadStats(); }).catch(fail); };
+    $('rf').addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = e.submitter || this.querySelector('[type=submit]');
+      var text = this.text.value.trim(); if(!text) return;
+      busy(btn, true, 'Sending…');
+      api('send',{method:'POST', body:{to:m.peer_email, subject: /^re:/i.test(subj) ? subj : 'Re: ' + subj, text:text, replyToId:m.id}})
+        .then(function(){ toast('Reply sent'); openMail(m.id); loadMail(); })
+        .catch(function(err){ busy(btn,false); fail(err); });
+    });
+    loadMail(); loadStats();
+  }).catch(fail);
+}
+
+function compose(pre){
+  sheet('New mail', '<form class="f" id="cf"><label>To<input name="to" type="email" inputmode="email" autocomplete="off" required value="'+esc(pre.to||'')+'"></label>' +
+    '<label>Subject<input name="subject" required value="'+esc(pre.subject||'')+'"></label>' +
+    '<label>Message<textarea name="text" required>'+esc(pre.text||'')+'</textarea></label>' +
+    '<p class="note">Sent from support@kdnfitness.com. Replies come back to this inbox.</p><p class="err" id="cerr" hidden></p>' +
+    '<div class="acts"><button class="btn" type="submit">Send mail</button></div></form>');
+  if(!pre.text){
+    api('content').then(function(c){ var ta = document.querySelector('#cf textarea'); if(ta && !ta.value) { ta.value = '\n\n' + c.signature; ta.setSelectionRange(0,0); } }).catch(function(){});
+  }
+  $('cf').addEventListener('submit', function(e){
+    e.preventDefault(); var d = formData(this), btn = this.querySelector('[type=submit]');
+    busy(btn, true, 'Sending…');
+    api('send',{method:'POST', body:d}).then(function(){ closeSheet(); toast('Mail sent'); if(state.tab==='mail') loadMail(); })
+      .catch(function(err){ busy(btn,false); var x=$('cerr'); x.hidden=false; x.textContent = err.message; });
+  });
+}
+
+/* ================= USERS ================= */
+function userStatus(u){
+  var t = Date.now();
+  if(u.status === 'cancelled') return '<span class="pill bad">Cancelled</span>';
+  if(!u.valid_until || u.valid_until <= t) return '<span class="pill mute">Expired</span>';
+  if(u.valid_until - t < 7*864e5) return '<span class="pill warn">Ends '+dShort(u.valid_until)+'</span>';
+  return '<span class="pill ok">Active</span>';
+}
+function usersView(){
+  $('view').innerHTML = '<div class="bar"><div class="seg" id="uf">' +
+    [['all','All'],['active','Active'],['expiring','Ending soon'],['expired','Expired']].map(function(x){ return '<button data-f="'+x[0]+'" aria-pressed="'+(state.ufilter===x[0])+'">'+x[1]+'</button>'; }).join('') +
+    '</div>' + searchBox('Search name, email or KDN ID') + '<button class="btn" id="adduser">Add member</button></div><ul class="list" id="ul"></ul>';
+  $('uf').addEventListener('click', function(e){ var b = e.target.closest('button'); if(!b) return; state.ufilter = b.dataset.f; usersView(); });
+  $('adduser').onclick = function(){ addUser({}); };
+  bindSearch(loadUsers); loadUsers();
+}
+function loadUsers(){
+  api('users?filter=' + state.ufilter + (state.q ? '&q=' + encodeURIComponent(state.q) : '')).then(function(j){
+    var ul = $('ul'); if(!ul) return;
+    ul.innerHTML = j.items.map(function(u){
+      return '<li class="row" data-uid="'+u.id+'" data-id="u'+u.id+'" tabindex="0"><span class="dot"></span><span class="t1">'+esc(u.name || u.email)+'</span><span class="when">'+userStatus(u)+'</span>' +
+        '<span class="t3">'+esc(u.kdn_id)+' · '+esc(PLANS[u.plan]||u.plan)+' · '+esc(u.email)+' · till '+dDate(u.valid_until)+'</span></li>';
+    }).join('');
+    if(!j.items.length) ul.innerHTML = '<li class="empty"><h3>'+(state.q||state.ufilter!=='all'?'No members match':'No members yet')+'</h3><p>'+(state.q||state.ufilter!=='all'?'Try another filter.':'Members appear here after a Razorpay payment, or add one yourself.')+'</p></li>';
+    Array.prototype.forEach.call(ul.querySelectorAll('[data-uid]'), function(r){ r.onclick = function(){ openUser(r.dataset.uid); }; });
+  }).catch(fail);
+}
+function planSelect(name, val, any){
+  return '<select name="'+name+'">'+(any?'<option value="">All plans</option>':'')+Object.keys(PLANS).map(function(k){ return '<option value="'+k+'"'+(val===k?' selected':'')+'>'+PLANS[k]+'</option>'; }).join('')+'</select>';
+}
+function addUser(pre){
+  sheet('Add member', '<form class="f" id="af"><label>Email<input name="email" type="email" inputmode="email" required value="'+esc(pre.email||'')+'"></label>' +
+    '<label>Name <small>optional</small><input name="name" value="'+esc(pre.name||'')+'"></label>' +
+    '<div class="two"><label>Plan'+planSelect('plan','ind')+'</label><label>Months<input name="months" type="number" min="1" max="24" value="3"></label></div>' +
+    '<label class="check"><input type="checkbox" name="sendWelcome" checked> Email them their KDN ID and validity</label>' +
+    '<p class="err" id="aerr" hidden></p><div class="acts"><button class="btn" type="submit">Add member</button></div></form>');
+  $('af').addEventListener('submit', function(e){
+    e.preventDefault(); var d = formData(this), btn = this.querySelector('[type=submit]'); busy(btn,true);
+    api('users',{method:'POST', body:d}).then(function(j){
+      toast(j.mailed === false ? 'Member added, but the email was not sent: ' + j.mailError : 'Member added: ' + j.user.kdn_id, j.mailed === false);
+      openUser(j.user.id); if(state.tab==='users') loadUsers(); loadStats();
+    }).catch(function(err){ busy(btn,false); var x=$('aerr'); x.hidden=false; x.textContent=err.message; });
+  });
+}
+function openUser(id){
+  api('users/'+id).then(function(j){
+    var u = j.user;
+    var pays = j.payments.length ? '<ul class="list">'+j.payments.map(function(p){ return '<li class="row" style="cursor:default"><span class="dot"></span><span class="t1">'+rupees(p.amount)+' · '+esc(PLANS[p.plan]||'—')+'</span><span class="when">'+dShort(p.created_at)+'</span><span class="t3">'+esc(p.source)+' · '+esc(p.status)+' · '+esc(p.ref||'')+'</span></li>'; }).join('')+'</ul>' : '<p class="note">No payments recorded.</p>';
+    sheet(u.name || u.email,
+      '<dl class="kv"><dt>KDN ID</dt><dd>'+esc(u.kdn_id)+'</dd><dt>Email</dt><dd>'+esc(u.email)+'</dd><dt>Status</dt><dd>'+userStatus(u)+'</dd><dt>Valid till</dt><dd>'+dDate(u.valid_until)+'</dd><dt>Joined</dt><dd>'+dDate(u.created_at)+'</dd></dl>' +
+      '<div class="acts"><button class="btn sm" data-ext="m3">Extend 3 months</button><button class="btn sm quiet" data-ext="d30">Add 30 days</button><button class="btn sm quiet" id="mailu">Email</button></div>' +
+      '<form class="f sec" id="uf2"><h3>Edit</h3><label>Name<input name="name" value="'+esc(u.name||'')+'"></label>' +
+      '<div class="two"><label>Plan'+planSelect('plan',u.plan)+'</label><label>Status<select name="status"><option value="active"'+(u.status==='active'?' selected':'')+'>Active</option><option value="cancelled"'+(u.status==='cancelled'?' selected':'')+'>Cancelled</option></select></label></div>' +
+      '<label>Valid till<input name="validUntil" type="date" value="'+isoDay(u.valid_until)+'"></label>' +
+      '<label>Notes <small>only you see these</small><textarea name="notes" style="min-height:80px">'+esc(u.notes||'')+'</textarea></label>' +
+      '<div class="acts"><button class="btn" type="submit">Save changes</button><button class="btn danger" type="button" id="udel">Delete member</button></div></form>' +
+      '<div class="sec"><h3>Payments</h3>'+pays+'</div>');
+    function patch(body, msg){ return api('users/'+u.id,{method:'PATCH', body:body}).then(function(){ toast(msg); openUser(u.id); if(state.tab==='users') loadUsers(); loadStats(); }).catch(fail); }
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ext]'), function(b){
+      b.onclick = function(){ patch(b.dataset.ext==='m3'?{extendMonths:3}:{extendDays:30}, b.dataset.ext==='m3'?'Extended by 3 months':'Added 30 days'); };
+    });
+    $('mailu').onclick = function(){ compose({to:u.email, subject:'Your KDN Fitness plan'}); };
+    $('uf2').addEventListener('submit', function(e){ e.preventDefault(); patch(formData(this), 'Changes saved'); });
+    $('udel').onclick = function(){ if(confirm('Delete '+u.email+'? Their payments stay in the Payments list.')) api('users/'+u.id,{method:'DELETE'}).then(function(){ closeSheet(); toast('Member deleted'); if(state.tab==='users') loadUsers(); loadStats(); }).catch(fail); };
+  }).catch(fail);
+}
+
+/* ================= PAYMENTS ================= */
+function payView(){
+  $('view').innerHTML = (state.me && !state.me.razorpayReady ? '<div class="warnbox">Razorpay payments will show here automatically once the webhook secret is added. Until then you can record UPI payments yourself.</div>' : '') +
+    '<div class="bar">' + searchBox('Search email or payment ID') + '<button class="btn" id="addpay">Record payment</button></div><ul class="list" id="pl"></ul>';
+  $('addpay').onclick = addPay; bindSearch(loadPays); loadPays();
+}
+function payPill(s){ return {captured:'<span class="pill ok">Paid</span>', manual:'<span class="pill gold">Recorded</span>', failed:'<span class="pill bad">Failed</span>', refunded:'<span class="pill mute">Refunded</span>'}[s] || esc(s); }
+function loadPays(){
+  api('payments' + (state.q ? '?q=' + encodeURIComponent(state.q) : '')).then(function(j){
+    var ul = $('pl'); if(!ul) return;
+    ul.innerHTML = j.items.map(function(p){
+      return '<li class="row" style="cursor:default"><span class="dot"></span><span class="t1"><b>'+rupees(p.amount)+'</b> · '+esc(p.email||'unknown')+'</span><span class="when">'+payPill(p.status)+'</span>' +
+        '<span class="t3">'+dLong(p.created_at)+' · '+esc(PLANS[p.plan]||'no plan')+' · '+esc(p.method||p.source)+(p.coupon?' · coupon '+esc(p.coupon):'')+' · '+esc(p.ref||'')+'</span></li>';
+    }).join('') || '<li class="empty"><h3>'+(state.q?'No payments match':'No payments yet')+'</h3></li>';
+  }).catch(fail);
+}
+function addPay(){
+  sheet('Record payment', '<form class="f" id="pf"><label>Customer email<input name="email" type="email" inputmode="email" required></label>' +
+    '<div class="two"><label>Amount (₹)<input name="amount" type="number" min="1" inputmode="numeric" required></label><label>Plan'+planSelect('plan','ind')+'</label></div>' +
+    '<div class="two"><label>Method<select name="method"><option>UPI</option><option>Bank transfer</option><option>Cash</option></select></label><label>UTR / reference <small>optional</small><input name="ref"></label></div>' +
+    '<label>Note <small>optional</small><input name="note"></label>' +
+    '<label class="check"><input type="checkbox" name="activate" checked> Start or extend their plan by 3 months</label>' +
+    '<label class="check"><input type="checkbox" name="sendWelcome" checked> Email them their KDN ID and validity</label>' +
+    '<p class="err" id="perr" hidden></p><div class="acts"><button class="btn" type="submit">Record payment</button></div></form>');
+  $('pf').addEventListener('submit', function(e){
+    e.preventDefault(); var d = formData(this), btn = this.querySelector('[type=submit]'); busy(btn,true);
+    api('payments',{method:'POST', body:d}).then(function(j){
+      closeSheet(); toast(j.mailed === false ? 'Payment recorded, but the email was not sent: ' + j.mailError : 'Payment recorded', j.mailed === false);
+      loadPays(); loadStats();
+    }).catch(function(err){ busy(btn,false); var x=$('perr'); x.hidden=false; x.textContent=err.message; });
+  });
+}
+
+/* ================= COUPONS ================= */
+function couponText(c){ return c.kind==='percent' ? c.value+'% off' : c.kind==='flat' ? '₹'+c.value+' off' : c.value+' free days'; }
+function couponsView(){
+  $('view').innerHTML = '<div class="bar"><span class="note" style="flex:1">Codes are not case-sensitive.</span><button class="btn" id="addc">New coupon</button></div><ul class="list" id="cl"></ul>';
+  $('addc').onclick = addCoupon; loadCoupons();
+}
+function loadCoupons(){
+  api('coupons').then(function(j){
+    var ul = $('cl'); if(!ul) return;
+    var t = Date.now();
+    ul.innerHTML = j.items.map(function(c){
+      var st = !c.active ? '<span class="pill mute">Off</span>' : c.expires_at && c.expires_at < t ? '<span class="pill mute">Expired</span>' : c.max_uses!=null && c.used>=c.max_uses ? '<span class="pill mute">Used up</span>' : '<span class="pill ok">Live</span>';
+      return '<li class="row" style="cursor:default;grid-template-columns:1fr auto"><span class="t1" style="font-weight:700;letter-spacing:.02em">'+esc(c.code)+' '+st+'</span>' +
+        '<span class="acts"><button class="btn sm quiet" data-tog="'+esc(c.code)+'" data-on="'+c.active+'">'+(c.active?'Turn off':'Turn on')+'</button><button class="btn sm danger" data-delc="'+esc(c.code)+'">Delete</button></span>' +
+        '<span class="t3" style="grid-column:1/3">'+couponText(c)+' · '+(c.plan?PLANS[c.plan]+' only':'all plans')+' · used '+c.used+(c.max_uses!=null?' of '+c.max_uses:'')+(c.expires_at?' · ends '+dDate(c.expires_at):'')+(c.note?' · '+esc(c.note):'')+'</span></li>';
+    }).join('') || '<li class="empty"><h3>No coupons yet</h3><p>Create one to give a discount or free days.</p></li>';
+    Array.prototype.forEach.call(ul.querySelectorAll('[data-tog]'), function(b){ b.onclick = function(){ api('coupons/'+encodeURIComponent(b.dataset.tog),{method:'PATCH',body:{active:b.dataset.on!=='1'}}).then(loadCoupons).catch(fail); }; });
+    Array.prototype.forEach.call(ul.querySelectorAll('[data-delc]'), function(b){ b.onclick = function(){ if(confirm('Delete coupon '+b.dataset.delc+'?')) api('coupons/'+encodeURIComponent(b.dataset.delc),{method:'DELETE'}).then(function(){ toast('Coupon deleted'); loadCoupons(); }).catch(fail); }; });
+  }).catch(fail);
+}
+function addCoupon(){
+  sheet('New coupon', '<form class="f" id="kf"><label>Code<input name="code" required autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="e.g. diwali20"></label>' +
+    '<div class="two"><label>Type<select name="kind"><option value="percent">% off</option><option value="flat">₹ off</option><option value="days">Free days</option></select></label><label>Value<input name="value" type="number" min="1" inputmode="numeric" required></label></div>' +
+    '<div class="two"><label>Plan'+planSelect('plan','',true)+'</label><label>Max uses <small>blank = no limit</small><input name="maxUses" type="number" min="1" inputmode="numeric"></label></div>' +
+    '<label>Last day <small>optional</small><input name="expires" type="date"></label>' +
+    '<label>Note <small>optional</small><input name="note" placeholder="Who is this for?"></label>' +
+    '<p class="err" id="kerr" hidden></p><div class="acts"><button class="btn" type="submit">Create coupon</button></div></form>');
+  $('kf').addEventListener('submit', function(e){
+    e.preventDefault(); var d = formData(this), btn = this.querySelector('[type=submit]'); busy(btn,true);
+    api('coupons',{method:'POST', body:d}).then(function(){ closeSheet(); toast('Coupon created'); loadCoupons(); })
+      .catch(function(err){ busy(btn,false); var x=$('kerr'); x.hidden=false; x.textContent=err.message; });
+  });
+}
+
+/* ================= WEBSITE ================= */
+function siteView(){
+  $('view').innerHTML = '<p class="note">Loading…</p>';
+  api('content').then(function(c){
+    $('view').innerHTML = '<form class="f" id="sf">' +
+      '<div class="plan"><h3>Announcement bar</h3><p class="note">A strip at the top of kdnfitness.com, for offers or news.</p>' +
+      '<label class="check"><input type="checkbox" name="b_on"'+(c.banner.on?' checked':'')+'> Show it on the website</label>' +
+      '<label>Text<input name="b_text" maxlength="200" value="'+esc(c.banner.text)+'" placeholder="Diwali offer: 30% off every plan till 5 Nov"></label>' +
+      '<label>Link <small>optional, opens when tapped</small><input name="b_link" value="'+esc(c.banner.link)+'" placeholder="https://kdnfitness.com/#plans"></label></div>' +
+      Object.keys(PLANS).map(function(k){ var p = c.plans[k]; return '<div class="plan"><h3>'+PLANS[k]+' plan</h3><div class="two"><label>Price (₹)<input name="'+k+'_price" type="number" min="1" inputmode="numeric" required value="'+esc(p.price)+'"></label><label>Crossed-out price <small>blank = none</small><input name="'+k+'_mrp" type="number" min="1" inputmode="numeric" value="'+esc(p.mrp||'')+'"></label></div><label>Line under the price<input name="'+k+'_per" maxlength="80" value="'+esc(p.per)+'"></label></div>'; }).join('') +
+      '<div class="plan"><h3>Email signature</h3><p class="note">Added to new mails and welcome emails.</p><label>Signature<textarea name="signature" style="min-height:80px">'+esc(c.signature)+'</textarea></label></div>' +
+      '<p class="note">Prices here change the plan cards on the website. Razorpay charges the amount set at checkout, so update that too when you change a price.</p>' +
+      '<p class="err" id="serr" hidden></p><div class="acts"><button class="btn" type="submit">Save website</button><a class="btn quiet" href="/" target="_blank" rel="noopener">Open website</a></div></form>';
+    $('sf').addEventListener('submit', function(e){
+      e.preventDefault(); var d = formData(this), btn = this.querySelector('[type=submit]');
+      var body = {banner:{on:d.b_on, text:d.b_text, link:d.b_link}, signature:d.signature, plans:{}};
+      Object.keys(PLANS).forEach(function(k){ body.plans[k] = {price:d[k+'_price'], mrp:d[k+'_mrp'], per:d[k+'_per']}; });
+      busy(btn,true,'Saving…'); $('serr').hidden = true;
+      api('content',{method:'PUT', body:body}).then(function(){ busy(btn,false); toast('Website updated. Live within a minute.'); })
+        .catch(function(err){ busy(btn,false); var x=$('serr'); x.hidden=false; x.textContent=err.message; });
+    });
+  }).catch(fail);
+}
+
+/* ---------- start ---------- */
+api('me').then(function(me){
+  state.me = me; $('who').textContent = me.email;
+  loadStats();
+  var h = (location.hash || '').slice(1);
+  go(TITLES[h] ? h : 'mail');
+  if(!me.mailReady) toast('Sending is off until RESEND_API_KEY is added in Cloudflare.', true);
+  setInterval(function(){ if(document.visibilityState === 'visible'){ loadStats(); if(state.tab==='mail' && !document.querySelector('.sheet')) loadMail(); } }, 60000);
+}).catch(function(){});
+})();
+</script>
+</body>
+</html>
