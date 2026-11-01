@@ -5,5 +5,5 @@ compatibility_date = "2026-06-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "kdn-admin"
-# Paste the Database ID from Cloudflare -> D1 -> kdn-admin here:
-database_id = "PASTE-D1-DATABASE-ID-HERE"
+# kdn-admin D1 database
+database_id = "251d98b6-93a5-4cea-a6ca-53f223171b60"
