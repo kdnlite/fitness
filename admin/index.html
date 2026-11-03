@@ -467,13 +467,13 @@ function payView(){
     '<div class="bar">' + searchBox('Search email or payment ID') + '<button class="btn" id="addpay">Record payment</button></div><ul class="list" id="pl"></ul>';
   $('addpay').onclick = addPay; bindSearch(loadPays); loadPays();
 }
-function payPill(s){ return {captured:'<span class="pill ok">Paid</span>', manual:'<span class="pill gold">Recorded</span>', failed:'<span class="pill bad">Failed</span>', refunded:'<span class="pill mute">Refunded</span>'}[s] || esc(s); }
+function payPill(s){ return {captured:'<span class="pill ok">Paid</span>', manual:'<span class="pill gold">Recorded</span>', failed:'<span class="pill bad">Failed</span>', refunded:'<span class="pill mute">Refunded</span>', review:'<span class="pill bad">Check</span>'}[s] || esc(s); }
 function loadPays(){
   api('payments' + (state.q ? '?q=' + encodeURIComponent(state.q) : '')).then(function(j){
     var ul = $('pl'); if(!ul) return;
     ul.innerHTML = j.items.map(function(p){
       return '<li class="row" style="cursor:default"><span class="dot"></span><span class="t1"><b>'+rupees(p.amount)+'</b> · '+esc(p.email||'unknown')+'</span><span class="when">'+payPill(p.status)+'</span>' +
-        '<span class="t3">'+dLong(p.created_at)+' · '+esc(PLANS[p.plan]||'no plan')+' · '+esc(p.method||p.source)+(p.coupon?' · coupon '+esc(p.coupon):'')+' · '+esc(p.ref||'')+'</span></li>';
+        '<span class="t3">'+dLong(p.created_at)+' · '+esc(PLANS[p.plan]||'no plan')+' · '+esc(p.method||p.source)+(p.coupon?' · coupon '+esc(p.coupon):'')+' · '+esc(p.ref||'')+'</span>'+(p.note?'<span class="t3" style="grid-column:1/-1'+(p.status==='review'?';color:var(--bad,#b3261e)':'')+'">'+esc(p.note)+'</span>':'')+'</li>';
     }).join('') || '<li class="empty"><h3>'+(state.q?'No payments match':'No payments yet')+'</h3></li>';
   }).catch(fail);
 }

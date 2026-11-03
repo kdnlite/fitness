@@ -24,6 +24,10 @@ export default {
       size: a.content?.byteLength || 0,
     }));
 
+    // The admin panel normally creates this table; do it here too so early mail is never lost.
+    await env.DB.prepare(
+      "CREATE TABLE IF NOT EXISTS messages ( id INTEGER PRIMARY KEY AUTOINCREMENT, direction TEXT NOT NULL, message_id TEXT, in_reply_to TEXT, peer_email TEXT NOT NULL, peer_name TEXT, subject TEXT, text_body TEXT, html_body TEXT, attachments TEXT, is_read INTEGER NOT NULL DEFAULT 0, status TEXT, error TEXT, created_at INTEGER NOT NULL )"
+    ).run();
     await env.DB.prepare(
       `INSERT OR IGNORE INTO messages
        (direction,message_id,in_reply_to,peer_email,peer_name,subject,text_body,html_body,attachments,is_read,created_at)
