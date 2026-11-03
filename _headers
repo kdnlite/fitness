@@ -1,0 +1,13 @@
+# Photos have a fingerprint in their name, so they never change: phones may keep them for a year.
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Other files in assets (hero video, previews) may be replaced under the same name.
+/assets/*
+  Cache-Control: public, max-age=86400
+
+/sw.js
+  Cache-Control: no-cache
+
+/kdn-live.js
+  Cache-Control: public, max-age=300
