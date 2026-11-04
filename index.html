@@ -1042,7 +1042,10 @@ body.menuon .mscrim{opacity:1;pointer-events:auto}
 
 /* ---------- Menu: own scroll, page stays still; gold burger lines at all times ---------- */
 #mlist{max-height:calc(100dvh - 170px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
-html.menuon,body.menuon{overflow:hidden;overscroll-behavior:none}
+html.menuon{overflow:hidden;overscroll-behavior:none}
+body.menuon{overscroll-behavior:none}
+body.menuon .hd{z-index:45}
+body.menuon #bnav{z-index:28}
 .hd .burger{border-color:rgba(184,147,74,.45)}
 .hd .burger i{background:#B8934A}
 body.onland .hd .burger{border-color:rgba(233,207,156,.4)}
@@ -2719,8 +2722,16 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-r
 body{overflow-x:clip}
 /* header: glass and soft shadow once you scroll */
 .hd{transition:box-shadow .3s ease,background-color .3s ease,border-color .3s ease}
-body:not(.onland) .hd.sc{background:rgba(255,255,255,.82);-webkit-backdrop-filter:saturate(1.8) blur(16px);backdrop-filter:saturate(1.8) blur(16px);border-bottom-color:rgba(220,226,234,.6);box-shadow:0 10px 30px rgba(11,18,32,.08)}
-body.onland .hd.sc{background:rgba(11,18,32,.86);-webkit-backdrop-filter:saturate(1.4) blur(16px);backdrop-filter:saturate(1.4) blur(16px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+/* The glass effect sits on a pseudo-element: a blur filter on the header itself would make
+   the header the frame for the fixed menu, which then opened off-screen after scrolling. */
+.hd::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;pointer-events:none;transition:opacity .3s ease}
+body:not(.onland) .hd.sc{background:transparent;border-bottom-color:rgba(220,226,234,.6);box-shadow:0 10px 30px rgba(11,18,32,.08)}
+body:not(.onland) .hd.sc::before{opacity:1;background:rgba(255,255,255,.84);-webkit-backdrop-filter:saturate(1.8) blur(16px);backdrop-filter:saturate(1.8) blur(16px)}
+body.onland .hd.sc{background:transparent;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+body.onland .hd.sc::before{opacity:1;background:rgba(11,18,32,.88);-webkit-backdrop-filter:saturate(1.4) blur(16px);backdrop-filter:saturate(1.4) blur(16px)}
+html.menuon .hd.sc::before{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* all three plan prices in the same gold as the Family plan */
+.lp-plan .lp-amt2 b,body.onland .lp-plan .lp-amt2 b,body.onland .lp-plan-hi .lp-amt2 b{color:#E9C05A}
 /* screens and cards glide in */
 @keyframes kup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .screen{animation:kup .42s cubic-bezier(.2,.8,.2,1) both}
@@ -10473,6 +10484,7 @@ img{-webkit-user-drag:none}
     }
   }
   $('mscrim').addEventListener('click',function(){ openMenu(false); });
+  $('mscrim').addEventListener('touchmove',function(e){ e.preventDefault(); },{passive:false});
   function go(where){
     if(where==='sound'){ sndToggle(); return; }
     openMenu(false);
