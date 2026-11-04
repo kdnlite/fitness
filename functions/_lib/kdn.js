@@ -22,6 +22,10 @@ export function json(data, status = 200, extra = {}) {
 
 export const bad = (msg, status = 400) => json({ error: msg }, status);
 
+// The Android app (Capacitor) loads its pages locally, so the public endpoints allow cross-origin reads.
+export const CORS = { 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, OPTIONS', 'access-control-allow-headers': 'content-type' };
+export const preflight = () => new Response(null, { status: 204, headers: { ...CORS, 'access-control-max-age': '86400' } });
+
 export function now() { return Date.now(); }
 
 export function cleanEmail(v) {

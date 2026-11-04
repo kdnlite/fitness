@@ -1,0 +1,22 @@
+{
+  "appId": "com.kdnfitness.app",
+  "appName": "KDN Fitness",
+  "webDir": "www",
+  "backgroundColor": "#0B1220",
+  "android": {
+    "backgroundColor": "#0B1220",
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 900,
+      "launchAutoHide": true,
+      "backgroundColor": "#060608",
+      "showSpinner": false
+    },
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_kdn",
+      "iconColor": "#E9C05A"
+    }
+  }
+}

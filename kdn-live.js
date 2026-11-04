@@ -27,7 +27,9 @@
     }
   }
   function load() {
-    fetch('/api/public/content', { cache: 'no-cache' })
+    // Inside the Android app the page is local, so ask the website for prices.
+    var native = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+    fetch((native ? 'https://kdnfitness.com' : '') + '/api/public/content', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : {}; })
       .then(apply)
       .catch(function () {});

@@ -2779,6 +2779,12 @@ img{-webkit-user-drag:none}
 .tddpics>span:has(.eph){width:76px;height:46px;border-radius:12px;background:#1c1c1c}
 .tddpics>span>img.eph{width:100%;height:100%;object-fit:contain;border-radius:0;background:#1c1c1c}
 #p-ex .ex .pics img.eph{width:96px;height:56px;object-fit:contain;background:#1c1c1c}
+/* Android app: Capacitor provides the status/navigation bar sizes as CSS variables */
+.kdn-native .hd{padding-top:var(--safe-area-inset-top,env(safe-area-inset-top,0px))}
+.kdn-native .bnav{padding-bottom:calc(6px + var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px)))}
+.kdn-native body.hasnav{padding-block-end:calc(92px + var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px)))}
+.kdn-native .hrem,.kdn-native .hs-panel{padding-bottom:var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px))}
+.kdn-native .hv-top{padding-top:calc(10px + var(--safe-area-inset-top,env(safe-area-inset-top,0px)))}
 /* ===== KDN POLISH CSS END ===== */
 
 </style>
@@ -3229,7 +3235,7 @@ img{-webkit-user-drag:none}
     </div>
     <button class="btn" type="button" id="b-about-go">Get my plan</button>
   </section>
-  <footer class="ft"><b>KDN</b><span>Fitness Tracker · Estimates only, not medical advice.</span></footer>
+  <footer class="ft"><b>KDN</b><span>Fitness Tracker · Estimates only, not medical advice. · <a href="https://kdnfitness.com/privacy.html" style="color:inherit">Privacy policy</a></span></footer>
 </div>
 <div class="modal mpm" id="mpm" hidden role="dialog" aria-modal="true" aria-labelledby="mpt"><div class="mbox mpbox"><span class="mpic2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3c1.7 0 2.6 1.9 2.6 4.3S9.7 12 8 12 5.4 9.6 5.4 7.3 6.3 3 8 3zM6 13.5h4.2l-.4 3.2A2.1 2.1 0 0 1 7.7 18.6a1.9 1.9 0 0 1-1.9-2.1zM16 7c1.7 0 2.6 1.9 2.6 4.3S17.7 16 16 16s-2.6-2.4-2.6-4.7S14.3 7 16 7zm-2 10.5h4.2l-.3 2.6a2 2 0 0 1-2 1.9 2 2 0 0 1-1.9-2.2z"/></svg></span><h3 id="mpt">Allow step counting</h3><p>KDN uses your phone’s motion sensor to count your steps and work out your distance, calories and active time. Your steps stay on your phone.</p><ul class="mplist"><li>Counts steps automatically while KDN is open</li><li>Fills your daily ring, streak and monthly history</li><li>You can turn it off any time in your phone settings</li></ul><div class="nav"><button class="btn ghost" type="button" id="mp-later">Not now</button><button class="btn" type="button" id="mp-allow">Allow</button></div></div></div>
 <div class="modal" id="lgm" hidden role="dialog" aria-modal="true" aria-labelledby="lgt"><div class="mbox"><h3 id="lgt">Log out?</h3><p>This removes your saved details, plan and health records (medicines, reports and period data) from this device. Download a health backup first if you want to keep them. You will answer the questions again to get a new plan.</p><div class="nav"><button class="btn ghost" type="button" id="lg-no">Stay logged in</button><button class="btn danger" type="button" id="lg-yes">Log out</button></div></div></div>
@@ -3251,6 +3257,7 @@ img{-webkit-user-drag:none}
 <script>
 (function(){
   var $ = function(id){return document.getElementById(id)};
+  var NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
   var screens = ['s-landing','s-pay','s-ai','s-family','s-gym','s-trainer','s-share','s-home','s-intro','s-form','s-review','s-result','s-library','s-foods','s-about','s-health'];
   var curScreen = 's-landing';
   var planDone = false;
@@ -8898,6 +8905,7 @@ img{-webkit-user-drag:none}
 
   /* --- file saving (backup, CSV, plan PDF) --- */
   function gSaveFile(blob,fn,done){
+    if(NATIVE){ nSaveFile(blob,fn,done); return; }
     function fallback(){
       try{ var url = URL.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = fn; document.body.appendChild(a); a.click(); setTimeout(function(){ a.remove(); URL.revokeObjectURL(url); },4000); toast('Saved: '+fn); if(done) done(); }
       catch(e){ toast('Could not save the file in this browser.'); }
@@ -10911,7 +10919,7 @@ img{-webkit-user-drag:none}
     return HD;
   }
   function hSave(){
-    try{ localStorage.setItem(HKEY,JSON.stringify(HD)); return true; }
+    try{ localStorage.setItem(HKEY,JSON.stringify(HD)); if(NATIVE) nSync(); return true; }
     catch(e){ toast('Phone storage is full. Delete some old records and try again.'); return false; }
   }
   function hP(id){
@@ -11174,7 +11182,7 @@ img{-webkit-user-drag:none}
         var left = m.end ? Math.max(0,hDiff(today,m.end)+1) : null;
         return '<li class="hh-med'+(m.paused?' off':'')+'"><button type="button" class="hh-medb" data-h="editmed" data-v="'+m.id+'"><span class="hh-pill">'+hI('<rect x="3" y="8" width="18" height="8" rx="4" transform="rotate(-35 12 12)"/><path d="M9.5 8.5l5 7"/>')+'</span><span class="hh-mt"><b>'+esc(m.name)+(m.dose?' <em>'+esc(m.dose)+'</em>':'')+'</b><small>'+esc(hMedLine(m))+'</small><small>'+esc(HFOOD[m.food]||'')+(m.paused?' · Paused':left!=null?' · '+(left?left+' day'+(left===1?'':'s')+' left':'Course finished'):' · Ongoing')+(m.stock!=null?' · '+fmt(m.stock)+' left':'')+'</small></span><span class="hh-chev">›</span></button></li>';
       }).join('')+'</ul>';
-      h += '<p class="hh-foot">Reminders pop up while KDN is open on this phone. For a reminder even when KDN is closed, add your medicines to your phone calendar.</p>';
+      h += '<p class="hh-foot">'+(NATIVE ? 'KDN reminds you with a phone notification at each dose time, even when the app is closed.' : 'Reminders pop up while KDN is open on this phone. For a reminder even when KDN is closed, add your medicines to your phone calendar.')+'</p>';
     }
     return h;
   }
@@ -11446,7 +11454,7 @@ img{-webkit-user-drag:none}
       '<div class="hv-meta"><span class="hh-ric" style="--c:'+T.c+'">'+hI(T.ic)+'</span><div><small style="color:'+T.c+'">'+esc(T.name)+'</small><b>'+esc(r.date?hDate(r.date,{weekday:'short',day:'numeric',month:'long',year:'numeric'}):'')+'</b><span>'+esc([r.doc,r.place].filter(Boolean).join(' · '))+'</span></div></div>'+
       (r.notes ? '<p class="hv-notes">'+esc(r.notes).replace(/\n/g,'<br>')+'</p>' : '')+
       (files ? '<div class="hv-files">'+files+'</div>' : '<p class="hs-hint">No files in this record.</p>'),
-      '<button type="button" class="hh-btn ghost danger" data-hs="delrec">Delete</button>'+(navigator.share && (r.files||[]).length?'<button type="button" class="hh-btn ghost" data-hs="share">Share</button>':'')+'<button type="button" class="hh-gold" data-hs="editrec">Edit</button>');
+      '<button type="button" class="hh-btn ghost danger" data-hs="delrec">Delete</button>'+((navigator.share||NATIVE) && (r.files||[]).length?'<button type="button" class="hh-btn ghost" data-hs="share">Share</button>':'')+'<button type="button" class="hh-gold" data-hs="editrec">Edit</button>');
   }
   function hViewFile(id){
     var p = hP(), meta = null;
@@ -11454,12 +11462,13 @@ img{-webkit-user-drag:none}
     hGet(id).then(function(b){
       if(!b){ toast('This file is missing on this phone.'); return; }
       var u = hURL(b);
-      if(!/^image\//.test(b.type || (meta&&meta.type) || '')){ var w = window.open(u,'_blank'); if(!w) gSaveFile(b,(meta&&meta.name)||'report.pdf'); return; }
+      if(!/^image\//.test(b.type || (meta&&meta.type) || '')){ if(NATIVE){ gSaveFile(b,(meta&&meta.name)||'report.pdf'); return; } var w = window.open(u,'_blank'); if(!w) gSaveFile(b,(meta&&meta.name)||'report.pdf'); return; }
       var v = $('hview'); v.innerHTML = '<div class="hv-top"><span>'+esc(meta?meta.name:'')+'</span><button type="button" data-hv="zoom">Zoom</button><button type="button" data-hv="close" aria-label="Close">×</button></div><div class="hv-sc"><img loading="lazy" decoding="async" src="'+u+'" alt="'+esc(meta?meta.name:'Report')+'"></div>';
       v.hidden = false;
     }).catch(function(){ toast('Could not open this file.'); });
   }
   function hShare(r){
+    if(NATIVE){ Promise.all((r.files||[]).map(function(f){ return hGet(f.id).then(function(b){ return b ? {blob:b,name:f.name||'report'} : null; }); })).then(function(l){ nShareFiles(l.filter(Boolean),r.title||'Medical record'); }); return; }
     Promise.all((r.files||[]).map(function(f){ return hGet(f.id).then(function(b){ return b ? new File([b],f.name||'report',{type:b.type||f.type}) : null; }); })).then(function(fs){
       fs = fs.filter(Boolean);
       var data = {title:r.title||'Medical record',text:(r.title||'')+(r.date?' · '+hDate(r.date):''),files:fs};
@@ -11552,17 +11561,19 @@ img{-webkit-user-drag:none}
   /* ---- reminders ---- */
   var hFired = {}, hSnooze = {}, hQueue = [], hRemCur = null, hSW = null;
   function hNotifState(){
+    if(NATIVE) return nNotif;
     if(!('Notification' in window)) return 'none';
     if(Notification.permission==='granted') return 'on';
     if(Notification.permission==='denied') return 'blocked';
     return 'ask';
   }
   function hRegSW(){
-    if(hSW || !('serviceWorker' in navigator) || location.protocol!=='https:') return Promise.resolve(null);
+    if(NATIVE || hSW || !('serviceWorker' in navigator) || location.protocol!=='https:') return Promise.resolve(null);
     hSW = navigator.serviceWorker.register('/sw.js').then(function(){ return navigator.serviceWorker.ready; }).catch(function(){ return null; });
     return hSW;
   }
   function hNotifAsk(){
+    if(NATIVE){ nAskNotif(); return; }
     if(hNotifState()!=='ask') return;
     try{
       var pr = Notification.requestPermission(function(){});
@@ -11571,7 +11582,7 @@ img{-webkit-user-drag:none}
     }catch(e){}
   }
   function hNotify(title,body,tag){
-    if(hNotifState()!=='on') return;
+    if(NATIVE || hNotifState()!=='on') return;
     var opt = {body:body,tag:tag,renotify:true,requireInteraction:true,vibrate:[200,100,200]};
     hRegSW().then(function(reg){
       if(reg && reg.showNotification) return reg.showNotification(title,opt);
@@ -11783,7 +11794,7 @@ img{-webkit-user-drag:none}
     var bn = document.getElementById('bnav');
     if(bn) bn.addEventListener('click',function(ev){ if(ev.target.closest('button') && navigator.vibrate){ try{ navigator.vibrate(8); }catch(e){} } });
   })();
-  if('serviceWorker' in navigator && location.protocol==='https:') window.addEventListener('load',function(){ setTimeout(function(){ try{ navigator.serviceWorker.register('/sw.js'); }catch(e){} },1500); });
+  if(!NATIVE && 'serviceWorker' in navigator && location.protocol==='https:') window.addEventListener('load',function(){ setTimeout(function(){ try{ navigator.serviceWorker.register('/sw.js'); }catch(e){} },1500); });
   function kdnScreenIn(id){
     if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var box = {'s-home':'home','s-health':'health','s-family':'family'}[id], el = box && document.getElementById(box);
@@ -11792,6 +11803,122 @@ img{-webkit-user-drag:none}
     clearTimeout(el._kin); el._kin = setTimeout(function(){ el.classList.remove('kin'); },1100);
   }
   /* ==== KDN POLISH END ==== */
+  /* ==== KDN NATIVE APP START ====
+     Runs only inside the Android app (Capacitor). On the website NATIVE is false and nothing here runs. */
+  var NP = NATIVE ? (window.Capacitor.Plugins || {}) : {};
+  var nNotif = 'ask', nSyncT = null;
+  function nHash(s){ var h = 2166136261; s = String(s); for(var i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h,16777619); } return (h>>>0) % 2000000000 + 1000; }
+  function nPermRead(r){ var d = r && (r.display||r.receive); nNotif = d==='granted' ? 'on' : d==='denied' ? 'blocked' : 'ask'; return nNotif; }
+
+  /* Medicine and period reminders as phone notifications: they ring even when KDN is closed. */
+  function nSync(){ clearTimeout(nSyncT); nSyncT = setTimeout(nSyncNow,700); }
+  function nSyncNow(){
+    var LN = NP.LocalNotifications; if(!LN) return;
+    LN.getPending().then(function(p){
+      /* snoozed doses stay; everything else is rebuilt from the current medicines */
+      var old = ((p && p.notifications)||[]).filter(function(n){ return n.extra && n.extra.kdn && n.extra.kdn!=='snz'; }).map(function(n){ return {id:n.id}; });
+      return old.length ? LN.cancel({notifications:old}) : null;
+    }).then(function(){
+      if(typeof healthOn!=='function' || !healthOn() || nNotif!=='on') return null;
+      var D = hLoad(), today = todayKey(), list = [];
+      hPeople().forEach(function(P){
+        var p = D.ppl[P.id]; if(!p) return;
+        (p.meds||[]).forEach(function(m){
+          if(m.paused || (m.end && m.end<today) || (m.start && m.start>today)) return;
+          (m.times||[]).forEach(function(t){
+            var hm = t.split(':'), hr = +hm[0], mi = +hm[1];
+            var days = Array.isArray(m.days) && m.days.length && m.days.length<7 ? m.days : [null];
+            days.forEach(function(wd){
+              var on = {hour:hr,minute:mi}; if(wd!==null) on.weekday = wd+1;
+              list.push({id:nHash(P.id+'|'+m.id+'|'+t+'|'+wd),title:'Time for '+m.name+(m.dose?' '+m.dose:''),
+                body:[HFOOD[m.food]||'',m.form||'',P.me?'':'for '+P.name].filter(Boolean).join(' · '),
+                schedule:{on:on,allowWhileIdle:true},smallIcon:'ic_stat_kdn',iconColor:'#E9C05A',actionTypeId:'KDN_MED',
+                extra:{kdn:'med',p:P.id,k:m.id+'@'+t}});
+            });
+          });
+        });
+        if(P.gender==='female' && p.cyc && p.cyc.periods && p.cyc.periods.length){
+          var r = hCyc(hP(P.id).cyc);
+          if(!r.none && !r.onPeriod && r.late===0){
+            var at = new Date(hAdd(r.next,-2)+'T09:00:00');
+            if(at.getTime() > Date.now()+60000) list.push({id:nHash('per|'+P.id),title:'KDN period reminder',
+              body:(P.me?'Your':P.name+'’s')+' period is expected on '+hDate(r.next,{day:'numeric',month:'short'})+'.',
+              schedule:{at:at,allowWhileIdle:true},smallIcon:'ic_stat_kdn',iconColor:'#E9C05A',extra:{kdn:'per',p:P.id}});
+          }
+        }
+      });
+      return list.length ? LN.schedule({notifications:list.slice(0,400)}) : null;
+    }).catch(function(e){ try{ console.warn('KDN reminders',e); }catch(x){} });
+  }
+  function nAskNotif(){
+    var LN = NP.LocalNotifications; if(!LN) return;
+    LN.requestPermissions().then(function(r){
+      nPermRead(r); nSync();
+      if(curScreen==='s-health') hRender();
+      if(nNotif==='on'){ toast('Reminders are on. KDN will remind you even when the app is closed.'); snd('ok'); }
+      else toast('Notifications are off. Turn them on in Settings › Apps › KDN Fitness › Notifications.');
+    });
+  }
+
+  /* Files (backups, bills, reports): save to the phone through the Android share sheet. */
+  function nBlobB64(blob){ return new Promise(function(res,rej){ var fr = new FileReader(); fr.onload = function(){ res(String(fr.result).split(',')[1]||''); }; fr.onerror = rej; fr.readAsDataURL(blob); }); }
+  function nShareFiles(items,title){
+    var FS = NP.Filesystem, SH = NP.Share; if(!FS || !SH){ toast('Saving files is not available here.'); return Promise.resolve(); }
+    return Promise.all(items.map(function(it){
+      return nBlobB64(it.blob).then(function(b64){ return FS.writeFile({path:String(it.name||'kdn-file').replace(/[^\w.\-]+/g,'-'),data:b64,directory:'CACHE'}); }).then(function(r){ return r.uri; });
+    })).then(function(uris){ return SH.share({title:title||'KDN Fitness',files:uris,dialogTitle:'Save or share'}); })
+      .catch(function(e){ var m = String(e && (e.message||e)); if(/cancel/i.test(m)) return; toast('Could not save the file on this phone.'); });
+  }
+  function nSaveFile(blob,fn,done){ nShareFiles([{blob:blob,name:fn}],fn).then(function(){ if(done) done(); }); }
+
+  if(NATIVE){
+    document.documentElement.classList.add('kdn-native');
+    var LN0 = NP.LocalNotifications;
+    if(LN0){
+      LN0.checkPermissions().then(function(r){ nPermRead(r); nSync(); });
+      try{ LN0.registerActionTypes({types:[{id:'KDN_MED',actions:[{id:'taken',title:'I took it'},{id:'snooze',title:'Remind in 10 min'}]}]}); }catch(e){}
+      LN0.addListener('localNotificationActionPerformed',function(a){
+        var n = a && a.notification || {}, x = n.extra || {};
+        if(x.kdn==='med' || x.kdn==='snz'){
+          if(a.actionId==='taken'){ hMark(x.p,todayKey(),x.k,'t'); toast('Dose marked as taken.'); if(curScreen==='s-health') hRender(); return; }
+          if(a.actionId==='snooze'){ LN0.schedule({notifications:[{id:nHash('snz|'+x.p+'|'+x.k+'|'+Date.now()),title:n.title,body:n.body,schedule:{at:new Date(Date.now()+600000),allowWhileIdle:true},smallIcon:'ic_stat_kdn',iconColor:'#E9C05A',actionTypeId:'KDN_MED',extra:{kdn:'snz',p:x.p,k:x.k}}]}); toast('KDN will remind you again in 10 minutes.'); return; }
+        }
+        if(x.kdn && healthOn()){ hS.who = x.p || 'me'; hS.tab = x.kdn==='per' ? 'cyc' : 'meds'; show('s-health'); }
+      });
+    }
+    if(NP.App){
+      NP.App.addListener('appStateChange',function(s){ if(s && s.isActive){ nSync(); hTick(); if(typeof tickLic==='function') tickLic(); } });
+      /* Android back button: close what is open, then go home, then leave the app */
+      NP.App.addListener('backButton',function(){
+        if(!$('hview').hidden){ $('hview').hidden = true; $('hview').innerHTML = ''; return; }
+        if(!$('hsheet').hidden){ hClose(); return; }
+        if(!$('hrem').hidden) return;
+        if(menuOpen()){ openMenu(false); return; }
+        var mod = Array.prototype.filter.call(document.querySelectorAll('.modal'),function(m){ return !m.hidden; })[0];
+        if(mod){ if(mod.id==='lgm') closeLogout(); else mod.hidden = true; return; }
+        if(curScreen==='s-gym' && typeof gS==='object' && gS && gS.ov){ gS.ov = null; gRender(); return; }
+        if(curScreen==='s-result' && S){ openHome(); return; }
+        if(curScreen!=='s-home' && curScreen!=='s-landing'){ go('home'); return; }
+        if(NP.App.minimizeApp) NP.App.minimizeApp(); else NP.App.exitApp();
+      });
+    }
+    /* Links to WhatsApp, phone, Instagram, Google Calendar etc. open in their own apps */
+    document.addEventListener('click',function(ev){
+      var a = ev.target.closest && ev.target.closest('a[href]'); if(!a) return;
+      var h = a.getAttribute('href') || '';
+      var ext = /^(tel|mailto|sms|whatsapp|upi|intent):/i.test(h) || (/^https?:\/\//i.test(h) && a.host!==location.host);
+      if(!ext || a.hasAttribute('download')) return;
+      ev.preventDefault();
+      if(NP.AppLauncher) NP.AppLauncher.openUrl({url:a.href}).catch(function(){ toast('Could not open this link.'); });
+    },true);
+    var nOpen = window.open;
+    window.open = function(u){ u = String(u||''); if(/^(https?:|tel:|mailto:|whatsapp:)/i.test(u) && NP.AppLauncher){ NP.AppLauncher.openUrl({url:u}); return null; } return nOpen.apply(window,arguments); };
+    /* status bar icons: light on the dark landing page, dark on the light app pages */
+    var nBar = function(){ var SB = NP.SystemBars; if(!SB || !SB.setStyle) return; try{ SB.setStyle({style:document.body.classList.contains('onland') || document.body.classList.contains('gymmode') ? 'LIGHT' : 'DARK'}); }catch(e){} };
+    if(window.MutationObserver) new MutationObserver(nBar).observe(document.body,{attributes:true,attributeFilter:['class']});
+    nBar();
+  }
+  /* ==== KDN NATIVE APP END ==== */
 
 })();
 
