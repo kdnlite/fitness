@@ -2758,6 +2758,16 @@ img{-webkit-user-drag:none}
 .actsw-b button{flex:1;border:0;background:none;border-radius:99px;padding:9px 4px;font:700 .9rem var(--font-display);color:#6B5A36;cursor:pointer;transition:background .25s,color .25s}
 .actsw-b button.on{background:#0F1A2E;color:#F2D58A}
 @media (prefers-reduced-motion:reduce){.screen,.kin>*,.hx-grid.kin2>*,.toast:not([hidden]),.modal:not([hidden]) .mbox,.hr-box,.hr-ic,.hh-dose.due{animation:none!important}.rv{opacity:1;transform:none;transition:none}.hs-panel,.hs-scrim{transition:none}}
+/* exercise photos are landscape (about 1.7 : 1): show the whole person, never crop */
+.big2:has(.eph){grid-template-columns:1fr;gap:14px}
+.big2 .eph{aspect-ratio:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 8px 20px rgba(20,32,43,.12)}
+.pics .eph{width:92px;height:54px;object-fit:contain;background:#1c1c1c;border-radius:8px}
+@media (max-width:380px){.pics .eph{width:80px;height:47px}}
+#p-ex .ex summary:has(.pics .eph){grid-template-columns:96px minmax(0,1fr) auto}
+#p-ex .ex .pics:has(.eph){width:96px;height:56px;background:#1c1c1c}
+.tddpics>span:has(.eph){width:76px;height:46px;border-radius:12px;background:#1c1c1c}
+.tddpics>span>img.eph{width:100%;height:100%;object-fit:contain;border-radius:0;background:#1c1c1c}
+#p-ex .ex .pics img.eph{width:96px;height:56px;object-fit:contain;background:#1c1c1c}
 /* ===== KDN POLISH CSS END ===== */
 
 </style>
