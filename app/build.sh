@@ -35,11 +35,10 @@ sed -i -E "s/versionCode [0-9]+/versionCode ${VC}/; s/versionName \"[^\"]+\"/ver
 V=android/variables.gradle
 sed -i -E 's/compileSdkVersion = [0-9]+/compileSdkVersion = 36/; s/targetSdkVersion = [0-9]+/targetSdkVersion = 36/' "$V"
 M=android/app/src/main/AndroidManifest.xml
-# camera for "Take photo" of reports; notifications for medicine reminders
-for P in android.permission.CAMERA android.permission.POST_NOTIFICATIONS android.permission.VIBRATE; do
+# notifications for period reminders (no camera: medical reports are website only)
+for P in android.permission.POST_NOTIFICATIONS android.permission.VIBRATE; do
   grep -q "$P" "$M" || sed -i "s#</manifest>#    <uses-permission android:name=\"$P\" />\n</manifest>#" "$M"
 done
-grep -q 'android.hardware.camera' "$M" || sed -i 's#</manifest>#    <uses-feature android:name="android.hardware.camera" android:required="false" />\n</manifest>#' "$M"
 echo "--- variables.gradle"; cat "$V"
 echo "--- manifest"; cat "$M"
 grep -E "versionCode|versionName" "$G"

@@ -3258,6 +3258,9 @@ img{-webkit-user-drag:none}
 (function(){
   var $ = function(id){return document.getElementById(id)};
   var NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  /* Medicines and medical records are on the website only. Google Play treats them as "Medical" apps,
+     which need an organization developer account, so the Android app keeps just the period tracker. */
+  var HMED = !NATIVE;
   var screens = ['s-landing','s-pay','s-ai','s-family','s-gym','s-trainer','s-share','s-home','s-intro','s-form','s-review','s-result','s-library','s-foods','s-about','s-health'];
   var curScreen = 's-landing';
   var planDone = false;
@@ -7098,6 +7101,7 @@ img{-webkit-user-drag:none}
   }
   function syncAuth(){
     var on = !!S;
+    if(typeof kMenuSync==='function') try{ kMenuSync(); }catch(e){}
     $('m-edit').hidden = !on; $('m-out').hidden = !on; $('mwho').hidden = !on;
     if(on){ $('mwho').innerHTML = '<b>'+esc(S.name)+'</b><small>Logged in on this device</small>'; $('mwho').setAttribute('data-i', String(S.name||'?').trim().charAt(0).toUpperCase()); }
     $('b-start1').textContent = on ? 'Open my home' : 'Get Started';
@@ -7284,7 +7288,7 @@ img{-webkit-user-drag:none}
   var PLANNAME = {ind:'Individual',fam:'Family',gym:'Gym'};
   function licPlan(){ var l = lic(); return l && PLANNAME[l.plan] ? l.plan : 'ind'; }
   function planOn(p){ return licensed() && licPlan()===p; }
-  function healthOn(){ return licensed() && licPlan()!=='gym'; }
+  function healthOn(){ return licensed() && licPlan()!=='gym' && (HMED || hPeople().length>0); }
   function licOf(p){ return lic(); }
   function licSetPlan(p,l){ var c = lic(); if(!l.plan) l.plan = p; if(!c || c.end<l.end){ licSet(l); licMem = l; } }
   function licSwitch(p){ var l = lic(); if(!l || !PLANNAME[p]) return; l.plan = p; licSet(l); licMem = l; kWasOn = null; tickLic(); }
@@ -10533,7 +10537,7 @@ img{-webkit-user-drag:none}
     var on = licensed(), lp = licPlan();
     $('m-fam').hidden = !(on && lp==='fam');
     $('m-gym').hidden = on && lp!=='gym';
-    $('m-hlt').hidden = !(on && lp!=='gym');
+    $('m-hlt').hidden = !(on && lp!=='gym' && healthOn());
     Array.prototype.forEach.call(document.querySelectorAll('#mlist button[data-go]'),function(b){
       var g = b.getAttribute('data-go');
       if(KLOCK.indexOf(g)>=0) b.classList.toggle('lockhide',!on);
@@ -10937,6 +10941,7 @@ img{-webkit-user-drag:none}
   function hPeople(){
     var a = [{id:'me',name:S ? S.name : 'You',gender:S ? S.gender : '',me:true}];
     if(typeof planOn==='function' && planOn('fam')) famLoad().members.forEach(function(m){ a.push({id:'f-'+m.id,name:m.p.name,gender:m.p.gender}); });
+    if(!HMED) a = a.filter(function(x){ return x.gender==='female'; });
     return a;
   }
   function hPerson(id){ var a = hPeople(); id = id || hS.who; for(var i=0;i<a.length;i++) if(a[i].id===id) return a[i]; return a[0]; }
@@ -11140,11 +11145,12 @@ img{-webkit-user-drag:none}
 
   /* ---- screen ---- */
   function hOpen(){
-    if(!hPeople().some(function(x){ return x.id===hS.who; })) hS.who = 'me';
+    var hp = hPeople(); if(!hp.some(function(x){ return x.id===hS.who; })) hS.who = hp.length ? hp[0].id : 'me';
     hRender(); hTick();
   }
   function hTabs(P){
-    var t = [['meds','Medicines'],['recs','Records']]; if(P.gender==='female') t.push(['cyc','Periods']);
+    var t = HMED ? [['meds','Medicines'],['recs','Records']] : []; if(P.gender==='female') t.push(['cyc','Periods']);
+    if(t.length<2) return '';
     return '<div class="hh-seg" role="tablist">'+t.map(function(x){ return '<button type="button" role="tab" data-h="tab" data-v="'+x[0]+'" aria-selected="'+(hS.tab===x[0])+'"'+(hS.tab===x[0]?' class="on"':'')+'>'+x[1]+'</button>'; }).join('')+'</div>';
   }
   function hRender(){
@@ -11152,10 +11158,11 @@ img{-webkit-user-drag:none}
     hFreeURLs();
     var P = hPerson(), ppl = hPeople();
     if(hS.tab==='cyc' && P.gender!=='female') hS.tab = 'meds';
-    var h = '<div class="hh-hero"><div class="hx-glow"></div><small>My health</small><h2>'+(P.me ? 'Your health' : esc(P.name)+'’s health')+'</h2>';
-    h += '<p>'+(P.gender==='female'?'Medicines, medical records and periods':'Medicines and medical records')+' in one place. Saved only on this phone.</p>';
+    if(!HMED) hS.tab = 'cyc';
+    var h = '<div class="hh-hero"><div class="hx-glow"></div><small>'+(HMED?'My health':'Period tracker')+'</small><h2>'+(HMED ? (P.me ? 'Your health' : esc(P.name)+'’s health') : (P.me ? 'Your cycle' : esc(P.name)+'’s cycle'))+'</h2>';
+    h += '<p>'+(!HMED ? 'Next period, fertile days and symptoms' : P.gender==='female'?'Medicines, medical records and periods':'Medicines and medical records')+(HMED?' in one place':'')+'. Saved only on this phone.</p>';
     if(ppl.length>1) h += '<div class="hh-ppl" role="radiogroup" aria-label="Whose health">'+ppl.map(function(x){ return '<button type="button" role="radio" data-h="who" data-v="'+esc(x.id)+'" aria-checked="'+(x.id===P.id)+'"'+(x.id===P.id?' class="on"':'')+'><i>'+esc(String(x.name||'?').trim().charAt(0).toUpperCase())+'</i>'+esc(x.me?'Me':x.name)+'</button>'; }).join('')+'</div>';
-    if(P.me && !S) h += '<p class="hh-note">Make your plan first so KDN knows your profile. Medicines and records work now.</p>';
+    if(P.me && !S && HMED) h += '<p class="hh-note">Make your plan first so KDN knows your profile. Medicines and records work now.</p>';
     h += '</div>'+hTabs(P);
     if(hS.tab==='meds') h += hMedsHtml(P);
     else if(hS.tab==='recs') h += hRecsHtml(P);
@@ -11598,7 +11605,7 @@ img{-webkit-user-drag:none}
     if(typeof healthOn!=='function' || !healthOn()) return;
     var D = hLoad(), day = todayKey(), now = new Date(), mins = now.getHours()*60+now.getMinutes(), ts = Date.now();
     hPeople().forEach(function(P){
-      var p = D.ppl[P.id]; if(!p || !Array.isArray(p.meds) || !p.meds.length) return;
+      var p = D.ppl[P.id]; if(!HMED || !p || !Array.isArray(p.meds) || !p.meds.length) return;
       hDoses(hP(P.id),day).forEach(function(d){
         if(d.st) return;
         var key = P.id+'|'+day+'|'+d.k, tm = hMin(d.t), sn = hSnooze[key];
@@ -11645,6 +11652,7 @@ img{-webkit-user-drag:none}
   /* home card */
   function hHomeCard(){
     if(typeof healthOn!=='function' || !healthOn()) return '';
+    if(!HMED) return hHomeCardCycle();
     var D = hLoad(), day = todayKey(), line1 = '', line2 = '', next = null, cnt = 0, done = 0;
     hPeople().forEach(function(P){
       var p = D.ppl[P.id]; if(!p || !Array.isArray(p.meds)) return;
@@ -11660,6 +11668,12 @@ img{-webkit-user-drag:none}
     return '<button type="button" class="hx-health" data-hm="health"><span class="hx-hic">'+hI('<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M8.5 11.5h2l1-2 1.5 4 1-2h1.5"/>')+'</span><span class="hx-ht2"><small>My health</small><b>'+esc(line1)+'</b>'+(line2?'<span class="hx-per">'+hI('<path d="M12 3c3 4.5 6 8 6 11.5A6 6 0 0 1 6 14.5C6 11 9 7.5 12 3z"/>')+esc(line2)+'</span>':'')+'</span><span class="hx-go" aria-hidden="true">›</span></button>';
   }
 
+  function hHomeCardCycle(){
+    var P = hPeople()[0]; if(!P) return '';
+    var D = hLoad(), p = D.ppl[P.id], c = p && p.cyc && p.cyc.periods && p.cyc.periods.length ? hCyc(hP(P.id).cyc) : null;
+    var line = !c ? 'Track your period' : c.onPeriod ? 'Period day '+c.cday : c.late>0 ? 'Period '+c.late+' day'+(c.late>1?'s':'')+' late' : c.until===0 ? 'Period expected today' : 'Next period in '+c.until+' day'+(c.until>1?'s':'');
+    return '<button type="button" class="hx-health" data-hm="health"><span class="hx-hic">'+hI('<path d="M12 3c3 4.5 6 8 6 11.5A6 6 0 0 1 6 14.5C6 11 9 7.5 12 3z"/>')+'</span><span class="hx-ht2"><small>Period tracker</small><b>'+esc(line)+'</b></span><span class="hx-go" aria-hidden="true">›</span></button>';
+  }
   /* ---- events ---- */
   $('health').addEventListener('click',function(ev){
     var b = ev.target.closest('[data-h]'); if(!b) return;
@@ -11823,7 +11837,7 @@ img{-webkit-user-drag:none}
       var D = hLoad(), today = todayKey(), list = [];
       hPeople().forEach(function(P){
         var p = D.ppl[P.id]; if(!p) return;
-        (p.meds||[]).forEach(function(m){
+        (HMED ? (p.meds||[]) : []).forEach(function(m){
           if(m.paused || (m.end && m.end<today) || (m.start && m.start>today)) return;
           (m.times||[]).forEach(function(t){
             var hm = t.split(':'), hr = +hm[0], mi = +hm[1];
@@ -11873,6 +11887,16 @@ img{-webkit-user-drag:none}
 
   if(NATIVE){
     document.documentElement.classList.add('kdn-native');
+    (function(){
+      var mh = $('m-hlt'); if(mh){ var b = mh.querySelector('b'), sm = mh.querySelector('small'); if(b) b.textContent = 'Period tracker'; if(sm) sm.textContent = 'Next period, fertile days, symptoms'; }
+      Array.prototype.forEach.call(document.querySelectorAll('.lp-pl li'),function(li){
+        var t = li.textContent;
+        if(/^Medicine reminders/.test(t)) li.remove();
+        else if(/^Medicines, reports and period tracker/.test(t)) li.textContent = 'Period tracker for each woman in the family';
+      });
+      Object.keys(PLANS).forEach(function(k){ PLANS[k].ticks = PLANS[k].ticks.map(function(t){ return /^Medicine reminders, medical records and period tracker/.test(t) ? 'Period tracker for women' : /^Medicines, reports and period tracker/.test(t) ? 'Period tracker for each woman in the family' : t; }); });
+      try{ setPlan(curPlan); }catch(e){}
+    })();
     var LN0 = NP.LocalNotifications;
     if(LN0){
       LN0.checkPermissions().then(function(r){ nPermRead(r); nSync(); });
