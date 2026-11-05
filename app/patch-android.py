@@ -17,7 +17,7 @@ for d in ('layout', 'xml', 'drawable'):
 # strings
 sp = os.path.join(A, 'res/values/strings.xml'); s = open(sp).read()
 add = ''
-if 'kdn_widget_desc' not in s: add += '    <string name="kdn_widget_desc">Today\'s score, steps and water</string>\n'
+if 'kdn_widget_desc' not in s: add += '    <string name="kdn_widget_desc">Score, steps and water for today</string>\n'
 if 'health_connect_privacy_policy_url' not in s: add += '    <string name="health_connect_privacy_policy_url">https://kdnfitness.com/privacy.html</string>\n'
 s = s.replace('</resources>', add + '</resources>'); open(sp, 'w').write(s)
 # manifest
@@ -32,7 +32,7 @@ if 'KdnWidgetProvider' not in m:
 # health permissions from every plugin manifest, except reading steps
 perms = set()
 for f in glob.glob('node_modules/**/android/src/main/AndroidManifest.xml', recursive=True):
-    perms |= set(re.findall(r'android\.permission\.health\.[A-Z_]+', open(f).read()))
+    perms |= set(re.findall(r'android\.permission\.health\.[A-Z0-9_]+', open(f).read()))
 keep = {'android.permission.health.READ_STEPS'}
 rm = sorted(perms - keep)
 lines = ''.join('    <uses-permission android:name="%s" tools:node="remove" />\n' % p for p in rm if p not in m)

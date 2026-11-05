@@ -44,11 +44,30 @@ main{max-width:880px;margin:0 auto;padding:16px 16px calc(var(--tabh) + 32px + e
 .stats div{background:var(--bg);padding:10px 12px}
 .stats b{display:block;font-family:var(--display);font-size:1.35rem;font-weight:800}
 .stats span{font-size:.78rem;color:var(--muted)}
+.dcard{border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 10px;margin-bottom:14px;background:var(--bg)}
+.dcard h2{font-size:1rem;margin-bottom:10px}
+.dcard.dtwo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:560px){.dcard.dtwo{grid-template-columns:1fr}}
+.dchart{width:100%;height:auto;display:block}
+.dchart .dg{stroke:var(--line);stroke-width:1}
+.dchart .dt{font-size:10px;fill:var(--muted)}
+.legend{display:flex;gap:14px;font-size:.8rem;color:var(--muted);margin:6px 0 0}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.funnel{display:flex;flex-direction:column;gap:8px}
+.fr{display:grid;grid-template-columns:minmax(120px,1.2fr) 2fr auto;grid-template-rows:auto auto;column-gap:10px;align-items:center}
+.fr span{font-size:.88rem}
+.fr i{display:block;height:14px;border-radius:7px;background:linear-gradient(90deg,var(--gold),#E0B85A)}
+.fr b{font-family:var(--display);font-weight:800}
+.fr em{grid-column:2/4;font-style:normal;font-size:.74rem;color:var(--muted)}
+.dkv{list-style:none;margin:0;padding:0}
+.dkv li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.dkv li:last-child{border-bottom:0}
+.muted.small{font-size:.78rem;margin:8px 0 0}
 @media (max-width:520px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* bottom tabs */
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--bg);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-.tabs-in{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);height:var(--tabh)}
+.tabs-in{max-width:880px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);height:var(--tabh)}
 .tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:.74rem;color:var(--muted);cursor:pointer;position:relative}
 .tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tabs button[aria-current="page"]{color:var(--accent);font-weight:700}
@@ -162,6 +181,7 @@ main{max-width:880px;margin:0 auto;padding:16px 16px calc(var(--tabh) + 32px + e
 <div class="gate" id="gate"><span class="mark">KDN</span><p class="note">Checking login…</p></div>
 
 <nav class="tabs" aria-label="Sections" hidden><div class="tabs-in" id="tabs">
+  <button data-tab="dash"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Dashboard</button>
   <button data-tab="mail" aria-current="page"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Inbox<span class="badge" id="unread" hidden></span></button>
   <button data-tab="users"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2.2.6 3.5 2.6 3.5 6"/></svg>Users</button>
   <button data-tab="pay"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 10h19M6.5 15h4"/></svg>Payments</button>
@@ -175,7 +195,7 @@ main{max-width:880px;margin:0 auto;padding:16px 16px calc(var(--tabh) + 32px + e
 var $ = function(id){ return document.getElementById(id); };
 var PLANS = {ind:'Individual', fam:'Family', gym:'Gym'};
 var state = {tab:'mail', box:'in', q:'', page:0, ufilter:'all', me:null};
-var TITLES = {mail:'Inbox', users:'Users', pay:'Payments', coupons:'Coupons', site:'Website'};
+var TITLES = {dash:'Dashboard', mail:'Inbox', users:'Users', pay:'Payments', coupons:'Coupons', site:'Website'};
 
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
 var TZ = 'Asia/Kolkata';
@@ -287,13 +307,48 @@ function go(tab){
   Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function(b){ if(b.dataset.tab === tab) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
   $('title').textContent = TITLES[tab];
   try{ history.replaceState(null,'','#'+tab); }catch(e){}
-  ({mail:mailView, users:usersView, pay:payView, coupons:couponsView, site:siteView})[tab]();
+  ({dash:dashView, mail:mailView, users:usersView, pay:payView, coupons:couponsView, site:siteView})[tab]();
 }
 
 function searchBox(ph){ return '<input class="search" type="search" id="q" placeholder="'+esc(ph)+'" value="'+esc(state.q)+'" aria-label="'+esc(ph)+'">'; }
 function bindSearch(fn){
   var t; var q = $('q'); if(!q) return;
   q.addEventListener('input', function(){ clearTimeout(t); t = setTimeout(function(){ state.q = q.value; state.page = 0; fn(); }, 300); });
+}
+
+/* ================= DASHBOARD ================= */
+state.days = 30;
+function dashView(){
+  $('view').innerHTML = '<div class="bar"><div class="seg" id="drange">' + [[7,'7 days'],[30,'30 days'],[90,'90 days']].map(function(x){ return '<button data-d="'+x[0]+'" aria-pressed="'+(state.days===x[0])+'">'+x[1]+'</button>'; }).join('') + '</div></div><div id="dash"><p class="muted">Loading…</p></div>';
+  $('drange').addEventListener('click', function(e){ var b = e.target.closest('button'); if(!b) return; state.days = +b.dataset.d; dashView(); });
+  api('report?days=' + state.days).then(drawDash).catch(function(e){ $('dash').innerHTML = '<p class="muted">Could not load the report: ' + esc(e.message) + '</p>'; });
+}
+function sum(a, k){ return a.reduce(function(t, x){ return t + (x[k] || 0); }, 0); }
+function pct(a, b){ return b ? Math.round(a / b * 1000) / 10 + '%' : '—'; }
+function bars(days, keys, colors, fmt){
+  var W = 640, H = 170, L = 34, B = 22, n = days.length, bw = (W - L - 6) / n, max = 1;
+  days.forEach(function(d){ var t = 0; keys.forEach(function(k){ t = Math.max(t, d[k] || 0); }); max = Math.max(max, t); });
+  var top = Math.ceil(max / 4) * 4 || 4, g = '';
+  for(var i = 0; i <= 4; i++){ var y = 8 + (H - B - 8) * (1 - i / 4); g += '<line x1="'+L+'" x2="'+W+'" y1="'+y+'" y2="'+y+'" class="dg"/><text x="'+(L-6)+'" y="'+(y+3)+'" class="dt" text-anchor="end">'+(fmt ? fmt(top * i / 4) : Math.round(top * i / 4))+'</text>'; }
+  days.forEach(function(d, i){
+    var x0 = L + i * bw, w = Math.max(1.5, bw / keys.length - 1.5);
+    keys.forEach(function(k, j){ var v = d[k] || 0, h = (H - B - 8) * v / top; if(v) g += '<rect x="'+(x0 + j * (w + 1)).toFixed(1)+'" y="'+(H - B - h).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="2" fill="'+colors[j]+'"><title>'+d.d+' · '+k+': '+(fmt ? fmt(v) : v)+'</title></rect>'; });
+    if(n <= 14 || i % Math.ceil(n / 7) === 0) g += '<text x="'+(x0 + bw / 2).toFixed(1)+'" y="'+(H - 6)+'" class="dt" text-anchor="middle">'+d.d.slice(8)+'/'+d.d.slice(5,7)+'</text>';
+  });
+  return '<svg viewBox="0 0 '+W+' '+H+'" class="dchart" role="img">'+g+'</svg>';
+}
+function drawDash(r){
+  var D = r.days, v = sum(D,'visit'), st = sum(D,'start'), pl = sum(D,'plan'), pg = sum(D,'pay'), pd = sum(D,'paid'), rev = sum(D,'revenue'), nu = sum(D,'users');
+  var h = '<div class="stats"><div><b>'+v+'</b><span>Website visits</span></div><div><b>'+pl+'</b><span>Plans made</span></div><div><b>'+pd+'</b><span>Payments</span></div><div><b>'+rupees(rev)+'</b><span>Revenue</span></div></div>';
+  var F = [['Visited the website',v],['Started the questions',st],['Made a plan',pl],['Opened the plans page',pg],['Paid',pd]];
+  h += '<section class="dcard"><h2>From visit to payment</h2><div class="funnel">' + F.map(function(f, i){ var w = v ? Math.max(4, f[1] / v * 100) : 4; return '<div class="fr"><span>'+f[0]+'</span><i style="width:'+w.toFixed(1)+'%"></i><b>'+f[1]+'</b><em>'+(i ? pct(f[1], F[i-1][1]) + ' of previous' : '')+'</em></div>'; }).join('') + '</div><p class="muted small">Counted on the website, once per visit. No names, emails or IPs are stored for this.</p></section>';
+  h += '<section class="dcard"><h2>Visits and plans per day</h2>' + bars(D, ['visit','plan'], ['#A87A1E','#1D4ED8']) + '<p class="legend"><span><i style="background:#A87A1E"></i>Visits</span><span><i style="background:#1D4ED8"></i>Plans made</span></p></section>';
+  h += '<section class="dcard"><h2>Revenue per day</h2>' + bars(D, ['revenue'], ['#1F7A55'], function(p){ return '₹' + Math.round(p / 100).toLocaleString('en-IN'); }) + '<p class="muted small">'+pd+' payments · '+nu+' new members in this period · all time '+rupees(r.allTime.revenue)+' from '+r.allTime.payments+' payments</p></section>';
+  var act = r.active || {}, plans = ['ind','fam','gym'];
+  h += '<section class="dcard dtwo"><div><h2>Active members by plan</h2><ul class="dkv">' + plans.map(function(p){ return '<li><span>'+PLANS[p]+'</span><b>'+(act[p] || 0)+'</b></li>'; }).join('') + '</ul></div><div><h2>Revenue by plan</h2><ul class="dkv">' + plans.map(function(p){ return '<li><span>'+PLANS[p]+'</span><b>'+rupees((r.byPlan || {})[p] || 0)+'</b></li>'; }).join('') + '</ul></div></section>';
+  var C = r.coupons || [];
+  h += '<section class="dcard"><h2>Coupons</h2>' + (C.length ? '<ul class="dkv">' + C.map(function(c){ var inP = (r.byCoupon || {})[c.code] || 0; return '<li><span><code>'+esc(c.code)+'</code> '+(c.kind === 'percent' ? c.value + '% off' : c.kind === 'days' ? c.value + ' days' : rupees(c.value) + ' off')+(c.active ? '' : ' · off')+'</span><b>'+c.used+(c.max_uses != null ? ' / ' + c.max_uses : '')+' used'+(inP ? ' · '+inP+' here' : '')+'</b></li>'; }).join('') + '</ul>' : '<p class="muted">No coupons yet.</p>') + '</section>';
+  $('dash').innerHTML = h;
 }
 
 /* ================= MAIL ================= */
@@ -572,7 +627,7 @@ api('me').then(function(me){
   lo.onclick = function(){ api('logout',{method:'POST'}).then(function(){ location.reload(); }).catch(function(){ location.reload(); }); };
   loadStats();
   var h = (location.hash || '').slice(1);
-  go(TITLES[h] ? h : 'mail');
+  go(TITLES[h] ? h : 'dash');
   if(!me.mailReady) toast('Sending is off. Open Website and paste your Resend key.', true);
   setInterval(function(){ if(document.visibilityState === 'visible'){ loadStats(); if(state.tab==='mail' && !document.querySelector('.sheet')) loadMail(); } }, 60000);
 }).catch(function(e){ gate({error:e.message}); });

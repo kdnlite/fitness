@@ -38,6 +38,35 @@ export async function onRequest(ctx) {
       return json({ unread: unread.n, active: active.n, expiringSoon: expSoon.n, users: users.n, monthRevenue: rev.s, monthPayments: pays.n });
     }
 
+    // ---------- dashboard report: visits funnel, sales, plans, coupons ----------
+    if (res === 'report' && m === 'GET') {
+      const days = Math.max(7, Math.min(90, int(q.get('days'), 30)));
+      const IST = 5.5 * 3600000, t = now();
+      const from = new Date(t + IST - (days - 1) * DAY).toISOString().slice(0, 10);
+      const fromMs = new Date(from + 'T00:00:00+05:30').getTime();
+      const [vis, pays, nus, plans, coupons, tot] = await Promise.all([
+        db.prepare('SELECT day, kind, n FROM visits WHERE day>=?').bind(from).all(),
+        db.prepare("SELECT created_at, amount, plan, coupon FROM payments WHERE status IN ('captured','manual') AND created_at>=?").bind(fromMs).all(),
+        db.prepare('SELECT created_at FROM users WHERE created_at>=?').bind(fromMs).all(),
+        db.prepare("SELECT plan, COUNT(*) n FROM users WHERE status='active' AND valid_until>? GROUP BY plan").bind(t).all(),
+        db.prepare('SELECT code, kind, value, plan, used, max_uses, active FROM coupons ORDER BY used DESC LIMIT 12').all(),
+        db.prepare("SELECT COALESCE(SUM(amount),0) s, COUNT(*) n FROM payments WHERE status IN ('captured','manual')").first(),
+      ]);
+      const D = {};
+      for (let i = 0; i < days; i++) { const d = new Date(fromMs + IST + i * DAY).toISOString().slice(0, 10); D[d] = { d, visit: 0, start: 0, plan: 0, pay: 0, paid: 0, revenue: 0, users: 0 }; }
+      const dayOf = (ms) => new Date(ms + IST).toISOString().slice(0, 10);
+      for (const r of vis.results || []) if (D[r.day]) D[r.day][r.kind] = r.n;
+      const byPlan = {}, byCoupon = {};
+      for (const p of pays.results || []) {
+        const d = D[dayOf(p.created_at)]; if (d) { d.paid++; d.revenue += p.amount; }
+        byPlan[p.plan || 'ind'] = (byPlan[p.plan || 'ind'] || 0) + p.amount;
+        if (p.coupon) byCoupon[p.coupon] = (byCoupon[p.coupon] || 0) + 1;
+      }
+      for (const u of nus.results || []) { const d = D[dayOf(u.created_at)]; if (d) d.users++; }
+      const active = {}; for (const r of plans.results || []) active[r.plan] = r.n;
+      return json({ days: Object.values(D), active, byPlan, byCoupon, coupons: coupons.results || [], allTime: { revenue: tot.s, payments: tot.n } });
+    }
+
     // ---------- mail ----------
     if (res === 'messages') {
       if (!id && m === 'GET') {
