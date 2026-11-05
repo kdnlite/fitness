@@ -8,3 +8,5 @@ Edit the files here, never index.html directly.
 
 Build: `node tools/build.mjs` (writes index.html). Check: `node tools/build.mjs --check`.
 Commit src/ and index.html together. Cloudflare Pages serves index.html as it is.
+
+The start-up code (in 19-scene-menu-start.js) runs before later files' top-level lines. In files after it, keep data that render functions read inside functions, not top-level `var`s.

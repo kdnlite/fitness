@@ -1,0 +1,83 @@
+/* ===== KDN ENGAGE CSS START: score, streak, water, badges, reminders ===== */
+.kic{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ek{margin-top:14px;border-radius:26px;padding:6px;background:linear-gradient(160deg,#1A2440,#0B1220 70%);box-shadow:0 0 0 1px rgba(233,207,156,.2),0 18px 40px rgba(7,12,23,.22);color:#fff}
+.ek-top{display:flex;align-items:center;gap:14px;width:100%;text-align:left;font:inherit;color:inherit;background:none;border:0;padding:12px 12px 10px;cursor:pointer;border-radius:20px}
+.ek-top:active{transform:scale(.98)}
+.ek-rw{position:relative;display:inline-grid;place-items:center;flex:none}
+.ek-rw b{position:absolute;font-family:var(--font-display);font-size:1.25rem;color:#F2D58A}
+.ek-rw.big b{font-size:2rem}
+.ek-ring{transform:rotate(-90deg)}
+.ek-ring circle{fill:none;stroke-width:6}
+.ek-ring .bg{stroke:rgba(233,207,156,.16)}
+.ek-ring .fg{stroke:#E9C05A;stroke-linecap:round;transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1)}
+.ek-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ek-tx small{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#E9CF9C}
+.ek-tx b{font-family:var(--font-display);font-size:1.18rem;color:#fff}
+.ek-tx span{font-size:.84rem;color:#AEB8CC}
+.ek-fl{display:inline-block;animation:ekfl 1.6s ease-in-out infinite}
+@keyframes ekfl{50%{transform:scale(1.15) translateY(-1px)}}
+.ek .hx-go{color:#E9CF9C}
+.ek-wa{display:flex;align-items:center;gap:12px;margin:2px 6px;padding:12px 12px;border-radius:18px;background:rgba(255,255,255,.06)}
+.ek-wl{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.ek-wl small{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9CC8F0}
+.ek-wl b{font-size:1rem}
+.ek-cups{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+.ek-cups i{width:11px;height:15px;border-radius:2px 2px 4px 4px;border:1.5px solid rgba(156,200,240,.5);transition:background .3s}
+.ek-cups i.on{background:#5FB2F2;border-color:#5FB2F2}
+.ek-wb{display:flex;gap:8px;flex:none}
+.ek-q{width:44px;height:44px;border-radius:50%;border:1px solid rgba(233,207,156,.35);background:rgba(255,255,255,.06);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer}
+.ek-q.add{background:#5FB2F2;border-color:#5FB2F2;color:#06213A;font-weight:800}
+.ek-q:disabled{opacity:.35;cursor:default}
+.ek-q:active:not(:disabled){transform:scale(.92)}
+.ek-links{display:flex;flex-wrap:wrap;gap:6px;padding:8px 6px 6px}
+.ek-links button{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:0 12px;border-radius:14px;border:1px solid rgba(233,207,156,.22);background:transparent;color:#E8ECF4;font:600 .86rem var(--font-body);cursor:pointer;white-space:nowrap}
+.ek-links button em{font-style:normal;font-size:.75rem;color:#0B1220;background:#E9C05A;border-radius:999px;padding:1px 7px}
+.ek-links .kic{color:#E9CF9C}
+/* score sheet */
+.ek-big{display:flex;align-items:center;gap:16px;padding:6px 0}
+.ek-big p{margin:0;color:var(--muted);font-size:.92rem}
+.ek-big .ek-ring .bg{stroke:#F1E7D0}
+.ek-big .ek-rw b{color:#1B2742}
+.ek-rows{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.ek-row{display:grid;grid-template-columns:1fr 90px 44px;align-items:center;gap:10px}
+.ek-row span{display:flex;flex-direction:column;min-width:0}
+.ek-row small{color:var(--muted);font-size:.8rem}
+.ek-row em{font-style:normal;font-weight:700;text-align:right;font-size:.88rem}
+.ek-bar{height:8px;border-radius:4px;background:#F1E7D0;overflow:hidden}
+.ek-bar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#C9A762,#E9C05A)}
+.ek-days{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;align-items:end;height:92px}
+.ek-d{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
+.ek-d i{width:100%;max-width:18px;border-radius:5px;background:#E7DFCC}
+.ek-d.on i{background:linear-gradient(180deg,#E9C05A,#B8934A)}
+.ek-d.now i{box-shadow:0 0 0 2px #1B2742}
+.ek-d small{font-size:.7rem;color:var(--muted)}
+.ek-st{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.ek-st div{background:#FBF8F1;border-radius:16px;padding:12px;text-align:center}
+.ek-st b{display:block;font-family:var(--font-display);font-size:1.7rem;color:#1B2742}
+.ek-st small{color:var(--muted);font-size:.8rem}
+/* badges */
+.ek-bg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.ek-b{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:14px 8px;border-radius:18px;background:#F7F4EE;color:#8C93A3}
+.ek-b span{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#ECE6DA}
+.ek-b span .kic{width:26px;height:26px}
+.ek-b b{font-size:.9rem;color:#5B6273}
+.ek-b small{font-size:.74rem;line-height:1.3}
+.ek-b.on{background:linear-gradient(160deg,#1A2440,#0B1220);color:#AEB8CC}
+.ek-b.on span{background:linear-gradient(150deg,#F6E3B4,#C9A762);color:#1B2742}
+.ek-b.on b{color:#fff}
+/* reminders */
+.ek-rc{border:1px solid #EFE6D3;border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.ek-rh{display:flex;align-items:center;gap:12px}
+.ek-rh span{flex:1;min-width:0;display:flex;flex-direction:column}
+.ek-rh small{color:var(--muted);font-size:.8rem;line-height:1.3}
+.ek-sw{position:relative;width:52px;height:30px;border-radius:15px;border:0;background:#DCD5C6;cursor:pointer;flex:none;transition:background .2s}
+.ek-sw i{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.ek-sw.on{background:#B8934A}
+.ek-sw.on i{transform:translateX(22px)}
+.ek-tms{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.ek-tm{display:flex;flex-direction:column;gap:4px;font-size:.78rem;color:var(--muted)}
+.ek-tm input,.ek-tm select{font:inherit;font-size:16px;color:var(--fg);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;min-height:44px;width:100%}
+.ek-allow{min-height:48px;border-radius:14px;border:0;background:#1B2742;color:#F2D58A;font:700 .95rem var(--font-body);cursor:pointer}
+.ek-warn{margin:0;padding:10px 12px;border-radius:12px;background:#FDECEC;color:#8A1F1F;font-size:.88rem}
+.ek-note{margin:0;color:var(--muted);font-size:.84rem}
+/* ===== KDN ENGAGE CSS END ===== */

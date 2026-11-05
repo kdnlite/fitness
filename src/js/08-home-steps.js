@@ -49,6 +49,7 @@
     /* subscription timer */
     h += '<button type="button" class="hx-sub'+(sb.on?'':' off')+'" data-hm="sub"><span class="hx-subl"><small>Subscription time left</small><b id="hx-cd">'+sb.big+'</b><span>'+esc(sb.small)+'</span></span><span class="hx-go" aria-hidden="true">›</span>'+(sb.on?'<i class="hx-subbar"><em style="width:'+Math.round(sb.pct*100)+'%"></em></i>':'')+'</button>';
 
+    if(typeof eHomeCard==='function') h += eHomeCard();
     /* main tiles */
     if(typeof kBadgeHtml==='function') h += kBadgeHtml();
     h += '<div class="hx-grid">';

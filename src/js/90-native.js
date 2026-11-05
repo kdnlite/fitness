@@ -14,8 +14,10 @@
       var old = ((p && p.notifications)||[]).filter(function(n){ return n.extra && n.extra.kdn && n.extra.kdn!=='snz'; }).map(function(n){ return {id:n.id}; });
       return old.length ? LN.cancel({notifications:old}) : null;
     }).then(function(){
-      if(typeof healthOn!=='function' || !healthOn() || nNotif!=='on') return null;
-      var D = hLoad(), today = todayKey(), list = [];
+      if(nNotif!=='on') return null;
+      var list = (typeof eNotifList==='function' && S) ? eNotifList() : [];
+      if(typeof healthOn!=='function' || !healthOn()) return list.length ? LN.schedule({notifications:list.slice(0,400)}) : null;
+      var D = hLoad(), today = todayKey();
       hPeople().forEach(function(P){
         var p = D.ppl[P.id]; if(!p) return;
         (HMED ? (p.meds||[]) : []).forEach(function(m){
@@ -88,6 +90,7 @@
           if(a.actionId==='taken'){ hMark(x.p,todayKey(),x.k,'t'); toast('Dose marked as taken.'); if(curScreen==='s-health') hRender(); return; }
           if(a.actionId==='snooze'){ LN0.schedule({notifications:[{id:nHash('snz|'+x.p+'|'+x.k+'|'+Date.now()),title:n.title,body:n.body,schedule:{at:new Date(Date.now()+600000),allowWhileIdle:true},smallIcon:'ic_stat_kdn',iconColor:'#E9C05A',actionTypeId:'KDN_MED',extra:{kdn:'snz',p:x.p,k:x.k}}]}); toast('KDN will remind you again in 10 minutes.'); return; }
         }
+        if(x.kdn==='eng'){ var ek = String(x.k||''); if(/^m|^wo/.test(ek)) go('plan'); else if(ek==='st') go('steps'); else openHome(); return; }
         if(x.kdn && healthOn()){ hS.who = x.p || 'me'; hS.tab = x.kdn==='per' ? 'cyc' : 'meds'; show('s-health'); }
       });
     }
@@ -97,6 +100,8 @@
       NP.App.addListener('backButton',function(){
         if(!$('hview').hidden){ $('hview').hidden = true; $('hview').innerHTML = ''; return; }
         if(!$('hsheet').hidden){ hClose(); return; }
+        if(typeof kBack==='function' && kBack()) return;
+        if(kSheetOpen()){ kClose(); return; }
         if(!$('hrem').hidden) return;
         if(menuOpen()){ openMenu(false); return; }
         var mod = Array.prototype.filter.call(document.querySelectorAll('.modal'),function(m){ return !m.hidden; })[0];
@@ -124,6 +129,4 @@
     nBar();
   }
   /* ==== KDN NATIVE APP END ==== */
-
-})();
 
