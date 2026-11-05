@@ -28,7 +28,7 @@
   $('lgm').addEventListener('click',function(ev){ if(ev.target===$('lgm')) closeLogout() });
   $('lg-yes').addEventListener('click',function(){
     closeLogout();
-    sensorStop(); lsDel(); try{ localStorage.removeItem('kdn.gym.v1'); }catch(e){} if(typeof hClearAll==='function') hClearAll(); S = null; curR = null; viewDow = null; userKg = null; figG = null; D = null; f.reset(); amtGoal = null; tKey = null;
+    sensorStop(); lsDel(); try{ localStorage.removeItem('kdn.gym.v1'); }catch(e){} if(typeof hClearAll==='function') hClearAll(); if(typeof pClearAll==='function') pClearAll(); S = null; curR = null; viewDow = null; userKg = null; figG = null; D = null; f.reset(); amtGoal = null; tKey = null;
     $('home').innerHTML = '';
     syncAuth(); renderWelcome(); renderLibrary(); setFoodDiet('veg');
     go('home');

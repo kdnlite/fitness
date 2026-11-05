@@ -407,15 +407,8 @@
     var h = '<div class="sect"><div class="sh"><div><small>Progress</small><h3>Weigh-ins</h3></div><span class="dsum2">Week '+Math.max(1,Math.floor((dayNum(tk)-dayNum(S.startDate))/7)+1)+(r.weeks>0 ? ' of '+r.weeks : '')+'</span></div>';
     h += '<p class="hint">Weigh yourself once a week, same day and time, before eating. Daily weight moves 1 to 2 kg from water, so judge by the trend over two weeks or more.</p>';
     h += '<div class="frow"><span class="fl">Log your weight</span><div class="inwrap"><input type="number" id="w-kg" min="20" max="300" step="0.1" inputmode="decimal" placeholder="'+r1(list.length?list[list.length-1].kg:S.weight)+'" aria-label="Weight in kg"><span class="unit">kg</span></div><div class="inwrap"><input type="date" id="w-date" value="'+tk+'" max="'+tk+'" aria-label="Date"></div><button type="button" class="btn sm" data-pg="add">Save weigh-in</button><div class="err" id="w-err" role="alert"></div></div>';
-    // chart
-    var sw = S.startWeight>0 ? S.startWeight : S.weight, D = Math.max(7, r.weeks>0 ? r.weeks*7 : 28, list.length ? dayNum(list[list.length-1].k)-dayNum(S.startDate) : 0);
-    var vals = [sw, r.tw].concat(list.map(function(e){return e.kg})), lo = Math.min.apply(null,vals)-1, hi = Math.max.apply(null,vals)+1;
-    function X(d){return 8+Math.max(0,Math.min(D,d))/D*284}
-    function Y(v){return 8+(hi-v)/(hi-lo)*104}
-    var exp = r.weeks>0 ? '<line x1="'+X(0)+'" y1="'+Y(sw)+'" x2="'+X(r.weeks*7)+'" y2="'+Y(r.tw)+'" stroke="#9DB5EE" stroke-width="2" stroke-dasharray="5 4"/>' : '<line x1="'+X(0)+'" y1="'+Y(sw)+'" x2="'+X(D)+'" y2="'+Y(sw)+'" stroke="#9DB5EE" stroke-width="2" stroke-dasharray="5 4"/>';
-    var pts = list.map(function(e){return X(dayNum(e.k)-dayNum(S.startDate)).toFixed(1)+','+Y(e.kg).toFixed(1)}).join(' ');
-    var dots = list.map(function(e){return '<circle cx="'+X(dayNum(e.k)-dayNum(S.startDate)).toFixed(1)+'" cy="'+Y(e.kg).toFixed(1)+'" r="3.6" fill="#1D4ED8"><title>'+e.k+': '+e.kg+' kg</title></circle>'}).join('');
-    h += '<div class="chart"><svg viewBox="0 0 300 124" role="img" aria-label="Expected weight and your logged weight">'+exp+(list.length>1?'<polyline points="'+pts+'" fill="none" stroke="#1D4ED8" stroke-width="2"/>':'')+dots+'<text x="8" y="121" font-size="9" fill="#586774">Start '+r1(sw)+' kg</text><text x="292" y="121" font-size="9" fill="#586774" text-anchor="end">Target '+r1(r.tw)+' kg</text></svg><div class="cx"><span>Dashed line: plan</span><span></span><span>Dots: your weigh-ins</span></div></div>';
+    var sw = S.startWeight>0 ? S.startWeight : S.weight;
+    if(typeof wChart==='function') h += wChart(list,sw,r);
     if(list.length){
       var last = list[list.length-1], ex = expectedAt(last.k,r), df = last.kg-ex;
       h += '<p class="hint">Latest: <b>'+last.kg+' kg</b> on '+last.k+'. The plan expects about <b>'+r1(ex)+' kg</b> by then ('+(Math.abs(df)<0.3?'right on track':(df>0?'+':'')+r1(df)+' kg difference')+').</p>';
@@ -436,8 +429,10 @@
     if(list.length){
       h += '<div class="rlist">'+list.slice(-8).reverse().map(function(e){return '<div class="rrow"><span>'+e.k+(S.wtime&&S.wtime[e.k]?' · '+new Date(S.wtime[e.k]).toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit'}):'')+'</span><b>'+e.kg+' kg</b><span><button type="button" class="linkbtn" data-pg="del" data-k="'+e.k+'" aria-label="Delete weigh-in of '+e.k+'">Delete</button></span></div>'}).join('')+'</div>';
     }
+    if(typeof pgExtra==='function') h += pgExtra();
     h += '<p class="foot">No plan can promise an exact result, because bodies differ in water, hormones, sleep and how closely a plan is followed. This plan uses standard formulas to set a realistic start, then your own weigh-ins correct it every week or two.</p></div>';
     $('p-prog').innerHTML = '<button type="button" class="backlink" data-go2="today"><span aria-hidden="true">‹</span> Back</button>'+h;
+    if(typeof pgAfter==='function') pgAfter();
   }
   $('p-prog').addEventListener('click',function(ev){
     if(!S) return;
