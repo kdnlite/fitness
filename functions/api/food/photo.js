@@ -78,6 +78,9 @@ export async function onRequestPost({ request, env }) {
     const row = await env.DB.prepare('SELECT n FROM ai_use WHERE day=? AND who=?').bind(day, w).first();
     if (row && row.n >= LIMIT) return json({ error: `Daily limit of ${LIMIT} photos reached. Type what you ate instead, or try tomorrow.` }, 429, CORS);
     await env.DB.prepare('INSERT INTO ai_use (day, who, n) VALUES (?, ?, 1) ON CONFLICT(day, who) DO UPDATE SET n = n + 1').bind(day, w).run();
+    // keep only the last 3 days of counts
+    const old = new Date(Date.now() - 3 * 86400000).toISOString().slice(0, 10);
+    await env.DB.prepare('DELETE FROM ai_use WHERE day < ?').bind(old).run();
   }
 
   let lastErr = '';
