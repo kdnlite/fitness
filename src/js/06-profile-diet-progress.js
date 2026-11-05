@@ -171,6 +171,7 @@
     fa.forEach(function(a){ var x = DISHMAP[a.it.id]; addK += x.k*(a.it.m||1); addP += x.p*(a.it.m||1); });
     var totK = mp.K+addK, totP = mp.P+addP, nM = mp.slots.length+fa.length;
     var h = '<div class="tfy"><small>'+esc(dt.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'}))+'</small><h2>'+(isT ? 'Today’s diet for you' : esc(DAYN[sel])+'’s diet')+'</h2></div>';
+    if(typeof grocBtn==='function') h += grocBtn();
     h += '<div class="wkstrip" role="tablist" aria-label="Days of the week">'+DAYN.map(function(n,i){
       var m = mealPlan(d,r,i);
       return '<button type="button" role="tab" data-dd="'+i+'" aria-selected="'+(i===sel)+'" class="'+(i===sel?'on':'')+(i===td?' td':'')+'"><b>'+n.slice(0,3)+'</b><span>'+fmt(Math.round(m.K))+'</span></button>';

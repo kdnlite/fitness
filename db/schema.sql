@@ -68,3 +68,8 @@ CREATE TABLE IF NOT EXISTS settings (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL                     -- JSON
 );
+
+-- Photo AI use per day (who = hash of IP), for a daily limit
+CREATE TABLE IF NOT EXISTS ai_use ( day TEXT NOT NULL, who TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, who) );
+-- Anonymous visit counts per day (no IP or personal data stored)
+CREATE TABLE IF NOT EXISTS visits ( day TEXT NOT NULL, kind TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, kind) );

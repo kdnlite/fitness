@@ -27,7 +27,7 @@ a{color:var(--gold)}
 <header>
   <small>KDN Fitness</small>
   <h1>Privacy Policy</h1>
-  <p class="muted">Last updated: 4 November 2026. This policy covers the KDN Fitness website (kdnfitness.com) and the KDN Fitness Android app.</p>
+  <p class="muted">Last updated: 5 November 2026. This policy covers the KDN Fitness website (kdnfitness.com) and the KDN Fitness Android app.</p>
 </header>
 
 <div class="card"><b>In short:</b> your body details, plan, steps, medicines, medical reports and period data are saved only on your own phone. They are not uploaded to us. We only keep your email, name and subscription details when you buy a plan, so we can give you access and help you.</div>
@@ -46,13 +46,14 @@ a{color:var(--gold)}
 <ul>
   <li><b>When you buy a plan:</b> your email address, your name (if you give it), the plan you chose, the coupon you used and the payment reference. Payments are handled by Razorpay. We never see your card, UPI PIN or bank login. We store your KDN ID and the date your plan is valid until, and email them to you.</li>
   <li><b>When you write to support@kdnfitness.com:</b> your email address and your message, so we can reply.</li>
+  <li><b>Food photos (only when you use "snap what you ate"):</b> the photo is made smaller on your phone and sent to kdnfitness.com, where Cloudflare Workers AI looks at it and returns the foods it sees. The photo is not saved by us or used for anything else. To keep a daily limit we count photos per day using a scrambled (hashed) form of your internet address, which we delete after a few days.</li>
   <li><b>Prices and announcements:</b> the website and the app load the current plan prices from kdnfitness.com. This request does not include any of your personal data.</li>
 </ul>
 <p>We do not show ads. We do not use advertising or tracking SDKs. We do not sell or rent your data.</p>
 
 <h2>3. Service providers</h2>
 <ul>
-  <li><b>Cloudflare</b> hosts kdnfitness.com and our small database of subscriptions and support emails.</li>
+  <li><b>Cloudflare</b> hosts kdnfitness.com and our small database of subscriptions and support emails, and runs the AI that reads food photos (Workers AI).</li>
   <li><b>Razorpay</b> processes payments.</li>
   <li><b>Resend</b> sends our emails (for example your KDN ID and plan validity).</li>
   <li><b>Google Fonts</b> provides the fonts used by the website and the app.</li>

@@ -1,0 +1,40 @@
+/* ===== KDN FOOD LOG CSS START: quick add and grocery list ===== */
+.fq{display:flex;flex-direction:column;gap:8px;padding:12px;margin:4px 0 10px;border-radius:18px;background:linear-gradient(160deg,#FFFBF1,#FFF6E0);border:1px solid #F0DFB5}
+.fq-in{display:flex;gap:6px;align-items:center}
+.fq-in input{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--fg);background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-height:48px}
+.fq-ib{width:48px;height:48px;border-radius:14px;border:1px solid #E7D3A4;background:#fff;color:#8A6A2B;display:grid;place-items:center;cursor:pointer;flex:none}
+.fq-ib .kic{width:22px;height:22px}
+.fq-ib.off{opacity:.45}
+.fq-ib:active{transform:scale(.94)}
+.fq-go{min-height:44px;border-radius:14px;border:0;background:#1B2742;color:#F2D58A;font:700 .95rem var(--font-body);cursor:pointer}
+.fq-busy{display:flex;align-items:center;gap:8px;margin:0;color:#5B6273;font-size:.9rem}
+.fq-sp{width:16px;height:16px;border-radius:50%;border:2.5px solid #E7D3A4;border-top-color:#B8934A;animation:fqspin .8s linear infinite}
+@keyframes fqspin{to{transform:rotate(360deg)}}
+.fq-err{margin:0;padding:8px 10px;border-radius:10px;background:#FDECEC;color:#8A1F1F;font-size:.86rem}
+.fq-note{margin:0 0 4px;font-size:.82rem;color:#8A6A2B}
+.fq-rows{display:flex;flex-direction:column;gap:6px}
+.fq-r{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;background:#fff;border-radius:14px;padding:10px 8px 8px 12px}
+.fq-r>span:first-child{flex:1 1 100%;min-width:0;display:flex;flex-direction:column}
+.fq-r.miss>span:first-child{flex:1 1 0}
+.fq-r b{font-size:.94rem;line-height:1.25}
+.fq-r small{font-size:.76rem;color:var(--muted)}
+.fq-r.miss{background:#FFF4F2}
+.fq-q{display:flex;align-items:center;gap:4px;flex:none;margin-right:auto}
+.fq-q button{width:34px;height:34px;border-radius:50%;border:0;background:#F4EFE3;color:#1B2742;font-size:1.15rem;font-weight:700;cursor:pointer}
+.fq-q b{min-width:2.4ch;text-align:center}
+.fq-k{display:flex;flex-direction:column;align-items:flex-end;font-weight:800;min-width:42px;flex:none}
+.fq-k small{font-weight:400}
+.gr-btn{display:flex;align-items:center;gap:12px;width:100%;margin:10px 0;padding:12px 14px;border-radius:18px;border:1px solid #EFE6D3;background:#fff;font:inherit;text-align:left;cursor:pointer;color:var(--fg)}
+.gr-btn .kic{width:26px;height:26px;color:#8A6A2B;flex:none}
+.gr-btn span:nth-child(2){flex:1;display:flex;flex-direction:column}
+.gr-btn small{color:var(--muted);font-size:.8rem}
+.gr-btn>span:last-child{color:#B8934A;font-size:1.4rem}
+.gr-cat h4{margin:12px 0 4px;font-size:.78rem;font-family:var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:#8A6A2B}
+.gr-it{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid #F4EFE3;cursor:pointer}
+.gr-it input{-webkit-appearance:none;appearance:none;width:24px;height:24px;margin:0;border-radius:7px;border:2px solid #D9C9A3;background:#fff;flex:none;display:grid;place-items:center;cursor:pointer}
+.gr-it input:checked{background:#B8934A;border-color:#B8934A}
+.gr-it input:checked::after{content:'';width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.gr-it span{flex:1;min-width:0}
+.gr-it b{font-size:.9rem;white-space:nowrap}
+.gr-it.got span,.gr-it.got b{color:#A3A9B5;text-decoration:line-through}
+/* ===== KDN FOOD LOG CSS END ===== */

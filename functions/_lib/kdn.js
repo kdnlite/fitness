@@ -224,7 +224,9 @@ const SCHEMA = [
   "CREATE TABLE IF NOT EXISTS payments ( id INTEGER PRIMARY KEY AUTOINCREMENT, ref TEXT UNIQUE, source TEXT NOT NULL, email TEXT, plan TEXT, amount INTEGER NOT NULL, currency TEXT NOT NULL DEFAULT 'INR', status TEXT NOT NULL, method TEXT, coupon TEXT, note TEXT, created_at INTEGER NOT NULL )",
   "CREATE INDEX IF NOT EXISTS idx_payments_time ON payments(created_at)",
   "CREATE TABLE IF NOT EXISTS coupons ( code TEXT PRIMARY KEY, kind TEXT NOT NULL, value INTEGER NOT NULL, plan TEXT, max_uses INTEGER, used INTEGER NOT NULL DEFAULT 0, expires_at INTEGER, active INTEGER NOT NULL DEFAULT 1, note TEXT, created_at INTEGER NOT NULL )",
-  "CREATE TABLE IF NOT EXISTS settings ( key TEXT PRIMARY KEY, value TEXT NOT NULL )"
+  "CREATE TABLE IF NOT EXISTS settings ( key TEXT PRIMARY KEY, value TEXT NOT NULL )",
+  "CREATE TABLE IF NOT EXISTS ai_use ( day TEXT NOT NULL, who TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, who) )",
+  "CREATE TABLE IF NOT EXISTS visits ( day TEXT NOT NULL, kind TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, kind) )"
 ];
 let schemaReady = null;
 export function ensureSchema(db) {

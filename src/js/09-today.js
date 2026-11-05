@@ -393,6 +393,7 @@
       for(var i=0;i<EXTRAF.length;i++) if(EXTRAF[i][1]===n) return '<button type="button" class="qchip'+(i===0?' on':'')+'" data-act="xpick" data-v="x:'+i+'"><b>'+esc(n.replace(' / soda','').replace(' (steamed)','').replace(' with sugar',''))+'</b><small>'+EXTRAF[i][3]+' kcal</small></button>';
       return '';
     }).join('');
+    if(typeof fqHtml==='function') h += fqHtml();
     h += '<div class="tkstep"><span class="tklbl">1 · Tap what you ate</span><div class="qchips">'+chips+'</div>';
     h += '<label class="tksub" for="xf-item">Not in the list? Choose any food</label><select id="xf-item" class="sel">'+XOPTS+'</select></div>';
     h += '<div class="tkstep"><span class="tklbl">2 · How much? <span id="xf-unit"></span></span><div class="qwrap tkq"><button type="button" class="qb" data-act="xq" data-d="-0.5" aria-label="Less">−</button><input id="xf-q" type="number" min="0.25" max="20" step="0.25" value="1" inputmode="decimal" aria-label="Quantity"><button type="button" class="qb" data-act="xq" data-d="0.5" aria-label="More">+</button></div></div>';
