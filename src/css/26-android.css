@@ -1,0 +1,10 @@
+/* ===== KDN ANDROID EXTRAS CSS ===== */
+.hc{display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:14px;border-radius:20px;border:1px solid #EFE6D3;background:#fff}
+.hc.on{background:linear-gradient(160deg,#F2FBF6,#fff);border-color:#CDEBD9}
+.hc-ic{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#FDECF1;color:#C2416B;flex:none}
+.hc.on .hc-ic{background:#E4F4EC;color:#1F7A55}
+.hc-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.hc-tx small{color:var(--muted);font-size:.8rem;line-height:1.35}
+.hc .hh-gold,.hc .hh-btn{flex:none;min-height:42px;padding:0 16px}
+html.dk .hc{background:#131C30;border-color:rgba(233,207,156,.16)}
+html.dk .hc.on{background:linear-gradient(160deg,#10291D,#131C30);border-color:rgba(95,211,154,.25)}

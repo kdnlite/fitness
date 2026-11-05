@@ -40,6 +40,8 @@ M=android/app/src/main/AndroidManifest.xml
 for P in android.permission.POST_NOTIFICATIONS android.permission.VIBRATE; do
   grep -q "$P" "$M" || sed -i "s#</manifest>#    <uses-permission android:name=\"$P\" />\n</manifest>#" "$M"
 done
+echo "== 6b. KDN widget and Health Connect (steps only)"
+python3 patch-android.py
 echo "--- variables.gradle"; cat "$V"
 echo "--- manifest"; cat "$M"
 grep -E "versionCode|versionName" "$G"

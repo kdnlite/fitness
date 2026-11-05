@@ -315,7 +315,7 @@
     if(v==='w') body = weekHtml();
     else if(v==='m') body = monthViewHtml();
     else body = heroHtml()+dayTrendHtml();
-    $('p-steps').innerHTML = '<div class="stx">'+motionCard()+segHtml()+body+'</div>';
+    $('p-steps').innerHTML = '<div class="stx">'+(typeof hcCard==='function'?hcCard():'')+motionCard()+segHtml()+body+'</div>';
   }
   $('p-steps').addEventListener('click',function(ev){
     if(!S) return;

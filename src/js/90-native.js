@@ -95,7 +95,7 @@
       });
     }
     if(NP.App){
-      NP.App.addListener('appStateChange',function(s){ if(s && s.isActive){ nSync(); hTick(); if(typeof tickLic==='function') tickLic(); } });
+      NP.App.addListener('appStateChange',function(s){ if(s && s.isActive){ nSync(); hTick(); if(typeof tickLic==='function') tickLic(); if(typeof hcSync==='function') hcSync(false); } else if(typeof kWidgetPush==='function') kWidgetPush(true); });
       /* Android back button: close what is open, then go home, then leave the app */
       NP.App.addListener('backButton',function(){
         if(!$('hview').hidden){ $('hview').hidden = true; $('hview').innerHTML = ''; return; }

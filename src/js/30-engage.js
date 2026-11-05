@@ -108,6 +108,7 @@
     var cups = ''; for(var i=0;i<wg;i++) cups += '<i class="'+(i<wa?'on':'')+'"></i>';
     h += '<div class="ek-wa"><div class="ek-wl"><small>Water</small><b>'+wa+' / '+wg+' glasses</b><span class="ek-cups" aria-hidden="true">'+cups+'</span></div><div class="ek-wb"><button type="button" class="ek-q" data-e="wa-" aria-label="Remove a glass"'+(wa?'':' disabled')+'>−</button><button type="button" class="ek-q add" data-e="wa+" aria-label="Add a glass of water">+</button></div></div>';
     h += '<div class="ek-links"><button type="button" data-e="badges">'+kIco('<circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 7 5-3 5 3-1.5-7"/>')+'Badges <em>'+nb+'/'+kBadges().length+'</em></button><button type="button" data-e="rem">'+kIco('<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>')+'Reminders'+(remAnyOn()?' <em>On</em>':'')+'</button>'+(typeof wrCardBtn==='function'?wrCardBtn():'')+'</div>';
+    if(typeof kWidgetPush==='function') kWidgetPush();
     return h+'</div>';
   }
   function eScoreSheet(){
