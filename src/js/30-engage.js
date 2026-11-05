@@ -25,7 +25,7 @@
   }
   function kAddDays(k,n){ var p = k.split('-'), d = new Date(+p[0],+p[1]-1,+p[2]); d.setDate(d.getDate()+n); return dkey(d); }
   function kDow(k){ var p = k.split('-'); return (new Date(+p[0],+p[1]-1,+p[2]).getDay()+6)%7; }
-  function kNice(k,o){ var p = k.split('-'); return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString('en-IN',o||{day:'numeric',month:'short'}); }
+  function kNice(k,o){ var p = k.split('-'); return new Date(+p[0],+p[1]-1,+p[2]).toLocaleDateString(typeof kLang==='function' && kLang()==='hi'?'hi-IN':'en-IN',o||{day:'numeric',month:'short'}); }
   function kIco(p){ return '<svg class="kic" viewBox="0 0 24 24" aria-hidden="true">'+p+'</svg>'; }
 
   /* ---- water ---- */

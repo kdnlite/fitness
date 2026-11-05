@@ -14,7 +14,8 @@ cp ../index.html ../kdn-live.js www/
 cp -r ../assets www/assets
 
 echo "== 2. Install Capacitor"
-npm install --no-audit --no-fund
+# speech-recognition 7.x lists Capacitor 7 as its peer; it builds fine with Capacitor 8
+npm install --no-audit --no-fund --legacy-peer-deps
 npx cap --version
 
 echo "== 3. Android project"

@@ -24,9 +24,12 @@
   }
   function aiSpeak(txt,hi){
     try{
-      if(!window.speechSynthesis) return;
+      if(!window.speechSynthesis && !NATIVE) return;
       var clean = txt.replace(/[“”"]/g,'').replace(/→/g,hi?', फिर ':', then ').replace(/\bkg\b/g,hi?'किलो':'kilos').replace(/\bcm\b/g,hi?'सेंटीमीटर':'centimetres');
-      var lang = hi ? 'hi-IN' : 'en-IN', v = bestVoice(lang) || (hi ? null : bestVoice('en-GB') || bestVoice('en-US'));
+      var lang = hi ? 'hi-IN' : 'en-IN';
+      if(typeof kTTS==='function' && kTTS(clean,lang)) return;
+      if(!window.speechSynthesis) return;
+      var v = bestVoice(lang) || (hi ? null : bestVoice('en-GB') || bestVoice('en-US'));
       var u = new SpeechSynthesisUtterance(clean); u.lang = lang; if(v) u.voice = v;
       u.rate = hi ? 0.98 : 1.02; u.pitch = 1.05; u.volume = 1;
       speechSynthesis.speak(u);
@@ -148,7 +151,7 @@
   }
   function aiHandle(raw){
     var t = aiNorm(raw); if(!t){ aiConfused(); return; }
-    try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
+    try{ if(window.speechSynthesis) speechSynthesis.cancel(); if(typeof kTTSStop==='function') kTTSStop(); }catch(e){}
     AI.hi = isHindi(raw,t) || (AI.lang==='hi-IN' && !/[a-z]{3,}.*[a-z]{3,}.*[a-z]{3,}/.test(t) && /[ऀ-ॿ]/.test(raw));
     aiAdd('u',esc(raw));
     var w = parseWeight(t), hgt = parseHeight(t);
@@ -224,7 +227,7 @@
     if(AI.on && AI.rec){ try{ AI.rec.stop(); }catch(e){} return; }
     var hiUI = AI.lang==='hi-IN';
     if(!SR){ AI.hi = hiUI; aiSay('Voice isn’t available in this browser, but you can type your request in the box below.','इस ब्राउज़र में आवाज़ वाला फ़ीचर नहीं चलता, पर आप नीचे बॉक्स में लिखकर भेज सकते हैं।',{cls:'warn',then:aiHL}); return; }
-    try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){}
+    try{ if(window.speechSynthesis) speechSynthesis.cancel(); if(typeof kTTSStop==='function') kTTSStop(); }catch(e){}
     var rec = new SR(); AI.rec = rec; AI.heard = '';
     rec.lang = AI.lang; rec.interimResults = true; rec.maxAlternatives = 1; rec.continuous = true;
     rec.onstart = function(){ AI.on = true; $('ai-mic').classList.add('on'); $('ai-mic').setAttribute('aria-label','Stop listening'); aiState(hiUI ? 'सुन रहा हूँ… बोलिए' : 'Listening… go ahead'); $('ai-live').hidden = true; };
