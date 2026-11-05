@@ -1,0 +1,79 @@
+/* ===== KDN GUIDED WORKOUT CSS START ===== */
+.gw-start{display:flex;align-items:center;gap:14px;width:100%;margin:12px 0;padding:14px 16px;border-radius:22px;border:0;cursor:pointer;text-align:left;font:inherit;color:#fff;background:linear-gradient(150deg,#2B3A5C,#0B1220);box-shadow:0 0 0 1px rgba(233,207,156,.25),0 14px 30px rgba(7,12,23,.22)}
+.gw-start:active{transform:scale(.98)}
+.gw-sp{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(150deg,#F6E3B4,#C9A762);color:#1B2742;font-size:1.05rem;flex:none;padding-left:3px}
+.gw-start b{display:block;font-family:var(--font-display);font-size:1.08rem}
+.gw-start small{color:#AEB8CC;font-size:.82rem}
+.gw{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;color:#fff;background:radial-gradient(120% 70% at 50% 0%,#22304F 0%,#0B1220 60%,#060B15 100%);opacity:0;transform:translateY(24px);transition:opacity .28s ease,transform .32s cubic-bezier(.2,.85,.25,1);padding:calc(10px + var(--safe-area-inset-top,env(safe-area-inset-top,0px))) 18px calc(14px + var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px)));overflow-y:auto;overscroll-behavior:contain}
+.gw.open{opacity:1;transform:none}
+.gw-top{display:flex;align-items:center;gap:12px;flex:none}
+.gw-x{width:42px;height:42px;border-radius:50%;border:1px solid rgba(233,207,156,.3);background:rgba(255,255,255,.06);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;flex:none}
+.gw-pr{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.gw-pr small{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#E9CF9C}
+.gw-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.gw-bar i{display:block;height:100%;background:linear-gradient(90deg,#C9A762,#F2D58A);border-radius:3px;transition:width .4s}
+.gw-clock{font-family:var(--font-mono);font-size:.9rem;color:#AEB8CC;flex:none}
+.gw-fig{position:relative;margin:14px auto 0;width:100%;max-width:420px;aspect-ratio:4/3;border-radius:24px;overflow:hidden;background:#111A2E;flex:none}
+.gw-fig img,.gw-fig>span{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .5s ease}
+.gw-fig>span{display:grid;place-items:center;background:#F7F3EA}
+.gw-fig>span svg{width:80%;height:auto}
+.gw-fig .b{opacity:0}
+.gw-fig.alt .b{opacity:1}
+.gw-mid{display:flex;flex-direction:column;gap:8px;margin-top:14px;flex:1}
+.gw-mid h2{color:#fff;font-size:1.7rem;margin:0;letter-spacing:-.01em}
+.gw-mu{margin:0;color:#AEB8CC;font-size:.9rem}
+.gw-set{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-radius:18px;background:rgba(255,255,255,.06)}
+.gw-set span{font-size:1rem;color:#D7DDEA}
+.gw-set b{color:#F2D58A;font-size:1.3rem}
+.gw-tg{font-family:var(--font-display);font-size:1.3rem!important;color:#fff!important}
+.gw-last{margin:0;font-size:.84rem;color:#9CC8F0}
+.gw-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.gw-st{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:18px;border:1px solid rgba(233,207,156,.2)}
+.gw-st small{color:#AEB8CC;font-size:.8rem}
+.gw-st>div{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.gw-st b{font-family:var(--font-display);font-size:2rem;min-width:2ch;text-align:center}
+.gw-st button{width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:1.6rem;line-height:1;cursor:pointer}
+.gw-st button:active{transform:scale(.92);background:rgba(233,207,156,.25)}
+.gw-timer{display:flex;flex-direction:column;align-items:center;padding:6px 0}
+.gw-timer b,.gw-rest>b{font-family:var(--font-display);font-size:4.6rem;line-height:1;color:#F2D58A;font-variant-numeric:tabular-nums}
+.gw-timer small{color:#AEB8CC}
+.gw-how{border:1px solid rgba(233,207,156,.18);border-radius:16px;padding:10px 14px}
+.gw-how summary{cursor:pointer;font-weight:700;color:#E9CF9C}
+.gw-how ol{margin:8px 0 0;padding-left:1.2em;color:#D7DDEA;font-size:.9rem;line-height:1.5}
+.gw-how p{color:#D7DDEA;font-size:.88rem;margin:8px 0 0}
+.gw-foot{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;flex:none}
+.gw-go{flex:1 1 60%;min-height:56px;border-radius:18px;border:0;background:linear-gradient(150deg,#F6E3B4,#C9A762);color:#1B2742;font:800 1.05rem var(--font-body);cursor:pointer}
+.gw-ghost{flex:1 1 30%;min-height:56px;border-radius:18px;border:1px solid rgba(233,207,156,.35);background:transparent;color:#fff;font:700 1rem var(--font-body);cursor:pointer}
+.gw-go:active,.gw-ghost:active{transform:scale(.97)}
+.gw-skipx{flex:1 1 100%;background:none;border:0;color:#8C93A3;font:600 .86rem var(--font-body);cursor:pointer;min-height:40px}
+.gw-rest{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center}
+.gw-rest>small{font-family:var(--font-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E9CF9C}
+.gw-rest>b{font-size:6rem}
+.gw-rb{display:flex;gap:10px}
+.gw-chip{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(233,207,156,.35);background:transparent;color:#fff;font:700 .92rem var(--font-body);cursor:pointer}
+.gw-next{display:flex;flex-direction:column;gap:2px;margin-top:18px;padding:14px 18px;border-radius:18px;background:rgba(255,255,255,.06);min-width:min(320px,100%)}
+.gw-next small{color:#AEB8CC;font-size:.8rem}
+.gw-next b{font-size:1.2rem}
+.gw-next span{color:#D7DDEA;font-size:.88rem}
+.gw-tip{color:#8C93A3;font-size:.88rem;margin:6px 0 0}
+.gw-done{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;max-width:460px;margin:0 auto;width:100%}
+.gw-tro{width:86px;height:86px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(150deg,#F6E3B4,#C9A762);color:#1B2742;animation:gwpop .6s cubic-bezier(.2,1.6,.4,1)}
+.gw-tro .kic{width:42px;height:42px}
+@keyframes gwpop{from{transform:scale(.3);opacity:0}}
+.gw-done>small{font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#E9CF9C}
+.gw-done h2{color:#fff;margin:0;font-size:1.9rem}
+.gw-sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(70px,1fr));gap:8px;width:100%;margin-top:6px}
+.gw-sum div{background:rgba(255,255,255,.06);border-radius:16px;padding:12px 6px}
+.gw-sum b{display:block;font-family:var(--font-display);font-size:1.6rem;color:#F2D58A}
+.gw-sum span{color:#AEB8CC;font-size:.8rem}
+.gw-pr2{display:flex;flex-direction:column;gap:2px;padding:10px 16px;border-radius:16px;border:1px solid rgba(233,207,156,.4);width:100%}
+.gw-pr2 b{color:#F2D58A}
+.gw-done .gw-go{flex:none;width:100%;margin-top:10px}
+.gw-ask{position:absolute;inset:0;background:rgba(4,8,16,.72);display:flex;align-items:flex-end;justify-content:center;padding:18px}
+.gw-ask>div{width:100%;max-width:460px;background:#111A2E;border:1px solid rgba(233,207,156,.25);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.gw-ask b{font-size:1.2rem}
+.gw-ask span{color:#AEB8CC;font-size:.92rem}
+.gw-ab{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.gw-ab button{flex:1 1 40%;min-height:50px}
+@media (min-width:760px){.gw{padding-left:max(18px,calc(50% - 300px));padding-right:max(18px,calc(50% - 300px))}}
+/* ===== KDN GUIDED WORKOUT CSS END ===== */

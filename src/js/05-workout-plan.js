@@ -119,6 +119,7 @@
     } else {
       h += '<div class="wohero"><small>'+esc(DAYN[sel])+(sel===td?' · Today':'')+'</small><h3>'+esc(d.t)+'</h3><div class="wochips"><span><b>'+Math.round(exTotals(planExItems(sel)).min)+'</b> min</span><span><b>~'+Math.round(exTotals(planExItems(sel)).kcal)+'</b> kcal</span><span><b>'+nEx+'</b> exercise'+(nEx===1?'':'s')+'</span></div></div>';
       var ad = exAdds(sel);
+      if(sel===td && typeof gwStartBtn==='function') h += gwStartBtn();
       h += '<div class="wolist">'+d.items.map(function(it){return exItem(it.id,it,false)}).join('');
       if(ad.length) h += '<p class="woadd">Added by you</p>'+ad.map(function(a){return exItem(a.it.id,a.it,false)}).join('');
       h += '</div>';

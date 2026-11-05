@@ -111,6 +111,7 @@
     h += '<div class="tddbody" id="td-work">';
     if(rest) h += '<p class="hint">Lighter day. Do the gentle movement below, drink water and sleep well. Recovery is when muscles grow.</p>';
     else h += '<p class="hint">'+items.length+' exercises. Open any one for the pictures, calories burned and alternatives.</p>';
+    if(isToday && items.length && typeof gwStartBtn==='function') h += gwStartBtn();
     h += items.map(function(x){
       if(!x.add) return exItem(x.it.id,x.it,false);
       return '<div class="lrow addedrow">'+exItem(x.it.id,x.it,false).replace('<span class="kc">','<span class="inplan g">Added · '+(x.add.src==='perm'?'every '+DAYN[dow]:'once')+'</span><span class="kc">')+'<button type="button" class="xrm" data-act="exrm" data-src="'+x.add.src+'" data-i="'+x.add.i+'" aria-label="Remove '+esc(EXS[x.it.id].n)+'">×</button></div>';
