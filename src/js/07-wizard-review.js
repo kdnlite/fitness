@@ -126,7 +126,7 @@
     ev.preventDefault();
     var o = readForm(), m = VALID[cur](o);
     if(m){ $('err').textContent = m; return; }
-    if(cur < N-1){ goStep(cur+1); return; }
+    if(cur < N-1){ if(typeof kQuickJump==='function' && kQuickJump(cur)) return; goStep(cur+1); return; }
     D = o; editing = null; rvErr = {};
     setReviewMode(false);
     renderReview(); show('s-review');
@@ -255,7 +255,9 @@
     }
     var prev = S, nw = normalize(clone(D)), changed = !prev;
     if(prev){ ['weight','height','age','gender','goal','amt','tmode','weeks','loc','level','days'].forEach(function(k){ if(prev[k]!==nw[k]) changed = true; }); }
-    if(prev){ nw.log = prev.log; nw.wlog = prev.wlog; nw.stepGoal = prev.stepGoal; nw.dsel = prev.dsel; nw.prefs = prev.prefs; nw.startDate = prev.startDate; nw.startWeight = prev.startWeight; nw.kcalAdj = prev.kcalAdj; nw.adjFrom = prev.adjFrom; }
+    if(prev){ nw.log = prev.log; nw.wlog = prev.wlog; nw.stepGoal = prev.stepGoal; nw.dsel = prev.dsel; nw.prefs = prev.prefs; nw.startDate = prev.startDate; nw.startWeight = prev.startWeight; nw.kcalAdj = prev.kcalAdj; nw.adjFrom = prev.adjFrom;
+      /* keep everything else the person has built up: added foods and exercises, streaks and badges, reminders, measurements, photos, workout history, grocery ticks */
+      ['custom','wtime','eng','rem','meas','photos','wkh','groc','stride','motion'].forEach(function(k){ if(prev[k]!==undefined && nw[k]===undefined) nw[k] = prev[k]; }); }
     S = nw; S.savedAt = new Date().toISOString();
     if(prev && (prev.diet!==S.diet || prev.goal!==S.goal || prev.budget!==S.budget)){ S.dsel = {}; }
     if(changed){ S.startDate = todayKey(); S.startWeight = S.weight; S.kcalAdj = 0; S.adjFrom = S.startDate; S.wlog = S.wlog || {}; S.wlog[S.startDate] = S.weight; }
@@ -265,6 +267,7 @@
     syncAuth();
     renderWelcome();
     toast(ok ? (prev ? 'Plan updated.' : 'Saved on this device. You are logged in.') : 'Your plan is ready, but this browser would not let us save it.');
+    if(!prev && typeof kBuildAnim==='function') kBuildAnim();
   });
 
 

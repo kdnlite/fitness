@@ -124,7 +124,7 @@
     var nOpen = window.open;
     window.open = function(u){ u = String(u||''); if(/^(https?:|tel:|mailto:|whatsapp:)/i.test(u) && NP.AppLauncher){ NP.AppLauncher.openUrl({url:u}); return null; } return nOpen.apply(window,arguments); };
     /* status bar icons: light on the dark landing page, dark on the light app pages */
-    var nBar = function(){ var SB = NP.SystemBars; if(!SB || !SB.setStyle) return; try{ SB.setStyle({style:document.body.classList.contains('onland') || document.body.classList.contains('gymmode') ? 'LIGHT' : 'DARK'}); }catch(e){} };
+    var nBar = function(){ var SB = NP.SystemBars; if(!SB || !SB.setStyle) return; try{ SB.setStyle({style:document.body.classList.contains('onland') || document.body.classList.contains('gymmode') || document.documentElement.classList.contains('dk') ? 'LIGHT' : 'DARK'}); }catch(e){} };
     if(window.MutationObserver) new MutationObserver(nBar).observe(document.body,{attributes:true,attributeFilter:['class']});
     nBar();
   }

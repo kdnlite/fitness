@@ -101,6 +101,10 @@
     'Calories burned':'जली कैलोरी','Common mistake:':'आम गलती:','Alternatives':'विकल्प','Start position':'शुरुआती पोज़','End position':'आख़िरी पोज़','Time to reach':'पहुँचने का समय','How it works':'यह कैसे काम करता है',
     'Track and adjust':'ट्रैक करें और सुधारें','Your fitness coach,':'आपका फ़िटनेस कोच,','right in your pocket.':'आपकी जेब में।','Get your daily plan':'अपना रोज़ का प्लान पाएँ','Open my plan':'मेरा प्लान खोलें',
     'KDN AI voice assistant':'KDN AI आवाज़ सहायक','Included in every plan':'हर प्लान में शामिल','Vitamins and minerals':'विटामिन और खनिज','Daily need':'रोज़ की ज़रूरत','You need:':'आपको चाहिए:',
+    'Quick start · 8 questions':'जल्दी शुरू करें · 8 सवाल','We fill in the rest with sensible choices. You can change them on the next screen.':'बाकी हम सही विकल्पों से भर देंगे। अगली स्क्रीन पर आप इन्हें बदल सकते हैं।',
+    'Building your plan':'आपका प्लान बन रहा है','Working out your calories and protein':'आपकी कैलोरी और प्रोटीन का हिसाब','Picking dishes you will like':'आपकी पसंद के व्यंजन चुन रहे हैं','Building your weekly workouts':'आपके हफ़्ते के वर्कआउट बना रहे हैं','Setting your step goal':'आपका कदमों का लक्ष्य तय कर रहे हैं',
+    'Done. Check the details and tap Submit.':'हो गया। जानकारी जाँचें और सबमिट दबाएँ।','Submit':'सबमिट करें','Review':'जाँचें',
+    'Theme: Auto':'थीम: अपने आप','Theme: Dark':'थीम: डार्क','Theme: Light':'थीम: लाइट',
     /* footer */
     'Privacy policy':'प्राइवेसी पॉलिसी','Fitness Tracker · Estimates only, not medical advice. ·':'फ़िटनेस ट्रैकर · सिर्फ़ अनुमान, डॉक्टरी सलाह नहीं। ·'
   }; hiDict.d = D; return D; }
@@ -160,6 +164,24 @@
     b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span>'+(kLang()==='hi'?'भाषा: हिंदी · Switch to English':'Language: English · हिंदी में देखें')+'</span>';
     snd.parentNode.insertBefore(b,snd.nextSibling);
     b.addEventListener('click',function(ev){ ev.stopPropagation(); kLangToggle(); });
+  })();
+  /* ---- theme: Auto (follows the phone), Dark, Light ---- */
+  function kTheme(v){ if(v){ try{ localStorage.setItem('kdn.theme',v); }catch(e){} } var t = 'auto'; try{ t = localStorage.getItem('kdn.theme') || 'auto'; }catch(e){} return t; }
+  function kThemeApply(){
+    var t = kTheme(), d = t==='dark' || (t==='auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.classList.toggle('dk',!!d);
+    var m = document.querySelectorAll('meta[name="theme-color"]'); Array.prototype.forEach.call(m,function(x){ x.setAttribute('content',d?'#0B1220':'#FFFFFF'); });
+    var b = $('m-theme'); if(b){ var hi = kLang()==='hi', L = hi ? {auto:'अपने आप',dark:'डार्क',light:'लाइट'} : {auto:'Auto',dark:'Dark',light:'Light'}; b.querySelector('span').textContent = (hi?'थीम: ':'Theme: ')+L[t]; }
+    if(NATIVE && window.Capacitor && window.Capacitor.Plugins.SystemBars){ try{ window.Capacitor.Plugins.SystemBars.setStyle({style:d||document.body.classList.contains('onland')?'LIGHT':'DARK'}); }catch(e){} }
+  }
+  (function(){
+    var lb = $('m-lang'); if(!lb || $('m-theme')) return;
+    var b = document.createElement('button'); b.type = 'button'; b.id = 'm-theme'; b.setAttribute('data-notr','1');
+    b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><span></span>';
+    lb.parentNode.insertBefore(b,lb.nextSibling);
+    b.addEventListener('click',function(ev){ ev.stopPropagation(); var t = kTheme(), n = t==='auto' ? 'dark' : t==='dark' ? 'light' : 'auto'; kTheme(n); buzz(); kThemeApply(); });
+    try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',kThemeApply); }catch(e){}
+    kThemeApply();
   })();
   hiStart();
   /* ==== KDN LANGUAGE END ==== */

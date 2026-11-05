@@ -1,0 +1,18 @@
+/* ===== KDN FEEL CSS START ===== */
+.kq-btn{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:10px;width:100%}
+.kq-btn small{font-family:var(--font-body);font-weight:400;font-size:.8rem;color:var(--muted)}
+.kin{animation:kin .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes kin{from{opacity:0;transform:translateY(8px)}}
+.kb{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:radial-gradient(120% 80% at 50% 30%,#22304F,#0B1220 65%);color:#fff;animation:kbin .3s ease;pointer-events:none;padding:24px}
+.kb.out{opacity:0;transform:scale(1.04);transition:opacity .45s ease,transform .45s ease}
+@keyframes kbin{from{opacity:0}}
+.kb-in{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:340px;text-align:center}
+.kb h3{color:#fff;font-size:1.5rem;margin:0}
+.kb-ring{width:84px;height:84px;border-radius:50%;border:5px solid rgba(233,207,156,.18);border-top-color:#E9C05A;animation:kbspin 1s linear infinite}
+@keyframes kbspin{to{transform:rotate(360deg)}}
+.kb ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;text-align:left}
+.kb li{display:flex;align-items:center;gap:10px;color:#D7DDEA;font-size:.95rem;opacity:0;animation:kbli .35s ease forwards;animation-delay:var(--d)}
+.kb li span{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#E9C05A;color:#0B1220;font-size:.75rem;font-weight:800;flex:none}
+@keyframes kbli{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.kin,.kb,.kb li,.kb-ring{animation:none!important}.kb li{opacity:1}}
+/* ===== KDN FEEL CSS END ===== */
