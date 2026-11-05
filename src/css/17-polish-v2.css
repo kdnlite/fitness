@@ -1,0 +1,70 @@
+/* ===== KDN POLISH CSS START ===== */
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body{overflow-x:clip}
+/* header: glass and soft shadow once you scroll */
+.hd{transition:box-shadow .3s ease,background-color .3s ease,border-color .3s ease}
+/* The glass effect sits on a pseudo-element: a blur filter on the header itself would make
+   the header the frame for the fixed menu, which then opened off-screen after scrolling. */
+.hd::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;pointer-events:none;transition:opacity .3s ease}
+body:not(.onland) .hd.sc{background:transparent;border-bottom-color:rgba(220,226,234,.6);box-shadow:0 10px 30px rgba(11,18,32,.08)}
+body:not(.onland) .hd.sc::before{opacity:1;background:rgba(255,255,255,.84);-webkit-backdrop-filter:saturate(1.8) blur(16px);backdrop-filter:saturate(1.8) blur(16px)}
+body.onland .hd.sc{background:transparent;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+body.onland .hd.sc::before{opacity:1;background:rgba(11,18,32,.88);-webkit-backdrop-filter:saturate(1.4) blur(16px);backdrop-filter:saturate(1.4) blur(16px)}
+html.menuon .hd.sc::before{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* all three plan prices in the same gold as the Family plan */
+.lp-plan .lp-amt2 b,body.onland .lp-plan .lp-amt2 b,body.onland .lp-plan-hi .lp-amt2 b{color:#E9C05A}
+/* screens and cards glide in */
+@keyframes kup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.screen{animation:kup .42s cubic-bezier(.2,.8,.2,1) both}
+.kin>*{animation:kup .55s cubic-bezier(.2,.8,.2,1) both}
+.kin>:nth-child(2){animation-delay:.05s}.kin>:nth-child(3){animation-delay:.1s}.kin>:nth-child(4){animation-delay:.15s}.kin>:nth-child(5){animation-delay:.2s}.kin>:nth-child(6){animation-delay:.25s}.kin>:nth-child(n+7){animation-delay:.3s}
+.hx-grid.kin2>*{animation:kup .5s cubic-bezier(.2,.8,.2,1) both}
+.hx-grid.kin2>:nth-child(2){animation-delay:.06s}.hx-grid.kin2>:nth-child(3){animation-delay:.12s}.hx-grid.kin2>:nth-child(4){animation-delay:.18s}
+/* landing sections reveal as you scroll */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+/* long lists only draw what is on screen: smoother scrolling */
+.lp-sec,.lp-final{content-visibility:auto;contain-intrinsic-size:auto 720px}
+#lib-res>*:not(h3):not(.more):not(.kprev){content-visibility:auto;contain-intrinsic-size:auto 96px}
+#foodgrid>*{content-visibility:auto;contain-intrinsic-size:auto 240px}
+/* touch feedback */
+.btn{transition:transform .16s ease,background-color .2s ease,box-shadow .2s ease,border-color .2s ease}
+.btn:active{transform:scale(.97)}
+.cb{transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .12s ease}
+.cb:active{transform:scale(.95)}
+.scrollx{scroll-snap-type:x proximity;scroll-padding-inline:4px;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);padding-right:28px}
+.scrollx>*{scroll-snap-align:start}
+.bnav button{transition:background-color .25s ease,color .25s ease}
+.bnav button svg{transition:transform .35s cubic-bezier(.2,.8,.2,1.4)}
+.bnav button.on svg{transform:translateY(-1px) scale(1.12)}
+.bnav button:active svg{transform:scale(.9)}
+@keyframes tin{from{opacity:0;transform:translate(-50%,14px) scale(.96)}to{opacity:1;transform:translate(-50%,0)}}
+.toast:not([hidden]){animation:tin .36s cubic-bezier(.2,.9,.25,1.1) both}
+.modal:not([hidden]) .mbox{animation:kup .32s cubic-bezier(.2,.9,.25,1.05) both}
+:focus-visible{outline:2px solid #B8934A;outline-offset:2px}
+img{-webkit-user-drag:none}
+::selection{background:#F2DCA6;color:#1B2742}
+.actsw{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.actsw>span{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.actsw-b{display:flex;gap:4px;padding:4px;border-radius:99px;background:#F1ECE0;border:1px solid #E7DCC4}
+.actsw-b button{flex:1;border:0;background:none;border-radius:99px;padding:9px 4px;font:700 .9rem var(--font-display);color:#6B5A36;cursor:pointer;transition:background .25s,color .25s}
+.actsw-b button.on{background:#0F1A2E;color:#F2D58A}
+@media (prefers-reduced-motion:reduce){.screen,.kin>*,.hx-grid.kin2>*,.toast:not([hidden]),.modal:not([hidden]) .mbox,.hr-box,.hr-ic,.hh-dose.due{animation:none!important}.rv{opacity:1;transform:none;transition:none}.hs-panel,.hs-scrim{transition:none}}
+/* exercise photos are landscape (about 1.7 : 1): show the whole person, never crop */
+.big2:has(.eph){grid-template-columns:1fr;gap:14px}
+.big2 .eph{aspect-ratio:auto;height:auto;object-fit:contain;border-radius:14px;box-shadow:0 8px 20px rgba(20,32,43,.12)}
+.pics .eph{width:92px;height:54px;object-fit:contain;background:#1c1c1c;border-radius:8px}
+@media (max-width:380px){.pics .eph{width:80px;height:47px}}
+#p-ex .ex summary:has(.pics .eph){grid-template-columns:96px minmax(0,1fr) auto}
+#p-ex .ex .pics:has(.eph){width:96px;height:56px;background:#1c1c1c}
+.tddpics>span:has(.eph){width:76px;height:46px;border-radius:12px;background:#1c1c1c}
+.tddpics>span>img.eph{width:100%;height:100%;object-fit:contain;border-radius:0;background:#1c1c1c}
+#p-ex .ex .pics img.eph{width:96px;height:56px;object-fit:contain;background:#1c1c1c}
+/* Android app: Capacitor provides the status/navigation bar sizes as CSS variables */
+.kdn-native .hd{padding-top:var(--safe-area-inset-top,env(safe-area-inset-top,0px))}
+.kdn-native .bnav{padding-bottom:calc(6px + var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px)))}
+.kdn-native body.hasnav{padding-block-end:calc(92px + var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px)))}
+.kdn-native .hrem,.kdn-native .hs-panel{padding-bottom:var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px))}
+.kdn-native .hv-top{padding-top:calc(10px + var(--safe-area-inset-top,env(safe-area-inset-top,0px)))}
+/* ===== KDN POLISH CSS END ===== */
+

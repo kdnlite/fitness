@@ -1,0 +1,48 @@
+/* ===== hero: athletes beside the phone ===== */
+.lp-hero{background:radial-gradient(60% 75% at 74% 52%,#0C2A55 0%,rgba(12,42,85,0) 72%),linear-gradient(180deg,#071A3C 0%,#0A2247 55%,#08193A 100%)}
+body.onland,body.onland .hd,body.onland::before{background:#071A3C}
+body.onland .hd{border-bottom-color:rgba(255,255,255,.08)}
+.lp-walk{position:relative;margin:0;padding:0;width:100%;max-width:none;justify-self:stretch;display:block;aspect-ratio:928/754}
+.lp-walk-v,.lp-walk-end{position:absolute;inset:0;width:100%;height:100%;max-width:100%;display:block;object-fit:cover;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 6%,#000 92%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 6%,#000 92%,transparent 100%);mask-composite:intersect}
+.lp-walk-end[hidden]{display:none}
+.lp-replay{position:absolute;right:6%;bottom:6%;width:40px;height:40px;border-radius:50%;border:1px solid rgba(233,207,156,.45);background:rgba(7,26,60,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#E9CF9C;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
+.lp-replay svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.lp-replay:focus-visible{outline:2px solid #E9CF9C;outline-offset:2px}
+.lp-hero{overflow:hidden}
+@media (min-width:700px){.lp-hero{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}}
+@media (min-width:980px){.lp-walk{width:min(160%,760px);margin:-30px -60% 0 -8%}}
+@media (max-width:699px){.lp-walk{width:118%;margin:0 -9% 4px}}
+body.onland .lgimg{mix-blend-mode:lighten}
+@media (prefers-reduced-motion:reduce){.lp-art img{animation:none}}
+
+/* ===== preview mode + mobile hero order ===== */
+#mlist .lockhide{display:none!important}
+.mprev{font-style:normal;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;margin-left:8px;padding:2px 7px;border-radius:99px;background:#F3EAD3;color:#7A5C1E;vertical-align:middle}
+.mprev[hidden]{display:none}
+.kprev{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px;padding:18px;border-radius:18px;border:1.5px solid #E9CF9C;background:linear-gradient(160deg,#FFFBF1,#F7EEDA);color:#14202B}
+.kprev b{font-family:var(--font-display);font-size:1.1rem}
+.kprev p{margin:0;color:#586774}
+.kprev-l{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9A7A36}
+.kprev-l svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.foods .kprev{grid-column:1/-1}
+.kgp{max-width:760px;margin:0 auto;padding:28px 16px 40px;display:flex;flex-direction:column;gap:16px;color:#F6EBCB}
+.kgp h2{color:#fff;font-size:clamp(1.8rem,6vw,2.6rem)}
+.kgp .lead{color:#CDBB8A}
+.kgp .kprev-l{color:#E9C05A}
+.kgp-shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.kgp-shots figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.kgp-shots img{width:100%;height:auto;max-width:100%;border-radius:18px;border:1px solid rgba(233,192,90,.35);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.kgp-shots figcaption{font-family:var(--font-mono);font-size:11px;color:#A89868;text-align:center}
+.kgp-list{margin:0;padding-left:20px;display:grid;gap:6px;color:#F6EBCB}
+.kgp .btn{align-self:flex-start;background:linear-gradient(180deg,#F3D77F,#E9C05A 45%,#B98A1E);border-color:#B98A1E;color:#1A1405}
+.kgp .foot{color:#A89868}
+@media (max-width:520px){.kgp-shots{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.kgp-shots img{border-radius:12px}}
+@media (max-width:699px){
+  .lp-hero{display:flex;flex-direction:column;gap:18px}
+  .lp-copy{display:contents}
+  .lp-copy>h1{order:1}
+  .lp-walk{order:2;margin:-4px -9% 0}
+  .lp-lead{order:3}
+  .lp-cta{order:4}
+  .lp-trust{order:5}
+}

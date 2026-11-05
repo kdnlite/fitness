@@ -1,0 +1,90 @@
+/* ---------- Brand logo (gold KDN wordmark) ---------- */
+.logo{gap:10px}
+.lgimg{display:block;height:40px;width:auto;border-radius:10px;box-shadow:0 0 0 1px rgba(233,207,156,.25)}
+.lgsub{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:1.35;text-align:left}
+body.onland .lgsub{color:#8F9BB3}
+body.onland .lgimg{box-shadow:none;mix-blend-mode:screen;border-radius:0}
+.lp-wm{width:260px;max-width:72%;height:auto;margin:-10px 0 -6px;mix-blend-mode:screen}
+
+/* real dish photos */
+.dph{width:100%;height:100%;object-fit:cover;display:block}
+.food .pic:has(.dph),.mpic:has(.dph),.fdpic:has(.dph),.pic:has(.dph){padding:0;overflow:hidden;background:#2a1c14}
+.food .pic:has(.dph){height:150px}
+.fdpic:has(.dph){width:140px;height:140px}
+.ingph{margin:6px 0 2px;border-radius:16px;overflow:hidden;max-width:420px}
+.ingph img{width:100%;height:auto;display:block}
+.ingph figcaption{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:6px 2px 0}
+
+/* real exercise photos */
+.eph{display:block;width:100%;height:auto;border-radius:10px;object-fit:cover;background:#111}
+.pics .eph{width:74px;height:66px;border-radius:8px}
+.big2 .eph{aspect-ratio:1;object-fit:cover}
+
+/* ---------- Premium menu: navy panel, champagne gold, smooth open and close ---------- */
+.mscrim{position:fixed;inset:0;z-index:29;background:rgba(6,10,20,.42);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .32s ease}
+body.menuon .mscrim{opacity:1;pointer-events:auto}
+.hd .burger{border-radius:12px;transition:background .25s ease,border-color .25s ease,transform .2s ease}
+.hd .burger:active{transform:scale(.94)}
+.hd .burger i{transition:transform .34s cubic-bezier(.65,0,.35,1),opacity .2s ease,background .25s ease}
+.hd .burger[aria-expanded=true]{background:#0B1220;border-color:#E9CF9C}
+.hd .burger[aria-expanded=true] i{background:#E9CF9C}
+#mlist{width:288px;max-width:calc(100vw - 32px);top:calc(100% + 10px);padding:8px;gap:2px;border:0;border-radius:22px;
+  background:radial-gradient(120% 60% at 100% 0%,rgba(233,207,156,.14),rgba(233,207,156,0) 60%),#0B1220;
+  box-shadow:0 0 0 1px rgba(233,207,156,.28),0 24px 60px rgba(4,8,18,.5),0 6px 16px rgba(4,8,18,.3);
+  transform-origin:calc(100% - 22px) -6px;opacity:0;transform:translateY(-8px) scale(.94);
+  transition:opacity .26s ease,transform .34s cubic-bezier(.2,.9,.25,1.05);max-height:calc(100dvh - 96px);overflow-y:auto;scrollbar-width:none}
+#mlist.open{opacity:1;transform:none}
+#mlist::before{content:"";position:absolute;top:-6px;right:17px;width:12px;height:12px;background:#0B1220;transform:rotate(45deg);border-radius:3px 0 0 0;box-shadow:-1px -1px 0 rgba(233,207,156,.28)}
+#mlist .mwho{display:flex;flex-direction:column;gap:1px;margin:2px 2px 6px;padding:12px 14px 12px 58px;position:relative;border:0;border-radius:16px;background:linear-gradient(135deg,rgba(233,207,156,.16),rgba(233,207,156,.04))}
+#mlist .mwho::before{content:attr(data-i);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:linear-gradient(140deg,#E9CF9C,#B8934A);color:#0B1220;font-family:var(--font-display);font-weight:800;font-size:1rem;display:flex;align-items:center;justify-content:center}
+#mlist .mwho b{color:#fff}
+#mlist .mwho small{color:#9AA6BD}
+#mlist button{position:relative;padding:10px 12px;border-radius:14px;gap:12px;color:#E6EAF2;transition:background .2s ease,color .2s ease}
+#mlist button svg{width:34px;height:34px;padding:7px;flex:none;border-radius:11px;color:#E9CF9C;background:rgba(233,207,156,.1);transition:background .2s ease,color .2s ease}
+#mlist button b{color:#fff;font-weight:600;letter-spacing:.005em}
+#mlist button small{color:#8F9BB3}
+#mlist button:hover{background:rgba(255,255,255,.05);color:#fff}
+#mlist button:hover svg{background:rgba(233,207,156,.18)}
+#mlist button[aria-current=page]{background:rgba(233,207,156,.1)}
+#mlist button[aria-current=page]::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:#E9CF9C}
+#mlist button[aria-current=page] svg{background:#E9CF9C;color:#0B1220}
+#mlist button[aria-current=page] b{color:#E9CF9C}
+#mlist button:focus-visible{outline:2px solid #E9CF9C;outline-offset:-2px}
+#mlist .pro{background:linear-gradient(135deg,#E9CF9C,#C9A762);color:#0B1220}
+#mlist button.out{margin-top:6px}
+#mlist button.out::after{content:"";position:absolute;left:12px;right:12px;top:-4px;height:1px;background:rgba(255,255,255,.08)}
+#mlist button.out svg{color:#FF8A80;background:rgba(255,138,128,.1)}
+#mlist button.out b{color:#FF8A80}
+#mlist > *{opacity:0;transform:translateY(6px);transition:opacity .22s ease,transform .3s cubic-bezier(.2,.9,.25,1)}
+#mlist.open > *{opacity:1;transform:none}
+#mlist.open > :nth-child(1){transition-delay:.03s}#mlist.open > :nth-child(2){transition-delay:.06s}#mlist.open > :nth-child(3){transition-delay:.09s}
+#mlist.open > :nth-child(4){transition-delay:.12s}#mlist.open > :nth-child(5){transition-delay:.15s}#mlist.open > :nth-child(6){transition-delay:.18s}
+#mlist.open > :nth-child(7){transition-delay:.21s}#mlist.open > :nth-child(8){transition-delay:.24s}#mlist.open > :nth-child(9){transition-delay:.27s}
+#mlist.open > :nth-child(10){transition-delay:.3s}#mlist.open > :nth-child(11){transition-delay:.33s}
+@media (prefers-reduced-motion:reduce){#mlist,#mlist > *,.mscrim,.hd .burger i{transition:none}}
+
+/* ---------- Plan and Today cards in the logo palette (navy and champagne, kept light enough) ---------- */
+#s-result .planhero,#s-result .tdhero{background:radial-gradient(90% 70% at 100% 0%,rgba(233,207,156,.26),rgba(233,207,156,0) 60%),radial-gradient(70% 60% at 0% 100%,rgba(120,150,210,.22),rgba(120,150,210,0) 70%),linear-gradient(150deg,#2B3A5C 0%,#223150 55%,#1B2742 100%);
+  box-shadow:0 0 0 1px rgba(233,207,156,.22),0 18px 40px rgba(27,39,66,.22);color:#fff}
+#s-result .tdhero::after{background:rgba(233,207,156,.12)}
+#s-result .planhero small,#s-result .tdhero small{color:#E9CF9C;opacity:1}
+#s-result .ph-art{border:2px solid rgba(233,207,156,.7);box-shadow:0 8px 20px rgba(0,0,0,.18)}
+#s-result .journey{background:rgba(255,255,255,.08);border:1px solid rgba(233,207,156,.14)}
+#s-result .jrow .je b{color:#E9CF9C}
+#s-result .jtrack::before{background:linear-gradient(90deg,rgba(255,255,255,.35),rgba(233,207,156,.75))}
+#s-result .jtrack i.e{background:#E9CF9C;box-shadow:0 0 0 4px rgba(233,207,156,.25)}
+#s-result .miles > div{background:rgba(255,255,255,.08);border:1px solid rgba(233,207,156,.12)}
+#s-result .miles > div:last-child b{color:#E9CF9C}
+#s-result .tdhero p b{background:rgba(233,207,156,.18);color:#fff}
+
+/* ---------- Menu: own scroll, page stays still; gold burger lines at all times ---------- */
+#mlist{max-height:calc(100dvh - 170px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+html.menuon{overflow:hidden;overscroll-behavior:none}
+body.menuon{overscroll-behavior:none}
+body.menuon .hd{z-index:45}
+body.menuon #bnav{z-index:28}
+.hd .burger{border-color:rgba(184,147,74,.45)}
+.hd .burger i{background:#B8934A}
+body.onland .hd .burger{border-color:rgba(233,207,156,.4)}
+body.onland .hd .burger i,.hd .burger[aria-expanded=true] i{background:#E9CF9C}
+
