@@ -48,7 +48,7 @@
   function mmss(sec){ sec = Math.max(0,Math.ceil(sec)); return Math.floor(sec/60)+':'+pad(sec%60); }
   function gwFig(id){
     var P = (typeof ephOf==='function') ? ephOf(id) : null;
-    if(P && P.length) return '<div class="gw-fig" id="gw-fig"><img src="'+P[0]+'" alt="Start position"><img src="'+(P[1]||P[0])+'" alt="End position" class="b"></div>';
+    if(P && P.length) return '<div class="gw-fig" id="gw-fig"><img src="'+P[0]+'" data-hd="'+ephHd(P[0])+'" alt="Start position"><img src="'+(P[1]||P[0])+'" data-hd="'+ephHd(P[1]||P[0])+'" alt="End position" class="b"></div>';
     var f = figs(id,fg()); return '<div class="gw-fig draw" id="gw-fig"><span>'+f[0]+'</span><span class="b">'+(f[1]||f[0])+'</span></div>';
   }
   function gwTotSets(){ var s = gwSt(), n = 0, d = 0; s.items.forEach(function(it,i){ n += it.sets; if(i<s.i) d += it.sets; else if(i===s.i) d += s.set-1; }); return {n:n,d:d}; }

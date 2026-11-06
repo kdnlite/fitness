@@ -317,6 +317,10 @@ html.dk .fq-note{color:#A9B3C7}
 html.dk .fq-r{background:#131C30}
 html.dk .fq-r.miss{background:#182339}
 html.dk .fq-q button{background:#182339;color:#E8ECF4}
+html.dk .hc{background:#131C30;border:1px solid rgba(233,207,156,.16)}
+html.dk .hc.on{background:linear-gradient(160deg,#1A2440,#121A2C);border-color:rgba(233,207,156,.16)}
+html.dk .hc-ic{background:#182339}
+html.dk .hc.on .hc-ic{background:#182339;color:#A9B3C7}
 /* hand-written dark fixes (appended by tools/dark.py) */
 html.dk{--accent:#E9CF9C;--accent-fg:#0B1220;--accent-soft:#1E2A44;--ok:#5FD39A;--ok-soft:#10291D;--warn:#F2B860;--warn-soft:#33260F;--gold-ink:#E9CF9C}
 html.dk .cb.on,html.dk .dchip.on,html.dk .vsp button.on,html.dk .hhero,html.dk .stat.big,html.dk .wk div{color:#0B1220}
