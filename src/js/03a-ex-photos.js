@@ -1,2 +1,2 @@
   /* Made by tools/add-exercise-photos.py: exercise id -> photo version. Do not edit by hand. */
-  var EXPH = {};
+  var EXPH = {"squat":1};
