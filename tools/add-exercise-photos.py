@@ -4,6 +4,8 @@
   python3 tools/add-exercise-photos.py <exercise-id> <start-photo> <end-photo>
   python3 tools/add-exercise-photos.py --remove <exercise-id>
   python3 tools/add-exercise-photos.py --list          (ids and names, with which have photos)
+  Add --female (anywhere) to work on the female model's photos instead (files <id>-f-start.webp
+  etc., list EXPHF). Users whose gender is female see these; everyone else sees the male photos.
 
 Makes, in assets/ex/:
   <id>-start.webp / <id>-end.webp        light copy for lists, 1200 px on the long side
@@ -13,10 +15,13 @@ import sys, os, re, json
 from PIL import Image, ImageOps
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 LIST = os.path.join(ROOT, 'src/js/03a-ex-photos.js'); OUT = os.path.join(ROOT, 'assets/ex')
-def load():
-    s = open(LIST).read(); return json.loads(s[s.index('var EXPH = ') + 11:s.rindex(';')])
-def save(d):
-    open(LIST, 'w').write('  /* Made by tools/add-exercise-photos.py: exercise id -> photo version. Do not edit by hand. */\n  var EXPH = ' + json.dumps(dict(sorted(d.items())), separators=(',', ':')) + ';\n')
+def readvar(s, name):
+    m = re.search(r'var ' + name + r' = (\{.*?\});', s); return json.loads(m.group(1)) if m else {}
+def loadall():
+    s = open(LIST).read(); return readvar(s, 'EXPH'), readvar(s, 'EXPHF')
+def saveall(m, f):
+    j = lambda d: json.dumps(dict(sorted(d.items())), separators=(',', ':'))
+    open(LIST, 'w').write('  /* Made by tools/add-exercise-photos.py: exercise id -> photo version (EXPH male, EXPHF female). Do not edit by hand. */\n  var EXPH = ' + j(m) + ';\n  var EXPHF = ' + j(f) + ';\n')
 def ids():
     lib = open(os.path.join(ROOT, 'src/js/04-exercise-library.js'), encoding='utf-8').read()
     out = {m.group(1): m.group(2) for m in re.finditer(r"\b([a-z0-9]+):\{n:'([^']+)'", lib)}
@@ -31,14 +36,17 @@ def make(src, dst, size, q):
     im.save(dst, 'WEBP', quality=q, method=6)
     return im.size, os.path.getsize(dst)
 a = sys.argv[1:]
+FEM = '--female' in a; a = [x for x in a if x != '--female']
 if not a: print(__doc__); sys.exit(1)
-d = load()
+DM, DF = loadall(); d = DF if FEM else DM
+SUF = '-f' if FEM else ''
+def save(_): saveall(DM, DF)
 if a[0] == '--list':
     for k, n in sorted(ids().items(), key=lambda x: x[1].lower()): print(('✓ ' if k in d else '  ') + k.ljust(36) + n)
     sys.exit(0)
 if a[0] == '--remove':
     for s in ('start', 'end', 'start-hd', 'end-hd'):
-        p = os.path.join(OUT, f'{a[1]}-{s}.webp')
+        p = os.path.join(OUT, f'{a[1]}{SUF}-{s}.webp')
         if os.path.exists(p): os.remove(p)
     d.pop(a[1], None); save(d); print('removed', a[1]); sys.exit(0)
 eid, s_img, e_img = a
@@ -46,8 +54,8 @@ known = ids()
 if eid not in known: sys.exit(f'Unknown exercise id "{eid}". Run with --list to see ids.')
 os.makedirs(OUT, exist_ok=True)
 for tag, src in (('start', s_img), ('end', e_img)):
-    sz, b = make(src, os.path.join(OUT, f'{eid}-{tag}.webp'), 1200, 82)
-    hz, hb = make(src, os.path.join(OUT, f'{eid}-{tag}-hd.webp'), 3840, 90)
+    sz, b = make(src, os.path.join(OUT, f'{eid}{SUF}-{tag}.webp'), 1200, 82)
+    hz, hb = make(src, os.path.join(OUT, f'{eid}{SUF}-{tag}-hd.webp'), 3840, 90)
     print(f'{eid} {tag}: list {sz[0]}x{sz[1]} {b//1024} KB · full {hz[0]}x{hz[1]} {hb//1024} KB')
 d[eid] = d.get(eid, 0) + 1; save(d)
-print(f'{known[eid]}: photos added ({len(d)} exercises have photos now).')
+print(f'{known[eid]}: ' + ('female' if FEM else 'male') + f' photos added ({len(d)} exercises have ' + ('female' if FEM else 'male') + ' photos now).')
