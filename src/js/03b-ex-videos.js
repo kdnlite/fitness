@@ -1,2 +1,2 @@
   /* Made by tools/add-exercise-videos.py: which exercises have a demo video (assets/vid/<m|f>/<id>.mp4), id -> version. Do not edit by hand. */
-  var VIDS = {"m":{"squat":1},"f":{}};
+  var VIDS = {"m":{"bridge":1,"burpee":1,"calf":1,"climber":1,"crunch":1,"curl":1,"highknees":1,"jacks":1,"legraise":1,"lunge":1,"ohpress":1,"pushup":1,"row":1,"squat":2},"f":{"bridge":1,"burpee":1,"calf":1,"climber":1,"crunch":1,"curl":1,"highknees":1,"jacks":1,"legraise":1,"lunge":1,"ohpress":1,"plank":1,"pushup":1,"row":1,"squat":1}};
