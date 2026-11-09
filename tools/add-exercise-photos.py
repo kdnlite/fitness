@@ -23,6 +23,9 @@ def saveall(m, f):
     j = lambda d: json.dumps(dict(sorted(d.items())), separators=(',', ':'))
     open(LIST, 'w').write('  /* Made by tools/add-exercise-photos.py: exercise id -> photo version (EXPH male, EXPHF female). Do not edit by hand. */\n  var EXPH = ' + j(m) + ';\n  var EXPHF = ' + j(f) + ';\n')
 def ids():
+    # Full list (all 1,130 library exercises), exported from the built page; falls back to parsing the source.
+    p = os.path.join(ROOT, 'tools/exercise-ids.json')
+    if os.path.exists(p): return json.load(open(p, encoding='utf-8'))
     lib = open(os.path.join(ROOT, 'src/js/04-exercise-library.js'), encoding='utf-8').read()
     out = {m.group(1): m.group(2) for m in re.finditer(r"\b([a-z0-9]+):\{n:'([^']+)'", lib)}
     a = lib.index('var XROWS = ['); rows = json.loads(lib[a + 12:lib.index('];', a) + 1])
