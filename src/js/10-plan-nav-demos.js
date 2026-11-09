@@ -65,11 +65,10 @@
     jacks:0.9,highknees:0.7,burpee:4.5,wallsit:6,superman:3.2,crunch:2.8,stepup:3.2,birddog:4,latpull:3.4,frontraise:3,cablerow:3.2,cycle:1.6,deadlift:4,hangraise:3.4,kbswing:2,goblet:3.6,invrow:3.4};
   /* Real exercise videos are streamed from our server; photos stay inside the app.
      VBASE = folder on the server, VIDS = which exercises already have a video. */
-  var VBASE = 'https://videos.kdnfitness.app/';
-  var VIDS = {m:{}, f:{}};
+  var VBASE = 'https://kdnfitness.com/assets/vid/';   /* VIDS comes from 03b-ex-videos.js (made by tools/add-exercise-videos.py) */
   function vidOf(id){ var g = fg(), o = g==='f' ? 'm' : 'f'; return VIDS[g][id] ? g : (VIDS[o][id] ? o : null); }
   function realPlayerHtml(id,vg){
-    var P = ephOf(id), src = VBASE+vg+'/'+id+'.mp4';
+    var P = ephOf(id), src = VBASE+vg+'/'+id+'.mp4?v='+VIDS[vg][id];
     return '<div class="rplayer"><div class="vframe"><span class="vtag">Video · '+(vg==='f'?'female':'male')+'</span>'+
       '<video class="rvid" src="'+src+'" '+(P?'poster="'+P[0]+'" ':'')+'muted loop playsinline preload="none"></video>'+
       '<button type="button" class="rvplay" aria-label="Play video"><span class="ic"></span></button></div>'+

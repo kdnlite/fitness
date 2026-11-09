@@ -306,8 +306,8 @@ h1 mark{background:linear-gradient(transparent 60%,rgba(29,78,216,.24) 60%);colo
 .exbody{animation:rise .25s ease both}
 .player{display:flex;flex-direction:column;gap:10px;padding-top:14px}
 .rplayer{display:flex;flex-direction:column;gap:10px;padding-top:14px}
-.rplayer .vframe{position:relative}
-.rvid{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#111}
+.rplayer .vframe{position:relative;aspect-ratio:auto;max-width:520px}
+.rvid{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;background:#111}
 .rvplay{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;border:0;background:rgba(10,20,40,.6);cursor:pointer}
 .rvplay .ic{display:block;margin:auto;width:0;height:0;border-left:16px solid #d9b46a;border-top:10px solid transparent;border-bottom:10px solid transparent;transform:translateX(3px)}
 .rplayer.on .rvplay{opacity:0}
@@ -5050,6 +5050,8 @@ img.eph,.gw-fig img{cursor:zoom-in}
   /* Made by tools/add-exercise-photos.py: exercise id -> photo version (EXPH male, EXPHF female). Do not edit by hand. */
   var EXPH = {"bench":2,"birddog":1,"bridge":2,"burpee":1,"cablerow":1,"calf":1,"climber":2,"crunch":1,"curl":2,"dips":1,"frontraise":1,"highknees":1,"jacks":1,"latpull":1,"legraise":2,"lunge":2,"ohpress":2,"plank":2,"pullup":1,"pushdown":1,"pushup":2,"rdl":1,"row":2,"run":2,"skip":1,"squat":2,"stepup":1,"superman":1,"walk":2,"wallsit":1,"yoga":1};
   var EXPHF = {"bench":1,"birddog":1,"bridge":1,"burpee":1,"calf":1,"climber":1,"crunch":1,"curl":1,"dips":1,"frontraise":1,"highknees":1,"jacks":1,"latpull":1,"legraise":1,"lunge":1,"ohpress":1,"plank":1,"pullup":1,"pushdown":1,"pushup":1,"rdl":1,"row":1,"run":1,"skip":1,"squat":1,"stepup":1,"stretch":1,"superman":1,"walk":1,"wallsit":1,"yoga":1};
+  /* Made by tools/add-exercise-videos.py: which exercises have a demo video (assets/vid/<m|f>/<id>.mp4), id -> version. Do not edit by hand. */
+  var VIDS = {"m":{"squat":1},"f":{}};
   /* ---------- Exercise library ---------- */
   // fig = pose key, cap = captions for the frames
   var EXS = {
@@ -5681,8 +5683,9 @@ img.eph,.gw-fig img{cursor:zoom-in}
   }
   function exBody(id,it,lib){
     var e=EXS[id], fl=exPics(id), si=stillIdx(id);
-    var h = '<div class="exbody"><div class="big2">'+fl.map(function(s,i){return '<figure>'+s+'<figcaption>'+esc(ephOf(id) ? (i?'End position':'Start position') : (e.cap[i]||''))+'</figcaption></figure>'}).join('')+'</div>';
-    if(e.v) h += '<p class="hint basen">The pictures show the base movement: '+esc(EXS[e.base].n)+'. Follow the written steps below for what is different in this variation.</p>';
+    var hasVid = typeof vidOf==='function' && vidOf(id);
+    var h = '<div class="exbody">'+(hasVid ? realPlayerHtml(id,hasVid) : '')+'<div class="big2">'+fl.map(function(s,i){return '<figure>'+s+'<figcaption>'+esc(ephOf(id) ? (i?'End position':'Start position') : (e.cap[i]||''))+'</figcaption></figure>'}).join('')+'</div>';
+    if(e.v && !ephOf(id)) h += '<p class="hint basen">The pictures show the base movement: '+esc(EXS[e.base].n)+'. Follow the written steps below for what is different in this variation.</p>';
     h += calBlock(id,it,lib);
     h += '<p class="need"><b>You need:</b> '+esc(e.need)+'</p>';
     h += '<div><h5>How to do it</h5><ol>'+e.st.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol></div>';
@@ -7903,11 +7906,10 @@ img.eph,.gw-fig img{cursor:zoom-in}
     jacks:0.9,highknees:0.7,burpee:4.5,wallsit:6,superman:3.2,crunch:2.8,stepup:3.2,birddog:4,latpull:3.4,frontraise:3,cablerow:3.2,cycle:1.6,deadlift:4,hangraise:3.4,kbswing:2,goblet:3.6,invrow:3.4};
   /* Real exercise videos are streamed from our server; photos stay inside the app.
      VBASE = folder on the server, VIDS = which exercises already have a video. */
-  var VBASE = 'https://videos.kdnfitness.app/';
-  var VIDS = {m:{}, f:{}};
+  var VBASE = 'https://kdnfitness.com/assets/vid/';   /* VIDS comes from 03b-ex-videos.js (made by tools/add-exercise-videos.py) */
   function vidOf(id){ var g = fg(), o = g==='f' ? 'm' : 'f'; return VIDS[g][id] ? g : (VIDS[o][id] ? o : null); }
   function realPlayerHtml(id,vg){
-    var P = ephOf(id), src = VBASE+vg+'/'+id+'.mp4';
+    var P = ephOf(id), src = VBASE+vg+'/'+id+'.mp4?v='+VIDS[vg][id];
     return '<div class="rplayer"><div class="vframe"><span class="vtag">Video · '+(vg==='f'?'female':'male')+'</span>'+
       '<video class="rvid" src="'+src+'" '+(P?'poster="'+P[0]+'" ':'')+'muted loop playsinline preload="none"></video>'+
       '<button type="button" class="rvplay" aria-label="Play video"><span class="ic"></span></button></div>'+

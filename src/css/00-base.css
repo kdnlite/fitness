@@ -291,8 +291,8 @@ h1 mark{background:linear-gradient(transparent 60%,rgba(29,78,216,.24) 60%);colo
 .exbody{animation:rise .25s ease both}
 .player{display:flex;flex-direction:column;gap:10px;padding-top:14px}
 .rplayer{display:flex;flex-direction:column;gap:10px;padding-top:14px}
-.rplayer .vframe{position:relative}
-.rvid{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#111}
+.rplayer .vframe{position:relative;aspect-ratio:auto;max-width:520px}
+.rvid{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;background:#111}
 .rvplay{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;border:0;background:rgba(10,20,40,.6);cursor:pointer}
 .rvplay .ic{display:block;margin:auto;width:0;height:0;border-left:16px solid #d9b46a;border-top:10px solid transparent;border-bottom:10px solid transparent;transform:translateX(3px)}
 .rplayer.on .rvplay{opacity:0}

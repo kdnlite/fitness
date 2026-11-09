@@ -629,8 +629,9 @@
   }
   function exBody(id,it,lib){
     var e=EXS[id], fl=exPics(id), si=stillIdx(id);
-    var h = '<div class="exbody"><div class="big2">'+fl.map(function(s,i){return '<figure>'+s+'<figcaption>'+esc(ephOf(id) ? (i?'End position':'Start position') : (e.cap[i]||''))+'</figcaption></figure>'}).join('')+'</div>';
-    if(e.v) h += '<p class="hint basen">The pictures show the base movement: '+esc(EXS[e.base].n)+'. Follow the written steps below for what is different in this variation.</p>';
+    var hasVid = typeof vidOf==='function' && vidOf(id);
+    var h = '<div class="exbody">'+(hasVid ? realPlayerHtml(id,hasVid) : '')+'<div class="big2">'+fl.map(function(s,i){return '<figure>'+s+'<figcaption>'+esc(ephOf(id) ? (i?'End position':'Start position') : (e.cap[i]||''))+'</figcaption></figure>'}).join('')+'</div>';
+    if(e.v && !ephOf(id)) h += '<p class="hint basen">The pictures show the base movement: '+esc(EXS[e.base].n)+'. Follow the written steps below for what is different in this variation.</p>';
     h += calBlock(id,it,lib);
     h += '<p class="need"><b>You need:</b> '+esc(e.need)+'</p>';
     h += '<div><h5>How to do it</h5><ol>'+e.st.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol></div>';
