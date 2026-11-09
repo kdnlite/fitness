@@ -6,6 +6,10 @@
 /assets/*
   Cache-Control: public, max-age=86400
 
+# Exercise photos may be loaded from other sites (e.g. as references when making new photos).
+/assets/ex/*
+  Access-Control-Allow-Origin: *
+
 /sw.js
   Cache-Control: no-cache
 
