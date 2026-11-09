@@ -971,7 +971,10 @@ body.onland .lgimg{box-shadow:none;mix-blend-mode:screen;border-radius:0}
 .lp-wm{width:260px;max-width:72%;height:auto;margin:-10px 0 -6px;mix-blend-mode:screen}
 
 /* real dish photos */
-.dph{width:100%;height:100%;object-fit:cover;display:block}
+.dph{width:100%;height:100%;object-fit:contain;display:block}
+/* show the whole dish, never crop it (wins over the generic 'img{object-fit:cover}' box rules) */
+img.dph{object-fit:contain!important;background:#2a1c14}
+.hx-coll>span:has(.dph),.tddpics>span:has(.dph),.hm-mpic:has(.dph),.hh-ric:has(.dph){background:#2a1c14}
 .food .pic:has(.dph),.mpic:has(.dph),.fdpic:has(.dph),.pic:has(.dph){padding:0;overflow:hidden;background:#2a1c14}
 .food .pic:has(.dph){height:150px}
 .fdpic:has(.dph){width:140px;height:140px}
