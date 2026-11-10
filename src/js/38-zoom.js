@@ -3,9 +3,9 @@
     var hd = img.getAttribute('data-hd') || img.currentSrc || img.src, z = $('kzoom');
     if(!z){ z = document.createElement('div'); z.id = 'kzoom'; z.className = 'kzoom'; z.setAttribute('role','dialog'); z.setAttribute('aria-modal','true'); document.body.appendChild(z); }
     var cap = img.getAttribute('alt') || '', name = '';
-    var host = img.closest('.ex,.exrow,.tddrow,.gw,[data-ex],details'); if(host){ var h = host.querySelector('h2,h3,b,strong,.exn'); if(h) name = h.textContent.trim(); }
+    var host = img.closest('.ex,.exrow,.tddrow,.gw,[data-ex],details,.food,.mrow,.hm-meal,[data-dish],.card'); if(host){ var h = host.querySelector('h2,h3,h4,b,strong,.exn,.fn'); if(h) name = h.textContent.trim(); } if(!name) name = img.getAttribute('data-name')||'';
     z.setAttribute('aria-label',(name?name+', ':'')+cap);
-    z.innerHTML = '<img class="kz-img" src="'+(img.currentSrc||img.src)+'" alt="'+esc(cap)+'"><span class="kz-load" aria-hidden="true"></span><div class="kz-cap">'+(name?'<b>'+esc(name)+'</b>':'')+'<span>'+esc(cap)+' · tap to close</span></div>';
+    z.innerHTML = '<img class="kz-img" src="'+(img.currentSrc||img.src)+'" alt="'+esc(cap)+'"><span class="kz-load" aria-hidden="true"></span><div class="kz-cap">'+(name?'<b>'+esc(name)+'</b>':'')+'<span>'+(cap?esc(cap)+' · ':'')+'tap to close</span></div><button type="button" class="kz-x" aria-label="Close photo">×</button>';
     z.hidden = false; document.documentElement.classList.add('hlock');
     requestAnimationFrame(function(){ z.classList.add('open'); });
     if(hd && hd!==(img.currentSrc||img.src)){
@@ -22,7 +22,7 @@
   document.addEventListener('click',function(ev){
     var t = ev.target;
     if(kZoomIsOpen() && t.closest && t.closest('#kzoom')){ ev.preventDefault(); ev.stopPropagation(); kZoomClose(); return; }
-    var img = t.closest && t.closest('img.eph');
+    var img = t.closest && t.closest('img.eph,img.dph,.ingph img');
     if(!img){ var fig = t.closest && t.closest('#gw-fig'); if(fig){ var ims = fig.querySelectorAll('img'); img = ims[fig.classList.contains('alt') && ims[1] ? 1 : 0]; } }
     if(!img) return;
     ev.preventDefault(); ev.stopPropagation();

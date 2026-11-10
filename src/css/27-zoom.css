@@ -6,6 +6,8 @@ img.eph,.gw-fig img{cursor:zoom-in}
 .kzoom.open .kz-img{transform:none}
 .kz-cap{display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;text-align:center;font-size:.9rem}
 .kz-cap span{color:#AEB8CC;font-size:.82rem}
+.kz-x{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));left:max(10px,env(safe-area-inset-left,0px));width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:1.7rem;line-height:1;cursor:pointer}
+img.dph,.ingph img{cursor:zoom-in}
 .kz-load{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:22px;height:22px;border-radius:50%;border:2.5px solid rgba(255,255,255,.25);border-top-color:#E9C05A;opacity:0}
 .kzoom.loading .kz-load{opacity:1;animation:kzs .8s linear infinite}
 @keyframes kzs{to{transform:rotate(360deg)}}
