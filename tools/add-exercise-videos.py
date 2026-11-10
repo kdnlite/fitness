@@ -8,6 +8,11 @@ src/js/03b-ex-videos.js (VIDS). The app then plays it on the exercise page inste
 Run node tools/build.mjs afterwards.
 """
 import sys, os, re, json, subprocess
+def wm_filter(src):
+    # cover the generator's small corner watermark (bottom right) with ffmpeg delogo
+    w, h = map(int, subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', src], capture_output=True, text=True, check=True).stdout.strip().split(',')[:2])
+    k = min(w, h) / 464; bw, bh = round(48 * k), round(24 * k)
+    return f'delogo=x={w - bw - round(4 * k)}:y={h - bh - round(6 * k)}:w={bw}:h={bh}'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIST = os.path.join(ROOT, 'src/js/03b-ex-videos.js')
 IDS = json.load(open(os.path.join(ROOT, 'tools/exercise-ids.json'), encoding='utf-8'))
@@ -25,7 +30,7 @@ for i in range(0, len(a), 3):
     if eid not in IDS: sys.exit(f'Unknown exercise id "{eid}"')
     if g not in ('m', 'f'): sys.exit('Gender must be m or f')
     out = os.path.join(ROOT, 'assets/vid', g, eid + '.mp4'); os.makedirs(os.path.dirname(out), exist_ok=True)
-    subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', src, '-an', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '26',
+    subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', src, '-vf', wm_filter(src), '-an', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '26',
                     '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out], check=True)
     v[g][eid] = v[g].get(eid, 0) + 1
     print(f'{IDS[eid]} ({g}): {os.path.getsize(out) // 1024} KB')
