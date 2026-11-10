@@ -11,7 +11,7 @@ echo "== KDN Fitness app build: version $VN (code $VC)"
 echo "== 1. Copy the website into www (photos stay inside the app)"
 rm -rf www out && mkdir -p www out
 cp ../index.html ../kdn-live.js www/
-cp -r ../assets www/assets && rm -rf www/assets/vid   # demo videos stream from kdnfitness.com
+cp -r ../assets www/assets && rm -rf www/assets/vid www/assets/dvid   # demo and dish videos stream from kdnfitness.com
 
 echo "== 2. Install Capacitor"
 # speech-recognition 7.x lists Capacitor 7 as its peer; it builds fine with Capacitor 8

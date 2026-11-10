@@ -91,3 +91,5 @@ body.menuon #bnav{z-index:28}
 body.onland .hd .burger{border-color:rgba(233,207,156,.4)}
 body.onland .hd .burger i,.hd .burger[aria-expanded=true] i{background:#E9CF9C}
 
+.fdvid{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#2a1c14;margin:0 0 12px}
+.fdvid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
