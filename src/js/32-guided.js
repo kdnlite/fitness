@@ -48,6 +48,11 @@
   function mmss(sec){ sec = Math.max(0,Math.ceil(sec)); return Math.floor(sec/60)+':'+pad(sec%60); }
   function gwFig(id){
     var P = (typeof ephOf==='function') ? ephOf(id) : null;
+    /* A demo video of this exercise for the user's own model plays on its own (muted, looping);
+       without one the start and end photos take turns as before. */
+    var vg = fg();
+    if(typeof VIDS!=='undefined' && VIDS[vg] && VIDS[vg][id])
+      return '<div class="gw-fig vid" id="gw-fig"><video src="'+VBASE+vg+'/'+id+'.mp4?v='+VIDS[vg][id]+'"'+(P&&P.length?' poster="'+P[0]+'"':'')+' autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture></video></div>';
     if(P && P.length) return '<div class="gw-fig" id="gw-fig"><img src="'+P[0]+'" data-hd="'+ephHd(P[0])+'" alt="Start position"><img src="'+(P[1]||P[0])+'" data-hd="'+ephHd(P[1]||P[0])+'" alt="End position" class="b"></div>';
     var f = figs(id,fg()); return '<div class="gw-fig draw" id="gw-fig"><span>'+f[0]+'</span><span class="b">'+(f[1]||f[0])+'</span></div>';
   }
@@ -83,10 +88,15 @@
     else if(s.phase==='timer') h += '<button type="button" class="gw-ghost" data-gw="pause">'+(s.paused?'Resume':'Pause')+'</button><button type="button" class="gw-go" data-gw="done">'+(it.kind==='time'?'Finish':'Done')+'</button>';
     else h += '<button type="button" class="gw-go" data-gw="start">Start '+(it.kind==='hold'?it.t+' sec':it.m+' min')+'</button>';
     h += '<button type="button" class="gw-skipx" data-gw="skipex">Skip this exercise</button></div>';
+    var oldV = $('gw-fig') && $('gw-fig').querySelector('video');
     $('gw').innerHTML = h;
+    /* keep the same video playing across re-renders (Start, Pause…) instead of restarting it */
+    var newV = $('gw-fig') && $('gw-fig').querySelector('video');
+    if(oldV && newV && oldV.getAttribute('src')===newV.getAttribute('src')) newV.parentNode.replaceChild(oldV, newV);
     gwFigMode();
   }
-  function gwFigMode(){ var f = $('gw-fig'), s = gwSt(); if(f && s) f.classList.toggle('alt',!!s.pics); }
+  function gwFigMode(){ var f = $('gw-fig'), s = gwSt(); if(f && s) f.classList.toggle('alt',!!s.pics);
+    var v = f && f.querySelector('video'); if(v){ v.muted = true; if(v.paused){ var pr = v.play(); if(pr && pr.catch) pr.catch(function(){}); } } }
   function gwTick(){
     var s = gwSt(); if(!s) return;
     var c = $('gw-clock'); if(c) c.textContent = mmss((Date.now()-s.start)/1000);

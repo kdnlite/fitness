@@ -9,5 +9,9 @@ public class MainActivity extends BridgeActivity {
         // KDN's own plugin: sends today's numbers to the home screen widget
         registerPlugin(KdnWidgetPlugin.class);
         super.onCreate(savedInstanceState);
+        // Exercise demo videos (muted) start on their own on the workout screen
+        if (getBridge() != null && getBridge().getWebView() != null) {
+            getBridge().getWebView().getSettings().setMediaPlaybackRequiresUserGesture(false);
+        }
     }
 }
