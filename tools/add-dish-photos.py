@@ -4,8 +4,9 @@ Crops a margin on every side (removes generator watermarks), writes
 assets/img/dish/<id>-<hash>.webp (card, 720px) and -hd (full), updates DPH/DPHD."""
 import sys, os, re, json, hashlib, io
 from PIL import Image
+import numpy as np, cv2
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-src = sys.argv[1]; crop = float(sys.argv[2]) if len(sys.argv) > 2 else 7.0
+src = sys.argv[1]; crop = float(sys.argv[2]) if len(sys.argv) > 2 else 3.0
 js = os.path.join(root, 'src/js/02-dish-library.js'); s = open(js).read()
 def getmap(name):
     m = re.search(r'var %s = (\{.*?\});' % name, s); return json.loads(m.group(1)), m
@@ -15,6 +16,13 @@ for f in sorted(os.listdir(src)):
     if not f.endswith(('.webp', '.png', '.jpg')): continue
     did = os.path.splitext(f)[0]
     im = Image.open(os.path.join(src, f)).convert('RGB'); w, h = im.size
+    # Gemini blends a small white sparkle into the bottom-right area: undo the blend with its alpha map
+    A = np.asarray(Image.open(os.path.join(root, 'tools/gemini-wm-alpha.png'))).astype(float) / 255.0
+    x0, y0 = w - 1024 + 903, h - 687 + 566
+    arr = np.asarray(im).astype(float); reg = arr[y0:y0 + 48, x0:x0 + 48]
+    al = A[..., None]; reg = (reg - al * 255.0) / np.maximum(1 - al, 0.2)
+    arr[y0:y0 + 48, x0:x0 + 48] = np.clip(reg, 0, 255)
+    im = Image.fromarray(arr.astype('uint8'))
     dx, dy = round(w * crop / 100), round(h * crop / 100)
     im = im.crop((dx, dy, w - dx, h - dy))
     hd = io.BytesIO(); im.save(hd, 'WEBP', quality=86, method=6); hb = hd.getvalue()
