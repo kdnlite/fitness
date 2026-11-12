@@ -12,6 +12,9 @@ def wm_filter(src):
     # cover the generator's small corner watermark (bottom right) with ffmpeg delogo
     w, h = map(int, subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', src], capture_output=True, text=True, check=True).stdout.strip().split(',')[:2])
     k = min(w, h) / 464; bw, bh = round(48 * k), round(24 * k)
+    if w > h:  # landscape: the mark sits a little further in from the corner
+        bw, bh = round(64 * k), round(30 * k)
+        return f'delogo=x={w - round(68 * k)}:y={h - round(40 * k)}:w={bw}:h={bh}'
     return f'delogo=x={w - bw - round(4 * k)}:y={h - bh - round(6 * k)}:w={bw}:h={bh}'
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIST = os.path.join(ROOT, 'src/js/03b-ex-videos.js')
