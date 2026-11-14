@@ -23,6 +23,8 @@ html.menuon .hd.sc::before{-webkit-backdrop-filter:none;backdrop-filter:none}
 /* landing sections reveal as you scroll */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
+/* the review list rows also use the class .rv: never hide them */
+#rvlist .rv{opacity:1;transform:none;transition:none}
 /* long lists only draw what is on screen: smoother scrolling */
 .lp-sec,.lp-final{content-visibility:auto;contain-intrinsic-size:auto 720px}
 #lib-res>*:not(h3):not(.more):not(.kprev){content-visibility:auto;contain-intrinsic-size:auto 96px}
