@@ -37,3 +37,43 @@
 body.onland .lp-dish{background:#111A2C;border:1px solid rgba(233,207,156,.10)}
 body.onland .lp-dish figcaption b{color:#fff}
 body.onland .lp-dish figcaption span{color:#9AA6BD}
+
+/* Hero: the athletes' stage tilts in 3D with the pointer (or phone tilt) */
+.lp-hero{perspective:1200px}
+.lp-walk.tilt{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.75,.2,1);will-change:transform}
+.lp-walk.tilt.live{transition:transform .12s linear}
+
+/* Plans: glass cards that tilt with a gold sheen following the pointer */
+.lp-plans{perspective:1000px}
+.lp-plan.glass{transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.75,.2,1),box-shadow .45s;will-change:transform}
+.lp-plan.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(233,207,156,.30),rgba(233,207,156,.08) 35%,transparent 60%);mix-blend-mode:screen}
+.lp-plan.glass.hot::after{opacity:1}
+.lp-plan.glass.hot{box-shadow:0 26px 60px rgba(5,10,25,.35),0 0 0 1px rgba(233,207,156,.35)}
+.lp-plan.glass.live{transition:transform .1s linear,box-shadow .45s}
+@media (prefers-reduced-motion:reduce){.lp-walk.tilt,.lp-plan.glass{transform:none!important}}
+
+/* 3D muscle map */
+.lp-body{display:flex;flex-direction:column;gap:22px}
+.lp-body-wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:26px;align-items:center;background:#000;border-radius:28px;padding:22px;position:relative;overflow:hidden}
+.lp-body-stage{perspective:1400px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.lp-body-stage.drag{cursor:grabbing}
+.lp-body-turn{position:relative;aspect-ratio:3/4;max-width:420px;margin:0 auto;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.75,.2,1)}
+.lp-body-turn.live{transition:none}
+.lp-body-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.lp-body-face.back{transform:rotateY(180deg)}
+.lp-body-face img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;-webkit-user-drag:none}
+.lp-body-face svg{position:absolute;inset:0;width:100%;height:100%}
+.lp-mu{fill:rgba(233,190,100,.0);stroke:rgba(233,207,156,.35);stroke-width:1.2;stroke-dasharray:3 4;cursor:pointer;transition:fill .3s,stroke .3s;outline:none}
+.lp-mu:hover,.lp-mu:focus-visible{fill:rgba(233,190,100,.22);stroke:#E9CF9C;stroke-dasharray:none}
+.lp-mu.on{fill:rgba(245,197,66,.30);stroke:#F5C542;stroke-dasharray:none;filter:drop-shadow(0 0 10px rgba(245,197,66,.85))}
+.lp-body-side{position:relative;color:#fff;display:flex;flex-direction:column;gap:16px}
+.lp-body-flip{display:inline-flex;gap:4px;background:rgba(255,255,255,.07);border-radius:999px;padding:4px;align-self:flex-start}
+.lp-body-flip button{border:0;background:transparent;color:#AEB9CF;font:600 .85rem var(--font-body,inherit);padding:8px 16px;border-radius:999px;cursor:pointer}
+.lp-body-flip button.on{background:#E9CF9C;color:#0B1220}
+.lp-body-info small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#E9CF9C;margin-bottom:6px}
+.lp-body-info h3{margin:0 0 10px;color:#fff;font-size:clamp(1.4rem,3vw,2rem)}
+.lp-body-info ul{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:8px}
+.lp-body-info li{color:#C9D2E3;font-size:.95rem;padding-left:18px;position:relative}
+.lp-body-info li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:50%;background:#E9CF9C}
+.lp-body-info .btn{background:#E9CF9C;border-color:#E9CF9C;color:#0B1220}
+@media (max-width:699px){.lp-body-wrap{grid-template-columns:1fr;padding:16px}.lp-body-turn{max-width:300px}.lp-body-flip{align-self:center}}

@@ -3549,6 +3549,46 @@ img.dph,.ingph img{cursor:zoom-in}
 body.onland .lp-dish{background:#111A2C;border:1px solid rgba(233,207,156,.10)}
 body.onland .lp-dish figcaption b{color:#fff}
 body.onland .lp-dish figcaption span{color:#9AA6BD}
+
+/* Hero: the athletes' stage tilts in 3D with the pointer (or phone tilt) */
+.lp-hero{perspective:1200px}
+.lp-walk.tilt{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.75,.2,1);will-change:transform}
+.lp-walk.tilt.live{transition:transform .12s linear}
+
+/* Plans: glass cards that tilt with a gold sheen following the pointer */
+.lp-plans{perspective:1000px}
+.lp-plan.glass{transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.75,.2,1),box-shadow .45s;will-change:transform}
+.lp-plan.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(233,207,156,.30),rgba(233,207,156,.08) 35%,transparent 60%);mix-blend-mode:screen}
+.lp-plan.glass.hot::after{opacity:1}
+.lp-plan.glass.hot{box-shadow:0 26px 60px rgba(5,10,25,.35),0 0 0 1px rgba(233,207,156,.35)}
+.lp-plan.glass.live{transition:transform .1s linear,box-shadow .45s}
+@media (prefers-reduced-motion:reduce){.lp-walk.tilt,.lp-plan.glass{transform:none!important}}
+
+/* 3D muscle map */
+.lp-body{display:flex;flex-direction:column;gap:22px}
+.lp-body-wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:26px;align-items:center;background:#000;border-radius:28px;padding:22px;position:relative;overflow:hidden}
+.lp-body-stage{perspective:1400px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.lp-body-stage.drag{cursor:grabbing}
+.lp-body-turn{position:relative;aspect-ratio:3/4;max-width:420px;margin:0 auto;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.75,.2,1)}
+.lp-body-turn.live{transition:none}
+.lp-body-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.lp-body-face.back{transform:rotateY(180deg)}
+.lp-body-face img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;-webkit-user-drag:none}
+.lp-body-face svg{position:absolute;inset:0;width:100%;height:100%}
+.lp-mu{fill:rgba(233,190,100,.0);stroke:rgba(233,207,156,.35);stroke-width:1.2;stroke-dasharray:3 4;cursor:pointer;transition:fill .3s,stroke .3s;outline:none}
+.lp-mu:hover,.lp-mu:focus-visible{fill:rgba(233,190,100,.22);stroke:#E9CF9C;stroke-dasharray:none}
+.lp-mu.on{fill:rgba(245,197,66,.30);stroke:#F5C542;stroke-dasharray:none;filter:drop-shadow(0 0 10px rgba(245,197,66,.85))}
+.lp-body-side{position:relative;color:#fff;display:flex;flex-direction:column;gap:16px}
+.lp-body-flip{display:inline-flex;gap:4px;background:rgba(255,255,255,.07);border-radius:999px;padding:4px;align-self:flex-start}
+.lp-body-flip button{border:0;background:transparent;color:#AEB9CF;font:600 .85rem var(--font-body,inherit);padding:8px 16px;border-radius:999px;cursor:pointer}
+.lp-body-flip button.on{background:#E9CF9C;color:#0B1220}
+.lp-body-info small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#E9CF9C;margin-bottom:6px}
+.lp-body-info h3{margin:0 0 10px;color:#fff;font-size:clamp(1.4rem,3vw,2rem)}
+.lp-body-info ul{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:8px}
+.lp-body-info li{color:#C9D2E3;font-size:.95rem;padding-left:18px;position:relative}
+.lp-body-info li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;border-radius:50%;background:#E9CF9C}
+.lp-body-info .btn{background:#E9CF9C;border-color:#E9CF9C;color:#0B1220}
+@media (max-width:699px){.lp-body-wrap{grid-template-columns:1fr;padding:16px}.lp-body-turn{max-width:300px}.lp-body-flip{align-self:center}}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -3618,6 +3658,26 @@ body.onland .lp-dish figcaption span{color:#9AA6BD}
     <section class="lp-db" aria-labelledby="lp-db-h">
       <div class="lp-db-v"><video id="lpdb" muted loop playsinline preload="none" poster="assets/kdn-dumbbell.webp" width="720" height="720" aria-label="A black and gold KDN dumbbell turning in the light"><source src="assets/kdn-dumbbell.mp4" type="video/mp4"></video></div>
       <div class="lp-db-copy"><small>Built for serious training</small><h2 id="lp-db-h">Every rep, <span>planned for you</span></h2><p>1,130 exercises sorted by muscle, for no equipment, dumbbells or a full gym. Each one comes with the right form and the most common mistake.</p></div>
+    </section>
+
+    <section class="lp-body" aria-labelledby="lp-body-h">
+      <div class="lp-sh"><small>Train by muscle</small><h2 id="lp-body-h">Tap a muscle, <em class="sf">see its exercises</em></h2></div>
+      <div class="lp-body-wrap">
+        <div class="lp-body-stage" id="lpbody">
+          <div class="lp-body-turn">
+            <div class="lp-body-face front"><img src="assets/kdn-body-front.webp" alt="" width="900" height="1200" loading="lazy" decoding="async"><svg viewBox="0 0 600 800" aria-label="Front muscles" role="group"></svg></div>
+            <div class="lp-body-face back"><img src="assets/kdn-body-back.webp" alt="" width="900" height="1200" loading="lazy" decoding="async"><svg viewBox="0 0 600 800" aria-label="Back muscles" role="group"></svg></div>
+          </div>
+        </div>
+        <div class="lp-body-side">
+          <div class="lp-body-flip" role="group" aria-label="Turn the body"><button type="button" class="on" data-side="front">Front</button><button type="button" data-side="back">Back</button></div>
+          <div class="lp-body-info" aria-live="polite">
+            <small id="lpmu-n">1,130 exercises</small><h3 id="lpmu-h">Pick a muscle</h3>
+            <ul id="lpmu-l"><li>Tap any glowing part of the body, or drag it to turn it around.</li></ul>
+            <button type="button" class="btn" id="lpmu-go" hidden>See all exercises</button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="lp-sec" aria-labelledby="lp-f-h">
@@ -13972,6 +14032,88 @@ body.onland .lp-dish figcaption span{color:#9AA6BD}
     window.addEventListener('scroll', function(){ if(!on || tick) return; tick = true; requestAnimationFrame(function(){ tick = false;
       var r = band.getBoundingClientRect(), k = (r.top + r.height/2 - innerHeight/2) / innerHeight;
       box.style.transform = 'translateY('+(k*-40).toFixed(1)+'px) rotate('+(k*-14).toFixed(1)+'deg) scale('+(1.04-Math.abs(k)*.12).toFixed(3)+')'; }); }, {passive:true});
+  })();
+  /* ---------- Hero stage tilt and glass plan cards ---------- */
+  (function(){
+    var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(still) return;
+    var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    /* The hero figure leans toward the pointer; on phones it follows the tilt of the device. */
+    var st = document.querySelector('.lp-walk'), hero = document.querySelector('.lp-hero');
+    if(st && hero){
+      st.classList.add('tilt');
+      var set = function(rx,ry){ st.style.transform = 'rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)'; };
+      if(fine){
+        hero.addEventListener('pointermove', function(e){ var r = hero.getBoundingClientRect(); var x = (e.clientX-r.left)/r.width-.5, y = (e.clientY-r.top)/r.height-.5; st.classList.add('live'); set(-y*8, x*12); });
+        hero.addEventListener('pointerleave', function(){ st.classList.remove('live'); set(0,0); });
+      } else if('DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission !== 'function'){
+        var raf = 0, gx = 0, gy = 0;
+        window.addEventListener('deviceorientation', function(e){ if(e.beta==null) return; gx = Math.max(-1,Math.min(1,(e.beta-45)/30)); gy = Math.max(-1,Math.min(1,(e.gamma||0)/30));
+          if(raf || document.getElementById('s-landing').hidden) return; raf = requestAnimationFrame(function(){ raf = 0; st.classList.add('live'); set(-gx*6, gy*9); }); }, {passive:true});
+      }
+    }
+
+    /* Plan cards tilt under the pointer and catch a gold light where the pointer is. */
+    if(!fine) return;
+    document.querySelectorAll('.lp-plan').forEach(function(c){
+      c.classList.add('glass');
+      c.addEventListener('pointermove', function(e){ var r = c.getBoundingClientRect(), x = (e.clientX-r.left)/r.width, y = (e.clientY-r.top)/r.height;
+        c.classList.add('hot','live'); c.style.setProperty('--mx',(x*100).toFixed(1)+'%'); c.style.setProperty('--my',(y*100).toFixed(1)+'%');
+        c.style.transform = 'rotateX('+((.5-y)*10).toFixed(2)+'deg) rotateY('+((x-.5)*12).toFixed(2)+'deg) translateZ(8px)'; });
+      c.addEventListener('pointerleave', function(){ c.classList.remove('hot','live'); c.style.transform = ''; });
+    });
+  })();
+  /* ---------- 3D muscle map: tap a muscle to see its exercises, drag or tap Front/Back to turn ---------- */
+  (function(){
+    var stage = document.getElementById('lpbody'); if(!stage || typeof EXS==='undefined') return;
+    var turn = stage.querySelector('.lp-body-turn'), still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /* [muscle, cx, cy, rx, ry] in a 600x800 frame; each pair is mirrored left/right */
+    var SPOTS = {
+      front:[['Shoulders',212,175,26,32,1],['Chest',300,192,72,30],['Biceps',200,240,17,33,1],['Forearms',168,315,17,42,1],['Abs & core',300,282,45,72],['Quads',262,452,33,66,1],['Calves',249,605,20,50,1]],
+      back:[['Back',300,215,72,72],['Shoulders',212,172,24,28,1],['Triceps',198,245,17,35,1],['Forearms',165,315,17,42,1],['Glutes',300,340,62,38],['Hamstrings',262,447,30,56,1],['Calves',255,566,24,46,1]]
+    };
+    var NS = 'http://www.w3.org/2000/svg';
+    ['front','back'].forEach(function(side){
+      var svg = stage.querySelector('.lp-body-face.'+side+' svg');
+      SPOTS[side].forEach(function(s){
+        [s[1]].concat(s[5] ? [600-s[1]] : []).forEach(function(cx){
+          var e = document.createElementNS(NS,'ellipse'); e.setAttribute('class','lp-mu'); e.setAttribute('cx',cx); e.setAttribute('cy',s[2]); e.setAttribute('rx',s[3]); e.setAttribute('ry',s[4]);
+          e.setAttribute('tabindex','0'); e.setAttribute('role','button'); e.setAttribute('aria-label',s[0]); e.dataset.mu = s[0]; svg.appendChild(e);
+        });
+      });
+    });
+    var byMu = {}; Object.keys(EXS).forEach(function(id){ var m = EXS[id].mu; if(m) (byMu[m] = byMu[m] || []).push(id); });
+    var hasPic = function(id){ return (typeof EXPH!=='undefined' && EXPH[id]) ? 1 : 0; };
+    var cur = null;
+    function pick(mu){
+      cur = mu; stage.querySelectorAll('.lp-mu').forEach(function(e){ e.classList.toggle('on', e.dataset.mu===mu); });
+      var ids = (byMu[mu]||[]).slice().sort(function(a,b){ return hasPic(b)-hasPic(a) || EXS[a].eq-EXS[b].eq || (EXS[a].n<EXS[b].n?-1:1); });
+      document.getElementById('lpmu-n').textContent = ids.length.toLocaleString('en-IN')+' exercises';
+      document.getElementById('lpmu-h').textContent = mu;
+      document.getElementById('lpmu-l').innerHTML = ids.slice(0,5).map(function(id){ return '<li>'+EXS[id].n.replace(/[<&]/g,'')+'</li>'; }).join('');
+      var go = document.getElementById('lpmu-go'); go.hidden = false; go.textContent = 'See all '+mu.toLowerCase()+' exercises';
+    }
+    stage.addEventListener('click', function(e){ var m = e.target.closest && e.target.closest('.lp-mu'); if(m && !moved) pick(m.dataset.mu); });
+    stage.addEventListener('keydown', function(e){ var m = e.target.closest && e.target.closest('.lp-mu'); if(m && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); pick(m.dataset.mu); } });
+    document.getElementById('lpmu-go').addEventListener('click', function(){ if(cur && typeof openLibrary==='function') openLibrary(cur); });
+
+    /* Turning: buttons snap to front/back; dragging turns the body freely and settles on the nearest side. */
+    var ang = 0, flips = document.querySelectorAll('.lp-body-flip button');
+    function setAng(a, live){ ang = a; turn.classList.toggle('live', !!live); turn.style.transform = 'rotateY('+a+'deg)';
+      var back = Math.round(((a%360)+360)%360/180)%2===1; flips.forEach(function(b){ b.classList.toggle('on', (b.dataset.side==='back')===back); }); }
+    flips.forEach(function(b){ b.addEventListener('click', function(){ var want = b.dataset.side==='back' ? 180 : 0; var base = Math.round(ang/360)*360; setAng(base+want); }); });
+    var x0 = null, a0 = 0, moved = false;
+    stage.addEventListener('pointerdown', function(e){ x0 = e.clientX; a0 = ang; moved = false; });
+    window.addEventListener('pointermove', function(e){ if(x0===null) return; var dx = e.clientX-x0; if(Math.abs(dx)>6){ moved = true; stage.classList.add('drag'); setAng(a0+dx*.6, true); } });
+    window.addEventListener('pointerup', function(){ if(x0===null) return; x0 = null; stage.classList.remove('drag'); if(moved){ setAng(Math.round(ang/180)*180); setTimeout(function(){ moved = false; }, 0); } });
+    /* A gentle sway invites people to turn it, until they touch it. */
+    if(!still && 'IntersectionObserver' in window){
+      var sway = true, t0 = 0, raf = 0;
+      stage.addEventListener('pointerdown', function(){ sway = false; }, {once:true});
+      flips.forEach(function(b){ b.addEventListener('click', function(){ sway = false; }); });
+      new IntersectionObserver(function(es){ if(es[0].isIntersecting && sway && !raf){ t0 = performance.now(); (function f(t){ if(!sway){ raf = 0; return; } turn.classList.add('live'); turn.style.transform = 'rotateY('+(Math.sin((t-t0)/900)*14).toFixed(2)+'deg)'; raf = requestAnimationFrame(f); })(t0); } else if(!es[0].isIntersecting && raf){ cancelAnimationFrame(raf); raf = 0; } },{threshold:.3}).observe(stage);
+    }
   })();
   /* ==== KDN NATIVE APP START ====
      Runs only inside the Android app (Capacitor). On the website NATIVE is false and nothing here runs. */
