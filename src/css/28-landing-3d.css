@@ -1,0 +1,39 @@
+/* ---------- Landing motion: counting stats with rings, gold dust, 3D card reveal ---------- */
+.lp-trust li{position:relative;padding-top:38px}
+.lp-ring{position:absolute;left:0;top:0;width:30px;height:30px;transform:rotate(-90deg)}
+.lp-ring circle{fill:none;stroke:rgba(255,255,255,.12);stroke-width:3}
+.lp-ring .lp-ring-f{stroke:#E9CF9C;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.7,.2,1)}
+.lp-trust.on .lp-ring-f{stroke-dashoffset:var(--ring-to,8)}
+
+.lp-dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;mix-blend-mode:screen}
+.lp-gym-cap{z-index:2}
+
+.lp-grid{perspective:1100px}
+.js3d .lp-feat{transform:translateY(46px) rotateX(24deg) scale(.96);opacity:0;transform-origin:50% 100%;transition:transform .9s cubic-bezier(.2,.75,.2,1),opacity .7s ease}
+.js3d .lp-feat.in{transform:none;opacity:1}
+@media (prefers-reduced-motion:reduce){.js3d .lp-feat{transform:none;opacity:1;transition:none}.lp-ring .lp-ring-f{transition:none}}
+
+/* Gold KDN dumbbell band */
+.lp-db{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:8px;background:#000;border-radius:28px;overflow:hidden;color:#fff;padding:12px 28px 12px 0;isolation:isolate}
+.lp-db::after{content:"";position:absolute;inset:0;background:radial-gradient(45% 60% at 28% 50%,rgba(233,190,100,.16),transparent 70%);z-index:-1}
+.lp-db-v{aspect-ratio:1;max-width:460px;width:100%;justify-self:center;will-change:transform}
+.lp-db-v video{width:100%;height:100%;object-fit:cover;display:block;-webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent);mask-image:radial-gradient(closest-side,#000 72%,transparent)}
+.lp-db-copy small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#E9CF9C;margin-bottom:8px}
+.lp-db-copy h2{margin:0 0 10px;color:#fff;font-size:clamp(1.5rem,3.4vw,2.4rem);letter-spacing:-.02em}
+.lp-db-copy h2 span{color:#E9CF9C}
+.lp-db-copy p{margin:0;color:#AEB9CF;max-width:420px}
+@media (max-width:699px){.lp-db{grid-template-columns:1fr;padding:6px 18px 24px;text-align:center}.lp-db-v{max-width:300px}.lp-db-copy p{margin:0 auto}}
+
+/* Turning dishes */
+.lp-dishes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;perspective:900px}
+.lp-dish{margin:0;background:var(--surface);border-radius:24px;padding:10px 10px 14px;transition:transform .5s cubic-bezier(.2,.75,.2,1)}
+.lp-dish-v{aspect-ratio:1;border-radius:18px;overflow:hidden;background:#2a1d14}
+.lp-dish-v video{width:100%;height:100%;object-fit:cover;display:block}
+.lp-dish figcaption{padding:10px 4px 0;display:flex;flex-direction:column;gap:2px}
+.lp-dish figcaption b{font-size:1rem}
+.lp-dish figcaption span{font-size:.82rem;color:var(--muted)}
+@media (hover:hover){.lp-dish:hover{transform:translateY(-6px) rotateX(6deg)}}
+@media (max-width:699px){.lp-dishes{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin:0 -20px;padding-left:20px;padding-right:20px}.lp-dish{scroll-snap-align:center}}
+body.onland .lp-dish{background:#111A2C;border:1px solid rgba(233,207,156,.10)}
+body.onland .lp-dish figcaption b{color:#fff}
+body.onland .lp-dish figcaption span{color:#9AA6BD}
