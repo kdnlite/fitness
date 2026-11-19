@@ -344,7 +344,7 @@
     var list = DISHES.filter(function(x){return x.cat===foodCat && dietOk(x,foodDiet)});
     list = list.filter(function(x){return DPH[x.id]}).concat(list.filter(function(x){return !DPH[x.id]}));
     $('foodcount').textContent = list.length+' '+CATN[foodCat].toLowerCase()+' dishes for '+({vegan:'vegan',veg:'vegetarian',nonveg:'non-vegetarian'}[foodDiet])+' eaters'+(foodDiet==='nonveg' ? ' (every dish, including egg, chicken and fish)' : foodDiet==='veg' ? ' (including vegan dishes)' : '');
-    var kp = !licensed(), shownN = kp ? 6 : foodN; $('foodgrid').innerHTML = list.slice(0,shownN).map(dishCard).join('') + (kp && list.length>shownN ? kPrevCard('You are seeing '+shownN+' of '+DISHES.length+' dishes.','Get a plan to open every dish with its recipe, nutrition and a daily meal plan set for your body.') : list.length>shownN ? '<button type="button" class="btn ghost more" id="food-more">Show '+Math.min(60,list.length-shownN)+' more ('+(list.length-shownN)+' left)</button>' : '');
+    var kp = !licensed(), shownN = kp ? 4 : foodN; $('foodgrid').innerHTML = list.slice(0,shownN).map(dishCard).join('') + (kp && list.length>shownN ? kPrevCard('You are seeing '+shownN+' of '+DISHES.length+' dishes.','Subscribe to a plan or apply your coupon to open all '+DISHES.length+' recipes with nutrition and a daily meal plan set for your body.') : list.length>shownN ? '<button type="button" class="btn ghost more" id="food-more">Show '+Math.min(60,list.length-shownN)+' more ('+(list.length-shownN)+' left)</button>' : '');
   }
   var foodN = 60;
   $('foodgrid').addEventListener('click',function(ev){ if(ev.target.closest('#food-more')){ foodN += 60; renderFoods(); } });

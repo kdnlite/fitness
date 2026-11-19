@@ -698,14 +698,14 @@
     paintLib();
   }
   function paintLib(){
-    var kp = !licensed(), ids = libIds(LB), shown = ids.slice(0,kp?6:LB.n), h = '', last = '';
+    var kp = !licensed(), ids = libIds(LB), shown = ids.slice(0,kp?2:LB.n), h = '', last = '';
     shown.forEach(function(id){
       var mu = EXS[id].mu;
       if(mu!==last){ h += '<h3 class="lgh">'+esc(mu)+'</h3>'; last = mu; }
       h += libRow(id);
     });
     if(!ids.length) h = '<p class="hint">No exercise matches. Try a shorter word or clear the filters.</p>';
-    if(kp && ids.length>shown.length) h += kPrevCard('You are seeing '+shown.length+' of '+fmt(EXCOUNT)+' exercises.','Get a plan to open every exercise, with pictures, form tips, calories burned and alternatives.');
+    if(kp && ids.length>shown.length) h += kPrevCard('You are seeing '+shown.length+' of '+fmt(EXCOUNT)+' exercises.','Subscribe to a plan or apply your coupon to open all '+fmt(EXCOUNT)+' exercises, with pictures, demo videos, form tips, calories burned and alternatives.');
     else if(ids.length>shown.length) h += '<button type="button" class="btn ghost more" data-lib="more">Show '+Math.min(30,ids.length-shown.length)+' more ('+(ids.length-shown.length)+' left)</button>';
     $('lib-res').innerHTML = h;
     $('libcount').textContent = ids.length+' of '+EXCOUNT+' exercises'+(ids.length>shown.length?' · showing '+shown.length:'');
