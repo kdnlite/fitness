@@ -160,6 +160,12 @@
       '<button type="button" class="btn" data-unlock>'+(licensed() ? 'Switch to the Gym plan' : 'See plans')+'</button><p class="foot">Sample data shown. '+(licensed() ? 'Your plan now is '+PLANNAME[licPlan()]+'. The Gym Manager comes only with the Gym plan.' : 'The Gym plan unlocks the manager for your own gym.')+'</p></div>';
   }
   document.addEventListener('click',function(ev){ var b = ev.target.closest('[data-unlock]'); if(b){ ev.preventDefault(); if(typeof setPlan==='function' && curScreen==='s-gym') setPlan('gym'); show('s-pay'); } });
+  /* ---------- Landing: KDN gym reel plays only while it is on screen ---------- */
+  (function(){
+    var v = $('lpgym'); if(!v || !('IntersectionObserver' in window)) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var p = v.play(); if(p && p.catch) p.catch(function(){}); } else v.pause(); }); },{threshold:.35}).observe(v);
+  })();
   /* ---------- Landing hero: the athletes walk in once, then hold their pose ---------- */
   (function(){
     var v = $('lpwalk'); if(!v) return; var end = v.parentNode.querySelector('.lp-walk-end');
