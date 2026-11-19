@@ -64,7 +64,7 @@
     var h = '<div class="gw-top"><button type="button" class="gw-x" data-gw="quit" aria-label="Leave workout">×</button><div class="gw-pr"><small>Exercise '+(s.i+1)+' of '+s.items.length+'</small><span class="gw-bar"><i style="width:'+Math.round(ts.d/ts.n*100)+'%"></i></span></div><span class="gw-clock" id="gw-clock">'+mmss((Date.now()-s.start)/1000)+'</span></div>';
     if(s.phase==='rest'){
       var nx = s.restNext;
-      h += '<div class="gw-rest"><small>Rest</small><b id="gw-t">'+mmss(s.left)+'</b><div class="gw-rb"><button type="button" class="gw-chip" data-gw="r-15">−15 s</button><button type="button" class="gw-chip" data-gw="r+15">+15 s</button></div>';
+      h += '<div class="gw-rest"><small>Rest</small><div class="gw-rr"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54"/><circle id="gw-ring" cx="60" cy="60" r="54" pathLength="100" style="stroke-dashoffset:'+(100-100*Math.max(0,s.left)/(s.restTot||s.left||1)).toFixed(1)+'"/></svg><b id="gw-t">'+mmss(s.left)+'</b></div><div class="gw-rb"><button type="button" class="gw-chip" data-gw="r-15">−15 s</button><button type="button" class="gw-chip" data-gw="r+15">+15 s</button></div>';
       h += '<div class="gw-next"><small>Up next</small><b>'+esc(EXS[nx.it.id].n)+'</b><span>Set '+nx.set+' of '+nx.it.sets+' · '+gwTarget(nx.it)+'</span></div>';
       h += '<p class="gw-tip">Breathe slowly. Sip some water.</p></div>';
       h += '<div class="gw-foot"><button type="button" class="gw-go" data-gw="skip">Skip rest</button></div>';
@@ -103,6 +103,7 @@
     if((s.phase==='rest' || s.phase==='timer') && !s.paused){
       var left = (s.end-Date.now())/1000, prev = Math.ceil(s.left); s.left = left;
       var t = $('gw-t'); if(t) t.textContent = mmss(left);
+      var rg = $('gw-ring'); if(rg && s.phase==='rest') rg.style.strokeDashoffset = (100-100*Math.max(0,left)/(s.restTot||1)).toFixed(1);
       var nowS = Math.ceil(left);
       if(nowS!==prev && nowS<=3 && nowS>0){ snd('rep'); buzz(); }
       if(left<=0){ if(s.phase==='rest'){ snd('ok'); buzz('big'); s.phase = 'ready'; gwRender(); } else gwSetDone(); }
@@ -114,6 +115,7 @@
     else if(it.kind==='hold'){ lg.push([Math.round(it.t-Math.max(0,s.left)),0]); }
     else lg.push([Math.round((it.m*60-Math.max(0,s.left))/60),0]);
     snd('ok'); buzz('ok');
+    var gwel = $('gw'); if(gwel){ gwel.classList.remove('flash'); void gwel.offsetWidth; gwel.classList.add('flash'); }
     gwAdvance(true);
   }
   function gwAdvance(rest){
@@ -122,7 +124,7 @@
     else if(s.i<s.items.length-1){ s.i++; s.set = 1; restSec = 60; }
     else { gwFinish(); return; }
     var nx = {it:gwCur(),set:s.set};
-    if(rest && it.kind!=='time'){ s.phase = 'rest'; s.paused = false; s.left = restSec; s.end = Date.now()+restSec*1000; s.restNext = nx; }
+    if(rest && it.kind!=='time'){ s.phase = 'rest'; s.paused = false; s.left = restSec; s.restTot = restSec; s.end = Date.now()+restSec*1000; s.restNext = nx; }
     else s.phase = 'ready';
     gwRender();
   }
@@ -140,7 +142,7 @@
     });
     var lg = logOf(t); if(sets) lg.wo = 1; lsSet(S);
     s.phase = 'done'; s.sum = {min:Math.round((Date.now()-s.start)/60000), sets:sets, vol:Math.round(vol), kcal:Math.round(kcal), prs:prs};
-    snd('win'); buzz('ok'); gwWake(false); clearInterval(gwOpen.p);
+    snd('win'); buzz('ok'); gwWake(false); clearInterval(gwOpen.p); if(typeof kConfetti==='function') setTimeout(function(){ kConfetti($('gw')); },200);
     gwRender();
     renderHome(); if(typeof renderToday==='function' && curR) renderToday(S,curR);
   }

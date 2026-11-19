@@ -104,11 +104,12 @@
     var t = todayKey(), sc = dayScore(t), si = streakInfo(), wa = waterOf(t), wg = waterGoal(), nb = Object.keys(engOf().b).length;
     var tip = (!sc.lg.st || sc.st<40) ? 'Walk to fill your steps' : !sc.lg.wo && !sc.rest ? 'Finish today’s workout' : wa<wg ? 'Drink '+(wg-wa)+' more glass'+(wg-wa>1?'es':'') : sc.total>=100 ? 'Perfect day!' : 'Great day so far';
     var h = '<div class="ek" id="ek">';
-    h += '<button type="button" class="ek-top" data-e="score"><span class="ek-rw">'+eRing(sc.total)+'<b>'+sc.total+'</b></span><span class="ek-tx"><small>Today’s score</small><b>'+(si.n ? si.n+'-day streak' : 'Start your streak')+(si.today?' <span class="ek-fl" aria-hidden="true">🔥</span>':'')+'</b><span>'+esc(tip)+(si.best>si.n?' · best '+si.best:'')+'</span></span><span class="hx-go" aria-hidden="true">›</span></button>';
+    h += '<button type="button" class="ek-top" data-e="score"><span class="ek-rw">'+(typeof kRings==='function'?kRings(sc):eRing(sc.total))+'<b>'+sc.total+'</b></span><span class="ek-tx"><small>Today’s score</small><b>'+(si.n ? si.n+'-day streak' : 'Start your streak')+(si.today?' <span class="ek-fl" aria-hidden="true">🔥</span>':'')+'</b><span>'+esc(tip)+(si.best>si.n?' · best '+si.best:'')+'</span></span><span class="hx-go" aria-hidden="true">›</span></button>';
     var cups = ''; for(var i=0;i<wg;i++) cups += '<i class="'+(i<wa?'on':'')+'"></i>';
     h += '<div class="ek-wa"><div class="ek-wl"><small>Water</small><b>'+wa+' / '+wg+' glasses</b><span class="ek-cups" aria-hidden="true">'+cups+'</span></div><div class="ek-wb"><button type="button" class="ek-q" data-e="wa-" aria-label="Remove a glass"'+(wa?'':' disabled')+'>−</button><button type="button" class="ek-q add" data-e="wa+" aria-label="Add a glass of water">+</button></div></div>';
     h += '<div class="ek-links"><button type="button" data-e="badges">'+kIco('<circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 7 5-3 5 3-1.5-7"/>')+'Badges <em>'+nb+'/'+kBadges().length+'</em></button><button type="button" data-e="rem">'+kIco('<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>')+'Reminders'+(remAnyOn()?' <em>On</em>':'')+'</button>'+(typeof wrCardBtn==='function'?wrCardBtn():'')+'</div>';
     if(typeof kWidgetPush==='function') kWidgetPush();
+    if(sc.total>=100 && engOf().cel!==t && typeof kCelebrate==='function'){ engOf().cel = t; lsSet(S); setTimeout(kCelebrate,600); }
     return h+'</div>';
   }
   function eScoreSheet(){

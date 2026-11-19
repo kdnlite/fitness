@@ -1,0 +1,63 @@
+/* ---------- In-app polish: rings, rest ring, set flash, medals, weight line, dish open, today's muscles, perfect day, swipe ---------- */
+/* three activity rings on the home score card */
+.ek-ring.k3{transform:rotate(-90deg)}
+.ek-ring.k3 circle{fill:none;stroke-width:5.5;stroke-linecap:round}
+.ek-ring.k3 .bg{opacity:.18}
+.ek-ring.k3 .st{stroke:#F5C542}.ek-ring.k3 .wo{stroke:#FF8A5B}.ek-ring.k3 .wa{stroke:#4CC3F5}
+.ek-ring.k3 .fg{animation:kring 1.2s cubic-bezier(.2,.75,.2,1) both}
+@keyframes kring{from{stroke-dashoffset:var(--c)}}
+.ek-rw:has(.k3) b{font-size:.95rem}
+
+/* guided workout: rest countdown ring and a gold flash when a set is done */
+.gw-rr{position:relative;width:180px;height:180px;margin:6px auto;display:grid;place-items:center}
+.gw-rr svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.gw-rr circle{fill:none;stroke-width:7}
+.gw-rr circle:first-child{stroke:rgba(255,255,255,.12)}
+.gw-rr #gw-ring{stroke:#F5C542;stroke-linecap:round;stroke-dasharray:100;transition:stroke-dashoffset .25s linear}
+.gw-rr b{position:relative}
+#gw.flash::after{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(60% 50% at 50% 60%,rgba(245,197,66,.45),transparent 70%);animation:kflash .7s ease-out forwards;z-index:5}
+@keyframes kflash{from{opacity:1}to{opacity:0}}
+
+/* badges look like medals and spin when tapped */
+.ek-b.on span{background:radial-gradient(circle at 35% 30%,#FFF1C2,#F5C542 45%,#B8862B 100%);color:#5A3B00;box-shadow:0 6px 16px rgba(184,134,43,.45),inset 0 -3px 0 rgba(0,0,0,.15)}
+.ek-b span{transform-style:preserve-3d}
+.ek-b.spin span{animation:kspin .9s cubic-bezier(.2,.75,.2,1)}
+@keyframes kspin{from{transform:perspective(300px) rotateY(0)}to{transform:perspective(300px) rotateY(360deg)}}
+
+/* weight line draws itself, the dots appear one by one */
+.wch .wln{stroke-dasharray:100;animation:kdraw 1.6s cubic-bezier(.3,.7,.2,1) both}
+@keyframes kdraw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+.wch .wdot{animation:kpop .4s ease-out both}
+@keyframes kpop{from{opacity:0;transform:scale(.3);transform-box:fill-box;transform-origin:center}to{opacity:1;transform:none}}
+
+/* an opened dish swings open */
+details.fd[open]>.fdbody,details.food[open]>:not(summary){animation:kopen .45s cubic-bezier(.2,.75,.2,1) both;transform-origin:50% 0}
+@keyframes kopen{from{opacity:0;transform:perspective(700px) rotateX(-18deg) translateY(-6px)}to{opacity:1;transform:none}}
+
+/* today's muscles */
+.kbm{display:flex;align-items:center;gap:14px;background:#050505;border-radius:18px;padding:10px 14px;margin:6px 0 12px;color:#fff}
+.kbm-figs{display:flex;gap:2px;flex:none}
+.kbm-f{position:relative;width:62px;aspect-ratio:3/4}
+.kbm-f img{width:100%;height:100%;object-fit:contain;display:block}
+.kbm-f svg{position:absolute;inset:0;width:100%;height:100%}
+.kbm-f ellipse{fill:rgba(245,197,66,.55);filter:drop-shadow(0 0 6px rgba(245,197,66,.9))}
+.kbm-tx small{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#E9CF9C}
+.kbm-tx b{font-size:.98rem;line-height:1.35}
+
+/* perfect day */
+.kcel{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px;background:rgba(3,5,10,.72);opacity:0;transition:opacity .3s}
+.kcel.on{opacity:1}
+.kcel-box{position:relative;width:min(360px,100%);background:#0B0B0B;border:1px solid rgba(245,197,66,.35);border-radius:26px;padding:0 20px 20px;text-align:center;color:#fff;overflow:hidden;transform:scale(.9);transition:transform .4s cubic-bezier(.2,.9,.3,1.2)}
+.kcel.on .kcel-box{transform:none}
+.kcel-box img{width:calc(100% + 40px);margin:0 -20px 6px;height:auto;display:block;background:#0B1220}
+.kcel-box small{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#F5C542}
+.kcel-box h2{margin:4px 0 6px;color:#fff}
+.kcel-box p{margin:0 0 14px;color:#C9D2E3;font-size:.95rem}
+.kcel-box .btn{width:100%;background:#F5C542;border-color:#F5C542;color:#111}
+.kconf{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10}
+#gw .kconf{position:fixed}
+
+/* swipe a meal */
+details.fd.kswipe{transition:transform .25s ease,opacity .25s ease;will-change:transform}
+@media (hover:hover) and (pointer:fine){.kswipe-h{display:none}}
+@media (prefers-reduced-motion:reduce){.ek-ring.k3 .fg,.wch .wln,.wch .wdot,details.fd[open]>.fdbody,details.food[open]>:not(summary),.ek-b.spin span{animation:none}}

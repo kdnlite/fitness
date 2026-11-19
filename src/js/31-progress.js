@@ -20,8 +20,8 @@
       if(b2>a) g += '<line x1="'+X(a).toFixed(1)+'" y1="'+Y(expectedAt(a,r)).toFixed(1)+'" x2="'+X(b2).toFixed(1)+'" y2="'+Y(expectedAt(b2,r)).toFixed(1)+'" class="wexp"/>'; }
     if(pts.length){
       var line = pts.map(function(e){ return X(e.k).toFixed(1)+','+Y(e.kg).toFixed(1); }).join(' ');
-      if(pts.length>1) g += '<polygon points="'+X(pts[0].k).toFixed(1)+','+(H-B)+' '+line+' '+X(pts[pts.length-1].k).toFixed(1)+','+(H-B)+'" fill="url(#wgr)"/><polyline points="'+line+'" class="wln"/>';
-      g += pts.map(function(e,i){ return '<circle cx="'+X(e.k).toFixed(1)+'" cy="'+Y(e.kg).toFixed(1)+'" r="'+(i===pts.length-1?5:3.2)+'" class="wdot'+(i===pts.length-1?' last':'')+'"><title>'+kNice(e.k)+': '+e.kg+' kg</title></circle>'; }).join('');
+      if(pts.length>1) g += '<polygon points="'+X(pts[0].k).toFixed(1)+','+(H-B)+' '+line+' '+X(pts[pts.length-1].k).toFixed(1)+','+(H-B)+'" fill="url(#wgr)"/><polyline pathLength="100" points="'+line+'" class="wln"/>';
+      g += pts.map(function(e,i){ return '<circle cx="'+X(e.k).toFixed(1)+'" cy="'+Y(e.kg).toFixed(1)+'" r="'+(i===pts.length-1?5:3.2)+'" class="wdot'+(i===pts.length-1?' last':'')+'" style="animation-delay:'+(0.25+i/Math.max(1,pts.length)*1.1).toFixed(2)+'s"><title>'+kNice(e.k)+': '+e.kg+' kg</title></circle>'; }).join('');
       var lp = pts[pts.length-1]; g += '<text x="'+Math.min(W-R-4,X(lp.k)).toFixed(1)+'" y="'+(Y(lp.kg)-10).toFixed(1)+'" class="wt dark" text-anchor="'+(X(lp.k)>W-60?'end':'middle')+'">'+lp.kg+' kg</text>';
     }
     g += '<text x="'+L+'" y="'+(H-8)+'" class="wt">'+kNice(d0Key(d0))+'</text><text x="'+(W-R)+'" y="'+(H-8)+'" class="wt" text-anchor="end">'+kNice(d0Key(d0+span))+'</text>';

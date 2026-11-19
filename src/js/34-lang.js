@@ -168,10 +168,11 @@
   /* ---- theme: Auto (follows the phone), Dark, Light ---- */
   function kTheme(v){ if(v){ try{ localStorage.setItem('kdn.theme',v); }catch(e){} } var t = 'auto'; try{ t = localStorage.getItem('kdn.theme') || 'auto'; }catch(e){} return t; }
   function kThemeApply(){
-    var t = kTheme(), d = t==='dark' || (t==='auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+    var t = kTheme(), d = t==='dark' || t==='gold' || (t==='auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
     document.documentElement.classList.toggle('dk',!!d);
-    var m = document.querySelectorAll('meta[name="theme-color"]'); Array.prototype.forEach.call(m,function(x){ x.setAttribute('content',d?'#0B1220':'#FFFFFF'); });
-    var b = $('m-theme'); if(b){ var hi = kLang()==='hi', L = hi ? {auto:'अपने आप',dark:'डार्क',light:'लाइट'} : {auto:'Auto',dark:'Dark',light:'Light'}; b.querySelector('span').textContent = (hi?'थीम: ':'Theme: ')+L[t]; }
+    document.documentElement.classList.toggle('gk',t==='gold');
+    var m = document.querySelectorAll('meta[name="theme-color"]'); Array.prototype.forEach.call(m,function(x){ x.setAttribute('content',t==='gold'?'#050505':d?'#0B1220':'#FFFFFF'); });
+    var b = $('m-theme'); if(b){ var hi = kLang()==='hi', L = hi ? {auto:'अपने आप',dark:'डार्क',gold:'काला-सुनहरा',light:'लाइट'} : {auto:'Auto',dark:'Dark',gold:'Black & gold',light:'Light'}; b.querySelector('span').textContent = (hi?'थीम: ':'Theme: ')+L[t]; }
     if(NATIVE && window.Capacitor && window.Capacitor.Plugins.SystemBars){ try{ window.Capacitor.Plugins.SystemBars.setStyle({style:d||document.body.classList.contains('onland')?'LIGHT':'DARK'}); }catch(e){} }
   }
   (function(){
@@ -179,7 +180,7 @@
     var b = document.createElement('button'); b.type = 'button'; b.id = 'm-theme'; b.setAttribute('data-notr','1');
     b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><span></span>';
     lb.parentNode.insertBefore(b,lb.nextSibling);
-    b.addEventListener('click',function(ev){ ev.stopPropagation(); var t = kTheme(), n = t==='auto' ? 'dark' : t==='dark' ? 'light' : 'auto'; kTheme(n); buzz(); kThemeApply(); });
+    b.addEventListener('click',function(ev){ ev.stopPropagation(); var t = kTheme(), n = t==='auto' ? 'dark' : t==='dark' ? 'gold' : t==='gold' ? 'light' : 'auto'; kTheme(n); buzz(); kThemeApply(); });
     try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',kThemeApply); }catch(e){}
     kThemeApply();
   })();

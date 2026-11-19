@@ -1,0 +1,129 @@
+/* ===== Black & gold theme: the dark theme with true black surfaces (made from 24-dark.css) ===== */
+html.dk.gk body{background:#050505;color:#E8ECF4}
+html.dk.gk input,html.dk.gk select,html.dk.gk textarea{background:#0C0C0C;color:#E8ECF4;border-color:rgba(233,207,156,.22)}
+html.dk.gk .btn.ghost{background:#121212}
+html.dk.gk .burger{background:#121212}
+html.dk.gk .mlist{background:#121212;box-shadow:none}
+html.dk.gk input[type=text],html.dk.gk input[type=number]{background:#121212}
+html.dk.gk .opt span{background:#121212}
+html.dk.gk .food{background:#121212}
+html.dk.gk .ex{background:#121212}
+html.dk.gk .chip-float{background:#121212}
+html.dk.gk .welcome{background:#121212;box-shadow:none}
+html.dk.gk .rvlist{background:#121212;box-shadow:none}
+html.dk.gk .jtrack i{background:#121212}
+html.dk.gk .vcount{background:#121212}
+html.dk.gk .vsp button{background:#121212}
+html.dk.gk select{background:#121212}
+html.dk.gk .tcard{background:#121212}
+html.dk.gk .fcard{background:#121212;box-shadow:none}
+html.dk.gk .cb{background:#121212}
+html.dk.gk .mcard{background:#121212}
+html.dk.gk .rm{background:#121212}
+html.dk.gk .prow{background:#121212}
+html.dk.gk .tick{background:#121212}
+html.dk.gk .mbox{background:#121212;box-shadow:none}
+html.dk.gk .tabs .tab[aria-selected="true"]{background:#121212;box-shadow:none}
+html.dk.gk .dchip{background:#121212}
+html.dk.gk .minissteps{background:#121212;box-shadow:none}
+html.dk.gk details.fd{background:#121212}
+html.dk.gk .ringcard{background:#121212;box-shadow:none}
+html.dk.gk .chart{background:#121212}
+html.dk.gk input[type=date]{background:#121212}
+html.dk.gk .hh-art{background:#121212}
+html.dk.gk #home .sect{background:#121212}
+html.dk.gk .wrow{background:#121212}
+html.dk.gk .sinp,html.dk.gk .sel{background:#121212}
+html.dk.gk .sect{background:#121212}
+html.dk.gk .qb{background:#121212}
+html.dk.gk .xrm{background:#121212}
+html.dk.gk .qwrap input{background:#121212}
+html.dk.gk .bgrid>div{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .rcard{background:#121212}
+html.dk.gk .pill{background:#121212}
+html.dk.gk .sbox{background:#121212;box-shadow:none}
+html.dk.gk .scopeb{background:#121212}
+html.dk.gk .ph-cal{background:#121212;box-shadow:none}
+html.dk.gk .ph-card{background:#121212;box-shadow:none}
+html.dk.gk .mpcard{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .sttl button.on{background:#121212;color:#E8ECF4}
+html.dk.gk .wostats div{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .hchips div{background:#121212;box-shadow:none}
+html.dk.gk .plansel button.on{background:#121212;box-shadow:none}
+html.dk.gk .ailang button.on{background:#121212;color:#E8ECF4}
+html.dk.gk .aichips button{background:#121212}
+html.dk.gk .amsg.a.warn{background:#121212;border-color:rgba(233,207,156,.16)}
+html.dk.gk .amsg .abtn{background:#121212}
+html.dk.gk .aitype{background:#121212;box-shadow:none}
+html.dk.gk .trcard .btn{background:#121212;color:#E8ECF4;border-color:rgba(233,207,156,.16)}
+html.dk.gk .kcsoon{background:#121212;border:1.5px dashed rgba(233,207,156,.16)}
+html.dk.gk .pricecard,html.dk.gk .couponcard,html.dk.gk .actcard,html.dk.gk .donecard{background:#121212;box-shadow:none}
+html.dk.gk .dset{background:#121212}
+html.dk.gk .tkpanel{background:#121212;border:1px solid rgba(233,207,156,.16);box-shadow:none}
+html.dk.gk .tkbig.on{background:#121212}
+html.dk.gk .tkrow{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .tkst{background:#121212;border:1.5px solid rgba(233,207,156,.16)}
+html.dk.gk .hm-av{background:#121212;box-shadow:none}
+html.dk.gk .hm-card{background:#121212;border:1px solid rgba(233,207,156,.16);box-shadow:none}
+html.dk.gk .hm-day.miss span{background:#121212}
+html.dk.gk .hx-av{background:#121212;box-shadow:none}
+html.dk.gk .hx-tile{background:#121212;border:1px solid rgba(233,207,156,.16);box-shadow:none}
+html.dk.gk .hx-prof{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .hx-prof dl div{background:#121212}
+html.dk.gk .hx-gal{background:#121212;border:1px solid rgba(233,207,156,.16);box-shadow:none}
+html.dk.gk .tdd{background:#121212;border:1px solid rgba(233,207,156,.16);box-shadow:none}
+html.dk.gk .pcd{background:#121212;box-shadow:none}
+html.dk.gk .slot.on{background:#121212;color:#E8ECF4;border:1.5px solid rgba(233,207,156,.16)}
+html.dk.gk .fmc{background:#121212;box-shadow:none}
+html.dk.gk .kqrbox svg,html.dk.gk .kqrbox .qrsvg{background:#121212;box-shadow:none}
+html.dk.gk .hh-card{background:#121212;border:1px solid rgba(233,207,156,.16);box-shadow:none}
+html.dk.gk .hh-warn{background:#121212;border-color:rgba(233,207,156,.16)}
+html.dk.gk .hh-dose{background:#121212}
+html.dk.gk .hh-time{background:#121212;color:#E8ECF4;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .hh-skip,html.dk.gk .hh-undo{background:#121212;color:#A9B3C7;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .hh-btn.ghost{background:#121212;color:#E8ECF4;border-color:rgba(233,207,156,.16)}
+html.dk.gk .hh-medb{background:#121212;border:1px solid rgba(233,207,156,.16);box-shadow:none}
+html.dk.gk .hh-rec{background:#121212;border:1px solid rgba(233,207,156,.16);box-shadow:none}
+html.dk.gk .hh-ric{background:#121212;border:1px solid color-mix(in srgb,var(--c) 22%,rgba(233,207,156,.16))}
+html.dk.gk .hh-bk{background:#121212}
+html.dk.gk .hh-cico{background:#121212;box-shadow:none}
+html.dk.gk .hh-cst div{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .hh-calh button{background:#121212;color:#E8ECF4;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .hh-cd.per i,html.dk.gk .hh-cd.ov i{background:#121212}
+html.dk.gk .hh-hist li{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .hs-panel{background:#121212;box-shadow:none}
+html.dk.gk .hs-foot{background:#121212;border-top:1px solid rgba(233,207,156,.16)}
+html.dk.gk .hs-body input[type=time]{background:#121212}
+html.dk.gk .hs-add{background:#121212;color:#A9B3C7;border:1.5px dashed rgba(233,207,156,.16)}
+html.dk.gk .hs-files li{background:#121212}
+html.dk.gk .hs-files button{background:#121212}
+html.dk.gk .hs-cal{background:#121212}
+html.dk.gk .hs-tog{background:#121212;color:#E8ECF4;border:1.5px solid rgba(233,207,156,.16)}
+html.dk.gk .hs-tog i::after{background:#121212;box-shadow:none}
+html.dk.gk .hv-notes{background:#121212}
+html.dk.gk .hv-pdf{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .ek-st div{background:#121212}
+html.dk.gk .ek-sw i{background:#121212;box-shadow:none}
+html.dk.gk .ek-tm input,html.dk.gk .ek-tm select{background:#121212}
+html.dk.gk .wch{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .pg-card{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .pg-m{background:#121212}
+html.dk.gk .wr-g>div{background:#121212}
+html.dk.gk .wr-w{background:#121212}
+html.dk.gk .fq-in input{background:#121212}
+html.dk.gk .fq-ib{background:#121212;color:#A9B3C7;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .fq-r{background:#121212}
+html.dk.gk .hc{background:#121212;border:1px solid rgba(233,207,156,.16)}
+html.dk.gk .cb.on,html.dk.gk .dchip.on,html.dk.gk .vsp button.on,html.dk.gk .hhero,html.dk.gk .stat.big,html.dk.gk .wk div{color:#050505}
+html.dk.gk .toast{background:#F2D58A;color:#050505}
+html.dk.gk .hh-seg button.on{background:#E9CF9C;color:#050505}
+html.dk.gk .wch .wdot{fill:#050505}
+html.dk.gk .gr-it input{background:#0C0C0C}
+html.dk.gk .fq-r{background:#0C0C0C}
+html.dk.gk .fq-ib{background:#0C0C0C;color:#E9CF9C;border-color:rgba(233,207,156,.3)}
+html.dk.gk .fq-go{background:#E9CF9C;color:#050505}
+html.dk.gk .ek-allow{background:#E9CF9C;color:#050505}
+html.dk.gk .cb.on *,html.dk.gk .dchip.on *,html.dk.gk .stat.big *,html.dk.gk .btn:not(.ghost) *{color:#050505}
+html.dk.gk .gr-btn{background:#121212;border-color:rgba(233,207,156,.16);color:#E8ECF4}
+html.dk.gk{--bg:#050505;--surface:#121212;--accent:#F5C542;--accent-fg:#0B0B0B;--accent-soft:#2A2312;--line:rgba(245,197,66,.20)}
+html.dk.gk body{background:#050505}

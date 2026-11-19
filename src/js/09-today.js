@@ -94,6 +94,7 @@
     if(tdOpen.m){
     h += '<div class="tddbody" id="td-meals">';
     h += '<div class="dsum"><div><small>This day adds up to</small><b>'+fmt(Math.round(totK))+' kcal</b><span>'+pct+'% of your '+fmt(r.target)+' kcal'+(addK?' · includes +'+Math.round(addK)+' you added':'')+'</span></div><div><small>Protein</small><b>'+Math.round(totP)+' g</b><span>'+pp+'% of '+r.protein+' g target</span></div></div>';
+    h += '<p class="hint kswipe-h">Tip: swipe a meal to the left to swap it for another dish.</p>';
     h += mealCards(d,r,mp,dow)+addedFoodCards(dow);
     h += '<button type="button" class="btn ghost addbtn" data-act="addfd">+ Add food to '+(isToday?'today':DAYN[dow])+'</button>';
     if(mp.tops.length) h += '<p class="tddsub">Protein top-up</p>'+topCards(mp);
@@ -111,6 +112,7 @@
     h += '<div class="tddbody" id="td-work">';
     if(rest) h += '<p class="hint">Lighter day. Do the gentle movement below, drink water and sleep well. Recovery is when muscles grow.</p>';
     else h += '<p class="hint">'+items.length+' exercises. Open any one for the pictures, calories burned and alternatives.</p>';
+    if(items.length && typeof kBodyMini==='function') h += kBodyMini(items.map(function(x){ return (EXS[x.it.id]||{}).mu; }));
     if(isToday && items.length && typeof gwStartBtn==='function') h += gwStartBtn();
     h += items.map(function(x){
       if(!x.add) return exItem(x.it.id,x.it,false);
