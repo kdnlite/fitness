@@ -56,7 +56,7 @@ body.onland .ft .ft-bot{padding-top:18px;color:#6F7B93;font-size:.82rem;justify-
   body.onland .lp-plans{gap:22px}
   body.onland .lp-steps{flex-direction:row;gap:22px}
   body.onland .lp-steps>li{flex:1 1 0;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px;background:#111A2C}
-  body.onland .lp-gym-frame{aspect-ratio:21/9}
+  body.onland .lp-gym-frame{aspect-ratio:16/9}
   body.onland .lp-db{padding:24px 56px 24px 0}
   body.onland .lp-faq .lp-qs{max-width:860px}
 }

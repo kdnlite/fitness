@@ -1,0 +1,39 @@
+/* ==== landing: premium layer (gold details, marquee, grain, card glow) ==== */
+body.onland{--gold2:#F6E3B4;--gold3:#B8893E}
+/* fine film grain over the whole landing page */
+body.onland #s-landing::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.035;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* gold gradient on the italic accent words */
+body.onland .lp-hl,body.onland .lp-sh h2 .sf,body.onland .lp-final .sf{background:linear-gradient(100deg,var(--gold3) 0%,var(--gold2) 45%,#E9CF9C 60%,var(--gold3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+/* gold buttons with a soft sheen */
+body.onland .lp-cta .btn:not(.ghost),body.onland .lp-final .btn,body.onland .lp-nav .btn,body.onland .lp-plan-hi .btn{position:relative;overflow:hidden;background:linear-gradient(180deg,#F3DDAA,#D9B26A);border-color:#D9B26A;color:#0B1220;box-shadow:0 8px 24px rgba(217,178,106,.22),inset 0 1px 0 rgba(255,255,255,.55)}
+body.onland .lp-cta .btn:not(.ghost)::after,body.onland .lp-final .btn::after,body.onland .lp-nav .btn::after,body.onland .lp-plan-hi .btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);transition:left .7s ease}
+body.onland .lp-cta .btn:not(.ghost):hover::after,body.onland .lp-final .btn:hover::after,body.onland .lp-nav .btn:hover::after,body.onland .lp-plan-hi .btn:hover::after{left:120%}
+body.onland .lp-cta .btn.ghost{border-color:rgba(233,207,156,.35)}
+body.onland .lp-cta .btn.ghost:hover{border-color:#E9CF9C;background:rgba(233,207,156,.06)}
+/* section labels get a short gold rule */
+body.onland .lp-sh small{display:inline-flex;align-items:center;gap:10px}
+body.onland .lp-sh small::before{content:"";width:28px;height:1px;background:linear-gradient(90deg,transparent,#E9CF9C)}
+/* marquee of what is included */
+.lp-mq{display:none}
+body.onland .lp-mq{display:block;margin:0 calc(50% - 50vw);overflow:hidden;border-block:1px solid rgba(233,207,156,.14);background:linear-gradient(90deg,#0B1220,#0E1729 50%,#0B1220);padding:15px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.lp-mq-t{display:flex;width:max-content;animation:lpmq 38s linear infinite}
+.lp-mq-t span{display:inline-flex;align-items:center;gap:22px;padding-right:22px;white-space:nowrap;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#C9B68E}
+.lp-mq-t span::after{content:"";width:6px;height:6px;transform:rotate(45deg);background:#E9CF9C;opacity:.7}
+@keyframes lpmq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.lp-mq-t{animation:none}}
+/* cards: hairline gold edge and a glow on hover */
+body.onland .lp-feat,body.onland .lp-plan,body.onland .lp-dish,body.onland .lp-steps>li{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+body.onland .lp-feat:hover,body.onland .lp-plan:hover,body.onland .lp-dish:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60px rgba(0,0,0,.35),0 0 0 1px rgba(233,207,156,.12),0 0 40px rgba(233,207,156,.08)}
+body.onland .lp-plan-hi{border-color:rgba(233,207,156,.45);box-shadow:0 30px 80px rgba(0,0,0,.4),0 0 60px rgba(233,207,156,.10)}
+/* big price numbers in gold gradient */
+body.onland .lp-amt2 b{background:linear-gradient(180deg,#F6E3B4,#D2A75A);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+/* gym reel: thin gold frame */
+body.onland .lp-gym-frame,body.onland .lp-db,body.onland .lp-body-wrap{box-shadow:0 30px 80px rgba(0,0,0,.4),0 0 0 1px rgba(233,207,156,.14)}
+/* header: glass once scrolled */
+body.onland .hd.sc{background:rgba(11,18,32,.78);-webkit-backdrop-filter:saturate(140%) blur(14px);backdrop-filter:saturate(140%) blur(14px)}
+/* hero: faint gold light behind the athletes */
+body.onland .lp-hero{background:radial-gradient(40% 55% at 78% 45%,rgba(233,207,156,.10),transparent 70%),radial-gradient(60% 75% at 74% 52%,#0C2A55 0%,rgba(12,42,85,0) 72%),linear-gradient(180deg,#071A3C 0%,#0A2247 55%,#08193A 100%)}
+/* FAQ: open item gets a gold mark */
+body.onland .lp-qs details[open] summary{color:#F3DDAA}
+body.onland .lp-final .lp-wm{mix-blend-mode:lighten;background:transparent}
