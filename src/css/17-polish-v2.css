@@ -21,8 +21,8 @@ html.menuon .hd.sc::before{-webkit-backdrop-filter:none;backdrop-filter:none}
 .hx-grid.kin2>*{animation:kup .5s cubic-bezier(.2,.8,.2,1) both}
 .hx-grid.kin2>:nth-child(2){animation-delay:.06s}.hx-grid.kin2>:nth-child(3){animation-delay:.12s}.hx-grid.kin2>:nth-child(4){animation-delay:.18s}
 /* landing sections reveal as you scroll */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
-.rv.in{opacity:1;transform:none}
+.lprv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.lprv.in{opacity:1;transform:none}
 /* the review list rows also use the class .rv: never hide them */
 #rvlist .rv{opacity:1;transform:none;transition:none}
 /* long lists only draw what is on screen: smoother scrolling */

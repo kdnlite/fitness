@@ -27,6 +27,7 @@
     <button class="logo" type="button" id="logo" aria-label="KDN Fitness Tracker, go to home">
       <img class="lgimg" src="assets/img/ff436bebdcd8.jpg" alt="" width="91" height="40"><span class="lgsub">Fitness<br>Tracker</span>
     </button>
+    <nav class="lp-nav" aria-label="Page sections"><a href="#lp-f-h">Features</a><a href="#lp-body-h">Exercises</a><a href="#lp-food-h">Food</a><a href="#lp-p-h">Plans</a><a href="#lp-q-h">FAQ</a><button class="btn" type="button" id="b-start4">Get Started</button></nav>
     <div class="menu" id="menu">
       <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mlist" aria-label="Open menu"><i></i><i></i><i></i></button>
       <nav class="mlist" id="mlist" hidden aria-label="Main menu">
@@ -193,6 +194,19 @@
         </article>
       </div>
       <p class="lp-note2">Have a coupon or a trainer code? You can apply it on the next screen.</p>
+    </section>
+
+    <section class="lp-sec lp-faq" aria-labelledby="lp-q-h">
+      <div class="lp-sh"><small>Questions</small><h2 id="lp-q-h">Asked <em class="sf">often</em></h2></div>
+      <div class="lp-qs">
+        <details><summary>What do I get with KDN?</summary><p>A daily diet built from Indian dishes with recipes, a weekly workout for home or the gym, a step goal, weekly check-ins that adjust your calories, and the KDN AI assistant that understands Hindi and English.</p></details>
+        <details><summary>I am vegetarian or vegan. Will it work for me?</summary><p>Yes. You pick veg, vegan or non-veg at the start, and every meal in your plan follows that choice. You can swap any dish you don't like.</p></details>
+        <details><summary>Do I need a gym?</summary><p>No. Tell us where you train: at home with no equipment, at home with dumbbells, or in a full gym. Your workout uses only what you have.</p></details>
+        <details><summary>How long does a plan last?</summary><p>Every plan lasts 3 months. The Family plan covers up to 4 people, each with their own plan.</p></details>
+        <details><summary>I have a coupon or a trainer code. Where do I use it?</summary><p>Tap Get Started and enter it on the payment screen.</p></details>
+        <details><summary>Is this medical advice?</summary><p>No. The numbers are estimates from standard formulas. If you have a health condition, are pregnant or are under 18, check with a doctor or dietitian first.</p></details>
+        <details><summary>Where is my data kept?</summary><p>Your plan and daily logs are saved on your own device. Read the <a href="https://kdnfitness.com/privacy.html">privacy policy</a> for the full details.</p></details>
+      </div>
     </section>
 
     <section class="lp-final" aria-labelledby="lp-fin-h">
@@ -503,7 +517,7 @@
     </div>
     <button class="btn" type="button" id="b-about-go">Get my plan</button>
   </section>
-  <footer class="ft"><b>KDN</b><span>Fitness Tracker · Estimates only, not medical advice. · <a href="https://kdnfitness.com/privacy.html" style="color:inherit">Privacy policy</a></span></footer>
+  <footer class="ft"><div class="ft-top"><div class="ft-brand"><b>KDN</b><span>Fitness Tracker</span><p>Indian diet plans, workouts and a Hindi-speaking AI coach, in one app.</p></div><nav class="ft-cols" aria-label="Footer"><div><h4>Product</h4><a href="#lp-f-h">Features</a><a href="#lp-body-h">Exercises</a><a href="#lp-food-h">Food</a><a href="#lp-p-h">Plans</a></div><div><h4>Help</h4><a href="#lp-q-h">FAQ</a><a href="mailto:support@kdnfitness.com">support@kdnfitness.com</a></div><div><h4>Legal</h4><a href="https://kdnfitness.com/privacy.html">Privacy policy</a></div></nav></div><div class="ft-bot"><span>© 2026 KDN Fitness</span><span>Estimates only, not medical advice.</span></div></footer>
 </div>
 <div class="modal mpm" id="mpm" hidden role="dialog" aria-modal="true" aria-labelledby="mpt"><div class="mbox mpbox"><span class="mpic2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3c1.7 0 2.6 1.9 2.6 4.3S9.7 12 8 12 5.4 9.6 5.4 7.3 6.3 3 8 3zM6 13.5h4.2l-.4 3.2A2.1 2.1 0 0 1 7.7 18.6a1.9 1.9 0 0 1-1.9-2.1zM16 7c1.7 0 2.6 1.9 2.6 4.3S17.7 16 16 16s-2.6-2.4-2.6-4.7S14.3 7 16 7zm-2 10.5h4.2l-.3 2.6a2 2 0 0 1-2 1.9 2 2 0 0 1-1.9-2.2z"/></svg></span><h3 id="mpt">Allow step counting</h3><p>KDN uses your phone’s motion sensor to count your steps and work out your distance, calories and active time. Your steps stay on your phone.</p><ul class="mplist"><li>Counts steps automatically while KDN is open</li><li>Fills your daily ring, streak and monthly history</li><li>You can turn it off any time in your phone settings</li></ul><div class="nav"><button class="btn ghost" type="button" id="mp-later">Not now</button><button class="btn" type="button" id="mp-allow">Allow</button></div></div></div>
 <div class="modal" id="lgm" hidden role="dialog" aria-modal="true" aria-labelledby="lgt"><div class="mbox"><h3 id="lgt">Log out?</h3><p>This removes your saved details, plan and health records (medicines, reports and period data) from this device. Download a health backup first if you want to keep them. You will answer the questions again to get a new plan.</p><div class="nav"><button class="btn ghost" type="button" id="lg-no">Stay logged in</button><button class="btn danger" type="button" id="lg-yes">Log out</button></div></div></div>

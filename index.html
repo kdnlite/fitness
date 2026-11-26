@@ -2756,8 +2756,8 @@ html.menuon .hd.sc::before{-webkit-backdrop-filter:none;backdrop-filter:none}
 .hx-grid.kin2>*{animation:kup .5s cubic-bezier(.2,.8,.2,1) both}
 .hx-grid.kin2>:nth-child(2){animation-delay:.06s}.hx-grid.kin2>:nth-child(3){animation-delay:.12s}.hx-grid.kin2>:nth-child(4){animation-delay:.18s}
 /* landing sections reveal as you scroll */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
-.rv.in{opacity:1;transform:none}
+.lprv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.lprv.in{opacity:1;transform:none}
 /* the review list rows also use the class .rv: never hide them */
 #rvlist .rv{opacity:1;transform:none;transition:none}
 /* long lists only draw what is on screen: smoother scrolling */
@@ -3781,6 +3781,68 @@ details.fd[open]>.fdbody,details.food[open]>:not(summary){animation:kopen .45s c
 details.fd.kswipe{transition:transform .25s ease,opacity .25s ease;will-change:transform}
 @media (hover:hover) and (pointer:fine){.kswipe-h{display:none}}
 @media (prefers-reduced-motion:reduce){.ek-ring.k3 .fg,.wch .wln,.wch .wdot,details.fd[open]>.fdbody,details.food[open]>:not(summary),.ek-b.spin span{animation:none}}
+/* ==== landing: top links, FAQ, full footer, wide desktop layout ==== */
+.lp-nav{display:none}
+body.onland .lp-nav{display:none}
+@media (min-width:900px){
+  body.onland .lp-nav{display:flex;align-items:center;gap:26px;margin-left:auto;margin-right:16px}
+  body.onland .lp-nav a{color:#C9D2E3;text-decoration:none;font-size:.92rem;font-weight:500;letter-spacing:.01em;transition:color .2s}
+  body.onland .lp-nav a:hover{color:var(--gold,#E9CF9C)}
+  body.onland .lp-nav .btn{background:var(--gold,#E9CF9C);border-color:var(--gold,#E9CF9C);color:#0B1220;padding:9px 18px;border-radius:10px;font-size:.9rem;min-height:0}
+}
+/* FAQ */
+.lp-qs{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.lp-qs details{border-bottom:1px solid var(--line)}
+.lp-qs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 2px;font-weight:600;font-size:1.02rem}
+.lp-qs summary::-webkit-details-marker{display:none}
+.lp-qs summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--gold,#E9CF9C);transition:transform .25s}
+.lp-qs details[open] summary::after{transform:rotate(45deg)}
+.lp-qs p{margin:0 2px 18px;max-width:70ch;line-height:1.6}
+body.onland .lp-qs,body.onland .lp-qs details{border-color:rgba(255,255,255,.09)}
+body.onland .lp-qs summary{color:#fff}
+body.onland .lp-qs p{color:#9AA6BD}
+body.onland .lp-qs a{color:var(--gold,#E9CF9C)}
+/* footer: full version only on the landing page */
+.ft .ft-top{display:none}
+.ft .ft-bot{display:flex;gap:6px 14px;flex-wrap:wrap}
+body.onland .ft{display:block}
+body.onland .ft .ft-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px;padding:20px 0 26px;border-bottom:1px solid rgba(255,255,255,.07)}
+body.onland .ft-brand{max-width:300px;display:flex;flex-direction:column;gap:4px}
+body.onland .ft-brand b{font-size:1.4rem;letter-spacing:.04em}
+body.onland .ft-brand span{color:#8F9BB3;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+body.onland .ft-brand p{margin:8px 0 0;color:#8F9BB3;font-size:.9rem;line-height:1.5}
+body.onland .ft-cols{display:flex;flex-wrap:wrap;gap:28px 56px}
+body.onland .ft-cols div{display:flex;flex-direction:column;gap:9px}
+body.onland .ft-cols h4{margin:0 0 4px;color:#fff;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-family:var(--font-mono)}
+body.onland .ft-cols a{color:#9AA6BD;text-decoration:none;font-size:.92rem}
+body.onland .ft-cols a:hover{color:var(--gold,#E9CF9C)}
+body.onland .ft .ft-bot{padding-top:18px;color:#6F7B93;font-size:.82rem;justify-content:space-between}
+/* section headings: label above, heading below, one clean block */
+.lp-sh{display:block}
+.lp-sh small{display:block;margin-bottom:4px}
+.lp-sh .lp-sub{max-width:60ch}
+.lp-final h2{display:block}
+/* wide desktop */
+@media (min-width:1100px){
+  body.onland .wrap,body.onland .hd-in{max-width:1180px}
+  body.onland .wrap{gap:56px}
+  body.onland .lp-hero{padding:88px max(24px,calc(50vw - 590px)) 96px;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px}
+  body.onland .lp-copy h1{font-size:clamp(3.4rem,4.6vw,4.6rem)}
+  body.onland .lp-lead{font-size:1.15rem;max-width:46ch}
+  body.onland .lp-walk{width:min(118%,700px);margin:-20px -10% 0 0}
+  body.onland .lp-final{padding:96px max(24px,calc(50vw - 590px)) 104px}
+  body.onland .lp-final h2{font-size:clamp(3rem,4.4vw,4.2rem)}
+  body.onland .ft{padding:24px max(24px,calc(50vw - 590px)) 30px}
+  body.onland .lp-sh h2{font-size:clamp(2.2rem,3.2vw,3rem)}
+  body.onland .lp-sh{margin-bottom:8px}
+  body.onland .lp-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+  body.onland .lp-plans{gap:22px}
+  body.onland .lp-steps{flex-direction:row;gap:22px}
+  body.onland .lp-steps>li{flex:1 1 0;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px;background:#111A2C}
+  body.onland .lp-gym-frame{aspect-ratio:21/9}
+  body.onland .lp-db{padding:24px 56px 24px 0}
+  body.onland .lp-faq .lp-qs{max-width:860px}
+}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -3795,6 +3857,7 @@ details.fd.kswipe{transition:transform .25s ease,opacity .25s ease;will-change:t
     <button class="logo" type="button" id="logo" aria-label="KDN Fitness Tracker, go to home">
       <img class="lgimg" src="assets/img/ff436bebdcd8.jpg" alt="" width="91" height="40"><span class="lgsub">Fitness<br>Tracker</span>
     </button>
+    <nav class="lp-nav" aria-label="Page sections"><a href="#lp-f-h">Features</a><a href="#lp-body-h">Exercises</a><a href="#lp-food-h">Food</a><a href="#lp-p-h">Plans</a><a href="#lp-q-h">FAQ</a><button class="btn" type="button" id="b-start4">Get Started</button></nav>
     <div class="menu" id="menu">
       <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="mlist" aria-label="Open menu"><i></i><i></i><i></i></button>
       <nav class="mlist" id="mlist" hidden aria-label="Main menu">
@@ -3961,6 +4024,19 @@ details.fd.kswipe{transition:transform .25s ease,opacity .25s ease;will-change:t
         </article>
       </div>
       <p class="lp-note2">Have a coupon or a trainer code? You can apply it on the next screen.</p>
+    </section>
+
+    <section class="lp-sec lp-faq" aria-labelledby="lp-q-h">
+      <div class="lp-sh"><small>Questions</small><h2 id="lp-q-h">Asked <em class="sf">often</em></h2></div>
+      <div class="lp-qs">
+        <details><summary>What do I get with KDN?</summary><p>A daily diet built from Indian dishes with recipes, a weekly workout for home or the gym, a step goal, weekly check-ins that adjust your calories, and the KDN AI assistant that understands Hindi and English.</p></details>
+        <details><summary>I am vegetarian or vegan. Will it work for me?</summary><p>Yes. You pick veg, vegan or non-veg at the start, and every meal in your plan follows that choice. You can swap any dish you don't like.</p></details>
+        <details><summary>Do I need a gym?</summary><p>No. Tell us where you train: at home with no equipment, at home with dumbbells, or in a full gym. Your workout uses only what you have.</p></details>
+        <details><summary>How long does a plan last?</summary><p>Every plan lasts 3 months. The Family plan covers up to 4 people, each with their own plan.</p></details>
+        <details><summary>I have a coupon or a trainer code. Where do I use it?</summary><p>Tap Get Started and enter it on the payment screen.</p></details>
+        <details><summary>Is this medical advice?</summary><p>No. The numbers are estimates from standard formulas. If you have a health condition, are pregnant or are under 18, check with a doctor or dietitian first.</p></details>
+        <details><summary>Where is my data kept?</summary><p>Your plan and daily logs are saved on your own device. Read the <a href="https://kdnfitness.com/privacy.html">privacy policy</a> for the full details.</p></details>
+      </div>
     </section>
 
     <section class="lp-final" aria-labelledby="lp-fin-h">
@@ -4271,7 +4347,7 @@ details.fd.kswipe{transition:transform .25s ease,opacity .25s ease;will-change:t
     </div>
     <button class="btn" type="button" id="b-about-go">Get my plan</button>
   </section>
-  <footer class="ft"><b>KDN</b><span>Fitness Tracker · Estimates only, not medical advice. · <a href="https://kdnfitness.com/privacy.html" style="color:inherit">Privacy policy</a></span></footer>
+  <footer class="ft"><div class="ft-top"><div class="ft-brand"><b>KDN</b><span>Fitness Tracker</span><p>Indian diet plans, workouts and a Hindi-speaking AI coach, in one app.</p></div><nav class="ft-cols" aria-label="Footer"><div><h4>Product</h4><a href="#lp-f-h">Features</a><a href="#lp-body-h">Exercises</a><a href="#lp-food-h">Food</a><a href="#lp-p-h">Plans</a></div><div><h4>Help</h4><a href="#lp-q-h">FAQ</a><a href="mailto:support@kdnfitness.com">support@kdnfitness.com</a></div><div><h4>Legal</h4><a href="https://kdnfitness.com/privacy.html">Privacy policy</a></div></nav></div><div class="ft-bot"><span>© 2026 KDN Fitness</span><span>Estimates only, not medical advice.</span></div></footer>
 </div>
 <div class="modal mpm" id="mpm" hidden role="dialog" aria-modal="true" aria-labelledby="mpt"><div class="mbox mpbox"><span class="mpic2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3c1.7 0 2.6 1.9 2.6 4.3S9.7 12 8 12 5.4 9.6 5.4 7.3 6.3 3 8 3zM6 13.5h4.2l-.4 3.2A2.1 2.1 0 0 1 7.7 18.6a1.9 1.9 0 0 1-1.9-2.1zM16 7c1.7 0 2.6 1.9 2.6 4.3S17.7 16 16 16s-2.6-2.4-2.6-4.7S14.3 7 16 7zm-2 10.5h4.2l-.3 2.6a2 2 0 0 1-2 1.9 2 2 0 0 1-1.9-2.2z"/></svg></span><h3 id="mpt">Allow step counting</h3><p>KDN uses your phone’s motion sensor to count your steps and work out your distance, calories and active time. Your steps stay on your phone.</p><ul class="mplist"><li>Counts steps automatically while KDN is open</li><li>Fills your daily ring, streak and monthly history</li><li>You can turn it off any time in your phone settings</li></ul><div class="nav"><button class="btn ghost" type="button" id="mp-later">Not now</button><button class="btn" type="button" id="mp-allow">Allow</button></div></div></div>
 <div class="modal" id="lgm" hidden role="dialog" aria-modal="true" aria-labelledby="lgt"><div class="mbox"><h3 id="lgt">Log out?</h3><p>This removes your saved details, plan and health records (medicines, reports and period data) from this device. Download a health backup first if you want to keep them. You will answer the questions again to get a new plan.</p><div class="nav"><button class="btn ghost" type="button" id="lg-no">Stay logged in</button><button class="btn danger" type="button" id="lg-yes">Log out</button></div></div></div>
@@ -12904,7 +12980,7 @@ details.fd.kswipe{transition:transform .25s ease,opacity .25s ease;will-change:t
       var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px',threshold:0.06});
       Array.prototype.forEach.call(document.querySelectorAll('#s-landing .lp-sec > *, #s-landing .lp-plan, #s-landing .lp-final > *'),function(el){
         if(el.getBoundingClientRect().top < innerHeight) return;
-        el.classList.add('rv'); io.observe(el);
+        el.classList.add('lprv'); io.observe(el);
       });
     }
     /* light haptic tick on the bottom bar (Android) */
@@ -14398,6 +14474,23 @@ details.fd.kswipe{transition:transform .25s ease,opacity .25s ease;will-change:t
     });
   })();
   /* ==== KDN WOW END ==== */
+  /* ==== landing top links, FAQ and footer links ==== */
+  (function(){
+    var b4 = document.getElementById('b-start4');
+    if(b4) b4.addEventListener('click',function(){ var b = document.getElementById('b-start1'); if(b) b.click(); });
+    document.addEventListener('click',function(ev){
+      var a = ev.target.closest && ev.target.closest('a[href^="#lp-"]');
+      if(!a) return;
+      var t = document.getElementById(a.getAttribute('href').slice(1));
+      if(!t) return;
+      ev.preventDefault();
+      var land = document.getElementById('s-landing');
+      if(land && land.hidden && typeof show==='function') show('s-landing');
+      var sec = t.closest('section') || t;
+      var y = sec.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({top:Math.max(0,y),behavior:(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)?'auto':'smooth'});
+    });
+  })();
   /* ==== KDN NATIVE APP START ====
      Runs only inside the Android app (Capacitor). On the website NATIVE is false and nothing here runs. */
   var NP = NATIVE ? (window.Capacitor.Plugins || {}) : {};

@@ -1,0 +1,62 @@
+/* ==== landing: top links, FAQ, full footer, wide desktop layout ==== */
+.lp-nav{display:none}
+body.onland .lp-nav{display:none}
+@media (min-width:900px){
+  body.onland .lp-nav{display:flex;align-items:center;gap:26px;margin-left:auto;margin-right:16px}
+  body.onland .lp-nav a{color:#C9D2E3;text-decoration:none;font-size:.92rem;font-weight:500;letter-spacing:.01em;transition:color .2s}
+  body.onland .lp-nav a:hover{color:var(--gold,#E9CF9C)}
+  body.onland .lp-nav .btn{background:var(--gold,#E9CF9C);border-color:var(--gold,#E9CF9C);color:#0B1220;padding:9px 18px;border-radius:10px;font-size:.9rem;min-height:0}
+}
+/* FAQ */
+.lp-qs{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.lp-qs details{border-bottom:1px solid var(--line)}
+.lp-qs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 2px;font-weight:600;font-size:1.02rem}
+.lp-qs summary::-webkit-details-marker{display:none}
+.lp-qs summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--gold,#E9CF9C);transition:transform .25s}
+.lp-qs details[open] summary::after{transform:rotate(45deg)}
+.lp-qs p{margin:0 2px 18px;max-width:70ch;line-height:1.6}
+body.onland .lp-qs,body.onland .lp-qs details{border-color:rgba(255,255,255,.09)}
+body.onland .lp-qs summary{color:#fff}
+body.onland .lp-qs p{color:#9AA6BD}
+body.onland .lp-qs a{color:var(--gold,#E9CF9C)}
+/* footer: full version only on the landing page */
+.ft .ft-top{display:none}
+.ft .ft-bot{display:flex;gap:6px 14px;flex-wrap:wrap}
+body.onland .ft{display:block}
+body.onland .ft .ft-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px;padding:20px 0 26px;border-bottom:1px solid rgba(255,255,255,.07)}
+body.onland .ft-brand{max-width:300px;display:flex;flex-direction:column;gap:4px}
+body.onland .ft-brand b{font-size:1.4rem;letter-spacing:.04em}
+body.onland .ft-brand span{color:#8F9BB3;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+body.onland .ft-brand p{margin:8px 0 0;color:#8F9BB3;font-size:.9rem;line-height:1.5}
+body.onland .ft-cols{display:flex;flex-wrap:wrap;gap:28px 56px}
+body.onland .ft-cols div{display:flex;flex-direction:column;gap:9px}
+body.onland .ft-cols h4{margin:0 0 4px;color:#fff;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-family:var(--font-mono)}
+body.onland .ft-cols a{color:#9AA6BD;text-decoration:none;font-size:.92rem}
+body.onland .ft-cols a:hover{color:var(--gold,#E9CF9C)}
+body.onland .ft .ft-bot{padding-top:18px;color:#6F7B93;font-size:.82rem;justify-content:space-between}
+/* section headings: label above, heading below, one clean block */
+.lp-sh{display:block}
+.lp-sh small{display:block;margin-bottom:4px}
+.lp-sh .lp-sub{max-width:60ch}
+.lp-final h2{display:block}
+/* wide desktop */
+@media (min-width:1100px){
+  body.onland .wrap,body.onland .hd-in{max-width:1180px}
+  body.onland .wrap{gap:56px}
+  body.onland .lp-hero{padding:88px max(24px,calc(50vw - 590px)) 96px;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px}
+  body.onland .lp-copy h1{font-size:clamp(3.4rem,4.6vw,4.6rem)}
+  body.onland .lp-lead{font-size:1.15rem;max-width:46ch}
+  body.onland .lp-walk{width:min(118%,700px);margin:-20px -10% 0 0}
+  body.onland .lp-final{padding:96px max(24px,calc(50vw - 590px)) 104px}
+  body.onland .lp-final h2{font-size:clamp(3rem,4.4vw,4.2rem)}
+  body.onland .ft{padding:24px max(24px,calc(50vw - 590px)) 30px}
+  body.onland .lp-sh h2{font-size:clamp(2.2rem,3.2vw,3rem)}
+  body.onland .lp-sh{margin-bottom:8px}
+  body.onland .lp-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+  body.onland .lp-plans{gap:22px}
+  body.onland .lp-steps{flex-direction:row;gap:22px}
+  body.onland .lp-steps>li{flex:1 1 0;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px;background:#111A2C}
+  body.onland .lp-gym-frame{aspect-ratio:21/9}
+  body.onland .lp-db{padding:24px 56px 24px 0}
+  body.onland .lp-faq .lp-qs{max-width:860px}
+}
