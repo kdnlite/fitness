@@ -28,7 +28,7 @@
         s.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><i></i><i></i><i></i><i></i><i></i><i></i>';
         document.body.appendChild(s); setTimeout(function(){ s.remove(); }, 1400);
         btn.classList.remove('lp-shine'); void btn.offsetWidth; btn.classList.add('lp-shine');
-        setTimeout(function(){ btn.classList.remove('lp-shine'); }, 2400);
+        setTimeout(function(){ btn.classList.remove('lp-shine'); }, 4100);
       };
     }
     /* pause when off screen to save battery */

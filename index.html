@@ -3937,12 +3937,12 @@ body.onland .lp-g:hover .lp-g-v img{transform:scale(1.035)}
 .lp-star i:nth-of-type(1){--dx:-60px;--dy:-34px}.lp-star i:nth-of-type(2){--dx:58px;--dy:-38px}.lp-star i:nth-of-type(3){--dx:-70px;--dy:18px}.lp-star i:nth-of-type(4){--dx:72px;--dy:22px}.lp-star i:nth-of-type(5){--dx:-12px;--dy:-64px}.lp-star i:nth-of-type(6){--dx:16px;--dy:58px}
 @keyframes lpstar{0%{transform:scale(.2) rotate(-40deg);opacity:0}25%{transform:scale(1.25) rotate(10deg);opacity:1}60%{transform:scale(1) rotate(0)}100%{transform:scale(1.6) rotate(25deg);opacity:0}}
 @keyframes lpspark{from{transform:translate(0,0);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(.3);opacity:0}}
-body.onland #b-start1.lp-shine{animation:lpbtnglow 2.2s ease-out}
+body.onland #b-start1.lp-shine{animation:lpbtnglow 2s ease-out 2}
 body.onland #b-start1.lp-shine::after{animation:lpsweep 1.1s cubic-bezier(.2,.8,.2,1)}
 @keyframes lpbtnglow{0%{box-shadow:0 0 0 0 rgba(255,214,130,.9),0 10px 30px rgba(233,207,156,.35)}30%{box-shadow:0 0 0 10px rgba(255,214,130,0),0 0 46px 10px rgba(255,214,130,.65)}100%{box-shadow:0 10px 30px rgba(233,207,156,.25)}}
 @keyframes lpsweep{from{left:-60%}to{left:130%}}
 /* Phones: less empty space above the headline, short lead line */
-@media (max-width:699px){body.onland .lp-hero{padding-top:18px}}
+@media (max-width:699px){body.onland .lp-hero{padding-top:10px;gap:14px}body.onland .lp-hero h1{margin:0}body.onland .lp-walk{margin-bottom:-14px}body.onland .lp-lead{position:relative;z-index:2;font-size:1rem;max-width:none}body.onland .lp-cta{display:flex;flex-wrap:nowrap;gap:10px}body.onland .lp-cta .btn{flex:1 1 0;min-width:0;width:auto;margin:0;padding-left:10px;padding-right:10px}body.onland .lp-trust{margin-top:0;padding-top:12px}body.onland .lp-trust li{padding-top:34px}body.onland .lp-trust b{font-size:2rem}}
 body.onland .lp-lead{max-width:34ch}
 </style>
 
@@ -3992,7 +3992,7 @@ body.onland .lp-lead{max-width:34ch}
     <div class="lp-hero">
       <div class="lp-copy">
                 <h1>Your fitness coach, <span class="lp-hl">right in your pocket.</span></h1>
-        <p class="lp-lead">Indian diet, home or gym workouts and a coach in Hindi or English. Your plan is ready in 2 minutes.</p>
+        <p class="lp-lead">Indian diet &amp; workouts, ready in 2 minutes.</p>
         <div class="lp-cta"><button class="btn" type="button" id="b-start1">Get Started</button><button class="btn ghost" type="button" id="b-plans">See plans</button></div>
         <ul class="lp-trust">
           <li><span class="lp-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></svg></span><b data-n="1130">1,130</b><span>exercises by muscle</span></li>
@@ -4001,7 +4001,7 @@ body.onland .lp-lead{max-width:34ch}
         </ul>
       </div>
 
-      <figure class="lp-stage lp-walk lp-still" aria-label="The KDN athletes walk in, flex, high-five and chat in front of the KDN app on a phone"><img class="lp-walk-img" src="assets/kdn-hero-phone-1200.webp" srcset="assets/kdn-hero-phone-1200.webp 1200w, assets/kdn-hero-phone-2400.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" width="2400" height="1797" fetchpriority="high" alt=""><video class="lp-loop" muted playsinline loop autoplay preload="auto" width="1200" height="900" data-star-t="12.46" data-star-x="0.605" data-star-y="0.085"><source src="assets/kdn-hero-loop.mp4" type="video/mp4"></video></figure>
+      <figure class="lp-stage lp-walk lp-still" aria-label="The KDN athletes walk in, flex, high-five and chat in front of the KDN app on a phone"><img class="lp-walk-img" src="assets/kdn-hero-phone-1200.webp" srcset="assets/kdn-hero-phone-1200.webp 1200w, assets/kdn-hero-phone-2400.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" width="2400" height="1797" fetchpriority="high" alt=""><video class="lp-loop" muted playsinline loop autoplay preload="auto" width="1200" height="900" data-star-t="12.2" data-star-x="0.559" data-star-y="0.208"><source src="assets/kdn-hero-loop2.mp4" type="video/mp4"></video></figure>
     </div>
 
     <div class="lp-mq" aria-label="What KDN includes"><div class="lp-mq-t"><span>1,130 exercises by muscle</span><span>185 Indian dishes with recipes</span><span>AI coach in Hindi &amp; English</span><span>Veg · Vegan · Non-veg</span><span>Home or gym workouts</span><span>Weekly check-ins</span><span>Step tracker</span><span>Family plans</span><span aria-hidden="true">1,130 exercises by muscle</span><span aria-hidden="true">185 Indian dishes with recipes</span><span aria-hidden="true">AI coach in Hindi &amp; English</span><span aria-hidden="true">Veg · Vegan · Non-veg</span><span aria-hidden="true">Home or gym workouts</span><span aria-hidden="true">Weekly check-ins</span><span aria-hidden="true">Step tracker</span><span aria-hidden="true">Family plans</span></div></div>
@@ -14666,7 +14666,7 @@ body.onland .lp-lead{max-width:34ch}
         s.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><i></i><i></i><i></i><i></i><i></i><i></i>';
         document.body.appendChild(s); setTimeout(function(){ s.remove(); }, 1400);
         btn.classList.remove('lp-shine'); void btn.offsetWidth; btn.classList.add('lp-shine');
-        setTimeout(function(){ btn.classList.remove('lp-shine'); }, 2400);
+        setTimeout(function(){ btn.classList.remove('lp-shine'); }, 4100);
       };
     }
     /* pause when off screen to save battery */
