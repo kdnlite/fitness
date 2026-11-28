@@ -95,8 +95,8 @@ body.onland .lp-still .lp-hw{animation:lpinR 2.1s cubic-bezier(.22,.7,.18,1) .5s
 @keyframes lpstepR{0%,20%,40%,60%,80%{transform:translateY(0) rotate(0)}10%,30%,50%,70%{transform:translateY(-1.6%) rotate(-.6deg)}90%{transform:translateY(-.5%)}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){body.onland .lp-still .lp-walk-img,body.onland .lp-still .lp-hm,body.onland .lp-still .lp-hw{animation:none}}
 /* Hero pose moments */
-.lp-pose{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(.995);transition:opacity .32s ease,transform .45s cubic-bezier(.2,.8,.2,1);pointer-events:none}
-.lp-pose.on{opacity:1;transform:none}
+.lp-clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s ease;pointer-events:none;-webkit-mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%);mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%)}
+.lp-clip.on{opacity:1}
 .lp-hp{transition:opacity .32s ease}
 .lp-hp.off{opacity:0}
 .lp-ball{position:fixed;left:0;top:0;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;z-index:60;pointer-events:none;background:radial-gradient(circle at 35% 35%,#fff 0,#FFF3C9 25%,#E9CF9C 55%,#B8893E 100%);box-shadow:0 0 14px 4px rgba(255,214,130,.8),0 0 40px 10px rgba(233,207,156,.45)}

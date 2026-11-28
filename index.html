@@ -3940,8 +3940,8 @@ body.onland .lp-still .lp-hw{animation:lpinR 2.1s cubic-bezier(.22,.7,.18,1) .5s
 @keyframes lpstepR{0%,20%,40%,60%,80%{transform:translateY(0) rotate(0)}10%,30%,50%,70%{transform:translateY(-1.6%) rotate(-.6deg)}90%{transform:translateY(-.5%)}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){body.onland .lp-still .lp-walk-img,body.onland .lp-still .lp-hm,body.onland .lp-still .lp-hw{animation:none}}
 /* Hero pose moments */
-.lp-pose{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(.995);transition:opacity .32s ease,transform .45s cubic-bezier(.2,.8,.2,1);pointer-events:none}
-.lp-pose.on{opacity:1;transform:none}
+.lp-clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s ease;pointer-events:none;-webkit-mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%);mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%)}
+.lp-clip.on{opacity:1}
 .lp-hp{transition:opacity .32s ease}
 .lp-hp.off{opacity:0}
 .lp-ball{position:fixed;left:0;top:0;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;z-index:60;pointer-events:none;background:radial-gradient(circle at 35% 35%,#fff 0,#FFF3C9 25%,#E9CF9C 55%,#B8893E 100%);box-shadow:0 0 14px 4px rgba(255,214,130,.8),0 0 40px 10px rgba(233,207,156,.45)}
@@ -4012,7 +4012,7 @@ body.onland #b-start1.lp-shine::after{animation:lpsweep 1.1s cubic-bezier(.2,.8,
         </ul>
       </div>
 
-      <figure class="lp-stage lp-walk lp-still" aria-label="The KDN male and female athletes walk in and stand in front of the KDN app on a phone"><img class="lp-walk-img" src="assets/kdn-hero-phone-1200.webp" srcset="assets/kdn-hero-phone-1200.webp 1200w, assets/kdn-hero-phone-2400.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" width="2400" height="1797" fetchpriority="high" alt=""><img class="lp-hp lp-hm" src="assets/kdn-hero-man-1x.webp" srcset="assets/kdn-hero-man-1x.webp 1x, assets/kdn-hero-man-2x.webp 2x" alt="" width="650" height="1567"><img class="lp-hp lp-hw" src="assets/kdn-hero-woman-1x.webp" srcset="assets/kdn-hero-woman-1x.webp 1x, assets/kdn-hero-woman-2x.webp 2x" alt="" width="553" height="1463"><img class="lp-pose" data-pose="clap" data-src="assets/kdn-hero-pose-clap-1x.webp" data-srcset="assets/kdn-hero-pose-clap-1x.webp 1200w, assets/kdn-hero-pose-clap.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" alt="" width="2400" height="1797"><img class="lp-pose" data-pose="talk" data-src="assets/kdn-hero-pose-talk-1x.webp" data-srcset="assets/kdn-hero-pose-talk-1x.webp 1200w, assets/kdn-hero-pose-talk.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" alt="" width="2400" height="1797"><img class="lp-pose" data-pose="flex" data-src="assets/kdn-hero-pose-flex-1x.webp" data-srcset="assets/kdn-hero-pose-flex-1x.webp 1200w, assets/kdn-hero-pose-flex.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" alt="" width="2400" height="1797"><img class="lp-pose" data-pose="throw" data-src="assets/kdn-hero-pose-throw-1x.webp" data-srcset="assets/kdn-hero-pose-throw-1x.webp 1200w, assets/kdn-hero-pose-throw.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" alt="" width="2400" height="1797" data-hx="0.80" data-hy="0.16"></figure>
+      <figure class="lp-stage lp-walk lp-still" aria-label="The KDN male and female athletes walk in and stand in front of the KDN app on a phone"><img class="lp-walk-img" src="assets/kdn-hero-phone-1200.webp" srcset="assets/kdn-hero-phone-1200.webp 1200w, assets/kdn-hero-phone-2400.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" width="2400" height="1797" fetchpriority="high" alt=""><img class="lp-hp lp-hm" src="assets/kdn-hero-man-1x.webp" srcset="assets/kdn-hero-man-1x.webp 1x, assets/kdn-hero-man-2x.webp 2x" alt="" width="650" height="1567"><img class="lp-hp lp-hw" src="assets/kdn-hero-woman-1x.webp" srcset="assets/kdn-hero-woman-1x.webp 1x, assets/kdn-hero-woman-2x.webp 2x" alt="" width="553" height="1463"><video class="lp-clip" data-clip="clap" muted playsinline preload="none" width="1200" height="900"><source src="assets/kdn-hero-clip-clap.mp4" type="video/mp4"></video><video class="lp-clip" data-clip="talk" muted playsinline preload="none" width="1200" height="900"><source src="assets/kdn-hero-clip-talk.mp4" type="video/mp4"></video><video class="lp-clip" data-clip="flex" muted playsinline preload="none" width="1200" height="900"><source src="assets/kdn-hero-clip-flex.mp4" type="video/mp4"></video><video class="lp-clip" data-clip="throw" muted playsinline preload="none" width="1200" height="900" data-exit-x="0.653" data-exit-y="0.026" data-exit-t="1.42"><source src="assets/kdn-hero-clip-throw.mp4" type="video/mp4"></video></figure>
     </div>
 
     <div class="lp-mq" aria-label="What KDN includes"><div class="lp-mq-t"><span>1,130 exercises by muscle</span><span>185 Indian dishes with recipes</span><span>AI coach in Hindi &amp; English</span><span>Veg · Vegan · Non-veg</span><span>Home or gym workouts</span><span>Weekly check-ins</span><span>Step tracker</span><span>Family plans</span><span aria-hidden="true">1,130 exercises by muscle</span><span aria-hidden="true">185 Indian dishes with recipes</span><span aria-hidden="true">AI coach in Hindi &amp; English</span><span aria-hidden="true">Veg · Vegan · Non-veg</span><span aria-hidden="true">Home or gym workouts</span><span aria-hidden="true">Weekly check-ins</span><span aria-hidden="true">Step tracker</span><span aria-hidden="true">Family plans</span></div></div>
@@ -14647,51 +14647,59 @@ body.onland #b-start1.lp-shine::after{animation:lpsweep 1.1s cubic-bezier(.2,.8,
     var o = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); o.unobserve(e.target); } }); },{threshold:.2});
     gs.forEach(function(g){ o.observe(g); });
   })();
-  /* ==== hero: after the walk-in the athletes clap, chat, flex and toss a star at Get Started ==== */
+  /* ==== hero: after the walk-in the athletes clap, chat, flex and toss a ball that lights up Get Started (Grok clips) ==== */
   (function(){
     var fig = document.querySelector('.lp-still'); if(!fig) return;
     if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var land = document.getElementById('s-landing');
-    var poses = {}; fig.querySelectorAll('.lp-pose').forEach(function(p){ poses[p.dataset.pose] = p; });
+    var clips = {}; fig.querySelectorAll('.lp-clip').forEach(function(v){ clips[v.dataset.clip] = v; });
     var idle = fig.querySelectorAll('.lp-hm, .lp-hw');
     var sl = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
     var visible = false, running = false;
-    function load(p){ if(p.dataset.src && !p.src){ p.src = p.dataset.src; if(p.dataset.srcset) p.srcset = p.dataset.srcset; } return p.decode ? p.decode().catch(function(){}) : Promise.resolve(); }
-    async function showPose(name, ms){
-      var p = poses[name]; if(!p) return; await load(p);
-      p.classList.add('on'); idle.forEach(function(i){ i.classList.add('off'); });
-      await sl(ms);
-      p.classList.remove('on'); idle.forEach(function(i){ i.classList.remove('off'); });
+
+    function play(name){
+      var v = clips[name]; if(!v) return Promise.resolve();
+      return new Promise(function(done){
+        var fired = false, finish = function(){
+          v.removeEventListener('ended', finish); v.removeEventListener('timeupdate', tick);
+          idle.forEach(function(i){ i.classList.remove('off'); });
+          v.classList.remove('on'); setTimeout(done, 260);
+        };
+        var tick = function(){ if(!fired && v.dataset.exitT && v.currentTime >= +v.dataset.exitT){ fired = true; star(v); } };
+        v.addEventListener('ended', finish); v.addEventListener('timeupdate', tick);
+        try{ v.currentTime = 0; }catch(e){}
+        var p = v.play();
+        var show = function(){ v.classList.add('on'); setTimeout(function(){ idle.forEach(function(i){ i.classList.add('off'); }); }, 250); };
+        if(p && p.then) p.then(show).catch(function(){ done(); }); else show();
+      });
     }
-    function star(){
-      var btn = document.getElementById('b-start1'); var p = poses.throw; if(!btn || !p) return;
+
+    function star(v){
+      var btn = document.getElementById('b-start1'); if(!btn) return;
       var fr = fig.getBoundingClientRect(), br = btn.getBoundingClientRect();
-      var hx = fr.left + fr.width * (+p.dataset.hx || .7), hy = fr.top + fr.height * (+p.dataset.hy || .3);
+      var hx = fr.left + fr.width * (+v.dataset.exitX), hy = fr.top + fr.height * (+v.dataset.exitY);
       var tx = br.left + br.width * .5, ty = br.top + br.height * .5;
       var ball = document.createElement('div'); ball.className = 'lp-ball'; document.body.appendChild(ball);
-      var cx = (hx + tx) / 2, cy = Math.min(hy, ty) - Math.max(120, Math.abs(tx - hx) * .35);
-      var kf = []; for(var i = 0; i <= 24; i++){ var t = i / 24, x = (1-t)*(1-t)*hx + 2*(1-t)*t*cx + t*t*tx, y = (1-t)*(1-t)*hy + 2*(1-t)*t*cy + t*t*ty; kf.push({ transform: 'translate(' + x + 'px,' + y + 'px) scale(' + (0.6 + t * .6) + ')' }); }
-      var a = ball.animate(kf, { duration: 1150, easing: 'cubic-bezier(.35,.1,.25,1)', fill: 'forwards' });
+      var cx = hx + (tx - hx) * .35, cy = Math.min(hy, ty) - 140;
+      var kf = []; for(var i = 0; i <= 24; i++){ var t = i / 24, x = (1-t)*(1-t)*hx + 2*(1-t)*t*cx + t*t*tx, y = (1-t)*(1-t)*hy + 2*(1-t)*t*cy + t*t*ty; kf.push({ transform: 'translate(' + x + 'px,' + y + 'px) scale(' + (0.8 + t * .5) + ')' }); }
+      var a = ball.animate(kf, { duration: 1200, easing: 'cubic-bezier(.35,.1,.25,1)', fill: 'forwards' });
       a.onfinish = function(){
         ball.remove();
         var s = document.createElement('div'); s.className = 'lp-star'; s.style.left = tx + 'px'; s.style.top = ty + 'px';
-        s.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg>' + '<i></i><i></i><i></i><i></i><i></i><i></i>';
+        s.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg><i></i><i></i><i></i><i></i><i></i><i></i>';
         document.body.appendChild(s); setTimeout(function(){ s.remove(); }, 1400);
         btn.classList.remove('lp-shine'); void btn.offsetWidth; btn.classList.add('lp-shine');
         setTimeout(function(){ btn.classList.remove('lp-shine'); }, 2400);
       };
     }
+
     async function loop(){
       if(running) return; running = true;
-      await sl(3200);
-      var seq = [['clap',1700],['talk',2400],['flex',2000],['throw',1900]];
+      Object.keys(clips).forEach(function(k){ clips[k].preload = 'auto'; });
+      await sl(3000);
+      var seq = ['clap', 'talk', 'flex', 'throw'];
       while(visible && !land.hidden){
-        for(var i = 0; i < seq.length && visible && !land.hidden; i++){
-          var n = seq[i][0];
-          if(n === 'throw'){ var pr = showPose('throw', seq[i][1]); await sl(260); star(); await pr; }
-          else await showPose(n, seq[i][1]);
-          await sl(2600);
-        }
+        for(var i = 0; i < seq.length && visible && !land.hidden; i++){ await play(seq[i]); await sl(2200); }
       }
       running = false;
     }
