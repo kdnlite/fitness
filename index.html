@@ -2410,7 +2410,7 @@ details.zmore .gtwo{align-items:end}
 .lp-hero{background:radial-gradient(60% 75% at 74% 52%,#0C2A55 0%,rgba(12,42,85,0) 72%),linear-gradient(180deg,#071A3C 0%,#0A2247 55%,#08193A 100%)}
 body.onland,body.onland .hd,body.onland::before{background:#071A3C}
 body.onland .hd{border-bottom-color:rgba(255,255,255,.08)}
-.lp-walk{position:relative;margin:0;padding:0;width:100%;max-width:none;justify-self:stretch;display:block;aspect-ratio:928/754}
+.lp-walk{position:relative;margin:0;padding:0;width:100%;max-width:none;justify-self:stretch;display:block;aspect-ratio:928/696}
 .lp-walk-v,.lp-walk-end{position:absolute;inset:0;width:100%;height:100%;max-width:100%;display:block;object-fit:cover;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 6%,#000 92%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 6%,#000 92%,transparent 100%);mask-composite:intersect}
 .lp-walk-end[hidden]{display:none}
 .lp-replay{position:absolute;right:6%;bottom:6%;width:40px;height:40px;border-radius:50%;border:1px solid rgba(233,207,156,.45);background:rgba(7,26,60,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#E9CF9C;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}
@@ -3882,6 +3882,21 @@ body.onland .lp-hero{background:radial-gradient(40% 55% at 78% 45%,rgba(233,207,
 /* FAQ: open item gets a gold mark */
 body.onland .lp-qs details[open] summary{color:#F3DDAA}
 body.onland .lp-final .lp-wm{mix-blend-mode:lighten;background:transparent}
+/* gym scenes */
+.lp-gs{display:grid;grid-template-columns:1fr;gap:16px}
+.lp-g{margin:0;border-radius:20px;overflow:hidden;background:#111A2C;border:1px solid rgba(255,255,255,.08)}
+.lp-g-v{aspect-ratio:16/9;background:#0B1220}
+.lp-g-v video{width:100%;height:100%;object-fit:cover;display:block}
+.lp-g figcaption{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px}
+.lp-g figcaption b{color:#fff;font-size:1.02rem}
+.lp-g figcaption span{color:#9AA6BD;font-size:.9rem;line-height:1.5}
+@media (min-width:760px){.lp-gs{grid-template-columns:1fr 1fr}.lp-g-wide{grid-column:1/-1}.lp-g-wide .lp-g-v{aspect-ratio:21/9}}
+body.onland .lp-g{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60px rgba(0,0,0,.35),0 0 40px rgba(233,207,156,.08)}
+
+.lp-diets{padding-bottom:8px}
+@media (min-width:1000px){.lp-gs3{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:760px) and (max-width:999px){.lp-gs3 .lp-g:last-child{grid-column:1/-1}}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -3939,14 +3954,14 @@ body.onland .lp-final .lp-wm{mix-blend-mode:lighten;background:transparent}
         </ul>
       </div>
 
-      <figure class="lp-stage lp-walk"><video id="lpwalk" class="lp-walk-v" muted playsinline preload="none" poster="assets/kdn-hero-start.webp" width="928" height="754" aria-label="The KDN male and female athletes walk in from both sides and pose in front of the KDN app on a phone"><source src="assets/kdn-hero.mp4" type="video/mp4"></video><img class="lp-walk-end" src="assets/kdn-hero-end.webp" width="928" height="754" alt="The KDN male and female athletes posing in front of the KDN app on a phone" hidden></figure>
+      <figure class="lp-stage lp-walk"><video id="lpwalk" class="lp-walk-v" muted playsinline preload="none" poster="assets/kdn-hero-start.webp" width="928" height="696" aria-label="The KDN male and female athletes walk in from both sides and pose in front of the KDN app on a phone"><source src="assets/kdn-hero.mp4" type="video/mp4"></video><img class="lp-walk-end" src="assets/kdn-hero-end.webp" width="928" height="696" alt="The KDN male and female athletes posing in front of the KDN app on a phone" hidden></figure>
     </div>
 
     <div class="lp-mq" aria-label="What KDN includes"><div class="lp-mq-t"><span>1,130 exercises by muscle</span><span>185 Indian dishes with recipes</span><span>AI coach in Hindi &amp; English</span><span>Veg · Vegan · Non-veg</span><span>Home or gym workouts</span><span>Weekly check-ins</span><span>Step tracker</span><span>Family plans</span><span aria-hidden="true">1,130 exercises by muscle</span><span aria-hidden="true">185 Indian dishes with recipes</span><span aria-hidden="true">AI coach in Hindi &amp; English</span><span aria-hidden="true">Veg · Vegan · Non-veg</span><span aria-hidden="true">Home or gym workouts</span><span aria-hidden="true">Weekly check-ins</span><span aria-hidden="true">Step tracker</span><span aria-hidden="true">Family plans</span></div></div>
 
     <section class="lp-gym" aria-labelledby="lp-gym-h">
       <div class="lp-gym-frame">
-        <video id="lpgym" class="lp-gym-v" muted loop playsinline preload="none" poster="assets/kdn-gym-reel2.webp" width="1280" height="720" aria-label="The KDN athletes train in the KDN gym: a barbell deadlift and battle ropes"><source src="assets/kdn-gym-reel2.mp4" type="video/mp4"></video>
+        <video id="lpgym" class="lp-gym-v" muted loop playsinline preload="none" poster="assets/kdn-gym-reel2.webp" width="1280" height="720" aria-label="The KDN athletes train in a gym: a barbell deadlift and battle ropes"><source src="assets/kdn-gym-reel2.mp4" type="video/mp4"></video>
         <canvas class="lp-dust" aria-hidden="true"></canvas><div class="lp-gym-cap"><small>Inside KDN</small><h2 id="lp-gym-h">Train like the KDN athletes</h2><p>Every exercise in the app is shown by the same two coaches, with start and end pictures and a short demo video.</p></div>
       </div>
     </section>
@@ -4036,6 +4051,24 @@ body.onland .lp-final .lp-wm{mix-blend-mode:lighten;background:transparent}
         <li><span>2</span><div><b>Get your daily plan</b><p>Calories, protein, meals with recipes, a weekly workout and a step goal, all set for you.</p></div></li>
         <li><span>3</span><div><b>Track and adjust</b><p>Tick off meals and workouts, count steps, and weigh in weekly so the plan keeps up with you.</p></div></li>
       </ol>
+    </section>
+
+    <section class="lp-sec lp-gyms lp-diets" aria-labelledby="lp-dt-h">
+      <div class="lp-sh"><small>Diet, every day</small><h2 id="lp-dt-h">Your diet, <em class="sf">followed for real</em></h2><p class="lp-sub">Indian meals with exact portions, at home, at work and at the dinner table.</p></div>
+      <div class="lp-gs lp-gs3">
+        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/diet-kitchen.webp" width="1280" height="720" aria-label="A woman cooks breakfast following the KDN dish guide on her phone"><source src="assets/diet-kitchen.mp4" type="video/mp4"></video></div><figcaption><b>Cook it the right way</b><span>Every dish has a recipe, portions and macros for your plan.</span></figcaption></figure>
+        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/diet-office.webp" width="1280" height="720" aria-label="A man checks today's diet on the KDN app before lunch at work"><source src="assets/diet-office.mp4" type="video/mp4"></video></div><figcaption><b>Lunch at work, still on plan</b><span>Open today's diet and eat exactly what it says.</span></figcaption></figure>
+        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/diet-dinner.webp" width="1280" height="720" aria-label="A couple checks their dinner plan on the KDN app and eats a home-cooked Indian meal"><source src="assets/diet-dinner.mp4" type="video/mp4"></video></div><figcaption><b>Dinner the whole family eats</b><span>Dal, roti and sabzi, sized to your calories.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <section class="lp-sec lp-gyms" aria-labelledby="lp-gy-h">
+      <div class="lp-sh"><small>In the gym</small><h2 id="lp-gy-h">Built for <em class="sf">real gyms</em></h2><p class="lp-sub">Members train with their plan on the phone. Owners run the whole gym from one dashboard.</p></div>
+      <div class="lp-gs">
+        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/gym-arrive.webp" width="1280" height="720" aria-label="A member walks into a busy gym looking at his plan on his phone"><source src="assets/gym-arrive.mp4" type="video/mp4"></video></div><figcaption><b>Walk in, plan ready</b><span>Today's workout and meals are on the phone before the first set.</span></figcaption></figure>
+        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/gym-train.webp" width="1280" height="720" aria-label="A member checks her workout on the KDN app between sets and starts her next set"><source src="assets/gym-train.mp4" type="video/mp4"></video></div><figcaption><b>Train with the plan in your pocket</b><span>Sets, reps and a rest timer between every set.</span></figcaption></figure>
+        <figure class="lp-g lp-g-wide"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/gym-owner.webp" width="1280" height="720" aria-label="A gym owner manages members, fees and check-ins on the KDN Gym Manager dashboard"><source src="assets/gym-owner.mp4" type="video/mp4"></video></div><figcaption><b>Run the gym from one dashboard</b><span>KDN Gym Manager keeps members, fees, check-ins, trainers and WhatsApp reminders in one place. Included in the Gym plan.</span></figcaption></figure>
+      </div>
     </section>
 
     <section class="lp-sec" aria-labelledby="lp-p-h">
@@ -14338,7 +14371,7 @@ body.onland .lp-final .lp-wm{mix-blend-mode:lighten;background:transparent}
   (function(){
     var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(still || !('IntersectionObserver' in window)) return;
-    var vids = document.querySelectorAll('#lpdb, .lp-dish video');
+    var vids = document.querySelectorAll('#lpdb, .lp-dish video, .lp-gs video');
     var o = new IntersectionObserver(function(es){ es.forEach(function(e){ var v = e.target; if(e.isIntersecting){ var p = v.play(); if(p && p.catch) p.catch(function(){}); } else v.pause(); }); },{threshold:.25});
     vids.forEach(function(v){ o.observe(v); });
     var box = document.querySelector('.lp-db-v'), band = document.querySelector('.lp-db'), on = false, tick = false;
@@ -14458,7 +14491,7 @@ body.onland .lp-final .lp-wm{mix-blend-mode:lighten;background:transparent}
   function kCelebrate(){
     if(document.querySelector('.kcel')) return;
     var el = document.createElement('div'); el.className = 'kcel'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label','Perfect day');
-    el.innerHTML = '<div class="kcel-box"><img src="assets/kdn-hero-end.webp" alt="The KDN athletes cheering" width="928" height="754"><small>Perfect day</small><h2>100 out of 100!</h2><p>Steps, workout, water and food all done. Keep the streak going tomorrow.</p><button type="button" class="btn">Thanks!</button></div>';
+    el.innerHTML = '<div class="kcel-box"><img src="assets/kdn-hero-end.webp" alt="The KDN athletes cheering" width="928" height="696"><small>Perfect day</small><h2>100 out of 100!</h2><p>Steps, workout, water and food all done. Keep the streak going tomorrow.</p><button type="button" class="btn">Thanks!</button></div>';
     document.body.appendChild(el);
     requestAnimationFrame(function(){ el.classList.add('on'); });
     try{ snd('win'); buzz('ok'); }catch(e){}

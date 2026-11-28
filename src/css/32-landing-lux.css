@@ -37,3 +37,18 @@ body.onland .lp-hero{background:radial-gradient(40% 55% at 78% 45%,rgba(233,207,
 /* FAQ: open item gets a gold mark */
 body.onland .lp-qs details[open] summary{color:#F3DDAA}
 body.onland .lp-final .lp-wm{mix-blend-mode:lighten;background:transparent}
+/* gym scenes */
+.lp-gs{display:grid;grid-template-columns:1fr;gap:16px}
+.lp-g{margin:0;border-radius:20px;overflow:hidden;background:#111A2C;border:1px solid rgba(255,255,255,.08)}
+.lp-g-v{aspect-ratio:16/9;background:#0B1220}
+.lp-g-v video{width:100%;height:100%;object-fit:cover;display:block}
+.lp-g figcaption{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px}
+.lp-g figcaption b{color:#fff;font-size:1.02rem}
+.lp-g figcaption span{color:#9AA6BD;font-size:.9rem;line-height:1.5}
+@media (min-width:760px){.lp-gs{grid-template-columns:1fr 1fr}.lp-g-wide{grid-column:1/-1}.lp-g-wide .lp-g-v{aspect-ratio:21/9}}
+body.onland .lp-g{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60px rgba(0,0,0,.35),0 0 40px rgba(233,207,156,.08)}
+
+.lp-diets{padding-bottom:8px}
+@media (min-width:1000px){.lp-gs3{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:760px) and (max-width:999px){.lp-gs3 .lp-g:last-child{grid-column:1/-1}}

@@ -26,7 +26,7 @@
   function kCelebrate(){
     if(document.querySelector('.kcel')) return;
     var el = document.createElement('div'); el.className = 'kcel'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label','Perfect day');
-    el.innerHTML = '<div class="kcel-box"><img src="assets/kdn-hero-end.webp" alt="The KDN athletes cheering" width="928" height="754"><small>Perfect day</small><h2>100 out of 100!</h2><p>Steps, workout, water and food all done. Keep the streak going tomorrow.</p><button type="button" class="btn">Thanks!</button></div>';
+    el.innerHTML = '<div class="kcel-box"><img src="assets/kdn-hero-end.webp" alt="The KDN athletes cheering" width="928" height="696"><small>Perfect day</small><h2>100 out of 100!</h2><p>Steps, workout, water and food all done. Keep the streak going tomorrow.</p><button type="button" class="btn">Thanks!</button></div>';
     document.body.appendChild(el);
     requestAnimationFrame(function(){ el.classList.add('on'); });
     try{ snd('win'); buzz('ok'); }catch(e){}

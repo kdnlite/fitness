@@ -2,7 +2,7 @@
 .lp-hero{background:radial-gradient(60% 75% at 74% 52%,#0C2A55 0%,rgba(12,42,85,0) 72%),linear-gradient(180deg,#071A3C 0%,#0A2247 55%,#08193A 100%)}
 body.onland,body.onland .hd,body.onland::before{background:#071A3C}
 body.onland .hd{border-bottom-color:rgba(255,255,255,.08)}
-.lp-walk{position:relative;margin:0;padding:0;width:100%;max-width:none;justify-self:stretch;display:block;aspect-ratio:928/754}
+.lp-walk{position:relative;margin:0;padding:0;width:100%;max-width:none;justify-self:stretch;display:block;aspect-ratio:928/696}
 .lp-walk-v,.lp-walk-end{position:absolute;inset:0;width:100%;height:100%;max-width:100%;display:block;object-fit:cover;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 6%,#000 92%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%),linear-gradient(180deg,transparent 0,#000 6%,#000 92%,transparent 100%);mask-composite:intersect}
 .lp-walk-end[hidden]{display:none}
 .lp-replay{position:absolute;right:6%;bottom:6%;width:40px;height:40px;border-radius:50%;border:1px solid rgba(233,207,156,.45);background:rgba(7,26,60,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#E9CF9C;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2}

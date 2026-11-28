@@ -48,7 +48,7 @@
   (function(){
     var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(still || !('IntersectionObserver' in window)) return;
-    var vids = document.querySelectorAll('#lpdb, .lp-dish video');
+    var vids = document.querySelectorAll('#lpdb, .lp-dish video, .lp-gs video');
     var o = new IntersectionObserver(function(es){ es.forEach(function(e){ var v = e.target; if(e.isIntersecting){ var p = v.play(); if(p && p.catch) p.catch(function(){}); } else v.pause(); }); },{threshold:.25});
     vids.forEach(function(v){ o.observe(v); });
     var box = document.querySelector('.lp-db-v'), band = document.querySelector('.lp-db'), on = false, tick = false;
