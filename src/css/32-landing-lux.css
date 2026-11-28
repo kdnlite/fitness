@@ -53,7 +53,7 @@ body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60p
 @media (min-width:1000px){.lp-gs3{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:760px) and (max-width:999px){.lp-gs3 .lp-g:last-child{grid-column:1/-1}}
 /* Hero uses the same deep blue as the rest of the page */
-body.onland .lp-hero{background:#071A3C}
+body.onland .lp-hero{background:#0B1220}
 .lp-ic{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(233,207,156,.1);box-shadow:inset 0 0 0 1px rgba(233,207,156,.35)}
 .lp-ic svg{width:16px;height:16px;fill:none;stroke:#E9CF9C;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .lp-trust.on .lp-ic{animation:lpic .7s cubic-bezier(.2,.8,.2,1) both}
@@ -61,10 +61,10 @@ body.onland .lp-hero{background:#071A3C}
 @keyframes lpic{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.lp-trust.on .lp-ic{animation:none}}
 /* Closing call to action and footer use the same deep blue as the page */
-body.onland .lp-final{background:radial-gradient(60% 70% at 50% 120%,rgba(233,207,156,.16),rgba(233,207,156,0) 70%),#071A3C}
-body.onland .ft{background:#071A3C}
+body.onland .lp-final{background:radial-gradient(60% 70% at 50% 120%,rgba(233,207,156,.16),rgba(233,207,156,0) 70%),#0B1220}
+body.onland .ft{background:#0B1220}
 /* Phone-only Get Started bar */
-.lp-sbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 16px;border-radius:18px;background:rgba(10,24,54,.86);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(233,207,156,.22);transform:translateY(140%);opacity:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s;pointer-events:none}
+.lp-sbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 16px;border-radius:18px;background:rgba(14,22,40,.88);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(233,207,156,.22);transform:translateY(140%);opacity:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s;pointer-events:none}
 .lp-sbar.on{transform:none;opacity:1;pointer-events:auto}
 .lp-sbar div{flex:1;min-width:0;display:flex;flex-direction:column}
 .lp-sbar b{color:#fff;font-size:.95rem;line-height:1.2}
