@@ -10,7 +10,7 @@
 <title>KDN Fitness Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="assets/kdn-hero3-start.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/kdn-hero-4k-1200.webp" imagesrcset="assets/kdn-hero-4k-1200.webp 1200w, assets/kdn-hero-4k-2400.webp 2400w" imagesizes="(min-width:1100px) 700px, 100vw" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
 <style>
@@ -3917,6 +3917,17 @@ body.onland .ft{background:#0B1220}
 .lp-sbar .btn{flex:none;width:auto;margin:0;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,#F3DDA9,#D9B66E);border:0;color:#0B1220;font-weight:700}
 @media (min-width:760px){.lp-sbar{display:none}}
 @media (prefers-reduced-motion:reduce){.lp-sbar{transition:none}}
+/* 4K still photos in place of the videos */
+.lp-walk-img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;-webkit-mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%);mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%)}
+body.onland .lp-still{animation:lpheroin 1.1s cubic-bezier(.2,.8,.2,1) backwards}
+body.onland .lp-still .lp-walk-img{animation:lpfloat 7s ease-in-out 1.1s infinite alternate}
+@keyframes lpheroin{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes lpfloat{from{transform:translateY(0)}to{transform:translateY(-8px)}}
+.lp-g-v{overflow:hidden}
+.lp-g-v img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.lp-g.in .lp-g-v img{transform:scale(1)}
+body.onland .lp-g:hover .lp-g-v img{transform:scale(1.035)}
+@media (prefers-reduced-motion:reduce){body.onland .lp-still,body.onland .lp-still .lp-walk-img{animation:none}.lp-g-v img{transform:none;transition:none}}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -3974,7 +3985,7 @@ body.onland .ft{background:#0B1220}
         </ul>
       </div>
 
-      <figure class="lp-stage lp-walk"><video id="lpwalk" class="lp-walk-v" muted playsinline preload="none" poster="assets/kdn-hero3-start.webp" width="928" height="696" aria-label="The KDN male and female athletes walk in from both sides and pose in front of the KDN app on a phone"><source src="assets/kdn-hero3.mp4" type="video/mp4"></video><img class="lp-walk-end" src="assets/kdn-hero3-end.webp" width="928" height="696" alt="The KDN male and female athletes posing in front of the KDN app on a phone" hidden></figure>
+      <figure class="lp-stage lp-walk lp-still"><img class="lp-walk-img" src="assets/kdn-hero-4k-1200.webp" srcset="assets/kdn-hero-4k-1200.webp 1200w, assets/kdn-hero-4k-2400.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" width="2400" height="1797" fetchpriority="high" alt="The KDN male and female athletes standing in front of the KDN app on a phone"></figure>
     </div>
 
     <div class="lp-mq" aria-label="What KDN includes"><div class="lp-mq-t"><span>1,130 exercises by muscle</span><span>185 Indian dishes with recipes</span><span>AI coach in Hindi &amp; English</span><span>Veg · Vegan · Non-veg</span><span>Home or gym workouts</span><span>Weekly check-ins</span><span>Step tracker</span><span>Family plans</span><span aria-hidden="true">1,130 exercises by muscle</span><span aria-hidden="true">185 Indian dishes with recipes</span><span aria-hidden="true">AI coach in Hindi &amp; English</span><span aria-hidden="true">Veg · Vegan · Non-veg</span><span aria-hidden="true">Home or gym workouts</span><span aria-hidden="true">Weekly check-ins</span><span aria-hidden="true">Step tracker</span><span aria-hidden="true">Family plans</span></div></div>
@@ -4076,18 +4087,18 @@ body.onland .ft{background:#0B1220}
     <section class="lp-sec lp-gyms lp-diets" aria-labelledby="lp-dt-h">
       <div class="lp-sh"><small>Diet, every day</small><h2 id="lp-dt-h">Your diet, <em class="sf">followed for real</em></h2><p class="lp-sub">Indian meals with exact portions, at home, at work and at the dinner table.</p></div>
       <div class="lp-gs lp-gs3">
-        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/diet-kitchen.webp" width="1280" height="720" aria-label="A woman cooks breakfast following the KDN dish guide on her phone"><source src="assets/diet-kitchen.mp4" type="video/mp4"></video></div><figcaption><b>Cook it the right way</b><span>Every dish has a recipe, portions and macros for your plan.</span></figcaption></figure>
-        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/diet-office.webp" width="1280" height="720" aria-label="A man checks today's diet on the KDN app before lunch at work"><source src="assets/diet-office.mp4" type="video/mp4"></video></div><figcaption><b>Lunch at work, still on plan</b><span>Open today's diet and eat exactly what it says.</span></figcaption></figure>
-        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/diet-dinner.webp" width="1280" height="720" aria-label="A couple checks their dinner plan on the KDN app and eats a home-cooked Indian meal"><source src="assets/diet-dinner.mp4" type="video/mp4"></video></div><figcaption><b>Dinner the whole family eats</b><span>Dal, roti and sabzi, sized to your calories.</span></figcaption></figure>
+        <figure class="lp-g"><div class="lp-g-v"><img src="assets/diet-kitchen-1280.webp" srcset="assets/diet-kitchen-1280.webp 1280w, assets/diet-kitchen-2560.webp 2560w" sizes="(min-width:1000px) 600px, 100vw" width="2560" height="1440" loading="lazy" decoding="async" alt="A woman cooks breakfast following the KDN dish guide on her phone"></div><figcaption><b>Cook it the right way</b><span>Every dish has a recipe, portions and macros for your plan.</span></figcaption></figure>
+        <figure class="lp-g"><div class="lp-g-v"><img src="assets/diet-office-1280.webp" srcset="assets/diet-office-1280.webp 1280w, assets/diet-office-2560.webp 2560w" sizes="(min-width:1000px) 600px, 100vw" width="2560" height="1440" loading="lazy" decoding="async" alt="A man checks today's diet on the KDN app before lunch at work"></div><figcaption><b>Lunch at work, still on plan</b><span>Open today's diet and eat exactly what it says.</span></figcaption></figure>
+        <figure class="lp-g"><div class="lp-g-v"><img src="assets/diet-dinner-1280.webp" srcset="assets/diet-dinner-1280.webp 1280w, assets/diet-dinner-2560.webp 2560w" sizes="(min-width:1000px) 600px, 100vw" width="2560" height="1440" loading="lazy" decoding="async" alt="A couple checks their dinner plan on the KDN app and eats a home-cooked Indian meal"></div><figcaption><b>Dinner the whole family eats</b><span>Dal, roti and sabzi, sized to your calories.</span></figcaption></figure>
       </div>
     </section>
 
     <section class="lp-sec lp-gyms" aria-labelledby="lp-gy-h">
       <div class="lp-sh"><small>In the gym</small><h2 id="lp-gy-h">Built for <em class="sf">real gyms</em></h2><p class="lp-sub">Members train with their plan on the phone. Owners run the whole gym from one dashboard.</p></div>
       <div class="lp-gs">
-        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/gym-arrive.webp" width="1280" height="720" aria-label="A member walks into a busy gym looking at his plan on his phone"><source src="assets/gym-arrive.mp4" type="video/mp4"></video></div><figcaption><b>Walk in, plan ready</b><span>Today's workout and meals are on the phone before the first set.</span></figcaption></figure>
-        <figure class="lp-g"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/gym-train.webp" width="1280" height="720" aria-label="A member checks her workout on the KDN app between sets and starts her next set"><source src="assets/gym-train.mp4" type="video/mp4"></video></div><figcaption><b>Train with the plan in your pocket</b><span>Sets, reps and a rest timer between every set.</span></figcaption></figure>
-        <figure class="lp-g lp-g-wide"><div class="lp-g-v"><video muted loop playsinline preload="none" poster="assets/gym-owner.webp" width="1280" height="720" aria-label="A gym owner manages members, fees and check-ins on the KDN Gym Manager dashboard"><source src="assets/gym-owner.mp4" type="video/mp4"></video></div><figcaption><b>Run the gym from one dashboard</b><span>KDN Gym Manager keeps members, fees, check-ins, trainers and WhatsApp reminders in one place. Included in the Gym plan.</span></figcaption></figure>
+        <figure class="lp-g"><div class="lp-g-v"><img src="assets/gym-arrive-1280.webp" srcset="assets/gym-arrive-1280.webp 1280w, assets/gym-arrive-2560.webp 2560w" sizes="(min-width:1000px) 600px, 100vw" width="2560" height="1440" loading="lazy" decoding="async" alt="A member walks into a busy gym looking at his plan on his phone"></div><figcaption><b>Walk in, plan ready</b><span>Today's workout and meals are on the phone before the first set.</span></figcaption></figure>
+        <figure class="lp-g"><div class="lp-g-v"><img src="assets/gym-train-1280.webp" srcset="assets/gym-train-1280.webp 1280w, assets/gym-train-2560.webp 2560w" sizes="(min-width:1000px) 600px, 100vw" width="2560" height="1440" loading="lazy" decoding="async" alt="A member checks her workout on the KDN app between sets and starts her next set"></div><figcaption><b>Train with the plan in your pocket</b><span>Sets, reps and a rest timer between every set.</span></figcaption></figure>
+        <figure class="lp-g lp-g-wide"><div class="lp-g-v"><img src="assets/gym-owner-1280.webp" srcset="assets/gym-owner-1280.webp 1280w, assets/gym-owner-2560.webp 2560w" sizes="(min-width:1000px) 600px, 100vw" width="2560" height="1440" loading="lazy" decoding="async" alt="A gym owner manages members, fees and check-ins on the KDN Gym Manager dashboard"></div><figcaption><b>Run the gym from one dashboard</b><span>KDN Gym Manager keeps members, fees, check-ins, trainers and WhatsApp reminders in one place. Included in the Gym plan.</span></figcaption></figure>
       </div>
     </section>
 
@@ -14511,7 +14522,7 @@ body.onland .ft{background:#0B1220}
   function kCelebrate(){
     if(document.querySelector('.kcel')) return;
     var el = document.createElement('div'); el.className = 'kcel'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label','Perfect day');
-    el.innerHTML = '<div class="kcel-box"><img src="assets/kdn-hero3-end.webp" alt="The KDN athletes cheering" width="928" height="696"><small>Perfect day</small><h2>100 out of 100!</h2><p>Steps, workout, water and food all done. Keep the streak going tomorrow.</p><button type="button" class="btn">Thanks!</button></div>';
+    el.innerHTML = '<div class="kcel-box"><img src="assets/kdn-hero-4k-1200.webp" alt="The KDN athletes" width="1200" height="899"><small>Perfect day</small><h2>100 out of 100!</h2><p>Steps, workout, water and food all done. Keep the streak going tomorrow.</p><button type="button" class="btn">Thanks!</button></div>';
     document.body.appendChild(el);
     requestAnimationFrame(function(){ el.classList.add('on'); });
     try{ snd('win'); buzz('ok'); }catch(e){}
@@ -14600,6 +14611,14 @@ body.onland .ft{background:#0B1220}
     function upd(){ var on = pastHero && !atEnd && !land.hidden; bar.classList.toggle('on',on); bar.setAttribute('aria-hidden',on?'false':'true'); bar.querySelector('button').tabIndex = on?0:-1; }
     new IntersectionObserver(function(es){ pastHero = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; upd(); }).observe(hero);
     if(fin) new IntersectionObserver(function(es){ atEnd = es[0].isIntersecting; upd(); },{threshold:.05}).observe(fin);
+  })();
+  /* ==== gym and diet photos settle into place as they scroll in ==== */
+  (function(){
+    var gs = document.querySelectorAll('.lp-g');
+    if(!gs.length) return;
+    if(!('IntersectionObserver' in window)){ gs.forEach(function(g){ g.classList.add('in'); }); return; }
+    var o = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); o.unobserve(e.target); } }); },{threshold:.2});
+    gs.forEach(function(g){ o.observe(g); });
   })();
   /* ==== KDN NATIVE APP START ====
      Runs only inside the Android app (Capacitor). On the website NATIVE is false and nothing here runs. */

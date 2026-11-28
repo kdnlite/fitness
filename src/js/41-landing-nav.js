@@ -31,3 +31,11 @@
     new IntersectionObserver(function(es){ pastHero = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; upd(); }).observe(hero);
     if(fin) new IntersectionObserver(function(es){ atEnd = es[0].isIntersecting; upd(); },{threshold:.05}).observe(fin);
   })();
+  /* ==== gym and diet photos settle into place as they scroll in ==== */
+  (function(){
+    var gs = document.querySelectorAll('.lp-g');
+    if(!gs.length) return;
+    if(!('IntersectionObserver' in window)){ gs.forEach(function(g){ g.classList.add('in'); }); return; }
+    var o = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); o.unobserve(e.target); } }); },{threshold:.2});
+    gs.forEach(function(g){ o.observe(g); });
+  })();
