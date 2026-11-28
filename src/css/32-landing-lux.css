@@ -99,3 +99,8 @@ body.onland #b-start1.lp-shine::after{animation:lpsweep 1.1s cubic-bezier(.2,.8,
 /* Phones: less empty space above the headline, short lead line */
 @media (max-width:699px){body.onland .lp-hero{padding-top:10px;gap:14px}body.onland .lp-hero h1{margin:0}body.onland .lp-walk{margin-bottom:-14px}body.onland .lp-lead{position:relative;z-index:2;font-size:1rem;max-width:none}body.onland .lp-cta{display:flex;flex-wrap:nowrap;gap:10px}body.onland .lp-cta .btn{flex:1 1 0;min-width:0;width:auto;margin:0;padding-left:10px;padding-right:10px}body.onland .lp-trust{margin-top:0;padding-top:12px}body.onland .lp-trust li{padding-top:34px}body.onland .lp-trust b{font-size:2rem}}
 body.onland .lp-lead{max-width:34ch}
+/* Flying objects and falling gold star sparks */
+.lp-ball-football,.lp-ball-shuttle{width:30px;height:30px;margin:-15px 0 0 -15px;background:none;box-shadow:0 0 18px 4px rgba(255,214,130,.55);border-radius:50%}
+.lp-ball-football svg,.lp-ball-shuttle svg{width:100%;height:100%;display:block}
+.lp-star b{position:absolute;left:0;top:0;width:var(--sz);height:var(--sz);margin:calc(var(--sz)/-2) 0 0 calc(var(--sz)/-2);background:#FFE7A6;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);filter:drop-shadow(0 0 4px #FFD27A);animation:lpfall var(--d) cubic-bezier(.3,.1,.6,1) forwards}
+@keyframes lpfall{0%{transform:translate(0,0) scale(.4) rotate(0);opacity:1}25%{transform:translate(calc(var(--dx)*.6),var(--up)) scale(1) rotate(90deg);opacity:1}100%{transform:translate(var(--dx),var(--fall)) scale(.7) rotate(300deg);opacity:0}}
