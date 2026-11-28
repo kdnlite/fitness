@@ -10,7 +10,7 @@
 <title>KDN Fitness Tracker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="assets/kdn-hero-start.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/kdn-hero2-start.webp" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
 <style>
@@ -3897,6 +3897,26 @@ body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60p
 .lp-diets{padding-bottom:8px}
 @media (min-width:1000px){.lp-gs3{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:760px) and (max-width:999px){.lp-gs3 .lp-g:last-child{grid-column:1/-1}}
+/* Hero uses the same deep blue as the rest of the page */
+body.onland .lp-hero{background:#071A3C}
+.lp-ic{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(233,207,156,.1);box-shadow:inset 0 0 0 1px rgba(233,207,156,.35)}
+.lp-ic svg{width:16px;height:16px;fill:none;stroke:#E9CF9C;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lp-trust.on .lp-ic{animation:lpic .7s cubic-bezier(.2,.8,.2,1) both}
+.lp-trust li:nth-child(2) .lp-ic{animation-delay:.12s}.lp-trust li:nth-child(3) .lp-ic{animation-delay:.24s}
+@keyframes lpic{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.lp-trust.on .lp-ic{animation:none}}
+/* Closing call to action and footer use the same deep blue as the page */
+body.onland .lp-final{background:radial-gradient(60% 70% at 50% 120%,rgba(233,207,156,.16),rgba(233,207,156,0) 70%),#071A3C}
+body.onland .ft{background:#071A3C}
+/* Phone-only Get Started bar */
+.lp-sbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 16px;border-radius:18px;background:rgba(10,24,54,.86);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1px rgba(233,207,156,.22);transform:translateY(140%);opacity:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s;pointer-events:none}
+.lp-sbar.on{transform:none;opacity:1;pointer-events:auto}
+.lp-sbar div{flex:1;min-width:0;display:flex;flex-direction:column}
+.lp-sbar b{color:#fff;font-size:.95rem;line-height:1.2}
+.lp-sbar span{color:#9AA6BD;font-size:.78rem}
+.lp-sbar .btn{flex:none;width:auto;margin:0;padding:12px 18px;border-radius:12px;background:linear-gradient(135deg,#F3DDA9,#D9B66E);border:0;color:#0B1220;font-weight:700}
+@media (min-width:760px){.lp-sbar{display:none}}
+@media (prefers-reduced-motion:reduce){.lp-sbar{transition:none}}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -3948,13 +3968,13 @@ body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60p
         <p class="lp-lead">A diet built from the Indian food you already eat, workouts for home or the gym, and an assistant you can talk to in Hindi or English. Answer 13 quick questions and your plan will be ready in about two minutes.</p>
         <div class="lp-cta"><button class="btn" type="button" id="b-start1">Get Started</button><button class="btn ghost" type="button" id="b-plans">See plans</button></div>
         <ul class="lp-trust">
-          <li><svg class="lp-ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5"/><circle class="lp-ring-f" cx="18" cy="18" r="15.5" pathLength="100"/></svg><b data-n="1130">1,130</b><span>exercises by muscle</span></li>
-          <li><svg class="lp-ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5"/><circle class="lp-ring-f" cx="18" cy="18" r="15.5" pathLength="100"/></svg><b data-n="185">185</b><span>Indian dishes with recipes</span></li>
-          <li><svg class="lp-ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15.5"/><circle class="lp-ring-f" cx="18" cy="18" r="15.5" pathLength="100"/></svg><b data-n="3">3</b><span>diets: veg, vegan, non-veg</span></li>
+          <li><span class="lp-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"/></svg></span><b data-n="1130">1,130</b><span>exercises by muscle</span></li>
+          <li><span class="lp-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11h18a9 9 0 0 1-18 0zM8 7c0-1.5 1-2 1-3.5M12 7c0-1.5 1-2 1-3.5M16 7c0-1.5 1-2 1-3.5"/></svg></span><b data-n="185">185</b><span>Indian dishes with recipes</span></li>
+          <li><span class="lp-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 15-14-1 10-6 15-14 15M5 19l7-7"/></svg></span><b data-n="3">3</b><span>diets: veg, vegan, non-veg</span></li>
         </ul>
       </div>
 
-      <figure class="lp-stage lp-walk"><video id="lpwalk" class="lp-walk-v" muted playsinline preload="none" poster="assets/kdn-hero-start.webp" width="928" height="696" aria-label="The KDN male and female athletes walk in from both sides and pose in front of the KDN app on a phone"><source src="assets/kdn-hero.mp4" type="video/mp4"></video><img class="lp-walk-end" src="assets/kdn-hero-end.webp" width="928" height="696" alt="The KDN male and female athletes posing in front of the KDN app on a phone" hidden></figure>
+      <figure class="lp-stage lp-walk"><video id="lpwalk" class="lp-walk-v" muted playsinline preload="none" poster="assets/kdn-hero2-start.webp" width="928" height="696" aria-label="The KDN male and female athletes walk in from both sides and pose in front of the KDN app on a phone"><source src="assets/kdn-hero2.mp4" type="video/mp4"></video><img class="lp-walk-end" src="assets/kdn-hero2-end.webp" width="928" height="696" alt="The KDN male and female athletes posing in front of the KDN app on a phone" hidden></figure>
     </div>
 
     <div class="lp-mq" aria-label="What KDN includes"><div class="lp-mq-t"><span>1,130 exercises by muscle</span><span>185 Indian dishes with recipes</span><span>AI coach in Hindi &amp; English</span><span>Veg · Vegan · Non-veg</span><span>Home or gym workouts</span><span>Weekly check-ins</span><span>Step tracker</span><span>Family plans</span><span aria-hidden="true">1,130 exercises by muscle</span><span aria-hidden="true">185 Indian dishes with recipes</span><span aria-hidden="true">AI coach in Hindi &amp; English</span><span aria-hidden="true">Veg · Vegan · Non-veg</span><span aria-hidden="true">Home or gym workouts</span><span aria-hidden="true">Weekly check-ins</span><span aria-hidden="true">Step tracker</span><span aria-hidden="true">Family plans</span></div></div>
@@ -4242,7 +4262,7 @@ body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60p
       <div class="fhead"><p class="hint">Nothing leaves your device.</p><div class="avatar" id="avatar" aria-hidden="true"></div></div>
       <div class="step" data-step="0">
         <label class="q" for="name">What is your name?</label>
-        <input type="text" id="name" name="name" autocomplete="given-name" maxlength="40" placeholder="e.g. Kabir">
+        <input type="text" id="name" name="name" autocomplete="given-name" maxlength="40" placeholder="e.g. Rohan">
       </div>
       <div class="step" data-step="1" hidden>
         <label class="q" for="weight">What is your current weight?</label>
@@ -14068,8 +14088,8 @@ body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60p
     'Sunday is always rest. More days is not always better.':'रविवार हमेशा आराम का दिन है। ज़्यादा दिन हमेशा बेहतर नहीं होते।','Monday to Saturday':'सोमवार से शनिवार','How fast do you want to get there?':'आप कितनी जल्दी वहाँ पहुँचना चाहते हैं?',
     'Recommended pace':'सुझाई गई रफ़्तार','My own time':'मेरा अपना समय','Choose how long you want to take':'चुनें कि आप कितना समय लेना चाहते हैं','weeks':'हफ़्ते','months':'महीने','What is your food budget?':'आपका खाने का बजट क्या है?',
     'We pick foods that fit it. You can change this later in your diet plan.':'हम इसी बजट में खाना चुनते हैं। आप इसे बाद में डाइट प्लान में बदल सकते हैं।','Everyday dal, roti, seasonal fruit':'रोज़ की दाल, रोटी, मौसमी फल',
-    'Adds paneer, oats, soy milk':'पनीर, ओट्स, सोया मिल्क भी','Adds chicken, fish, nuts':'चिकन, मछली, मेवे भी','e.g. Kabir':'जैसे: कबीर','Weight in kg':'वज़न kg में','Get my plan':'मेरा प्लान बनाएँ','Start my questions':'सवाल शुरू करें',
-    'Edit your plan':'अपना प्लान बदलें','Save changes':'बदलाव सेव करें','Your plan in':'आपका प्लान','three steps':'तीन चरणों में','Get Started':'शुरू करें','Start your plan':'अपना प्लान शुरू करें','Here is your plan, Kabir.':'यह रहा आपका प्लान।',
+    'Adds paneer, oats, soy milk':'पनीर, ओट्स, सोया मिल्क भी','Adds chicken, fish, nuts':'चिकन, मछली, मेवे भी','e.g. Rohan':'जैसे: रोहन','Weight in kg':'वज़न kg में','Get my plan':'मेरा प्लान बनाएँ','Start my questions':'सवाल शुरू करें',
+    'Edit your plan':'अपना प्लान बदलें','Save changes':'बदलाव सेव करें','Your plan in':'आपका प्लान','three steps':'तीन चरणों में','Get Started':'शुरू करें','Start your plan':'अपना प्लान शुरू करें',
     'Your diet plan is ready. Opening it now.':'आपका डाइट प्लान तैयार है। अभी खोल रहे हैं।',
     /* pay */
     'Choose a plan':'प्लान चुनें','Enter your coupon':'अपना कूपन डालें','or use a coupon':'या कूपन इस्तेमाल करें','Coupon code':'कूपन कोड','Coupon active':'कूपन चालू','1 person':'1 व्यक्ति','Up to 4 people':'4 लोगों तक','3-month plan':'3 महीने का प्लान',
@@ -14491,7 +14511,7 @@ body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60p
   function kCelebrate(){
     if(document.querySelector('.kcel')) return;
     var el = document.createElement('div'); el.className = 'kcel'; el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label','Perfect day');
-    el.innerHTML = '<div class="kcel-box"><img src="assets/kdn-hero-end.webp" alt="The KDN athletes cheering" width="928" height="696"><small>Perfect day</small><h2>100 out of 100!</h2><p>Steps, workout, water and food all done. Keep the streak going tomorrow.</p><button type="button" class="btn">Thanks!</button></div>';
+    el.innerHTML = '<div class="kcel-box"><img src="assets/kdn-hero2-end.webp" alt="The KDN athletes cheering" width="928" height="696"><small>Perfect day</small><h2>100 out of 100!</h2><p>Steps, workout, water and food all done. Keep the streak going tomorrow.</p><button type="button" class="btn">Thanks!</button></div>';
     document.body.appendChild(el);
     requestAnimationFrame(function(){ el.classList.add('on'); });
     try{ snd('win'); buzz('ok'); }catch(e){}
@@ -14564,6 +14584,22 @@ body.onland .lp-g:hover{border-color:rgba(233,207,156,.35);box-shadow:0 24px 60p
       var y = sec.getBoundingClientRect().top + window.scrollY - 76;
       window.scrollTo({top:Math.max(0,y),behavior:(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)?'auto':'smooth'});
     });
+  })();
+  /* ==== phones: a Get Started bar slides up once the hero is scrolled past ==== */
+  (function(){
+    if(!('IntersectionObserver' in window)) return;
+    var hero = document.querySelector('.lp-hero'), fin = document.querySelector('.lp-final'), land = document.getElementById('s-landing');
+    if(!hero || !land) return;
+    var bar = document.createElement('div');
+    bar.className = 'lp-sbar'; bar.setAttribute('aria-hidden','true');
+    bar.innerHTML = '<div><b>Your plan in 2 minutes</b><span>Plans from ₹799 for 3 months</span></div><button class="btn" type="button" tabindex="-1">Get Started</button>';
+    document.body.appendChild(bar);
+    new MutationObserver(function(){ upd(); }).observe(land,{attributes:true,attributeFilter:['hidden']});
+    bar.querySelector('button').addEventListener('click',function(){ var b = document.getElementById('b-start1'); if(b) b.click(); });
+    var pastHero = false, atEnd = false;
+    function upd(){ var on = pastHero && !atEnd && !land.hidden; bar.classList.toggle('on',on); bar.setAttribute('aria-hidden',on?'false':'true'); bar.querySelector('button').tabIndex = on?0:-1; }
+    new IntersectionObserver(function(es){ pastHero = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; upd(); }).observe(hero);
+    if(fin) new IntersectionObserver(function(es){ atEnd = es[0].isIntersecting; upd(); },{threshold:.05}).observe(fin);
   })();
   /* ==== KDN NATIVE APP START ====
      Runs only inside the Android app (Capacitor). On the website NATIVE is false and nothing here runs. */

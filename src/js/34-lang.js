@@ -85,8 +85,8 @@
     'Sunday is always rest. More days is not always better.':'रविवार हमेशा आराम का दिन है। ज़्यादा दिन हमेशा बेहतर नहीं होते।','Monday to Saturday':'सोमवार से शनिवार','How fast do you want to get there?':'आप कितनी जल्दी वहाँ पहुँचना चाहते हैं?',
     'Recommended pace':'सुझाई गई रफ़्तार','My own time':'मेरा अपना समय','Choose how long you want to take':'चुनें कि आप कितना समय लेना चाहते हैं','weeks':'हफ़्ते','months':'महीने','What is your food budget?':'आपका खाने का बजट क्या है?',
     'We pick foods that fit it. You can change this later in your diet plan.':'हम इसी बजट में खाना चुनते हैं। आप इसे बाद में डाइट प्लान में बदल सकते हैं।','Everyday dal, roti, seasonal fruit':'रोज़ की दाल, रोटी, मौसमी फल',
-    'Adds paneer, oats, soy milk':'पनीर, ओट्स, सोया मिल्क भी','Adds chicken, fish, nuts':'चिकन, मछली, मेवे भी','e.g. Kabir':'जैसे: कबीर','Weight in kg':'वज़न kg में','Get my plan':'मेरा प्लान बनाएँ','Start my questions':'सवाल शुरू करें',
-    'Edit your plan':'अपना प्लान बदलें','Save changes':'बदलाव सेव करें','Your plan in':'आपका प्लान','three steps':'तीन चरणों में','Get Started':'शुरू करें','Start your plan':'अपना प्लान शुरू करें','Here is your plan, Kabir.':'यह रहा आपका प्लान।',
+    'Adds paneer, oats, soy milk':'पनीर, ओट्स, सोया मिल्क भी','Adds chicken, fish, nuts':'चिकन, मछली, मेवे भी','e.g. Rohan':'जैसे: रोहन','Weight in kg':'वज़न kg में','Get my plan':'मेरा प्लान बनाएँ','Start my questions':'सवाल शुरू करें',
+    'Edit your plan':'अपना प्लान बदलें','Save changes':'बदलाव सेव करें','Your plan in':'आपका प्लान','three steps':'तीन चरणों में','Get Started':'शुरू करें','Start your plan':'अपना प्लान शुरू करें',
     'Your diet plan is ready. Opening it now.':'आपका डाइट प्लान तैयार है। अभी खोल रहे हैं।',
     /* pay */
     'Choose a plan':'प्लान चुनें','Enter your coupon':'अपना कूपन डालें','or use a coupon':'या कूपन इस्तेमाल करें','Coupon code':'कूपन कोड','Coupon active':'कूपन चालू','1 person':'1 व्यक्ति','Up to 4 people':'4 लोगों तक','3-month plan':'3 महीने का प्लान',

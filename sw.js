@@ -3,7 +3,7 @@
    - The page itself is always fetched fresh when online; the saved copy is used only when offline or very slow.
    - /api and /admin are never cached.
    - Shows medicine and period reminders. */
-var V = 'kdn-v3';
+var V = 'kdn-v4';
 var KEEP = [V, 'kdn-img', 'kdn-fonts'];
 
 self.addEventListener('install', function (e) {
@@ -24,6 +24,19 @@ function cacheFirst(req, name) {
         if (res && (res.ok || res.type === 'opaque')) c.put(req, res.clone());
         return res;
       });
+    });
+  });
+}
+/* Other files in /assets may be replaced under the same name: show the saved copy at once and refresh it in the background. */
+function staleWhileRevalidate(e, req) {
+  return caches.open(V).then(function (c) {
+    return c.match(req).then(function (hit) {
+      var net = fetch(req).then(function (res) {
+        if (res && res.ok) c.put(req, res.clone());
+        return res;
+      });
+      if (hit) { e.waitUntil(net.catch(function () {})); return hit; }
+      return net;
     });
   });
 }
@@ -54,7 +67,7 @@ self.addEventListener('fetch', function (e) {
   if (p.indexOf('/api/') === 0 || p.indexOf('/admin') === 0 || p === '/sw.js') return;
   if (p.indexOf('/assets/img/') === 0) { e.respondWith(cacheFirst(req, 'kdn-img')); return; }
   if (/\.mp4$/.test(p)) return;
-  if (p.indexOf('/assets/') === 0) { e.respondWith(cacheFirst(req, V)); return; }
+  if (p.indexOf('/assets/') === 0) { e.respondWith(staleWhileRevalidate(e, req)); return; }
   if (req.mode === 'navigate' || p === '/' || p === '/index.html' || p === '/kdn-live.js') { e.respondWith(networkFirst(req)); return; }
 });
 
