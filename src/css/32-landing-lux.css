@@ -81,24 +81,10 @@ body.onland .ft{background:#0B1220}
 .lp-g.in .lp-g-v img{transform:scale(1)}
 body.onland .lp-g:hover .lp-g-v img{transform:scale(1.035)}
 @media (prefers-reduced-motion:reduce){body.onland .lp-still,body.onland .lp-still .lp-walk-img{animation:none}.lp-g-v img{transform:none;transition:none}}
-/* Hero: the two athletes walk in from the sides and stop in front of the phone (4K cut-outs) */
-.lp-hp{position:absolute;display:block;height:auto;max-width:none;pointer-events:none;will-change:transform}
-.lp-hm{left:18.116%;top:12.823%;width:27.083%}
-.lp-hw{left:54.197%;top:18.589%;width:23.037%}
-body.onland .lp-still .lp-walk-img{animation:lpphone .9s cubic-bezier(.2,.8,.2,1) both}
-body.onland .lp-still .lp-hm{animation:lpinL 2.1s cubic-bezier(.22,.7,.18,1) .35s backwards,lpstepL 2.1s linear .35s backwards}
-body.onland .lp-still .lp-hw{animation:lpinR 2.1s cubic-bezier(.22,.7,.18,1) .5s backwards,lpstepR 2.1s linear .5s backwards}
-@keyframes lpphone{from{opacity:0;transform:scale(.96) translateY(14px)}to{opacity:1;transform:none}}
-@keyframes lpinL{0%{opacity:0;translate:-95% 0;filter:blur(3px) brightness(.7)}18%{opacity:1}70%{filter:blur(0) brightness(1)}100%{opacity:1;translate:0 0;filter:none}}
-@keyframes lpinR{0%{opacity:0;translate:95% 0;filter:blur(3px) brightness(.7)}18%{opacity:1}70%{filter:blur(0) brightness(1)}100%{opacity:1;translate:0 0;filter:none}}
-@keyframes lpstepL{0%,20%,40%,60%,80%{transform:translateY(0) rotate(0)}10%,30%,50%,70%{transform:translateY(-1.6%) rotate(.6deg)}90%{transform:translateY(-.5%)}100%{transform:none}}
-@keyframes lpstepR{0%,20%,40%,60%,80%{transform:translateY(0) rotate(0)}10%,30%,50%,70%{transform:translateY(-1.6%) rotate(-.6deg)}90%{transform:translateY(-.5%)}100%{transform:none}}
-@media (prefers-reduced-motion:reduce){body.onland .lp-still .lp-walk-img,body.onland .lp-still .lp-hm,body.onland .lp-still .lp-hw{animation:none}}
 /* Hero pose moments */
+.lp-loop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%);mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%)}
 .lp-clip{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s ease;pointer-events:none;-webkit-mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%);mask-image:radial-gradient(120% 100% at 50% 45%,#000 62%,transparent 100%)}
 .lp-clip.on{opacity:1}
-.lp-hp{transition:opacity .32s ease}
-.lp-hp.off{opacity:0}
 .lp-ball{position:fixed;left:0;top:0;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;z-index:60;pointer-events:none;background:radial-gradient(circle at 35% 35%,#fff 0,#FFF3C9 25%,#E9CF9C 55%,#B8893E 100%);box-shadow:0 0 14px 4px rgba(255,214,130,.8),0 0 40px 10px rgba(233,207,156,.45)}
 .lp-star{position:fixed;width:0;height:0;z-index:61;pointer-events:none}
 .lp-star svg{position:absolute;width:64px;height:64px;left:-32px;top:-32px;fill:#FFE7A6;filter:drop-shadow(0 0 10px rgba(255,220,140,.95));animation:lpstar 1.2s cubic-bezier(.2,.8,.2,1) forwards}

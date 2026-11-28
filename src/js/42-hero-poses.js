@@ -1,38 +1,26 @@
-  /* ==== hero: after the walk-in the athletes clap, chat, flex and toss a ball that lights up Get Started (Grok clips) ==== */
+  /* ==== hero: one continuous looping Grok video; when her ball peaks, a gold star flies to Get Started ==== */
   (function(){
     var fig = document.querySelector('.lp-still'); if(!fig) return;
-    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var v = fig.querySelector('.lp-loop'); if(!v) return;
     var land = document.getElementById('s-landing');
-    var clips = {}; fig.querySelectorAll('.lp-clip').forEach(function(v){ clips[v.dataset.clip] = v; });
-    var idle = fig.querySelectorAll('.lp-hm, .lp-hw');
-    var sl = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
-    var visible = false, running = false;
-
-    function play(name){
-      var v = clips[name]; if(!v) return Promise.resolve();
-      return new Promise(function(done){
-        var fired = false, finish = function(){
-          v.removeEventListener('ended', finish); v.removeEventListener('timeupdate', tick);
-          idle.forEach(function(i){ i.classList.remove('off'); });
-          v.classList.remove('on'); setTimeout(done, 260);
-        };
-        var tick = function(){ if(!fired && v.dataset.exitT && v.currentTime >= +v.dataset.exitT){ fired = true; star(v); } };
-        v.addEventListener('ended', finish); v.addEventListener('timeupdate', tick);
-        try{ v.currentTime = 0; }catch(e){}
-        var p = v.play();
-        var show = function(){ v.classList.add('on'); setTimeout(function(){ idle.forEach(function(i){ i.classList.add('off'); }); }, 250); };
-        if(p && p.then) p.then(show).catch(function(){ done(); }); else show();
-      });
-    }
-
-    function star(v){
-      var btn = document.getElementById('b-start1'); if(!btn) return;
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce){ v.removeAttribute('autoplay'); v.pause(); return; }
+    var fired = false, last = 0;
+    v.addEventListener('timeupdate', function(){
+      var t = v.currentTime;
+      if(t < last) fired = false;            /* the loop restarted */
+      last = t;
+      if(!fired && t >= +v.dataset.starT){ fired = true; star(); }
+    });
+    function star(){
+      var btn = document.getElementById('b-start1'); if(!btn || land.hidden) return;
       var fr = fig.getBoundingClientRect(), br = btn.getBoundingClientRect();
-      var hx = fr.left + fr.width * (+v.dataset.exitX), hy = fr.top + fr.height * (+v.dataset.exitY);
+      if(fr.bottom < 0 || fr.top > innerHeight) return;
+      var hx = fr.left + fr.width * (+v.dataset.starX), hy = fr.top + fr.height * (+v.dataset.starY);
       var tx = br.left + br.width * .5, ty = br.top + br.height * .5;
       var ball = document.createElement('div'); ball.className = 'lp-ball'; document.body.appendChild(ball);
-      var cx = hx + (tx - hx) * .35, cy = Math.min(hy, ty) - 140;
-      var kf = []; for(var i = 0; i <= 24; i++){ var t = i / 24, x = (1-t)*(1-t)*hx + 2*(1-t)*t*cx + t*t*tx, y = (1-t)*(1-t)*hy + 2*(1-t)*t*cy + t*t*ty; kf.push({ transform: 'translate(' + x + 'px,' + y + 'px) scale(' + (0.8 + t * .5) + ')' }); }
+      var cx = hx + (tx - hx) * .35, cy = Math.min(hy, ty) - 120;
+      var kf = []; for(var i = 0; i <= 24; i++){ var u = i / 24, x = (1-u)*(1-u)*hx + 2*(1-u)*u*cx + u*u*tx, y = (1-u)*(1-u)*hy + 2*(1-u)*u*cy + u*u*ty; kf.push({ transform: 'translate(' + x + 'px,' + y + 'px) scale(' + (0.6 + u * .7) + ')' }); }
       var a = ball.animate(kf, { duration: 1200, easing: 'cubic-bezier(.35,.1,.25,1)', fill: 'forwards' });
       a.onfinish = function(){
         ball.remove();
@@ -43,18 +31,8 @@
         setTimeout(function(){ btn.classList.remove('lp-shine'); }, 2400);
       };
     }
-
-    async function loop(){
-      if(running) return; running = true;
-      Object.keys(clips).forEach(function(k){ clips[k].preload = 'auto'; });
-      await sl(3000);
-      var seq = ['clap', 'talk', 'flex', 'throw'];
-      while(visible && !land.hidden){
-        for(var i = 0; i < seq.length && visible && !land.hidden; i++){ await play(seq[i]); await sl(2200); }
-      }
-      running = false;
-    }
+    /* pause when off screen to save battery */
     if('IntersectionObserver' in window){
-      new IntersectionObserver(function(es){ visible = es[0].isIntersecting; if(visible) loop(); },{threshold:.35}).observe(fig);
+      new IntersectionObserver(function(es){ if(es[0].isIntersecting){ var p = v.play(); if(p && p.catch) p.catch(function(){}); } else v.pause(); },{threshold:.1}).observe(fig);
     }
   })();
