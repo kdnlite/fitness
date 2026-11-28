@@ -3959,15 +3959,13 @@ body.onland .lp-pts i::after{content:"";position:absolute;left:5px;top:2.5px;wid
 @keyframes lpptin{to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){body.onland .lp-pts li{animation:none;opacity:1;transform:none}}
 @media (max-width:699px){body.onland .lp-hero{padding-top:24px;gap:12px}body.onland .lp-hero .lp-trust{margin-top:44px;padding-top:22px}body.onland .lp-hero .lp-trust li{padding-top:38px}body.onland .lp-walk{margin-bottom:-12px}body.onland .lp-pts{gap:6px}body.onland .lp-pts li{font-size:.98rem;line-height:1.3}}
-/* Hero music toggle */
-.lp-snd{position:absolute;right:6%;bottom:8%;z-index:5;display:flex;align-items:center;gap:6px;padding:8px 12px 8px 10px;border-radius:999px;border:1px solid rgba(233,207,156,.4);background:rgba(11,18,32,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#E9CF9C;font-family:inherit;font-size:12px;font-weight:600;line-height:1;width:auto;min-height:0;margin:0;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35)}
-.lp-snd svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.lp-snd .sp{fill:currentColor;stroke:none}
-.lp-snd .on{display:none}.lp-snd.on .on{display:inline}.lp-snd.on .off{display:none}
-.lp-snd.on{background:linear-gradient(135deg,#F3DDA9,#D9B66E);color:#0B1220;border-color:transparent}
-.lp-snd.on .on{animation:lpwave 1.2s ease-in-out infinite}
-@keyframes lpwave{50%{opacity:.35}}
-body.onland .lp-snd{padding:6px 10px 6px 8px;height:auto;min-width:0;font-size:12px;border-radius:999px;letter-spacing:0}
+/* "coach," falls and hangs when the football / shuttle hits Get Started; the athlete puts it back */
+.lp-coach{display:inline-block;transform-origin:6% 78%;will-change:transform}
+.lp-coach.lp-drop{animation:lpdrop 1.6s cubic-bezier(.3,1.4,.5,1) forwards}
+.lp-coach.lp-fix{animation:lpfixw .85s cubic-bezier(.2,1.6,.4,1)}
+@keyframes lpdrop{0%{transform:none}35%{transform:rotate(96deg)}55%{transform:rotate(70deg)}72%{transform:rotate(88deg)}86%{transform:rotate(78deg)}100%{transform:rotate(82deg)}}
+@keyframes lpfixw{0%{transform:rotate(82deg)}55%{transform:rotate(-8deg)}78%{transform:rotate(4deg)}100%{transform:none}}
+@media (prefers-reduced-motion:reduce){.lp-coach.lp-drop,.lp-coach.lp-fix{animation:none}}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
@@ -4015,7 +4013,7 @@ body.onland .lp-snd{padding:6px 10px 6px 8px;height:auto;min-width:0;font-size:1
 
     <div class="lp-hero">
       <div class="lp-copy">
-                <h1>Your fitness coach, <span class="lp-hl">right in your pocket.</span></h1>
+                <h1>Your fitness <span class="lp-coach">coach,</span> <span class="lp-hl">right in your pocket.</span></h1>
         <ul class="lp-lead lp-pts"><li><i aria-hidden="true"></i>Meals from <b>Indian food you love</b></li><li><i aria-hidden="true"></i>Workouts for <b>home or the gym</b></li><li><i aria-hidden="true"></i>A coach in <b>Hindi &amp; English</b></li></ul>
         <div class="lp-cta"><button class="btn" type="button" id="b-start1">Get Started</button><button class="btn ghost" type="button" id="b-plans">See plans</button></div>
         <ul class="lp-trust">
@@ -4025,7 +4023,7 @@ body.onland .lp-snd{padding:6px 10px 6px 8px;height:auto;min-width:0;font-size:1
         </ul>
       </div>
 
-      <figure class="lp-stage lp-walk lp-still" aria-label="The KDN athletes walk in, flex, high-five and chat in front of the KDN app on a phone"><img class="lp-walk-img" src="assets/kdn-hero-phone-1200.webp" srcset="assets/kdn-hero-phone-1200.webp 1200w, assets/kdn-hero-phone-2400.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" width="2400" height="1797" fetchpriority="high" alt=""><video class="lp-loop" muted playsinline loop autoplay preload="auto" width="1200" height="900" data-cues='[{"t":12.2,"x":0.559,"y":0.208,"k":"ball"}]'><source src="assets/kdn-hero-loop2.mp4" type="video/mp4"></video><button class="lp-snd" type="button" aria-pressed="false" aria-label="Turn music on"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="sp" d="M4 9h4l5-4v14l-5-4H4z"/><path class="on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="off" d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></svg><span>Sound</span></button><audio class="lp-music" src="assets/kdn-hero-music.mp3" loop preload="none"></audio></figure>
+      <figure class="lp-stage lp-walk lp-still" aria-label="The KDN athletes walk in, flex, high-five and chat in front of the KDN app on a phone"><img class="lp-walk-img" src="assets/kdn-hero-phone-1200.webp" srcset="assets/kdn-hero-phone-1200.webp 1200w, assets/kdn-hero-phone-2400.webp 2400w" sizes="(min-width:1100px) 700px, 100vw" width="2400" height="1797" fetchpriority="high" alt=""><video class="lp-loop" muted playsinline loop autoplay preload="auto" width="1200" height="900" data-cues='[{"t":12.2,"x":0.559,"y":0.208,"k":"ball"}]'><source src="assets/kdn-hero-loop3.mp4" type="video/mp4"></video><audio class="lp-music" src="assets/kdn-hero-music.mp3" loop preload="none"></audio></figure>
     </div>
 
     <div class="lp-mq" aria-label="What KDN includes"><div class="lp-mq-t"><span>1,130 exercises by muscle</span><span>185 Indian dishes with recipes</span><span>AI coach in Hindi &amp; English</span><span>Veg · Vegan · Non-veg</span><span>Home or gym workouts</span><span>Weekly check-ins</span><span>Step tracker</span><span>Family plans</span><span aria-hidden="true">1,130 exercises by muscle</span><span aria-hidden="true">185 Indian dishes with recipes</span><span aria-hidden="true">AI coach in Hindi &amp; English</span><span aria-hidden="true">Veg · Vegan · Non-veg</span><span aria-hidden="true">Home or gym workouts</span><span aria-hidden="true">Weekly check-ins</span><span aria-hidden="true">Step tracker</span><span aria-hidden="true">Family plans</span></div></div>
@@ -14680,7 +14678,8 @@ body.onland .lp-snd{padding:6px 10px 6px 8px;height:auto;min-width:0;font-size:1
       var t = v.currentTime;
       if(t < last - 1) done = {};            /* the video looped */
       last = t;
-      cues.forEach(function(c, i){ if(!done[i] && t >= c.t && t < c.t + 1.5){ done[i] = 1; fly(c); } });
+      cues.forEach(function(c, i){ if(!done[i] && t >= c.t && t < c.t + 1.5){ done[i] = 1; if(c.k === 'fix') fixCoach(); else fly(c); } });
+      if(t < 1) fixCoach(true);
     });
     var ICON = {
       ball: '',
@@ -14698,8 +14697,11 @@ body.onland .lp-snd{padding:6px 10px 6px 8px;height:auto;min-width:0;font-size:1
       var cx = hx + (tx - hx) * .35, cy = Math.min(hy, ty) - 120;
       var kf = []; for(var i = 0; i <= 24; i++){ var u = i / 24, x = (1-u)*(1-u)*hx + 2*(1-u)*u*cx + u*u*tx, y = (1-u)*(1-u)*hy + 2*(1-u)*u*cy + u*u*ty; kf.push({ transform: 'translate(' + x + 'px,' + y + 'px) scale(' + (0.6 + u * .7) + ') rotate(' + (u * 540) + 'deg)' }); }
       var a = o.animate(kf, { duration: 1300, easing: 'cubic-bezier(.35,.1,.25,1)', fill: 'forwards' });
-      a.onfinish = function(){ o.remove(); burst(tx, ty, btn); };
+      a.onfinish = function(){ o.remove(); burst(tx, ty, btn); if(c.droop) setTimeout(dropCoach, 350); };
     }
+    var coach = document.querySelector('.lp-coach');
+    function dropCoach(){ if(!coach) return; coach.classList.remove('lp-fix'); coach.classList.add('lp-drop'); }
+    function fixCoach(quiet){ if(!coach || !coach.classList.contains('lp-drop')) return; coach.classList.remove('lp-drop'); if(!quiet){ void coach.offsetWidth; coach.classList.add('lp-fix'); setTimeout(function(){ coach.classList.remove('lp-fix'); }, 900); } }
     function burst(x, y, btn){
       var s = document.createElement('div'); s.className = 'lp-star'; s.style.left = x + 'px'; s.style.top = y + 'px';
       var h = '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg>';
@@ -14713,23 +14715,25 @@ body.onland .lp-snd{padding:6px 10px 6px 8px;height:auto;min-width:0;font-size:1
       setTimeout(function(){ btn.classList.remove('lp-shine'); }, 4100);
     }
   })();
-  /* ==== hero: light background music (original track made for KDN). Browsers only allow sound after a tap,
-     so it starts on the first tap anywhere unless the visitor turned it off; the button toggles it. ==== */
+  /* ==== hero: soft background music (original track made for KDN). It starts gently on the first scroll,
+     tap or key press. Browsers allow sound only after the visitor interacts, so if a plain scroll is not
+     enough the first tap starts it. ==== */
   (function(){
-    var btn = document.querySelector('.lp-snd'), a = document.querySelector('.lp-music'); if(!btn || !a) return;
+    var a = document.querySelector('.lp-music'); if(!a) return;
     var land = document.getElementById('s-landing');
-    var KEY = 'kdn.music'; var pref = null; try{ pref = localStorage.getItem(KEY); }catch(e){}
-    a.volume = .35; var want = pref !== 'off';
-    function ui(on){ btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', on ? 'true' : 'false'); btn.setAttribute('aria-label', on ? 'Turn music off' : 'Turn music on'); }
-    function fade(to, ms){ var from = a.volume, t0 = performance.now(); (function step(){ var u = Math.min(1, (performance.now() - t0) / ms); a.volume = from + (to - from) * u; if(u < 1) requestAnimationFrame(step); else if(to === 0) a.pause(); })(); }
-    function play(){ if(land && land.hidden) return; a.volume = 0; var p = a.play(); if(p && p.then) p.then(function(){ fade(.35, 900); ui(true); }).catch(function(){ ui(false); }); }
-    function stop(){ fade(0, 400); ui(false); }
-    btn.addEventListener('click', function(e){ e.stopPropagation(); want = a.paused; try{ localStorage.setItem(KEY, want ? 'on' : 'off'); }catch(_){} if(want) play(); else stop(); });
-    function first(e){ if(btn.contains(e.target)) return; document.removeEventListener('pointerdown', first, true); document.removeEventListener('keydown', first, true); if(want && a.paused) play(); }
-    document.addEventListener('pointerdown', first, true); document.addEventListener('keydown', first, true);
-    document.addEventListener('visibilitychange', function(){ if(document.hidden){ if(!a.paused){ a.pause(); a._resume = true; } } else if(a._resume){ a._resume = false; play(); } });
-    if(land) new MutationObserver(function(){ if(land.hidden && !a.paused) stop(); }).observe(land, { attributes: true, attributeFilter: ['hidden'] });
-    ui(false);
+    var VOL = .16, started = false;
+    function fade(to, ms, then){ var from = a.volume, t0 = performance.now(); (function step(){ var u = Math.min(1, (performance.now() - t0) / ms); a.volume = from + (to - from) * u; if(u < 1) requestAnimationFrame(step); else if(then) then(); })(); }
+    function play(){
+      if(started || (land && land.hidden)) return;
+      a.volume = 0; var p = a.play();
+      if(p && p.then) p.then(function(){ started = true; fade(VOL, 3000); off(); }).catch(function(){});
+    }
+    var EV = ['scroll','wheel','touchstart','touchend','pointerdown','keydown','click'];
+    function on(){ EV.forEach(function(e){ window.addEventListener(e, play, { passive: true, capture: true }); }); }
+    function off(){ EV.forEach(function(e){ window.removeEventListener(e, play, { capture: true }); }); }
+    on();
+    document.addEventListener('visibilitychange', function(){ if(!started) return; if(document.hidden) a.pause(); else if(!land || !land.hidden){ var p = a.play(); if(p && p.catch) p.catch(function(){}); } });
+    if(land) new MutationObserver(function(){ if(land.hidden){ if(!a.paused) fade(0, 500, function(){ a.pause(); }); } else if(started && a.paused){ a.volume = 0; var p = a.play(); if(p && p.then) p.then(function(){ fade(VOL, 1500); }).catch(function(){}); } }).observe(land, { attributes: true, attributeFilter: ['hidden'] });
   })();
   /* ==== KDN NATIVE APP START ====
      Runs only inside the Android app (Capacitor). On the website NATIVE is false and nothing here runs. */

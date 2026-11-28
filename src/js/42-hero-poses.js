@@ -18,7 +18,8 @@
       var t = v.currentTime;
       if(t < last - 1) done = {};            /* the video looped */
       last = t;
-      cues.forEach(function(c, i){ if(!done[i] && t >= c.t && t < c.t + 1.5){ done[i] = 1; fly(c); } });
+      cues.forEach(function(c, i){ if(!done[i] && t >= c.t && t < c.t + 1.5){ done[i] = 1; if(c.k === 'fix') fixCoach(); else fly(c); } });
+      if(t < 1) fixCoach(true);
     });
     var ICON = {
       ball: '',
@@ -36,8 +37,11 @@
       var cx = hx + (tx - hx) * .35, cy = Math.min(hy, ty) - 120;
       var kf = []; for(var i = 0; i <= 24; i++){ var u = i / 24, x = (1-u)*(1-u)*hx + 2*(1-u)*u*cx + u*u*tx, y = (1-u)*(1-u)*hy + 2*(1-u)*u*cy + u*u*ty; kf.push({ transform: 'translate(' + x + 'px,' + y + 'px) scale(' + (0.6 + u * .7) + ') rotate(' + (u * 540) + 'deg)' }); }
       var a = o.animate(kf, { duration: 1300, easing: 'cubic-bezier(.35,.1,.25,1)', fill: 'forwards' });
-      a.onfinish = function(){ o.remove(); burst(tx, ty, btn); };
+      a.onfinish = function(){ o.remove(); burst(tx, ty, btn); if(c.droop) setTimeout(dropCoach, 350); };
     }
+    var coach = document.querySelector('.lp-coach');
+    function dropCoach(){ if(!coach) return; coach.classList.remove('lp-fix'); coach.classList.add('lp-drop'); }
+    function fixCoach(quiet){ if(!coach || !coach.classList.contains('lp-drop')) return; coach.classList.remove('lp-drop'); if(!quiet){ void coach.offsetWidth; coach.classList.add('lp-fix'); setTimeout(function(){ coach.classList.remove('lp-fix'); }, 900); } }
     function burst(x, y, btn){
       var s = document.createElement('div'); s.className = 'lp-star'; s.style.left = x + 'px'; s.style.top = y + 'px';
       var h = '<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"/></svg>';
